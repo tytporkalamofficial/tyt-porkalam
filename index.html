@@ -218,7 +218,7 @@ table th, table td {
 td.rank-cell, td.neon-score, td.highlight-stat {
     font-size: 16pt !important;    /* In main numbers ko thoda aur bada kiya */
     font-weight: 700 !important;   /* Full bold */
-}
+
 </style>
 </head>
 <body>
@@ -491,10 +491,6 @@ td.rank-cell, td.neon-score, td.highlight-stat {
             tr.innerHTML = cellHTML;
             tbody.appendChild(tr);
             currentRank++;
-        }
-    }tr.innerHTML = cellHTML;
-        tbody.appendChild(tr);
-        currentRank++;
     }
     
 }
@@ -549,15 +545,10 @@ td.rank-cell, td.neon-score, td.highlight-stat {
     } else {
         cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : '-'}</td>`;
     }
-}
-            
+}   
             tr.innerHTML = cellHTML;
             tbody.appendChild(tr);
             currentRank++;
-        }
-    }tr.innerHTML = cellHTML;
-        tbody.appendChild(tr);
-        currentRank++;
     }
 
 }
@@ -613,12 +604,13 @@ td.rank-cell, td.neon-score, td.highlight-stat {
                 cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : '-'}</td>`;
             }
         }
+           
             tr.innerHTML = cellHTML;
             tbody.appendChild(tr);
             currentRank++;
         }
     }
-}  
+
     fetchAllSheetsData();
     setInterval(fetchAllSheetsData, 5000);
 </script>
