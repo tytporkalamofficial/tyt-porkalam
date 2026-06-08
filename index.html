@@ -450,9 +450,7 @@ td.rank-cell, td.neon-score, td.highlight-stat {
         tbody.appendChild(tr);
         currentRank++;
     }
-    
-    // Sabhi rows banne ke baad ek baar boom!
-    celebrateChampion();
+   
 }
 
     // 🎯 DYNAMIC LOGIC FOR PLAYER KILLS TAB
@@ -501,8 +499,6 @@ td.rank-cell, td.neon-score, td.highlight-stat {
         currentRank++;
     }
     
-    // Sabhi rows banne ke baad ek baar boom!
-    celebrateChampion();
 }
 
     // 👤 DYNAMIC LOGIC FOR PLAYER STATS GRID
@@ -565,9 +561,7 @@ td.rank-cell, td.neon-score, td.highlight-stat {
         tbody.appendChild(tr);
         currentRank++;
     }
-    
-    // Sabhi rows banne ke baad ek baar boom!
-    celebrateChampion();
+
 }
 
     // 🏆 DYNAMIC LOGIC FOR TEAM STANDINGS GRID
@@ -629,46 +623,11 @@ td.rank-cell, td.neon-score, td.highlight-stat {
         tbody.appendChild(tr);
         currentRank++;
     }
-    
-    // Sabhi rows banne ke baad ek baar boom!
-    celebrateChampion();
-}
+  
+}  
 
     fetchAllSheetsData();
     setInterval(fetchAllSheetsData, 5000);
-<script>
-  // Patakhe phodne wala JavaScript code
-function celebrateChampion() {
-    if (typeof confetti === 'function') {
-        // Left side se patakha
-        confetti({
-            particleCount: 150,
-            spread: 80,
-            origin: { x: 0.1, y: 0.6 },
-            colors: ['#ffd700', '#00ffaa', '#ff0055', '#00e5ff']
-        });
-
-        // Right side se patakha
-        setTimeout(() => {
-            confetti({
-                particleCount: 150,
-                spread: 80,
-                origin: { x: 0.9, y: 0.6 },
-                colors: ['#ffd700', '#00ffaa', '#ff0055', '#00e5ff']
-            });
-        }, 300);
-
-        // Beech me se bada dhamaka
-        setTimeout(() => {
-            confetti({
-                particleCount: 200,
-                spread: 100,
-                origin: { x: 0.5, y: 0.4 },
-                colors: ['#ffd700', '#ffffff']
-            });
-        }, 600);
-    }
-}
 </script>
 </body>
 </html>
