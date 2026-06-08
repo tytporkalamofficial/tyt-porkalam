@@ -206,6 +206,22 @@
         th.sub-th { background-color: rgba(10, 17, 31, 0.85); font-size: 10.5pt; color: #a0aec0; min-width: 70px; }
 
         .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
+        .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
+
+/* Poori website ke tables ke saare cells ke andar ka text/number bada karne ke liye */
+table th, table td {
+    font-size: 14pt !important;    /* Sabhi numbers aur text ko ek barabar bada karne ke liye */
+    font-weight: 600 !important;   /* Text ko thoda bold/mota karne ke liye */
+    padding: 12px 8px !important;  /* Rows ke beech me gap badane ke liye */
+}
+
+/* Rank aur Main Scores (Kills/Points) ko aur bhi zyada bada karne ke liye */
+td.rank-cell, td.neon-score, td.highlight-stat {
+    font-size: 16pt !important;    /* In main numbers ko thoda aur bada kiya */
+    font-weight: 700 !important;   /* Full bold */
+}
+
+</style>
     </style>
 </head>
 <body>
