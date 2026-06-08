@@ -489,7 +489,14 @@ function celebrateChampion() {
             tbody.appendChild(tr);
             currentRank++;
         }
+    }tr.innerHTML = cellHTML;
+        tbody.appendChild(tr);
+        currentRank++;
     }
+    
+    // Sabhi rows banne ke baad ek baar boom!
+    celebrateChampion();
+}
 
     // 🎯 DYNAMIC LOGIC FOR PLAYER KILLS TAB
     function buildPlayerKillsGrid(rows, headId, bodyId) {
@@ -532,7 +539,14 @@ function celebrateChampion() {
             tbody.appendChild(tr);
             currentRank++;
         }
+    }tr.innerHTML = cellHTML;
+        tbody.appendChild(tr);
+        currentRank++;
     }
+    
+    // Sabhi rows banne ke baad ek baar boom!
+    celebrateChampion();
+}
 
     // 👤 DYNAMIC LOGIC FOR PLAYER STATS GRID
     function buildPlayerStatsGrid(rows, headId, bodyId) {
@@ -590,7 +604,14 @@ function celebrateChampion() {
             tbody.appendChild(tr);
             currentRank++;
         }
+    }tr.innerHTML = cellHTML;
+        tbody.appendChild(tr);
+        currentRank++;
     }
+    
+    // Sabhi rows banne ke baad ek baar boom!
+    celebrateChampion();
+}
 
     // 🏆 DYNAMIC LOGIC FOR TEAM STANDINGS GRID
     function buildTeamStandingsGrid(rows, headId, bodyId) {
@@ -647,7 +668,14 @@ function celebrateChampion() {
             tbody.appendChild(tr);
             currentRank++;
         }
+    }tr.innerHTML = cellHTML;
+        tbody.appendChild(tr);
+        currentRank++;
     }
+    
+    // Sabhi rows banne ke baad ek baar boom!
+    celebrateChampion();
+}
 
     fetchAllSheetsData();
     setInterval(fetchAllSheetsData, 5000);
