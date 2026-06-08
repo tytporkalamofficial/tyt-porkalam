@@ -513,14 +513,21 @@
             cellHTML += `<td class="player-name-cell"><span class="team-emoji">👤</span>${row[startIdx] || '-'}</td>`;
             
             for (let d = startIdx + 1; d < numCols; d++) {
-                if (d === startIdx + 2) {
-                    cellHTML += `<td class="neon-score">${row[d] !== undefined ? row[d] : '-'}</td>`;
-                } else if (d === numCols - 1) {
-                    cellHTML += `<td class="highlight-stat">${row[d] !== undefined ? row[d] : '-'}</td>`;
-                } else {
-                    cellHTML += `<td>${row[d] !== undefined ? row[d] : '-'}</td>`;
-                }
-            }
+    let cellValue = row[d];
+    
+    // Agar ye aakhri column (KD) hai aur usme number hai, toh 2 decimal tak fix karo
+    if (d === numCols - 1 && cellValue !== undefined && !isNaN(cellValue) && cellValue !== "") {
+        cellValue = Number(cellValue).toFixed(2);
+    }
+
+    if (d === startIdx + 2) {
+        cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : '-'}</td>`;
+    } else if (d === numCols - 1) {
+        cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : '-'}</td>`;
+    } else {
+        cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : '-'}</td>`;
+    }
+}
             
             tr.innerHTML = cellHTML;
             tbody.appendChild(tr);
