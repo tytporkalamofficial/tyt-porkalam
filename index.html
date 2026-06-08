@@ -295,6 +295,36 @@ td.rank-cell, td.neon-score, td.highlight-stat {
         </table>
     </div>
 </div>
+    // Patakhe phodne wala champion function
+function celebrateChampion() {
+    // Left side se patakha
+    confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { x: 0.1, y: 0.6 },
+        colors: ['#ffd700', '#00ffaa', '#ff0055', '#00e5ff']
+    });
+
+    // Right side se patakha
+    setTimeout(() => {
+        confetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { x: 0.9, y: 0.6 },
+            colors: ['#ffd700', '#00ffaa', '#ff0055', '#00e5ff']
+        });
+    }, 300);
+
+    // Beech me se bada dhamaka
+    setTimeout(() => {
+        confetti({
+            particleCount: 200,
+            spread: 100,
+            origin: { x: 0.5, y: 0.4 },
+            colors: ['#ffd700', '#ffffff']
+        });
+    }, 600);
+}
 
 <script>
     const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyuMwMTwfZH6nh9r7f7F4wA6t0XgPbgRQLNvAxQkfv9ExAVTN3NHjmjDBP4S_VxSNN4_w/exec";
