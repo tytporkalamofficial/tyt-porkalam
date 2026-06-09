@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TYT PORKALAM - BGMI Esports Combo Engine</title>
+    <!-- CRACKERS ENGINE SCRIPT (COMPLETELY FIXED) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
     <style>
         * {
             box-sizing: border-box;
@@ -610,43 +613,37 @@ td.rank-cell, td.neon-score, td.highlight-stat {
 fetchAllSheetsData();
 setInterval(fetchAllSheetsData, 5000);
 </script>
+<!-- ========================================== -->
+<!--  HELLFIRE ULTRA ENGINE (ALL TABS + CRACKERS) -->
+<!-- ========================================== -->
+
+<!-- 1. FIRE THEME & POP-UP STYLES -->
 <style>
-/* Purane Ocean Theme ko Hellfire Theme me badalna */
 body {
     background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important;
     position: relative;
     overflow-x: hidden;
 }
-
-/* Canvas Animation Jo Purani Fish Ko Mita Kar Fire Embers Banayega */
 #odysseyCanvas {
     opacity: 0.15;
     mix-blend-mode: screen;
 }
-
-/* Main Container Fire Metallic Plate Look */
 .container {
     background: rgba(12, 4, 2, 0.85) !important;
     border: 2px solid #ff4500 !important;
     box-shadow: 0 0 35px rgba(255, 69, 0, 0.25), inset 0 0 20px rgba(255, 140, 0, 0.1) !important;
     border-radius: 16px !important;
 }
-
-/* Glowing Fire Header Title */
 .header-container h1.main-title {
     color: #ffffff !important;
     text-shadow: 0 0 10px #ff4500, 0 0 20px #ff8c00, 0 0 30px #ff0000 !important;
 }
-
-/* Live Sync Badge Fire Orange Alert */
 .live-badge {
     background: rgba(255, 69, 0, 0.2) !important;
     border: 1px solid #ff4500 !important;
     color: #ffaa66 !important;
     box-shadow: 0 0 10px rgba(255, 69, 0, 0.4) !important;
 }
-
-/* Fiery Navigation Tab Buttons */
 .tab-btn {
     background: rgba(25, 10, 5, 0.7) !important;
     border: 1px solid rgba(255, 69, 0, 0.3) !important;
@@ -658,27 +655,21 @@ body {
     border: 1px solid #ffd700 !important;
     box-shadow: 0 0 20px rgba(255, 69, 0, 0.6) !important;
 }
-
-/* Table Headers Crimson Fire Steel Look */
 th.map-header, th.sub-th, th.rank-header, th.team-name-head {
     background: linear-gradient(180deg, #2a0b03 0%, #120300 100%) !important;
     border-bottom: 2px solid #ff4500 !important;
     color: #ff8c00 !important;
 }
-
-/* Glowing Fire Table Scores */
 td.neon-score, td.highlight-stat {
     color: #ffaa44 !important;
     text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important;
 }
-
-/* Rank 1 Golden Fire Row Highlight */
 tr.rank-1 td {
     background-color: rgba(255, 69, 0, 0.12) !important;
     border-bottom: 1px solid #ffd700 !important;
 }
 
-/* 1st RANK FIRE CHAMPION POP-UP OVERLAY */
+/* POPUP STRUCTURE STYLE */
 .champion-popup-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -687,7 +678,7 @@ tr.rank-1 td {
     display: flex; justify-content: center; align-items: center;
     z-index: 99999;
     opacity: 0; pointer-events: none;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.3s ease;
 }
 .champion-popup-overlay.show {
     opacity: 1;
@@ -697,52 +688,53 @@ tr.rank-1 td {
     background: linear-gradient(135deg, #2a0c02 0%, #0a0300 100%);
     border: 3px solid #ff4500;
     box-shadow: 0 0 50px rgba(255, 69, 0, 0.5), inset 0 0 25px rgba(255, 140, 0, 0.2);
-    padding: 45px 65px;
+    padding: 40px 60px;
     border-radius: 24px;
     text-align: center;
     transform: scale(0.7);
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .champion-popup-overlay.show .champion-card {
     transform: scale(1);
 }
 .champion-title {
     color: #ffd700;
-    font-size: 21pt;
+    font-size: 20pt;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
 }
 .champion-name {
     color: #ffffff;
-    font-size: 40pt;
+    font-size: 38pt;
     font-weight: 900;
     margin: 15px 0;
     text-shadow: 0 0 20px #ff4500;
 }
 .champion-badge {
-    font-size: 50pt;
+    font-size: 45pt;
     margin-bottom: 5px;
-    animation: firePulse 0.9s infinite alternate;
+    animation: firePulse 0.8s infinite alternate;
 }
 @keyframes firePulse {
     0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); }
-    100% { transform: scale(1.15); filter: drop-shadow(0 0 20px #ff8c00); }
+    100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); }
 }
 </style>
 
+<!-- 2. DYNAMIC POP-UP HTML -->
 <div id="championPopup" class="champion-popup-overlay">
     <div class="champion-card">
-        <div class="champion-badge">🔥</div>
+        <div class="champion-badge">👑🔥</div>
         <div class="champion-title" id="popHeaderType">CURRENT #1 LEADER</div>
-        <div class="champion-name" id="popLeaderName">PLAYER/TEAM</div>
+        <div class="champion-name" id="popLeaderName">LOADING...</div>
     </div>
 </div>
 
+<!-- 3. ANIMATION & 1-SECOND SYNC LOGIC -->
 <script>
-// Piche Jo Canvas Hai Use Fire Spark Effect Me Badalne Ka System
+// Fire Particles Background
 function initFireBackground() {
     const canvas = document.getElementById('odysseyCanvas');
     if (!canvas) return;
@@ -780,41 +772,33 @@ function initFireBackground() {
             ctx.fill();
         }
     }
-
-    for (let i = 0; i < 60; i++) {
-        particles.push(new Particle());
-    }
+    for (let i = 0; i < 50; i++) particles.push(new Particle());
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
+        particles.forEach(p => { p.update(); p.draw(); });
         requestAnimationFrame(animate);
     }
     animate();
 }
 
-// Celebration Engine Setup
-let lastWinners = {
-    'team-points-tab': '',
-    'player-kills-tab': '',
-    'player-stats-tab': '',
-    'team-standings-tab': ''
-};
+// Global Tracker for last winners to avoid loop on auto-sync
+let lastWinnerCache = {};
 
-function triggerChampionCelebration(tabId, headerName) {
+function triggerTabCelebration(tabId, tabName) {
+    // Chhoti si delay taaki data load ho jaye
     setTimeout(() => {
-        const activeTab = document.getElementById(tabId);
-        if (!activeTab) return;
+        const gridContainer = document.getElementById(tabId);
+        if (!gridContainer) return;
 
-        const firstRow = activeTab.querySelector('tbody tr');
+        // Pehli row dhoondhna
+        const firstRow = gridContainer.querySelector('tbody tr');
         if (!firstRow) return;
 
-        let nameCell = firstRow.querySelector('.player-name-cell') || 
-                       firstRow.querySelector('.team-name-cell') || 
-                       firstRow.querySelector('.standing-team-cell') ||
+        // Team ya Player Name nikalna
+        let nameCell = firstRow.querySelector('.standing-team-cell') || 
+                       firstRow.querySelector('.player-name-cell') || 
+                       firstRow.querySelector('.team-name-cell') ||
                        firstRow.querySelectorAll('td')[1];
 
         if (!nameCell) return;
@@ -822,56 +806,62 @@ function triggerChampionCelebration(tabId, headerName) {
         let winnerName = nameCell.innerText || nameCell.textContent;
         winnerName = winnerName.replace(/[⭐👑🎖️🔥]/g, '').trim();
 
-        if (winnerName && lastWinners[tabId] !== winnerName) {
-            lastWinners[tabId] = winnerName;
+        if (!winnerName) return;
 
-            document.getElementById('popHeaderType').innerText = headerName + " #1 LEADER";
+        // Agar winner badla hai tabhi fire crackers phootenge
+        if (lastWinnerCache[tabId] !== winnerName) {
+            lastWinnerCache[tabId] = winnerName;
+
+            document.getElementById('popHeaderType').innerText = tabName + " #1 LEADER";
             document.getElementById('popLeaderName').innerText = winnerName;
 
             const popup = document.getElementById('championPopup');
             popup.classList.add('show');
 
-            // --- FIREWORKS BLASTS ---
+            // --- CRACKERS BOOM ANIMATION ---
             if (typeof confetti === 'function') {
-                // Left Flame Blast
-                confetti({ particleCount: 140, spread: 80, origin: { x: 0.1, y: 0.5 }, colors: ['#ff4500', '#ff8c00', '#ffd700'] });
+                // Left Side Fire Explosion
+                confetti({ particleCount: 150, spread: 80, origin: { x: 0.1, y: 0.5 }, colors: ['#ff4500', '#ff8c00', '#ffd700'] });
                 
-                // Right Flame Blast
+                // Right Side Fire Explosion
                 setTimeout(() => {
-                    confetti({ particleCount: 140, spread: 80, origin: { x: 0.9, y: 0.5 }, colors: ['#ff4500', '#ff8c00', '#ffd700'] });
-                }, 300);
+                    confetti({ particleCount: 150, spread: 80, origin: { x: 0.9, y: 0.5 }, colors: ['#ff4500', '#ff8c00', '#ffd700'] });
+                }, 250);
 
-                // Huge Core Inferno Blast
+                // Center Massive Explosion
                 setTimeout(() => {
-                    confetti({ particleCount: 220, spread: 120, origin: { x: 0.5, y: 0.4 }, colors: ['#ff0000', '#ff8c00', '#ffffff', '#ffd700'] });
-                }, 600);
+                    confetti({ particleCount: 200, spread: 100, origin: { x: 0.5, y: 0.4 }, colors: ['#ff0000', '#ff8c00', '#ffffff', '#ffd700'] });
+                }, 500);
             }
 
+            // Fix 3 Second Timeout (3000ms)
             setTimeout(() => {
                 popup.classList.remove('show');
-            }, 2300);
+            }, 3000);
         }
-    }, 650);
+    }, 400);
 }
 
-// Hook tab clicks
+// Tab badalne par pop-up trigger karne ka handle
 const originalSwitchTab = window.switchTab;
 window.switchTab = function(tabId) {
     if (typeof originalSwitchTab === 'function') {
         originalSwitchTab(tabId);
     }
     
-    let headerText = "TEAM POINTS";
-    if (tabId.includes('kills')) headerText = "PLAYER KILLS";
-    if (tabId.includes('stats')) headerText = "PLAYER STATS";
-    if (tabId.includes('standings')) headerText = "TEAM STANDINGS";
+    let cleanName = "TEAM POINTS";
+    if (tabId.includes('kills') || tabId.includes('player-kills')) cleanName = "PLAYER KILLS";
+    if (tabId.includes('stats') || tabId.includes('player-stats')) cleanName = "PLAYER STATS";
+    if (tabId.includes('standings') || tabId.includes('team-standings')) cleanName = "TEAM STANDINGS";
 
-    triggerChampionCelebration(tabId, headerText);
+    triggerTabCelebration(tabId, cleanName);
 };
 
-// Fire Background Initialize and First load trigger
+// Initialize Everything
 window.addEventListener('load', () => {
     initFireBackground();
+    
+    // Pehli baar khulne par active tab par pop-up chalana
     setTimeout(() => {
         let activeBtn = document.querySelector('.tab-btn.active');
         if (activeBtn) {
@@ -879,17 +869,17 @@ window.addEventListener('load', () => {
             if (onclickAttr) {
                 let match = onclickAttr.match(/'([^']+)'/);
                 if (match && match[1]) {
-                    let currentTab = match[1];
-                    let headerText = "TEAM POINTS";
-                    if (currentTab.includes('kills')) headerText = "PLAYER KILLS";
-                    if (currentTab.includes('stats')) headerText = "PLAYER STATS";
-                    if (currentTab.includes('standings')) headerText = "TEAM STANDINGS";
-                    triggerChampionCelebration(currentTab, headerText);
+                    window.switchTab(match[1]);
                 }
             }
         }
-    }, 1500);
+    }, 1200);
 });
+
+// COMPLETELY FIXING LIVE SYNC DELAY TO 1 SECOND (1000ms)
+fetchAllSheetsData();
+setInterval(fetchAllSheetsData, 1000);
 </script>
+
 </body>
 </html>
