@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TYT PORKALAM - BGMI Esports Combo Engine</title>
-    <!-- CRACKERS ENGINE SCRIPT (COMPLETELY FIXED) -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
+<body class="vsc-initialized">
     <style>
         * {
             box-sizing: border-box;
@@ -613,6 +613,11 @@ td.rank-cell, td.neon-score, td.highlight-stat {
 fetchAllSheetsData();
 setInterval(fetchAllSheetsData, 5000);
 </script>
+<!-- ========================================== -->
+<!--  HELLFIRE ULTRA ENGINE V3 (NATIVE CRACKERS) -->
+<!-- ========================================== -->
+
+<!-- 1. FIRE THEME & POP-UP STYLES -->
 <style>
 body {
     background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important;
@@ -716,8 +721,18 @@ tr.rank-1 td {
     0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); }
     100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); }
 }
+
+/* NATIVE CRACKERS CANVAS STYLE */
+#crackersCanvas {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 9999999 !important;
+}
 </style>
 
+<!-- 2. DYNAMIC POP-UP & NATIVE CANVAS HTML -->
+<canvas id="crackersCanvas"></canvas>
 <div id="championPopup" class="champion-popup-overlay">
     <div class="champion-card">
         <div class="champion-badge">👑🔥</div>
@@ -726,8 +741,9 @@ tr.rank-1 td {
     </div>
 </div>
 
+<!-- 3. ANIMATION & LOCAL CRACKERS ENGINE LOGIC -->
 <script>
-// Particles Background Engine
+// Fire Particles Background
 function initFireBackground() {
     const canvas = document.getElementById('odysseyCanvas');
     if (!canvas) return;
@@ -775,32 +791,112 @@ function initFireBackground() {
     animate();
 }
 
+// --- SELF-MADE NATIVE CRACKERS ENGINE (NO OUTSIDE CDN SCRIPT NEEDED) ---
+const cCanvas = document.getElementById('crackersCanvas');
+const cCtx = cCanvas.getContext('2d');
+let cParticles = [];
+let crackersAnimationId;
+
+function resizeCrackersCanvas() {
+    cCanvas.width = window.innerWidth;
+    cCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCrackersCanvas);
+resizeCrackersCanvas();
+
+class CrackerParticle {
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.radius = Math.random() * 4 + 2;
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 12 + 4;
+        this.speedX = Math.cos(angle) * velocity;
+        this.speedY = Math.sin(angle) * velocity;
+        this.gravity = 0.2;
+        this.alpha = 1;
+        this.decay = Math.random() * 0.015 + 0.015;
+    }
+    update() {
+        this.speedY += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.alpha -= this.decay;
+    }
+    draw() {
+        cCtx.save();
+        cCtx.globalAlpha = this.alpha;
+        cCtx.fillStyle = this.color;
+        cCtx.shadowBlur = 10;
+        cCtx.shadowColor = this.color;
+        cCtx.beginPath();
+        cCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        cCtx.fill();
+        cCtx.restore();
+    }
+}
+
+function createExplosion(x, y) {
+    const colors = ['#ff4500', '#ff8c00', '#ffd700', '#ff0000', '#ffffff'];
+    for (let i = 0; i < 100; i++) {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        cParticles.push(new CrackerParticle(x, y, color));
+    }
+}
+
+function animateCrackers() {
+    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+    for (let i = cParticles.length - 1; i >= 0; i--) {
+        cParticles[i].update();
+        if (cParticles[i].alpha <= 0) {
+            cParticles.splice(i, 1);
+        } else {
+            cParticles[i].draw();
+        }
+    }
+    crackersAnimationId = requestAnimationFrame(animateCrackers);
+}
+
+function triggerNativeCrackers() {
+    cParticles = []; 
+    cancelAnimationFrame(crackersAnimationId);
+    animateCrackers();
+
+    // Blast 1: Left Side
+    createExplosion(window.innerWidth * 0.2, window.innerHeight * 0.4);
+    
+    // Blast 2: Right Side (After 200ms)
+    setTimeout(() => {
+        createExplosion(window.innerWidth * 0.8, window.innerHeight * 0.4);
+    }, 250);
+
+    // Blast 3: Center Heavy (After 500ms)
+    setTimeout(() => {
+        createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.3);
+    }, 500);
+}
+
 // Global Tracker for winners
 let lastWinnerCache = {};
 
 function triggerTabCelebration(tabId, tabName) {
-    // 600ms wait taaki data table ke andar load ho jaye
     setTimeout(() => {
         const gridContainer = document.getElementById(tabId);
         if (!gridContainer) return;
 
-        // Fallback: Agar directly tbody tr na mile toh container ke andar ka pehla row dhoondho
         const firstRow = gridContainer.querySelector('tbody tr') || gridContainer.querySelector('tr');
         if (!firstRow) return;
 
-        // Safe Method: Name hamesha Row ka Dusra Column (Index 1) hota hai
         const allCells = firstRow.querySelectorAll('td');
         if (allCells.length < 2) return; 
         
-        let nameCell = allCells[1]; // Team Name ya Player Name column
-
+        let nameCell = allCells[1]; 
         let winnerName = nameCell.innerText || nameCell.textContent;
-        // Clean icons if any
         winnerName = winnerName.replace(/[⭐👑🎖️🔥]/g, '').trim();
 
         if (!winnerName || winnerName.toUpperCase() === "LOADING...") return;
 
-        // Check if winner changed or if it's first load
         if (lastWinnerCache[tabId] !== winnerName) {
             lastWinnerCache[tabId] = winnerName;
 
@@ -810,28 +906,10 @@ function triggerTabCelebration(tabId, tabName) {
             const popup = document.getElementById('championPopup');
             popup.classList.add('show');
 
-            // --- CRACKERS BOOM (BINA FAIL HUE CHALEGA) ---
-            try {
-                if (typeof confetti === 'function') {
-                    // Left Side
-                    confetti({ particleCount: 140, spread: 75, origin: { x: 0.1, y: 0.5 }, colors: ['#ff4500', '#ff8c00', '#ffd700'] });
-                    // Right Side
-                    setTimeout(() => {
-                        confetti({ particleCount: 140, spread: 75, origin: { x: 0.9, y: 0.5 }, colors: ['#ff4500', '#ff8c00', '#ffd700'] });
-                    }, 200);
-                    // Center Burst
-                    setTimeout(() => {
-                        confetti({ particleCount: 180, spread: 90, origin: { x: 0.5, y: 0.4 }, colors: ['#ff0000', '#ff8c00', '#ffffff', '#ffd700'] });
-                    }, 400);
-                } else {
-                    console.log("Confetti function not loaded yet, trying window level...");
-                    window.confetti({ particleCount: 150, spread: 80, origin: { x: 0.5, y: 0.5 } });
-                }
-            } catch(e) {
-                console.error("Crackers Error: ", e);
-            }
+            // INTRODUCING BULLETPROOF NATIVE CRACKERS
+            triggerNativeCrackers();
 
-            // Exactly 3 Second Tak Rokna (3000ms)
+            // 3 Second Display Timeout
             setTimeout(() => {
                 popup.classList.remove('show');
             }, 3000);
@@ -859,7 +937,6 @@ window.switchTab = function(tabId) {
 window.addEventListener('load', () => {
     initFireBackground();
     
-    // First screen open celebration
     setTimeout(() => {
         let activeBtn = document.querySelector('.tab-btn.active');
         if (activeBtn) {
