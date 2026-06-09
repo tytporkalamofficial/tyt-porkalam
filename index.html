@@ -613,11 +613,6 @@ td.rank-cell, td.neon-score, td.highlight-stat {
 fetchAllSheetsData();
 setInterval(fetchAllSheetsData, 5000);
 </script>
-<!-- ========================================== -->
-<!--  HELLFIRE ULTRA ENGINE (ALL TABS + CRACKERS) -->
-<!-- ========================================== -->
-
-<!-- 1. FIRE THEME & POP-UP STYLES -->
 <style>
 body {
     background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important;
@@ -673,10 +668,10 @@ tr.rank-1 td {
 .champion-popup-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(10, 3, 0, 0.92);
-    backdrop-filter: blur(8px);
+    background: rgba(10, 3, 0, 0.95);
+    backdrop-filter: blur(10px);
     display: flex; justify-content: center; align-items: center;
-    z-index: 99999;
+    z-index: 999999 !important;
     opacity: 0; pointer-events: none;
     transition: opacity 0.3s ease;
 }
@@ -685,13 +680,13 @@ tr.rank-1 td {
     pointer-events: auto;
 }
 .champion-card {
-    background: linear-gradient(135deg, #2a0c02 0%, #0a0300 100%);
+    background: linear-gradient(135deg, #3a1003 0%, #0c0400 100%);
     border: 3px solid #ff4500;
-    box-shadow: 0 0 50px rgba(255, 69, 0, 0.5), inset 0 0 25px rgba(255, 140, 0, 0.2);
-    padding: 40px 60px;
+    box-shadow: 0 0 60px rgba(255, 69, 0, 0.6), inset 0 0 30px rgba(255, 140, 0, 0.3);
+    padding: 50px 70px;
     border-radius: 24px;
     text-align: center;
-    transform: scale(0.7);
+    transform: scale(0.6);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .champion-popup-overlay.show .champion-card {
@@ -699,7 +694,7 @@ tr.rank-1 td {
 }
 .champion-title {
     color: #ffd700;
-    font-size: 20pt;
+    font-size: 22pt;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -707,13 +702,13 @@ tr.rank-1 td {
 }
 .champion-name {
     color: #ffffff;
-    font-size: 38pt;
+    font-size: 42pt;
     font-weight: 900;
     margin: 15px 0;
-    text-shadow: 0 0 20px #ff4500;
+    text-shadow: 0 0 25px #ff4500, 0 0 10px #ffffff;
 }
 .champion-badge {
-    font-size: 45pt;
+    font-size: 55pt;
     margin-bottom: 5px;
     animation: firePulse 0.8s infinite alternate;
 }
@@ -723,7 +718,6 @@ tr.rank-1 td {
 }
 </style>
 
-<!-- 2. DYNAMIC POP-UP HTML -->
 <div id="championPopup" class="champion-popup-overlay">
     <div class="champion-card">
         <div class="champion-badge">👑🔥</div>
@@ -732,9 +726,8 @@ tr.rank-1 td {
     </div>
 </div>
 
-<!-- 3. ANIMATION & 1-SECOND SYNC LOGIC -->
 <script>
-// Fire Particles Background
+// Particles Background Engine
 function initFireBackground() {
     const canvas = document.getElementById('odysseyCanvas');
     if (!canvas) return;
@@ -782,33 +775,32 @@ function initFireBackground() {
     animate();
 }
 
-// Global Tracker for last winners to avoid loop on auto-sync
+// Global Tracker for winners
 let lastWinnerCache = {};
 
 function triggerTabCelebration(tabId, tabName) {
-    // Chhoti si delay taaki data load ho jaye
+    // 600ms wait taaki data table ke andar load ho jaye
     setTimeout(() => {
         const gridContainer = document.getElementById(tabId);
         if (!gridContainer) return;
 
-        // Pehli row dhoondhna
-        const firstRow = gridContainer.querySelector('tbody tr');
+        // Fallback: Agar directly tbody tr na mile toh container ke andar ka pehla row dhoondho
+        const firstRow = gridContainer.querySelector('tbody tr') || gridContainer.querySelector('tr');
         if (!firstRow) return;
 
-        // Team ya Player Name nikalna
-        let nameCell = firstRow.querySelector('.standing-team-cell') || 
-                       firstRow.querySelector('.player-name-cell') || 
-                       firstRow.querySelector('.team-name-cell') ||
-                       firstRow.querySelectorAll('td')[1];
-
-        if (!nameCell) return;
+        // Safe Method: Name hamesha Row ka Dusra Column (Index 1) hota hai
+        const allCells = firstRow.querySelectorAll('td');
+        if (allCells.length < 2) return; 
+        
+        let nameCell = allCells[1]; // Team Name ya Player Name column
 
         let winnerName = nameCell.innerText || nameCell.textContent;
+        // Clean icons if any
         winnerName = winnerName.replace(/[⭐👑🎖️🔥]/g, '').trim();
 
-        if (!winnerName) return;
+        if (!winnerName || winnerName.toUpperCase() === "LOADING...") return;
 
-        // Agar winner badla hai tabhi fire crackers phootenge
+        // Check if winner changed or if it's first load
         if (lastWinnerCache[tabId] !== winnerName) {
             lastWinnerCache[tabId] = winnerName;
 
@@ -818,31 +810,36 @@ function triggerTabCelebration(tabId, tabName) {
             const popup = document.getElementById('championPopup');
             popup.classList.add('show');
 
-            // --- CRACKERS BOOM ANIMATION ---
-            if (typeof confetti === 'function') {
-                // Left Side Fire Explosion
-                confetti({ particleCount: 150, spread: 80, origin: { x: 0.1, y: 0.5 }, colors: ['#ff4500', '#ff8c00', '#ffd700'] });
-                
-                // Right Side Fire Explosion
-                setTimeout(() => {
-                    confetti({ particleCount: 150, spread: 80, origin: { x: 0.9, y: 0.5 }, colors: ['#ff4500', '#ff8c00', '#ffd700'] });
-                }, 250);
-
-                // Center Massive Explosion
-                setTimeout(() => {
-                    confetti({ particleCount: 200, spread: 100, origin: { x: 0.5, y: 0.4 }, colors: ['#ff0000', '#ff8c00', '#ffffff', '#ffd700'] });
-                }, 500);
+            // --- CRACKERS BOOM (BINA FAIL HUE CHALEGA) ---
+            try {
+                if (typeof confetti === 'function') {
+                    // Left Side
+                    confetti({ particleCount: 140, spread: 75, origin: { x: 0.1, y: 0.5 }, colors: ['#ff4500', '#ff8c00', '#ffd700'] });
+                    // Right Side
+                    setTimeout(() => {
+                        confetti({ particleCount: 140, spread: 75, origin: { x: 0.9, y: 0.5 }, colors: ['#ff4500', '#ff8c00', '#ffd700'] });
+                    }, 200);
+                    // Center Burst
+                    setTimeout(() => {
+                        confetti({ particleCount: 180, spread: 90, origin: { x: 0.5, y: 0.4 }, colors: ['#ff0000', '#ff8c00', '#ffffff', '#ffd700'] });
+                    }, 400);
+                } else {
+                    console.log("Confetti function not loaded yet, trying window level...");
+                    window.confetti({ particleCount: 150, spread: 80, origin: { x: 0.5, y: 0.5 } });
+                }
+            } catch(e) {
+                console.error("Crackers Error: ", e);
             }
 
-            // Fix 3 Second Timeout (3000ms)
+            // Exactly 3 Second Tak Rokna (3000ms)
             setTimeout(() => {
                 popup.classList.remove('show');
             }, 3000);
         }
-    }, 400);
+    }, 600);
 }
 
-// Tab badalne par pop-up trigger karne ka handle
+// Override Tab Switch for Live Intercept
 const originalSwitchTab = window.switchTab;
 window.switchTab = function(tabId) {
     if (typeof originalSwitchTab === 'function') {
@@ -850,18 +847,19 @@ window.switchTab = function(tabId) {
     }
     
     let cleanName = "TEAM POINTS";
-    if (tabId.includes('kills') || tabId.includes('player-kills')) cleanName = "PLAYER KILLS";
-    if (tabId.includes('stats') || tabId.includes('player-stats')) cleanName = "PLAYER STATS";
-    if (tabId.includes('standings') || tabId.includes('team-standings')) cleanName = "TEAM STANDINGS";
+    let lowerId = tabId.toLowerCase();
+    if (lowerId.includes('kill')) cleanName = "PLAYER KILLS";
+    if (lowerId.includes('stat')) cleanName = "PLAYER STATS";
+    if (lowerId.includes('standing')) cleanName = "TEAM STANDINGS";
 
     triggerTabCelebration(tabId, cleanName);
 };
 
-// Initialize Everything
+// Initialize Engine On Load
 window.addEventListener('load', () => {
     initFireBackground();
     
-    // Pehli baar khulne par active tab par pop-up chalana
+    // First screen open celebration
     setTimeout(() => {
         let activeBtn = document.querySelector('.tab-btn.active');
         if (activeBtn) {
@@ -873,12 +871,14 @@ window.addEventListener('load', () => {
                 }
             }
         }
-    }, 1200);
+    }, 1500);
 });
 
-// COMPLETELY FIXING LIVE SYNC DELAY TO 1 SECOND (1000ms)
-fetchAllSheetsData();
-setInterval(fetchAllSheetsData, 1000);
+// ULTRA SYNC TIME LOCK - REALTIME 1 SECOND (1000ms)
+if (typeof fetchAllSheetsData === 'function') {
+    fetchAllSheetsData();
+    setInterval(fetchAllSheetsData, 1000);
+}
 </script>
 
 </body>
