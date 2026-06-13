@@ -7,92 +7,6 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body class="vsc-initialized">
-    <!-- ========================================== -->
-<!--  CINEMATIC SPLASH SCREEN ENGINE BY GEMINI  -->
-<!-- ========================================== -->
-<style>
-/* Pure Page ko block karne wali welcome screen */
-.splash-screen {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, #1a0601 0%, #000000 100%);
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    z-index: 9999999 !important; /* Pura dashboard iske piche chupa rahega */
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-/* Title Text Style */
-.splash-title {
-    color: #ffffff;
-    font-size: 42pt;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    margin-bottom: 20px;
-    text-shadow: 0 0 30px #ff4500, 0 0 10px #ffffff;
-    animation: pulseGlow 2s infinite alternate;
-}
-/* Enter Tournament Button Style */
-.splash-btn {
-    background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
-    color: #ffffff;
-    border: 2px solid #ffd700;
-    padding: 15px 40px;
-    font-size: 18pt;
-    font-weight: 800;
-    text-transform: uppercase;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 0 25px rgba(255, 69, 0, 0.5);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-.splash-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 40px #ff4500;
-}
-@keyframes pulseGlow {
-    0% { text-shadow: 0 0 20px #ff4500; transform: scale(1); }
-    100% { text-shadow: 0 0 40px #ff8c00, 0 0 10px #ffffff; transform: scale(1.02); }
-}
-/* Jab screen gayab hogi toh fade out effect */
-.splash-screen.fade-out {
-    opacity: 0;
-    transform: scale(1.1);
-    pointer-events: none;
-
-</style>
-
-<!-- Audio Elements (Non-Copyright Links) -->
-<!-- Background Music (Looping) -->
-<audio id="bgMusic" 5 second>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-<!-- Button Click Cinematic Sound -->
-<audio id="clickSFX">
-    <source src="https://actions.google.com/sounds/v1/science_fiction/glitch_digital_power_up.ogg" type="audio/ogg">
-</audio>
-
-<!-- Splash Screen HTML Structure -->
-<div id="welcomeSplash" class="splash-screen">
-    <div class="splash-title">TYT PORKALAM</div>
-    <button class="splash-btn" onclick="startEsportsEngine()">Enter Tournament</button>
-</div>
-</style>
-
-<!-- Audio Elements (Non-Copyright Links) -->
-<!-- Background Music (Looping) -->
-<audio id="bgMusic" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-<!-- Button Click Cinematic Sound -->
-<audio id="clickSFX">
-    <source src="https://actions.google.com/sounds/v1/science_fiction/glitch_digital_power_up.ogg" type="audio/ogg">
-</audio>
-
-<!-- Splash Screen HTML Structure -->
-<div id="welcomeSplash" class="splash-screen">
-    <div class="splash-title">TYT PORKALAM</div>
-    <button class="splash-btn" onclick="startEsportsEngine()">Enter Tournament</button>
-</div>
     <style>
         * {
             box-sizing: border-box;
@@ -1042,7 +956,1931 @@ if (typeof fetchAllSheetsData === 'function') {
     fetchAllSheetsData();
     setInterval(fetchAllSheetsData, 1000);
 }
-    function startEsportsEngine() {
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TYT PORKALAM - BGMI Esports Combo Engine</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="vsc-initialized">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 15px;
+            background: radial-gradient(circle at 70% 30%, #062340 0%, #031124 60%, #010610 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 🌊 BGMI OCEAN ODYSSEY CANVAS ENGINE */
+        #odysseyCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* 🔮 GLASS CONTAINER STYLE */
+        .container {
+            width: 100%;
+            max-width: 1450px;
+            background-color: rgba(4, 14, 28, 0.55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 240, 255, 0.12);
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+        }
+
+        /* Header Layout */
+        .header-container {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(0, 240, 255, 0.4);
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 40pt;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin: 0;
+            color: #00f0ff;
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.6), 0 0 30px rgba(0, 240, 255, 0.3);
+        }
+
+        .subtitle {
+            font-size: 14pt;
+            color: #ff007f;
+            margin: 6px 0 0 0;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 255, 170, 0.2);
+            border: 1px solid #00ffaa;
+            color: #00ffaa;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0.4; } }
+
+        /* Navigation Tabs */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(8, 20, 38, 0.8);
+            border: 1.5px solid rgba(0, 240, 255, 0.2);
+            color: #cbd5e1;
+            padding: 12px 24px;
+            font-size: 12pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            color: #00f0ff;
+            border-color: #00f0ff;
+            background: rgba(0, 240, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Grid Enforcers */
+        .table-responsive {
+            overflow-x: auto;
+            display: none;
+            width: 100%;
+        }
+
+        .table-responsive.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(5, 12, 26, 0.45);
+            border: 2px solid rgba(0, 240, 255, 0.25);
+        }
+
+        th {
+            background-color: rgba(12, 23, 43, 0.9);
+            color: #00f0ff;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 12px 10px;
+            border: 1.5px solid rgba(0, 240, 255, 0.25);
+            text-align: center;
+            font-size: 11pt;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 10px;
+            border: 1.5px solid rgba(0, 240, 255, 0.18);
+            text-align: center;
+            color: #ffffff;
+            font-size: 11.5pt;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+            white-space: nowrap;
+        }
+
+        /* Dynamic Width Helpers instead of Hardcoded Ratios */
+        th.rank-header, td.rank-cell { width: 70px; min-width: 70px; }
+        th.team-name-head, td.team-name-cell { min-width: 220px; text-align: left !important; padding-left: 15px !important; }
+        th.player-name-head, td.player-name-cell { min-width: 220px; text-align: left !important; padding-left: 15px !important; }
+        th.total-points-head, th.top-killer-head, td.neon-score { min-width: 120px; }
+        
+        td.team-name-cell { border-left: 4px solid #00f0ff; }
+        td.player-name-cell { border-left: 4px solid #ff007f; }
+        td.standing-team-cell { border-left: 4px solid #00ffaa; text-align: center !important; }
+
+        .team-emoji {
+            margin-right: 8px;
+            display: inline-block;
+            font-size: 12pt;
+            vertical-align: middle;
+        }
+
+        td.neon-score { font-weight: 800; color: #00ffaa; font-size: 12.5pt; text-shadow: 0 0 8px rgba(0, 255, 170, 0.4); }
+        td.highlight-stat { color: #00ffaa; font-weight: 800; text-shadow: 0 0 6px rgba(0, 255, 170, 0.3); }
+        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; }
+
+        tr:nth-child(even) td { background-color: rgba(16, 29, 51, 0.25); } 
+        tr:hover td { background-color: rgba(0, 240, 255, 0.15); } 
+        
+        /* Premium Leaderboard Podium Rows Styling */
+        tr.rank-1 td { background-color: rgba(255, 215, 0, 0.04) !important; }
+        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell, tr.rank-1 td.standing-team-cell { text-shadow: 0 0 8px rgba(255,215,0,0.5); color: #ffd700; }
+        tr.rank-1 td.rank-cell { color: #ffd700; }
+
+        tr.rank-2 td { background-color: rgba(192, 192, 192, 0.04) !important; }
+        tr.rank-2 td.team-name-cell, tr.rank-2 td.player-name-cell, tr.rank-2 td.standing-team-cell { text-shadow: 0 0 8px rgba(192,192,192,0.4); color: #c0c0c0; }
+        tr.rank-2 td.rank-cell { color: #c0c0c0; }
+
+        tr.rank-3 td { background-color: rgba(205, 127, 50, 0.04) !important; }
+        tr.rank-3 td.team-name-cell, tr.rank-3 td.player-name-cell, tr.rank-3 td.standing-team-cell { text-shadow: 0 0 8px rgba(205,127,50,0.4); color: #cd7f32; }
+        tr.rank-3 td.rank-cell { color: #cd7f32; }
+
+        th.map-header { font-size: 11.5pt; font-weight: 800; background-color: rgba(16, 32, 61, 0.95); color: #ffffff; min-width: 140px; }
+        th.sub-th { background-color: rgba(10, 17, 31, 0.85); font-size: 10.5pt; color: #a0aec0; min-width: 70px; }
+
+        .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
+
+/* Poori website ke tables ke saare cells ke andar ka text/number bada karne ke liye */
+table th, table td {
+    font-size: 14pt !important;    /* Sabhi numbers aur text ko ek barabar bada karne ke liye */
+    font-weight: 600 !important;   /* Text ko thoda bold/mota karne ke liye */
+    padding: 9px 8px !important;  /* Rows ke beech me gap badane ke liye */
+}
+
+/* Rank aur Main Scores (Kills/Points) ko aur bhi zyada bada karne ke liye */
+td.rank-cell, td.neon-score, td.highlight-stat {
+    font-size: 16pt !important;    /* In main numbers ko thoda aur bada kiya */
+    font-weight: 700 !important;   /* Full bold */
+    </style>
+</head>
+<body>
+
+<canvas id="odysseyCanvas"></canvas>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header-container">
+        <h1 class="main-title">TYT PORKALAM</h1>
+        <div class="subtitle">🔥ONLY THE STRONGEST SQUAD WILL SURVIVE🔥</div>
+        <div class="live-badge">● Live Sync</div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="switchTab('team-points-tab', this)">🛡️ TEAM POINTS</button>
+        <button class="tab-btn" onclick="switchTab('player-kills-tab', this)">🎯 PLAYER KILLS</button>
+        <button class="tab-btn" onclick="switchTab('player-stats-tab', this)">📊 PLAYER STATS</button>
+        <button class="tab-btn" onclick="switchTab('team-standings-tab', this)">🏆 TEAM STANDINGS</button>
+    </div>
+
+    <!-- TAB 1: Team Points (Fully Dynamic Fluid Layout) -->
+    <div id="team-points-tab" class="table-responsive active">
+        <table>
+            <thead id="team-points-head"></thead>
+            <tbody id="team-points-body">
+                <tr><td class="status-message">LOADING MAPS METRICS...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 2: Player Kills (Dynamic Grid) -->
+    <div id="player-kills-tab" class="table-responsive">
+        <table>
+            <thead id="player-kills-head"></thead>
+            <tbody id="player-kills-body">
+                <tr><td class="status-message">KILLS DATABASE STREAMING...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 3: Players Stats -->
+    <div id="player-stats-tab" class="table-responsive">
+        <table>
+            <thead id="player-stats-head"></thead>
+            <tbody id="player-stats-body">
+                <tr><td class="status-message">SYNCHRONIZING PLAYER STATS RECORDS...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 4: Team Standings -->
+    <div id="team-standings-tab" class="table-responsive">
+        <table>
+            <thead id="team-standings-head"></thead>
+            <tbody id="team-standings-body">
+                <tr><td class="status-message">CONNECTING TO STANDINGS PIPELINE...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyuMwMTwfZH6nh9r7f7F4wA6t0XgPbgRQLNvAxQkfv9ExAVTN3NHjmjDBP4S_VxSNN4_w/exec";
+
+    // ========================================================
+    // 🌌 CANVAS ENGINE WITH SMOOTH WAVE ANIMATIONS
+    // ========================================================
+    const canvas = document.getElementById('odysseyCanvas');
+    const ctx = canvas.getContext('2d');
+    let fishSchool = [], vortexAngle = 0;
+
+    function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', initCanvas); initCanvas();
+
+    let whaleTop = { x: -450, y: canvas.height * 0.22, speed: 1.1, swing: 0, swingSpeed: 0.025, sizeScale: 0.9 };
+    let whaleBottom = { x: canvas.width + 500, y: canvas.height * 0.75, speed: -0.9, swing: 3.5, swingSpeed: 0.02, sizeScale: 1.2 };
+
+    for (let i = 0; i < 22; i++) {
+        fishSchool.push({
+            x: Math.random() * canvas.width + canvas.width * 0.2, y: Math.random() * canvas.height,
+            size: Math.random() * 7 + 5, speed: Math.random() * 1.5 + 1.0,
+            waveFactor: Math.random() * 10, waveSpeed: Math.random() * 0.05 + 0.03
+        });
+    }
+
+    function drawWhaleVector(x, y, swing, scale, invertedFactor) {
+        let tailWave = Math.sin(swing); ctx.save(); ctx.translate(x, y); ctx.scale(invertedFactor * scale, scale);
+        ctx.strokeStyle = "rgba(0, 210, 255, 0.14)"; ctx.lineWidth = 3; ctx.shadowBlur = 15; ctx.shadowColor = "#00f0ff";
+        ctx.beginPath(); ctx.moveTo(150, 0); ctx.bezierCurveTo(80, -60, -50, -50, -120, tailWave * 15);
+        ctx.lineTo(-160, (tailWave * 15) - 35); ctx.lineTo(-145, tailWave * 15); ctx.lineTo(-160, (tailWave * 15) + 35);
+        ctx.lineTo(-120, tailWave * 15); ctx.bezierCurveTo(-50, 60, 80, 55, 150, 0); ctx.stroke(); ctx.restore();
+    }
+
+    function renderOdysseyWorld() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        vortexAngle += 0.002;
+        ctx.save(); ctx.translate(canvas.width * 0.12, canvas.height * 0.5);
+        for(let i = 0; i < 6; i++) {
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.025 - (i * 0.004)})`; ctx.lineWidth = 25 - (i * 3);
+            ctx.save(); ctx.rotate(vortexAngle * (1 + i * 0.15)); ctx.beginPath(); ctx.ellipse(0, 0, 80 + (i * 22), 240 + (i * 35), 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+        }
+        ctx.restore();
+
+        ctx.fillStyle = "rgba(0, 225, 255, 0.2)";
+        fishSchool.forEach(fish => {
+            fish.waveFactor += fish.waveSpeed; fish.x -= fish.speed; fish.y += Math.sin(fish.waveFactor) * 0.5;
+            if (fish.x < -60) { fish.x = canvas.width + 60; fish.y = Math.random() * canvas.height; }
+            ctx.save(); ctx.translate(fish.x, fish.y); ctx.rotate(Math.PI + Math.sin(fish.waveFactor) * 0.1);
+            ctx.beginPath(); ctx.moveTo(fish.size * 2, 0); ctx.quadraticCurveTo(fish.size, -fish.size * 0.4, 0, 0); ctx.quadraticCurveTo(fish.size, fish.size * 0.4, fish.size * 2, 0); ctx.closePath(); ctx.fill(); ctx.restore();
+        });
+
+        drawWhaleVector(whaleTop.x, whaleTop.y, whaleTop.swing, whaleTop.sizeScale, 1);
+        drawWhaleVector(whaleBottom.x, whaleBottom.y, whaleBottom.swing, whaleBottom.sizeScale, -1);
+        whaleTop.x += whaleTop.speed; whaleTop.swing += whaleTop.swingSpeed; if (whaleTop.x > canvas.width + 500) whaleTop.x = -500;
+        whaleBottom.x += whaleBottom.speed; whaleBottom.swing += whaleBottom.swingSpeed; if (whaleBottom.x < -600) whaleBottom.x = canvas.width + 600;
+        requestAnimationFrame(renderOdysseyWorld);
+    }
+    requestAnimationFrame(renderOdysseyWorld);
+
+    // ========================================================
+    // 🎯 SMART AUTO EMOJI DICTIONARY ENGINE
+    // ========================================================
+    function getTeamEmoji(teamName) {
+        if (!teamName) return '🎮';
+        const name = teamName.toUpperCase();
+        if (name.includes('CAMPER')) return '⛺';
+        if (name.includes('HUNTER')) return '🏹';
+        if (name.includes('EVENING') || name.includes('SQUAD')) return '🌆';
+        if (name.includes('MEDICO')) return '🩺';
+        if (name.includes('MATRIX')) return '🔮';
+        if (name.includes('BOT')) return '🤖';
+        if (name.includes('THUNDER')) return '⚡';
+        return '⚔️'; 
+    }
+
+    function getRankBadgeHTML(rankNum) {
+        if (rankNum === 1) return '🥇';
+        if (rankNum === 2) return '🥈';
+        if (rankNum === 3) return '🥉';
+        return rankNum;
+    }
+
+    function switchTab(tabId, button) {
+        document.querySelectorAll('.table-responsive').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        button.classList.add('active');
+    }
+
+    async function fetchAllSheetsData() {
+        if (REALTIME_API_URL ==="https://docs.google.com/spreadsheets/d/1SB9i3h1db3IWtOJcnzeOcaobR2Iv7-juPu3XY9XdTCk/edit?usp=sharing" || REALTIME_API_URL === "") return;
+        try {
+            const response = await fetch(`${REALTIME_API_URL}?_=${new Date().getTime()}`);
+            const allData = await response.json();
+            
+            buildUniversalMasterGrid(allData.teamPoints, 'team-points-head', 'team-points-body');
+            buildPlayerKillsGrid(allData.playerKills, 'player-kills-head', 'player-kills-body');
+            buildPlayerStatsGrid(allData.playerStats, 'player-stats-head', 'player-stats-body');
+            buildTeamStandingsGrid(allData.teamStandings, 'team-standings-head', 'team-standings-body');
+        } catch (error) { console.error("Sync error:", error); }
+    }
+
+    // 🛡️ FULLY DYNAMIC & FLUID LOGIC FOR TEAM POINTS
+    function buildUniversalMasterGrid(rows, headId, bodyId) {
+        if (!rows || rows.length < 2) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+        
+        // Auto detecting header row dynamically
+        const isHeaderDeleted = rows[0][0] && rows[0][0].toString().toUpperCase().includes("S:NO");
+        const startRowIdx = isHeaderDeleted ? 0 : 1;
+        const headerRow = rows[startRowIdx];
+
+        if (!headerRow) return;
+
+        // Automatically calculating match columns boundaries
+        const totalColumns = headerRow.length;
+        const totalPointsIdx = totalColumns - 2; // Second last is Total Points
+        const topKillerIdx = totalColumns - 1;   // Last column is Top Killer
+
+        let headHTML = '<tr><th rowspan="2" class="rank-header">RANK</th>';
+        headerRow.forEach((col, index) => {
+            if (index === 1) headHTML += `<th rowspan="2" class="team-name-head">TEAM NAME</th>`;
+            else if (index > 1 && index < totalPointsIdx && index % 2 === 0) {
+                headHTML += `<th colspan="2" class="map-header">${col || ''}</th>`;
+            }
+            else if (index === totalPointsIdx) headHTML += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th>`;
+            else if (index === topKillerIdx) headHTML += `<th rowspan="2" class="top-killer-head">TOP KILLER</th>`;
+        });
+        headHTML += '</tr><tr>';
+        
+        if (rows[startRowIdx + 1]) {
+            rows[startRowIdx + 1].forEach((col, index) => {
+                if (index > 1 && index < totalPointsIdx) headHTML += `<th class="sub-th">${col || ''}</th>`;
+            });
+        }
+        headHTML += '</tr>';
+        thead.innerHTML = headHTML;
+
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        for (let i = (startRowIdx + 2); i < rows.length; i++) {
+            const row = rows[i];
+            if (!row || !row[1] || row[1].toString().trim() === "" || row[0] === "TOTAL POINTS") continue;
+            
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`);
+            
+            let rowCells = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
+            rowCells += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(row[1])}</span>${row[1] || '-'}</td>`;
+            
+            for (let j = 2; j < totalColumns; j++) {
+                if (j === totalPointsIdx) {
+                    rowCells += `<td class="neon-score">${row[j] !== undefined ? row[j] : '-'}</td>`;
+                } else if (j === topKillerIdx) {
+                    rowCells += `<td style="font-size:10.5pt;">${row[j] !== undefined ? row[j] : '-'}</td>`;
+                } else {
+                    rowCells += `<td>${row[j] !== undefined ? row[j] : '-'}</td>`;
+                }
+            }
+            tr.innerHTML = rowCells;
+            tbody.appendChild(tr);
+            currentRank++;
+        }
+    }
+
+    // 🎯 DYNAMIC LOGIC FOR PLAYER KILLS TAB
+    function buildPlayerKillsGrid(rows, headId, bodyId) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+
+        let startRowIdx = 0;
+        if (rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM")) {
+            startRowIdx = 1; 
+        }
+
+        const headerRow = rows[startRowIdx];
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[0] || 'PLAYER NAME'}</th>`;
+        for(let c = 1; c < numCols - 1; c++) {
+            headHTML += `<th>${headerRow[c] || 'MATCH'}</th>`;
+        }
+        headHTML += `<th class="total-points-head">${headerRow[numCols - 1] || 'TOTAL KILLS'}</th></tr>`;
+        thead.innerHTML = headHTML;
+
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        for (let i = startRowIdx + 1; i < rows.length; i++) {
+            const row = rows[i];
+            if (!row || !row[0] || row[0].toString().trim() === "" || row[0].toString().toUpperCase().includes("PLAYER NAME")) continue;
+
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`);
+
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
+            cellHTML += `<td class="player-name-cell"><span class="team-emoji">🎯</span>${row[0] || '-'}</td>`;
+            for(let d = 1; d < numCols - 1; d++) {
+                cellHTML += `<td>${row[d] !== undefined ? row[d] : '-'}</td>`;
+            }
+            cellHTML += `<td class="neon-score">${row[numCols - 1] !== undefined ? row[numCols - 1] : '-'}</td>`;
+
+            tr.innerHTML = cellHTML;
+            tbody.appendChild(tr);
+            currentRank++;
+        }
+    }
+
+    // 👤 DYNAMIC LOGIC FOR PLAYER STATS GRID
+    function buildPlayerStatsGrid(rows, headId, bodyId) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+
+        let startRowIdx = 0;
+        if (rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM")) {
+            startRowIdx = 1; 
+        }
+
+        const headerRow = rows[startRowIdx];
+        const hasSNo = headerRow[0] && headerRow[0].toString().toUpperCase().includes("S:");
+        const startIdx = hasSNo ? 1 : 0;
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[startIdx] || 'PLAYER NAME'}</th>`;
+        for (let c = startIdx + 1; c < numCols; c++) {
+            headHTML += `<th>${headerRow[c] || 'STAT'}</th>`;
+        }
+        headHTML += `</tr>`;
+        thead.innerHTML = headHTML;
+        
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        for (let i = startRowIdx + 1; i < rows.length; i++) {
+            const row = rows[i];
+            if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().toUpperCase().includes("PLAYER NAME")) continue;
+            
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`);
+            
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
+            cellHTML += `<td class="player-name-cell"><span class="team-emoji">👤</span>${row[startIdx] || '-'}</td>`;
+            
+            for (let d = startIdx + 1; d < numCols; d++) {
+                let cellValue = row[d];
+    
+            // Agar ye aakhri column (KD) hai aur usme number hai, toh 2 decimal tak fix karo
+            if (d === numCols - 1 && cellValue !== undefined && !isNaN(cellValue) && cellValue !== "") {
+            cellValue = Number(cellValue).toFixed(2);
+       }
+
+            if (d === startIdx + 2) {
+            cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : '-'}</td>`;
+            } else if (d === numCols - 1) {
+            cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : '-'}</td>`;
+             } else {
+             cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : '-'}</td>`;
+       }
+    }
+            
+            tr.innerHTML = cellHTML;
+            tbody.appendChild(tr);
+            currentRank++;
+        }
+    }
+
+    // 🏆 DYNAMIC LOGIC FOR TEAM STANDINGS GRID
+    function buildTeamStandingsGrid(rows, headId, bodyId) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+
+        let startRowIdx = 0;
+        if (rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM")) {
+            startRowIdx = 1;
+        }
+
+        const headerRow = rows[startRowIdx];
+        const hasRankCol = headerRow[0] && headerRow[0].toString().toUpperCase().includes("RANK");
+        const startIdx = hasRankCol ? 1 : 0;
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="team-name-head" style="text-align: center !important;">${headerRow[startIdx] || 'TEAM NAME'}</th>`;
+        for (let c = startIdx + 1; c < numCols; c++) {
+            headHTML += `<th>${headerRow[c] || 'DATA'}</th>`;
+        }
+        headHTML += `</tr>`;
+        thead.innerHTML = headHTML;
+
+       tbody.innerHTML = '';
+    let currentRank = 1;
+    
+    for (let i = startRowIdx + 1; i < rows.length; i++) {
+        const row = rows[i];
+        if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().trim() === "0") continue;
+
+        const tr = document.createElement('tr');
+        tr.classList.add(`rank-${currentRank}`);
+
+        let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
+        cellHTML += `<td class="standing-team-cell" style="text-align: center !important;">${row[startIdx]}</td>`;
+
+        for (let d = startIdx + 1; d < numCols; d++) {
+            let cellValue = row[d];
+
+            // Team KD ko 3-digit me force lock karne ke liye
+            if (d === numCols - 1 && cellValue !== undefined && !isNaN(cellValue) && cellValue !== '') {
+                cellValue = Number(cellValue).toFixed(2);
+            }
+
+            if (d === startIdx + 2) {
+                cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : 0}</td>`;
+            } else if (d === numCols - 1) {
+                cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : 0}</td>`;
+            } else {
+                cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : 0}</td>`;
+            }
+        }
+
+        tr.innerHTML = cellHTML;
+        tbody.appendChild(tr);
+        currentRank++;
+    }
+}
+
+// Data Fetching and Live Sync
+fetchAllSheetsData();
+setInterval(fetchAllSheetsData, 5000);
+</script>
+<!-- ========================================== -->
+<!--  HELLFIRE ULTRA ENGINE V3 (NATIVE CRACKERS) -->
+<!-- ========================================== -->
+
+<!-- 1. FIRE THEME & POP-UP STYLES -->
+<style>
+body {
+    background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important;
+    position: relative;
+    overflow-x: hidden;
+}
+#odysseyCanvas {
+    opacity: 0.15;
+    mix-blend-mode: screen;
+}
+.container {
+    background: rgba(12, 4, 2, 0.85) !important;
+    border: 2px solid #ff4500 !important;
+    box-shadow: 0 0 35px rgba(255, 69, 0, 0.25), inset 0 0 20px rgba(255, 140, 0, 0.1) !important;
+    border-radius: 16px !important;
+}
+.header-container h1.main-title {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px #ff4500, 0 0 20px #ff8c00, 0 0 30px #ff0000 !important;
+}
+.live-badge {
+    background: rgba(255, 69, 0, 0.2) !important;
+    border: 1px solid #ff4500 !important;
+    color: #ffaa66 !important;
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.4) !important;
+}
+.tab-btn {
+    background: rgba(25, 10, 5, 0.7) !important;
+    border: 1px solid rgba(255, 69, 0, 0.3) !important;
+    color: #cbd5e0 !important;
+}
+.tab-btn.active {
+    background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid #ffd700 !important;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.6) !important;
+}
+th.map-header, th.sub-th, th.rank-header, th.team-name-head {
+    background: linear-gradient(180deg, #2a0b03 0%, #120300 100%) !important;
+    border-bottom: 2px solid #ff4500 !important;
+    color: #ff8c00 !important;
+}
+td.neon-score, td.highlight-stat {
+    color: #ffaa44 !important;
+    text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important;
+}
+tr.rank-1 td {
+    background-color: rgba(255, 69, 0, 0.12) !important;
+    border-bottom: 1px solid #ffd700 !important;
+}
+
+/* POPUP STRUCTURE STYLE */
+.champion-popup-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 3, 0, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 999999 !important;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.champion-popup-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.champion-card {
+    background: linear-gradient(135deg, #3a1003 0%, #0c0400 100%);
+    border: 3px solid #ff4500;
+    box-shadow: 0 0 60px rgba(255, 69, 0, 0.6), inset 0 0 30px rgba(255, 140, 0, 0.3);
+    padding: 50px 70px;
+    border-radius: 24px;
+    text-align: center;
+    transform: scale(0.6);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.champion-popup-overlay.show .champion-card {
+    transform: scale(1);
+}
+.champion-title {
+    color: #ffd700;
+    font-size: 22pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+.champion-name {
+    color: #ffffff;
+    font-size: 42pt;
+    font-weight: 900;
+    margin: 15px 0;
+    text-shadow: 0 0 25px #ff4500, 0 0 10px #ffffff;
+}
+.champion-badge {
+    font-size: 55pt;
+    margin-bottom: 5px;
+    animation: firePulse 0.8s infinite alternate;
+}
+@keyframes firePulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); }
+    100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); }
+}
+
+/* NATIVE CRACKERS CANVAS STYLE */
+#crackersCanvas {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 9999999 !important;
+}
+</style>
+
+<!-- 2. DYNAMIC POP-UP & NATIVE CANVAS HTML -->
+<canvas id="crackersCanvas"></canvas>
+<div id="championPopup" class="champion-popup-overlay">
+    <div class="champion-card">
+        <div class="champion-badge">👑🔥</div>
+        <div class="champion-title" id="popHeaderType">CURRENT #1 LEADER</div>
+        <div class="champion-name" id="popLeaderName">LOADING...</div>
+    </div>
+</div>
+
+<!-- 3. ANIMATION & LOCAL CRACKERS ENGINE LOGIC -->
+<script>
+// Fire Particles Background
+function initFireBackground() {
+    const canvas = document.getElementById('odysseyCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + Math.random() * 100;
+            this.size = Math.random() * 3 + 1;
+            this.speedY = Math.random() * 1.5 + 0.5;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.opacity = Math.random() * 0.5 + 0.5;
+        }
+        update() {
+            this.y -= this.speedY;
+            this.x += this.speedX;
+            if (this.y < -10) {
+                this.y = canvas.height + 10;
+                this.x = Math.random() * canvas.width;
+            }
+        }
+        draw() {
+            ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 100) + 50}, 0, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+    for (let i = 0; i < 50; i++) particles.push(new Particle());
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+// --- SELF-MADE NATIVE CRACKERS ENGINE (NO OUTSIDE CDN SCRIPT NEEDED) ---
+const cCanvas = document.getElementById('crackersCanvas');
+const cCtx = cCanvas.getContext('2d');
+let cParticles = [];
+let crackersAnimationId;
+
+function resizeCrackersCanvas() {
+    cCanvas.width = window.innerWidth;
+    cCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCrackersCanvas);
+resizeCrackersCanvas();
+
+class CrackerParticle {
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.radius = Math.random() * 4 + 2;
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 12 + 4;
+        this.speedX = Math.cos(angle) * velocity;
+        this.speedY = Math.sin(angle) * velocity;
+        this.gravity = 0.2;
+        this.alpha = 1;
+        this.decay = Math.random() * 0.015 + 0.015;
+    }
+    update() {
+        this.speedY += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.alpha -= this.decay;
+    }
+    draw() {
+        cCtx.save();
+        cCtx.globalAlpha = this.alpha;
+        cCtx.fillStyle = this.color;
+        cCtx.shadowBlur = 10;
+        cCtx.shadowColor = this.color;
+        cCtx.beginPath();
+        cCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        cCtx.fill();
+        cCtx.restore();
+    }
+}
+
+function createExplosion(x, y) {
+    const colors = ['#ff4500', '#ff8c00', '#ffd700', '#ff0000', '#ffffff'];
+    for (let i = 0; i < 100; i++) {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        cParticles.push(new CrackerParticle(x, y, color));
+    }
+}
+
+function animateCrackers() {
+    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+    for (let i = cParticles.length - 1; i >= 0; i--) {
+        cParticles[i].update();
+        if (cParticles[i].alpha <= 0) {
+            cParticles.splice(i, 1);
+        } else {
+            cParticles[i].draw();
+        }
+    }
+    crackersAnimationId = requestAnimationFrame(animateCrackers);
+}
+
+function triggerNativeCrackers() {
+    cParticles = []; 
+    cancelAnimationFrame(crackersAnimationId);
+    animateCrackers();
+
+    // Blast 1: Left Side
+    createExplosion(window.innerWidth * 0.2, window.innerHeight * 0.4);
+    
+    // Blast 2: Right Side (After 200ms)
+    setTimeout(() => {
+        createExplosion(window.innerWidth * 0.8, window.innerHeight * 0.4);
+    }, 250);
+
+    // Blast 3: Center Heavy (After 500ms)
+    setTimeout(() => {
+        createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.3);
+    }, 500);
+}
+
+// Global Tracker for winners
+let lastWinnerCache = {};
+
+function triggerTabCelebration(tabId, tabName) {
+    setTimeout(() => {
+        const gridContainer = document.getElementById(tabId);
+        if (!gridContainer) return;
+
+        const firstRow = gridContainer.querySelector('tbody tr') || gridContainer.querySelector('tr');
+        if (!firstRow) return;
+
+        const allCells = firstRow.querySelectorAll('td');
+        if (allCells.length < 2) return; 
+        
+        let nameCell = allCells[1]; 
+        let winnerName = nameCell.innerText || nameCell.textContent;
+        winnerName = winnerName.replace(/[⭐👑🎖️🔥]/g, '').trim();
+
+        if (!winnerName || winnerName.toUpperCase() === "LOADING...") return;
+
+        if (lastWinnerCache[tabId] !== winnerName) {
+            lastWinnerCache[tabId] = winnerName;
+
+            document.getElementById('popHeaderType').innerText = tabName + " #1 LEADER";
+            document.getElementById('popLeaderName').innerText = winnerName;
+
+            const popup = document.getElementById('championPopup');
+            popup.classList.add('show');
+
+            // INTRODUCING BULLETPROOF NATIVE CRACKERS
+            triggerNativeCrackers();
+
+            // 3 Second Display Timeout
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 3000);
+        }
+    }, 600);
+}
+
+// Override Tab Switch for Live Intercept
+const originalSwitchTab = window.switchTab;
+window.switchTab = function(tabId) {
+    if (typeof originalSwitchTab === 'function') {
+        originalSwitchTab(tabId);
+    }
+    
+    let cleanName = "TEAM POINTS";
+    let lowerId = tabId.toLowerCase();
+    if (lowerId.includes('kill')) cleanName = "PLAYER KILLS";
+    if (lowerId.includes('stat')) cleanName = "PLAYER STATS";
+    if (lowerId.includes('standing')) cleanName = "TEAM STANDINGS";
+
+    triggerTabCelebration(tabId, cleanName);
+};
+
+// Initialize Engine On Load
+window.addEventListener('load', () => {
+    initFireBackground();
+    
+    setTimeout(() => {
+        let activeBtn = document.querySelector('.tab-btn.active');
+        if (activeBtn) {
+            let onclickAttr = activeBtn.getAttribute('onclick');
+            if (onclickAttr) {
+                let match = onclickAttr.match(/'([^']+)'/);
+                if (match && match[1]) {
+                    window.switchTab(match[1]);
+                }
+            }
+        }
+    }, 1500);
+});
+
+// ULTRA SYNC TIME LOCK - REALTIME 1 SECOND (1000ms)
+if (typeof fetchAllSheetsData === 'function') {
+    fetchAllSheetsData();
+    setInterval(fetchAllSheetsData, 1000);
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TYT PORKALAM - BGMI Esports Combo Engine</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="vsc-initialized">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 15px;
+            background: radial-gradient(circle at 70% 30%, #062340 0%, #031124 60%, #010610 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 🌊 BGMI OCEAN ODYSSEY CANVAS ENGINE */
+        #odysseyCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* 🔮 GLASS CONTAINER STYLE */
+        .container {
+            width: 100%;
+            max-width: 1450px;
+            background-color: rgba(4, 14, 28, 0.55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 240, 255, 0.12);
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(0, 240, 255, 0.15);
+        }
+
+        /* Header Layout */
+        .header-container {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(0, 240, 255, 0.4);
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 40pt;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin: 0;
+            color: #00f0ff;
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.6), 0 0 30px rgba(0, 240, 255, 0.3);
+        }
+
+        .subtitle {
+            font-size: 14pt;
+            color: #ff007f;
+            margin: 6px 0 0 0;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 255, 170, 0.2);
+            border: 1px solid #00ffaa;
+            color: #00ffaa;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0.4; } }
+
+        /* Navigation Tabs */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(8, 20, 38, 0.8);
+            border: 1.5px solid rgba(0, 240, 255, 0.2);
+            color: #cbd5e1;
+            padding: 12px 24px;
+            font-size: 12pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            color: #00f0ff;
+            border-color: #00f0ff;
+            background: rgba(0, 240, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Grid Enforcers */
+        .table-responsive {
+            overflow-x: auto;
+            display: none;
+            width: 100%;
+        }
+
+        .table-responsive.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(5, 12, 26, 0.45);
+            border: 2px solid rgba(0, 240, 255, 0.25);
+        }
+
+        th {
+            background-color: rgba(12, 23, 43, 0.9);
+            color: #00f0ff;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 12px 10px;
+            border: 1.5px solid rgba(0, 240, 255, 0.25);
+            text-align: center;
+            font-size: 11pt;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 10px;
+            border: 1.5px solid rgba(0, 240, 255, 0.18);
+            text-align: center;
+            color: #ffffff;
+            font-size: 11.5pt;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+            white-space: nowrap;
+        }
+
+        /* Dynamic Width Helpers instead of Hardcoded Ratios */
+        th.rank-header, td.rank-cell { width: 70px; min-width: 70px; }
+        th.team-name-head, td.team-name-cell { min-width: 220px; text-align: left !important; padding-left: 15px !important; }
+        th.player-name-head, td.player-name-cell { min-width: 220px; text-align: left !important; padding-left: 15px !important; }
+        th.total-points-head, th.top-killer-head, td.neon-score { min-width: 120px; }
+        
+        td.team-name-cell { border-left: 4px solid #00f0ff; }
+        td.player-name-cell { border-left: 4px solid #ff007f; }
+        td.standing-team-cell { border-left: 4px solid #00ffaa; text-align: center !important; }
+
+        .team-emoji {
+            margin-right: 8px;
+            display: inline-block;
+            font-size: 12pt;
+            vertical-align: middle;
+        }
+
+        td.neon-score { font-weight: 800; color: #00ffaa; font-size: 12.5pt; text-shadow: 0 0 8px rgba(0, 255, 170, 0.4); }
+        td.highlight-stat { color: #00ffaa; font-weight: 800; text-shadow: 0 0 6px rgba(0, 255, 170, 0.3); }
+        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; }
+
+        tr:nth-child(even) td { background-color: rgba(16, 29, 51, 0.25); } 
+        tr:hover td { background-color: rgba(0, 240, 255, 0.15); } 
+        
+        /* Premium Leaderboard Podium Rows Styling */
+        tr.rank-1 td { background-color: rgba(255, 215, 0, 0.04) !important; }
+        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell, tr.rank-1 td.standing-team-cell { text-shadow: 0 0 8px rgba(255,215,0,0.5); color: #ffd700; }
+        tr.rank-1 td.rank-cell { color: #ffd700; }
+
+        tr.rank-2 td { background-color: rgba(192, 192, 192, 0.04) !important; }
+        tr.rank-2 td.team-name-cell, tr.rank-2 td.player-name-cell, tr.rank-2 td.standing-team-cell { text-shadow: 0 0 8px rgba(192,192,192,0.4); color: #c0c0c0; }
+        tr.rank-2 td.rank-cell { color: #c0c0c0; }
+
+        tr.rank-3 td { background-color: rgba(205, 127, 50, 0.04) !important; }
+        tr.rank-3 td.team-name-cell, tr.rank-3 td.player-name-cell, tr.rank-3 td.standing-team-cell { text-shadow: 0 0 8px rgba(205,127,50,0.4); color: #cd7f32; }
+        tr.rank-3 td.rank-cell { color: #cd7f32; }
+
+        th.map-header { font-size: 11.5pt; font-weight: 800; background-color: rgba(16, 32, 61, 0.95); color: #ffffff; min-width: 140px; }
+        th.sub-th { background-color: rgba(10, 17, 31, 0.85); font-size: 10.5pt; color: #a0aec0; min-width: 70px; }
+
+        .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
+
+/* Poori website ke tables ke saare cells ke andar ka text/number bada karne ke liye */
+table th, table td {
+    font-size: 14pt !important;    /* Sabhi numbers aur text ko ek barabar bada karne ke liye */
+    font-weight: 600 !important;   /* Text ko thoda bold/mota karne ke liye */
+    padding: 9px 8px !important;  /* Rows ke beech me gap badane ke liye */
+}
+
+/* Rank aur Main Scores (Kills/Points) ko aur bhi zyada bada karne ke liye */
+td.rank-cell, td.neon-score, td.highlight-stat {
+    font-size: 16pt !important;    /* In main numbers ko thoda aur bada kiya */
+    font-weight: 700 !important;   /* Full bold */
+    </style>
+</head>
+<body>
+
+<canvas id="odysseyCanvas"></canvas>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header-container">
+        <h1 class="main-title">TYT PORKALAM</h1>
+        <div class="subtitle">🔥ONLY THE STRONGEST SQUAD WILL SURVIVE🔥</div>
+        <div class="live-badge">● Live Sync</div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="switchTab('team-points-tab', this)">🛡️ TEAM POINTS</button>
+        <button class="tab-btn" onclick="switchTab('player-kills-tab', this)">🎯 PLAYER KILLS</button>
+        <button class="tab-btn" onclick="switchTab('player-stats-tab', this)">📊 PLAYER STATS</button>
+        <button class="tab-btn" onclick="switchTab('team-standings-tab', this)">🏆 TEAM STANDINGS</button>
+    </div>
+
+    <!-- TAB 1: Team Points (Fully Dynamic Fluid Layout) -->
+    <div id="team-points-tab" class="table-responsive active">
+        <table>
+            <thead id="team-points-head"></thead>
+            <tbody id="team-points-body">
+                <tr><td class="status-message">LOADING MAPS METRICS...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 2: Player Kills (Dynamic Grid) -->
+    <div id="player-kills-tab" class="table-responsive">
+        <table>
+            <thead id="player-kills-head"></thead>
+            <tbody id="player-kills-body">
+                <tr><td class="status-message">KILLS DATABASE STREAMING...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 3: Players Stats -->
+    <div id="player-stats-tab" class="table-responsive">
+        <table>
+            <thead id="player-stats-head"></thead>
+            <tbody id="player-stats-body">
+                <tr><td class="status-message">SYNCHRONIZING PLAYER STATS RECORDS...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 4: Team Standings -->
+    <div id="team-standings-tab" class="table-responsive">
+        <table>
+            <thead id="team-standings-head"></thead>
+            <tbody id="team-standings-body">
+                <tr><td class="status-message">CONNECTING TO STANDINGS PIPELINE...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyuMwMTwfZH6nh9r7f7F4wA6t0XgPbgRQLNvAxQkfv9ExAVTN3NHjmjDBP4S_VxSNN4_w/exec";
+
+    // ========================================================
+    // 🌌 CANVAS ENGINE WITH SMOOTH WAVE ANIMATIONS
+    // ========================================================
+    const canvas = document.getElementById('odysseyCanvas');
+    const ctx = canvas.getContext('2d');
+    let fishSchool = [], vortexAngle = 0;
+
+    function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', initCanvas); initCanvas();
+
+    let whaleTop = { x: -450, y: canvas.height * 0.22, speed: 1.1, swing: 0, swingSpeed: 0.025, sizeScale: 0.9 };
+    let whaleBottom = { x: canvas.width + 500, y: canvas.height * 0.75, speed: -0.9, swing: 3.5, swingSpeed: 0.02, sizeScale: 1.2 };
+
+    for (let i = 0; i < 22; i++) {
+        fishSchool.push({
+            x: Math.random() * canvas.width + canvas.width * 0.2, y: Math.random() * canvas.height,
+            size: Math.random() * 7 + 5, speed: Math.random() * 1.5 + 1.0,
+            waveFactor: Math.random() * 10, waveSpeed: Math.random() * 0.05 + 0.03
+        });
+    }
+
+    function drawWhaleVector(x, y, swing, scale, invertedFactor) {
+        let tailWave = Math.sin(swing); ctx.save(); ctx.translate(x, y); ctx.scale(invertedFactor * scale, scale);
+        ctx.strokeStyle = "rgba(0, 210, 255, 0.14)"; ctx.lineWidth = 3; ctx.shadowBlur = 15; ctx.shadowColor = "#00f0ff";
+        ctx.beginPath(); ctx.moveTo(150, 0); ctx.bezierCurveTo(80, -60, -50, -50, -120, tailWave * 15);
+        ctx.lineTo(-160, (tailWave * 15) - 35); ctx.lineTo(-145, tailWave * 15); ctx.lineTo(-160, (tailWave * 15) + 35);
+        ctx.lineTo(-120, tailWave * 15); ctx.bezierCurveTo(-50, 60, 80, 55, 150, 0); ctx.stroke(); ctx.restore();
+    }
+
+    function renderOdysseyWorld() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        vortexAngle += 0.002;
+        ctx.save(); ctx.translate(canvas.width * 0.12, canvas.height * 0.5);
+        for(let i = 0; i < 6; i++) {
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.025 - (i * 0.004)})`; ctx.lineWidth = 25 - (i * 3);
+            ctx.save(); ctx.rotate(vortexAngle * (1 + i * 0.15)); ctx.beginPath(); ctx.ellipse(0, 0, 80 + (i * 22), 240 + (i * 35), 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+        }
+        ctx.restore();
+
+        ctx.fillStyle = "rgba(0, 225, 255, 0.2)";
+        fishSchool.forEach(fish => {
+            fish.waveFactor += fish.waveSpeed; fish.x -= fish.speed; fish.y += Math.sin(fish.waveFactor) * 0.5;
+            if (fish.x < -60) { fish.x = canvas.width + 60; fish.y = Math.random() * canvas.height; }
+            ctx.save(); ctx.translate(fish.x, fish.y); ctx.rotate(Math.PI + Math.sin(fish.waveFactor) * 0.1);
+            ctx.beginPath(); ctx.moveTo(fish.size * 2, 0); ctx.quadraticCurveTo(fish.size, -fish.size * 0.4, 0, 0); ctx.quadraticCurveTo(fish.size, fish.size * 0.4, fish.size * 2, 0); ctx.closePath(); ctx.fill(); ctx.restore();
+        });
+
+        drawWhaleVector(whaleTop.x, whaleTop.y, whaleTop.swing, whaleTop.sizeScale, 1);
+        drawWhaleVector(whaleBottom.x, whaleBottom.y, whaleBottom.swing, whaleBottom.sizeScale, -1);
+        whaleTop.x += whaleTop.speed; whaleTop.swing += whaleTop.swingSpeed; if (whaleTop.x > canvas.width + 500) whaleTop.x = -500;
+        whaleBottom.x += whaleBottom.speed; whaleBottom.swing += whaleBottom.swingSpeed; if (whaleBottom.x < -600) whaleBottom.x = canvas.width + 600;
+        requestAnimationFrame(renderOdysseyWorld);
+    }
+    requestAnimationFrame(renderOdysseyWorld);
+
+    // ========================================================
+    // 🎯 SMART AUTO EMOJI DICTIONARY ENGINE
+    // ========================================================
+    function getTeamEmoji(teamName) {
+        if (!teamName) return '🎮';
+        const name = teamName.toUpperCase();
+        if (name.includes('CAMPER')) return '⛺';
+        if (name.includes('HUNTER')) return '🏹';
+        if (name.includes('EVENING') || name.includes('SQUAD')) return '🌆';
+        if (name.includes('MEDICO')) return '🩺';
+        if (name.includes('MATRIX')) return '🔮';
+        if (name.includes('BOT')) return '🤖';
+        if (name.includes('THUNDER')) return '⚡';
+        return '⚔️'; 
+    }
+
+    function getRankBadgeHTML(rankNum) {
+        if (rankNum === 1) return '🥇';
+        if (rankNum === 2) return '🥈';
+        if (rankNum === 3) return '🥉';
+        return rankNum;
+    }
+
+    function switchTab(tabId, button) {
+        document.querySelectorAll('.table-responsive').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        button.classList.add('active');
+    }
+
+    async function fetchAllSheetsData() {
+        if (REALTIME_API_URL ==="https://docs.google.com/spreadsheets/d/1SB9i3h1db3IWtOJcnzeOcaobR2Iv7-juPu3XY9XdTCk/edit?usp=sharing" || REALTIME_API_URL === "") return;
+        try {
+            const response = await fetch(`${REALTIME_API_URL}?_=${new Date().getTime()}`);
+            const allData = await response.json();
+            
+            buildUniversalMasterGrid(allData.teamPoints, 'team-points-head', 'team-points-body');
+            buildPlayerKillsGrid(allData.playerKills, 'player-kills-head', 'player-kills-body');
+            buildPlayerStatsGrid(allData.playerStats, 'player-stats-head', 'player-stats-body');
+            buildTeamStandingsGrid(allData.teamStandings, 'team-standings-head', 'team-standings-body');
+        } catch (error) { console.error("Sync error:", error); }
+    }
+
+    // 🛡️ FULLY DYNAMIC & FLUID LOGIC FOR TEAM POINTS
+    function buildUniversalMasterGrid(rows, headId, bodyId) {
+        if (!rows || rows.length < 2) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+        
+        // Auto detecting header row dynamically
+        const isHeaderDeleted = rows[0][0] && rows[0][0].toString().toUpperCase().includes("S:NO");
+        const startRowIdx = isHeaderDeleted ? 0 : 1;
+        const headerRow = rows[startRowIdx];
+
+        if (!headerRow) return;
+
+        // Automatically calculating match columns boundaries
+        const totalColumns = headerRow.length;
+        const totalPointsIdx = totalColumns - 2; // Second last is Total Points
+        const topKillerIdx = totalColumns - 1;   // Last column is Top Killer
+
+        let headHTML = '<tr><th rowspan="2" class="rank-header">RANK</th>';
+        headerRow.forEach((col, index) => {
+            if (index === 1) headHTML += `<th rowspan="2" class="team-name-head">TEAM NAME</th>`;
+            else if (index > 1 && index < totalPointsIdx && index % 2 === 0) {
+                headHTML += `<th colspan="2" class="map-header">${col || ''}</th>`;
+            }
+            else if (index === totalPointsIdx) headHTML += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th>`;
+            else if (index === topKillerIdx) headHTML += `<th rowspan="2" class="top-killer-head">TOP KILLER</th>`;
+        });
+        headHTML += '</tr><tr>';
+        
+        if (rows[startRowIdx + 1]) {
+            rows[startRowIdx + 1].forEach((col, index) => {
+                if (index > 1 && index < totalPointsIdx) headHTML += `<th class="sub-th">${col || ''}</th>`;
+            });
+        }
+        headHTML += '</tr>';
+        thead.innerHTML = headHTML;
+
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        for (let i = (startRowIdx + 2); i < rows.length; i++) {
+            const row = rows[i];
+            if (!row || !row[1] || row[1].toString().trim() === "" || row[0] === "TOTAL POINTS") continue;
+            
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`);
+            
+            let rowCells = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
+            rowCells += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(row[1])}</span>${row[1] || '-'}</td>`;
+            
+            for (let j = 2; j < totalColumns; j++) {
+                if (j === totalPointsIdx) {
+                    rowCells += `<td class="neon-score">${row[j] !== undefined ? row[j] : '-'}</td>`;
+                } else if (j === topKillerIdx) {
+                    rowCells += `<td style="font-size:10.5pt;">${row[j] !== undefined ? row[j] : '-'}</td>`;
+                } else {
+                    rowCells += `<td>${row[j] !== undefined ? row[j] : '-'}</td>`;
+                }
+            }
+            tr.innerHTML = rowCells;
+            tbody.appendChild(tr);
+            currentRank++;
+        }
+    }
+
+    // 🎯 DYNAMIC LOGIC FOR PLAYER KILLS TAB
+    function buildPlayerKillsGrid(rows, headId, bodyId) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+
+        let startRowIdx = 0;
+        if (rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM")) {
+            startRowIdx = 1; 
+        }
+
+        const headerRow = rows[startRowIdx];
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[0] || 'PLAYER NAME'}</th>`;
+        for(let c = 1; c < numCols - 1; c++) {
+            headHTML += `<th>${headerRow[c] || 'MATCH'}</th>`;
+        }
+        headHTML += `<th class="total-points-head">${headerRow[numCols - 1] || 'TOTAL KILLS'}</th></tr>`;
+        thead.innerHTML = headHTML;
+
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        for (let i = startRowIdx + 1; i < rows.length; i++) {
+            const row = rows[i];
+            if (!row || !row[0] || row[0].toString().trim() === "" || row[0].toString().toUpperCase().includes("PLAYER NAME")) continue;
+
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`);
+
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
+            cellHTML += `<td class="player-name-cell"><span class="team-emoji">🎯</span>${row[0] || '-'}</td>`;
+            for(let d = 1; d < numCols - 1; d++) {
+                cellHTML += `<td>${row[d] !== undefined ? row[d] : '-'}</td>`;
+            }
+            cellHTML += `<td class="neon-score">${row[numCols - 1] !== undefined ? row[numCols - 1] : '-'}</td>`;
+
+            tr.innerHTML = cellHTML;
+            tbody.appendChild(tr);
+            currentRank++;
+        }
+    }
+
+    // 👤 DYNAMIC LOGIC FOR PLAYER STATS GRID
+    function buildPlayerStatsGrid(rows, headId, bodyId) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+
+        let startRowIdx = 0;
+        if (rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM")) {
+            startRowIdx = 1; 
+        }
+
+        const headerRow = rows[startRowIdx];
+        const hasSNo = headerRow[0] && headerRow[0].toString().toUpperCase().includes("S:");
+        const startIdx = hasSNo ? 1 : 0;
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[startIdx] || 'PLAYER NAME'}</th>`;
+        for (let c = startIdx + 1; c < numCols; c++) {
+            headHTML += `<th>${headerRow[c] || 'STAT'}</th>`;
+        }
+        headHTML += `</tr>`;
+        thead.innerHTML = headHTML;
+        
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        for (let i = startRowIdx + 1; i < rows.length; i++) {
+            const row = rows[i];
+            if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().toUpperCase().includes("PLAYER NAME")) continue;
+            
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`);
+            
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
+            cellHTML += `<td class="player-name-cell"><span class="team-emoji">👤</span>${row[startIdx] || '-'}</td>`;
+            
+            for (let d = startIdx + 1; d < numCols; d++) {
+                let cellValue = row[d];
+    
+            // Agar ye aakhri column (KD) hai aur usme number hai, toh 2 decimal tak fix karo
+            if (d === numCols - 1 && cellValue !== undefined && !isNaN(cellValue) && cellValue !== "") {
+            cellValue = Number(cellValue).toFixed(2);
+       }
+
+            if (d === startIdx + 2) {
+            cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : '-'}</td>`;
+            } else if (d === numCols - 1) {
+            cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : '-'}</td>`;
+             } else {
+             cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : '-'}</td>`;
+       }
+    }
+            
+            tr.innerHTML = cellHTML;
+            tbody.appendChild(tr);
+            currentRank++;
+        }
+    }
+
+    // 🏆 DYNAMIC LOGIC FOR TEAM STANDINGS GRID
+    function buildTeamStandingsGrid(rows, headId, bodyId) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+
+        let startRowIdx = 0;
+        if (rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM")) {
+            startRowIdx = 1;
+        }
+
+        const headerRow = rows[startRowIdx];
+        const hasRankCol = headerRow[0] && headerRow[0].toString().toUpperCase().includes("RANK");
+        const startIdx = hasRankCol ? 1 : 0;
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="team-name-head" style="text-align: center !important;">${headerRow[startIdx] || 'TEAM NAME'}</th>`;
+        for (let c = startIdx + 1; c < numCols; c++) {
+            headHTML += `<th>${headerRow[c] || 'DATA'}</th>`;
+        }
+        headHTML += `</tr>`;
+        thead.innerHTML = headHTML;
+
+       tbody.innerHTML = '';
+    let currentRank = 1;
+    
+    for (let i = startRowIdx + 1; i < rows.length; i++) {
+        const row = rows[i];
+        if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().trim() === "0") continue;
+
+        const tr = document.createElement('tr');
+        tr.classList.add(`rank-${currentRank}`);
+
+        let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
+        cellHTML += `<td class="standing-team-cell" style="text-align: center !important;">${row[startIdx]}</td>`;
+
+        for (let d = startIdx + 1; d < numCols; d++) {
+            let cellValue = row[d];
+
+            // Team KD ko 3-digit me force lock karne ke liye
+            if (d === numCols - 1 && cellValue !== undefined && !isNaN(cellValue) && cellValue !== '') {
+                cellValue = Number(cellValue).toFixed(2);
+            }
+
+            if (d === startIdx + 2) {
+                cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : 0}</td>`;
+            } else if (d === numCols - 1) {
+                cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : 0}</td>`;
+            } else {
+                cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : 0}</td>`;
+            }
+        }
+
+        tr.innerHTML = cellHTML;
+        tbody.appendChild(tr);
+        currentRank++;
+    }
+}
+
+// Data Fetching and Live Sync
+fetchAllSheetsData();
+setInterval(fetchAllSheetsData, 5000);
+</script>
+<!-- ========================================== -->
+<!--  HELLFIRE ULTRA ENGINE V3 (NATIVE CRACKERS) -->
+<!-- ========================================== -->
+
+<!-- 1. FIRE THEME & POP-UP STYLES -->
+<style>
+body {
+    background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important;
+    position: relative;
+    overflow-x: hidden;
+}
+#odysseyCanvas {
+    opacity: 0.15;
+    mix-blend-mode: screen;
+}
+.container {
+    background: rgba(12, 4, 2, 0.85) !important;
+    border: 2px solid #ff4500 !important;
+    box-shadow: 0 0 35px rgba(255, 69, 0, 0.25), inset 0 0 20px rgba(255, 140, 0, 0.1) !important;
+    border-radius: 16px !important;
+}
+.header-container h1.main-title {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px #ff4500, 0 0 20px #ff8c00, 0 0 30px #ff0000 !important;
+}
+.live-badge {
+    background: rgba(255, 69, 0, 0.2) !important;
+    border: 1px solid #ff4500 !important;
+    color: #ffaa66 !important;
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.4) !important;
+}
+.tab-btn {
+    background: rgba(25, 10, 5, 0.7) !important;
+    border: 1px solid rgba(255, 69, 0, 0.3) !important;
+    color: #cbd5e0 !important;
+}
+.tab-btn.active {
+    background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid #ffd700 !important;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.6) !important;
+}
+th.map-header, th.sub-th, th.rank-header, th.team-name-head {
+    background: linear-gradient(180deg, #2a0b03 0%, #120300 100%) !important;
+    border-bottom: 2px solid #ff4500 !important;
+    color: #ff8c00 !important;
+}
+td.neon-score, td.highlight-stat {
+    color: #ffaa44 !important;
+    text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important;
+}
+tr.rank-1 td {
+    background-color: rgba(255, 69, 0, 0.12) !important;
+    border-bottom: 1px solid #ffd700 !important;
+}
+
+/* POPUP STRUCTURE STYLE */
+.champion-popup-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 3, 0, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 999999 !important;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.champion-popup-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.champion-card {
+    background: linear-gradient(135deg, #3a1003 0%, #0c0400 100%);
+    border: 3px solid #ff4500;
+    box-shadow: 0 0 60px rgba(255, 69, 0, 0.6), inset 0 0 30px rgba(255, 140, 0, 0.3);
+    padding: 50px 70px;
+    border-radius: 24px;
+    text-align: center;
+    transform: scale(0.6);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.champion-popup-overlay.show .champion-card {
+    transform: scale(1);
+}
+.champion-title {
+    color: #ffd700;
+    font-size: 22pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+.champion-name {
+    color: #ffffff;
+    font-size: 42pt;
+    font-weight: 900;
+    margin: 15px 0;
+    text-shadow: 0 0 25px #ff4500, 0 0 10px #ffffff;
+}
+.champion-badge {
+    font-size: 55pt;
+    margin-bottom: 5px;
+    animation: firePulse 0.8s infinite alternate;
+}
+@keyframes firePulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); }
+    100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); }
+}
+
+/* NATIVE CRACKERS CANVAS STYLE */
+#crackersCanvas {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 9999999 !important;
+}
+</style>
+
+<!-- 2. DYNAMIC POP-UP & NATIVE CANVAS HTML -->
+<canvas id="crackersCanvas"></canvas>
+<div id="championPopup" class="champion-popup-overlay">
+    <div class="champion-card">
+        <div class="champion-badge">👑🔥</div>
+        <div class="champion-title" id="popHeaderType">CURRENT #1 LEADER</div>
+        <div class="champion-name" id="popLeaderName">LOADING...</div>
+    </div>
+</div>
+
+<!-- 3. ANIMATION & LOCAL CRACKERS ENGINE LOGIC -->
+<script>
+// Fire Particles Background
+function initFireBackground() {
+    const canvas = document.getElementById('odysseyCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + Math.random() * 100;
+            this.size = Math.random() * 3 + 1;
+            this.speedY = Math.random() * 1.5 + 0.5;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.opacity = Math.random() * 0.5 + 0.5;
+        }
+        update() {
+            this.y -= this.speedY;
+            this.x += this.speedX;
+            if (this.y < -10) {
+                this.y = canvas.height + 10;
+                this.x = Math.random() * canvas.width;
+            }
+        }
+        draw() {
+            ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 100) + 50}, 0, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+    for (let i = 0; i < 50; i++) particles.push(new Particle());
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+// --- SELF-MADE NATIVE CRACKERS ENGINE (NO OUTSIDE CDN SCRIPT NEEDED) ---
+const cCanvas = document.getElementById('crackersCanvas');
+const cCtx = cCanvas.getContext('2d');
+let cParticles = [];
+let crackersAnimationId;
+
+function resizeCrackersCanvas() {
+    cCanvas.width = window.innerWidth;
+    cCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCrackersCanvas);
+resizeCrackersCanvas();
+
+class CrackerParticle {
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.radius = Math.random() * 4 + 2;
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 12 + 4;
+        this.speedX = Math.cos(angle) * velocity;
+        this.speedY = Math.sin(angle) * velocity;
+        this.gravity = 0.2;
+        this.alpha = 1;
+        this.decay = Math.random() * 0.015 + 0.015;
+    }
+    update() {
+        this.speedY += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.alpha -= this.decay;
+    }
+    draw() {
+        cCtx.save();
+        cCtx.globalAlpha = this.alpha;
+        cCtx.fillStyle = this.color;
+        cCtx.shadowBlur = 10;
+        cCtx.shadowColor = this.color;
+        cCtx.beginPath();
+        cCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        cCtx.fill();
+        cCtx.restore();
+    }
+}
+
+function createExplosion(x, y) {
+    const colors = ['#ff4500', '#ff8c00', '#ffd700', '#ff0000', '#ffffff'];
+    for (let i = 0; i < 100; i++) {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        cParticles.push(new CrackerParticle(x, y, color));
+    }
+}
+
+function animateCrackers() {
+    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+    for (let i = cParticles.length - 1; i >= 0; i--) {
+        cParticles[i].update();
+        if (cParticles[i].alpha <= 0) {
+            cParticles.splice(i, 1);
+        } else {
+            cParticles[i].draw();
+        }
+    }
+    crackersAnimationId = requestAnimationFrame(animateCrackers);
+}
+
+function triggerNativeCrackers() {
+    cParticles = []; 
+    cancelAnimationFrame(crackersAnimationId);
+    animateCrackers();
+
+    // Blast 1: Left Side
+    createExplosion(window.innerWidth * 0.2, window.innerHeight * 0.4);
+    
+    // Blast 2: Right Side (After 200ms)
+    setTimeout(() => {
+        createExplosion(window.innerWidth * 0.8, window.innerHeight * 0.4);
+    }, 250);
+
+    // Blast 3: Center Heavy (After 500ms)
+    setTimeout(() => {
+        createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.3);
+    }, 500);
+}
+
+// Global Tracker for winners
+let lastWinnerCache = {};
+
+function triggerTabCelebration(tabId, tabName) {
+    setTimeout(() => {
+        const gridContainer = document.getElementById(tabId);
+        if (!gridContainer) return;
+
+        const firstRow = gridContainer.querySelector('tbody tr') || gridContainer.querySelector('tr');
+        if (!firstRow) return;
+
+        const allCells = firstRow.querySelectorAll('td');
+        if (allCells.length < 2) return; 
+        
+        let nameCell = allCells[1]; 
+        let winnerName = nameCell.innerText || nameCell.textContent;
+        winnerName = winnerName.replace(/[⭐👑🎖️🔥]/g, '').trim();
+
+        if (!winnerName || winnerName.toUpperCase() === "LOADING...") return;
+
+        if (lastWinnerCache[tabId] !== winnerName) {
+            lastWinnerCache[tabId] = winnerName;
+
+            document.getElementById('popHeaderType').innerText = tabName + " #1 LEADER";
+            document.getElementById('popLeaderName').innerText = winnerName;
+
+            const popup = document.getElementById('championPopup');
+            popup.classList.add('show');
+
+            // INTRODUCING BULLETPROOF NATIVE CRACKERS
+            triggerNativeCrackers();
+
+            // 3 Second Display Timeout
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 3000);
+        }
+    }, 600);
+}
+
+// Override Tab Switch for Live Intercept
+const originalSwitchTab = window.switchTab;
+window.switchTab = function(tabId) {
+    if (typeof originalSwitchTab === 'function') {
+        originalSwitchTab(tabId);
+    }
+    
+    let cleanName = "TEAM POINTS";
+    let lowerId = tabId.toLowerCase();
+    if (lowerId.includes('kill')) cleanName = "PLAYER KILLS";
+    if (lowerId.includes('stat')) cleanName = "PLAYER STATS";
+    if (lowerId.includes('standing')) cleanName = "TEAM STANDINGS";
+
+    triggerTabCelebration(tabId, cleanName);
+};
+
+// Initialize Engine On Load
+window.addEventListener('load', () => {
+    initFireBackground();
+    
+    setTimeout(() => {
+        let activeBtn = document.querySelector('.tab-btn.active');
+        if (activeBtn) {
+            let onclickAttr = activeBtn.getAttribute('onclick');
+            if (onclickAttr) {
+                let match = onclickAttr.match(/'([^']+)'/);
+                if (match && match[1]) {
+                    window.switchTab(match[1]);
+                }
+            }
+        }
+    }, 1500);
+});
+
+// ULTRA SYNC TIME LOCK - REALTIME 1 SECOND (1000ms)
+if (typeof fetchAllSheetsData === 'function') {
+    fetchAllSheetsData();
+    setInterval(fetchAllSheetsData, 1000);
+}
+function startEsportsEngine() {
     const bgMusic = document.getElementById('bgMusic');
     const clickSFX = document.getElementById('clickSFX');
     const splash = document.getElementById('welcomeSplash');
