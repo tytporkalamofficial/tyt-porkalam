@@ -2880,27 +2880,6 @@ if (typeof fetchAllSheetsData === 'function') {
     fetchAllSheetsData();
     setInterval(fetchAllSheetsData, 1000);
 }
-function startEsportsEngine() {
-    const bgMusic = document.getElementById('bgMusic');
-    const clickSFX = document.getElementById('clickSFX');
-    const splash = document.getElementById('welcomeSplash');
-
-    // 1. Pehle halke volume me background music chalao
-    bgMusic.volume = 0.3; // 30% volume taaki streams par aawaz zyada gunde na lage
-    bgMusic.play().catch(e => console.log("Audio play blocked: ", e));
-
-    // 2. Click karte hi blast/power-up sound effect baje
-    clickSFX.volume = 0.7;
-    clickSFX.play();
-
-    // 3. Welcome screen ko smooth fade-out effect ke sath mitao
-    splash.classList.add('fade-out');
-    
-    // 4. (Optional) Jaise hi enter karein, pehli baar data turant fetch ho jaye
-    if (typeof fetchAllSheetsData === 'function') {
-        fetchAllSheetsData();
-    }
-}
 </script>
 
 </body>
