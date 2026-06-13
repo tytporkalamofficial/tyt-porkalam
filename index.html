@@ -6,7 +6,101 @@
     <title>TYT PORKALAM - BGMI Esports Combo Engine</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
-<body class="vsc-initialized">
+<body clas<style>
+/* Pure page ko block karne wali welcome screen */
+.premium-splash {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #050100;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 9999999 !important; /* Splash screen sabse upar rahegi */
+    overflow: hidden;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Fire Background Animation */
+.fire-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(40,10,0,0.6) 0%, #000000 100%);
+    pointer-events: none;
+}
+.fire-particle {
+    position: absolute;
+    bottom: -20px;
+    background: radial-gradient(circle, #ff4500 20%, rgba(255,140,0,0) 70%);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: riseUp 4s linear infinite;
+}
+@keyframes riseUp {
+    0% { transform: translateY(0) scale(1) translateX(0); opacity: 0.7; }
+    50% { transform: translateY(-50vh) scale(1.3) translateX(20px); opacity: 0.4; }
+    100% { transform: translateY(-110vh) scale(0.5) translateX(-20px); opacity: 0; }
+}
+
+/* TYT PORKALAM Dancing / Glow Text Effect */
+.dancing-title {
+    color: #ffffff;
+    font-size: 46pt;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    margin-bottom: 30px;
+    z-index: 2;
+    position: relative;
+    text-shadow: 0 0 20px #ff4500, 0 0 40px #ff8c00;
+    animation: textDance 3s ease-in-out infinite alternate;
+}
+@keyframes textDance {
+    0% { transform: translateY(0) rotate(-1deg); text-shadow: 0 0 20px #ff4500, 0 0 40px #ff8c00; }
+    50% { transform: translateY(-10px) rotate(1deg) scale(1.03); text-shadow: 0 0 30px #ff0000, 0 0 50px #ffd700; }
+    100% { transform: translateY(5px) rotate(-0.5deg); text-shadow: 0 0 25px #ff4500, 0 0 45px #ff8c00; }
+}
+
+/* Enter Tournament Action Button */
+.enter-esports-btn {
+    background: linear-gradient(135deg, #ff4500 0%, #b30000 100%);
+    color: #ffffff;
+    border: 2px solid #ffd700;
+    padding: 16px 45px;
+    font-size: 16pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 0 25px rgba(255, 69, 0, 0.6);
+    transition: all 0.2s ease;
+}
+.enter-esports-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 45px #ff4500;
+    background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%);
+}
+
+/* Smooth Fade Out Class */
+.premium-splash.fade-hide {
+    opacity: 0;
+    transform: scale(1.05);
+    pointer-events: none;
+}
+</style>
+
+<div id="porkalamSplash" class="premium-splash">
+    <div class="fire-bg">
+        <div class="fire-particle" style="left:10%; width:15px; height:15px; animation-delay:0s; animation-duration:5s;"></div>
+        <div class="fire-particle" style="left:25%; width:22px; height:22px; animation-delay:1.5s; animation-duration:4s;"></div>
+        <div class="fire-particle" style="left:45%; width:12px; height:12px; animation-delay:0.5s; animation-duration:6s;"></div>
+        <div class="fire-particle" style="left:65%; width:26px; height:26px; animation-delay:2s; animation-duration:4.5s;"></div>
+        <div class="fire-particle" style="left:80%; width:18px; height:18px; animation-delay:1s; animation-duration:5.5s;"></div>
+    </div>
+    
+    <div class="dancing-title">TYT PORKALAM</div>
+    
+    <button class="enter-esports-btn" onclick="openMainPointsTable()">Enter Tournament</button>
+</div>
+    
     <style>
         * {
             box-sizing: border-box;
@@ -956,7 +1050,23 @@ if (typeof fetchAllSheetsData === 'function') {
     fetchAllSheetsData();
     setInterval(fetchAllSheetsData, 1000);
 }
-</script>
+<script>
+function openMainPointsTable() {
+    const splashScreen = document.getElementById('porkalamSplash');
+    
+    // Welcome screen ko smooth gayab karega aur dashboard samne aa jayega
+    splashScreen.classList.add('fade-hide');
+    
+    // Niche ka automatic database refresh system turant start ho jayega
+    if (typeof fetchAllSheetsData === 'function') {
+        fetchAllSheetsData();
+    }
+}
 
+// 1 Second Real-Time Sync Loop for live score tracking
+if (typeof fetchAllSheetsData === 'function') {
+    setInterval(fetchAllSheetsData, 1000);
+}
+</script>
 </body>
 </html>
