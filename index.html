@@ -1068,17 +1068,6 @@ function openMainPointsTable() {
 if (typeof fetchAllSheetsData === 'function') {
     setInterval(fetchAllSheetsData, 1000);
 }
-    function openMainPointsTable() {
-    const splashScreen = document.getElementById('porkalamSplash');
-    
-    // Welcome screen ko smooth gayab karega aur dashboard samne aa jayega
-    splashScreen.classList.add('fade-hide');
-    
-    // Niche ka automatic database refresh system turant start ho jayega
-    if (typeof fetchAllSheetsData === 'function') {
-        fetchAllSheetsData();
-    }
-}
 </script>
 </body>
 </html>
