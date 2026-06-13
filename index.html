@@ -86,6 +86,11 @@
     transform: scale(1.05);
     pointer-events: none;
 }
+/* Smooth animation aur arrow design */
+.pos-change { font-size: 10pt; font-weight: bold; margin-left: 5px; display: inline-block; }
+.pos-up { color: #00ff66; }
+.pos-down { color: #ff3333; }
+.table-row { transition: all 0.5s ease; }
 </style>
 
 <div id="porkalamSplash" class="premium-splash">
@@ -316,6 +321,7 @@ table th, table td {
 td.rank-cell, td.neon-score, td.highlight-stat {
     font-size: 16pt !important;    /* In main numbers ko thoda aur bada kiya */
     font-weight: 700 !important;   /* Full bold */
+}
     </style>
 </head>
 <body>
@@ -323,14 +329,12 @@ td.rank-cell, td.neon-score, td.highlight-stat {
 <canvas id="odysseyCanvas"></canvas>
 
 <div class="container">
-    <!-- Header -->
     <div class="header-container">
         <h1 class="main-title">TYT PORKALAM</h1>
         <div class="subtitle">🔥ONLY THE STRONGEST SQUAD WILL SURVIVE🔥</div>
         <div class="live-badge">● Live Sync</div>
     </div>
 
-    <!-- Navigation Tabs -->
     <div class="tabs-container">
         <button class="tab-btn active" onclick="switchTab('team-points-tab', this)">🛡️ TEAM POINTS</button>
         <button class="tab-btn" onclick="switchTab('player-kills-tab', this)">🎯 PLAYER KILLS</button>
@@ -338,7 +342,6 @@ td.rank-cell, td.neon-score, td.highlight-stat {
         <button class="tab-btn" onclick="switchTab('team-standings-tab', this)">🏆 TEAM STANDINGS</button>
     </div>
 
-    <!-- TAB 1: Team Points (Fully Dynamic Fluid Layout) -->
     <div id="team-points-tab" class="table-responsive active">
         <table>
             <thead id="team-points-head"></thead>
@@ -348,7 +351,6 @@ td.rank-cell, td.neon-score, td.highlight-stat {
         </table>
     </div>
 
-    <!-- TAB 2: Player Kills (Dynamic Grid) -->
     <div id="player-kills-tab" class="table-responsive">
         <table>
             <thead id="player-kills-head"></thead>
@@ -358,7 +360,6 @@ td.rank-cell, td.neon-score, td.highlight-stat {
         </table>
     </div>
 
-    <!-- TAB 3: Players Stats -->
     <div id="player-stats-tab" class="table-responsive">
         <table>
             <thead id="player-stats-head"></thead>
@@ -368,7 +369,6 @@ td.rank-cell, td.neon-score, td.highlight-stat {
         </table>
     </div>
 
-    <!-- TAB 4: Team Standings -->
     <div id="team-standings-tab" class="table-responsive">
         <table>
             <thead id="team-standings-head"></thead>
@@ -381,6 +381,16 @@ td.rank-cell, td.neon-score, td.highlight-stat {
 
 <script>
     const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyuMwMTwfZH6nh9r7f7F4wA6t0XgPbgRQLNvAxQkfv9ExAVTN3NHjmjDBP4S_VxSNN4_w/exec";
+
+    // Global Position Change Tracking History Memory
+    if (!window.rankHistory) {
+        window.rankHistory = {
+            teamPoints: {},
+            playerKills: {},
+            playerStats: {},
+            teamStandings: {}
+        };
+    }
 
     // ========================================================
     // 🌌 CANVAS ENGINE WITH SMOOTH WAVE ANIMATIONS
@@ -480,23 +490,21 @@ td.rank-cell, td.neon-score, td.highlight-stat {
         } catch (error) { console.error("Sync error:", error); }
     }
 
-    // 🛡️ FULLY DYNAMIC & FLUID LOGIC FOR TEAM POINTS
+    // 🛡FULLY DYNAMIC & FLUID LOGIC FOR TEAM POINTS
     function buildUniversalMasterGrid(rows, headId, bodyId) {
         if (!rows || rows.length < 2) return;
         const thead = document.getElementById(headId);
         const tbody = document.getElementById(bodyId);
         
-        // Auto detecting header row dynamically
         const isHeaderDeleted = rows[0][0] && rows[0][0].toString().toUpperCase().includes("S:NO");
         const startRowIdx = isHeaderDeleted ? 0 : 1;
         const headerRow = rows[startRowIdx];
 
         if (!headerRow) return;
 
-        // Automatically calculating match columns boundaries
         const totalColumns = headerRow.length;
-        const totalPointsIdx = totalColumns - 2; // Second last is Total Points
-        const topKillerIdx = totalColumns - 1;   // Last column is Top Killer
+        const totalPointsIdx = totalColumns - 2; 
+        const topKillerIdx = totalColumns - 1;   
 
         let headHTML = '<tr><th rowspan="2" class="rank-header">RANK</th>';
         headerRow.forEach((col, index) => {
@@ -524,9 +532,22 @@ td.rank-cell, td.neon-score, td.highlight-stat {
             if (!row || !row[1] || row[1].toString().trim() === "" || row[0] === "TOTAL POINTS") continue;
             
             const tr = document.createElement('tr');
-            tr.classList.add(`rank-${currentRank}`);
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
             
-            let rowCells = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
+            // --- DYNAMIC ARROW LOGIC FOR TAB 1 ---
+            let teamName = row[1].toString().trim();
+            let arrowHTML = '';
+            if (window.rankHistory.teamPoints[teamName]) {
+                let oldRank = window.rankHistory.teamPoints[teamName];
+                if (currentRank < oldRank) {
+                    arrowHTML = ` <span class="pos-change pos-up">↑${oldRank - currentRank}</span>`;
+                } else if (currentRank > oldRank) {
+                    arrowHTML = ` <span class="pos-change pos-down">↓${currentRank - oldRank}</span>`;
+                }
+            }
+            window.rankHistory.teamPoints[teamName] = currentRank;
+            
+            let rowCells = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrowHTML}</td>`;
             rowCells += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(row[1])}</span>${row[1] || '-'}</td>`;
             
             for (let j = 2; j < totalColumns; j++) {
@@ -572,9 +593,22 @@ td.rank-cell, td.neon-score, td.highlight-stat {
             if (!row || !row[0] || row[0].toString().trim() === "" || row[0].toString().toUpperCase().includes("PLAYER NAME")) continue;
 
             const tr = document.createElement('tr');
-            tr.classList.add(`rank-${currentRank}`);
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
 
-            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
+            // --- DYNAMIC ARROW LOGIC FOR TAB 2 ---
+            let playerName = row[0].toString().trim();
+            let arrowHTML = '';
+            if (window.rankHistory.playerKills[playerName]) {
+                let oldRank = window.rankHistory.playerKills[playerName];
+                if (currentRank < oldRank) {
+                    arrowHTML = ` <span class="pos-change pos-up">↑${oldRank - currentRank}</span>`;
+                } else if (currentRank > oldRank) {
+                    arrowHTML = ` <span class="pos-change pos-down">↓${currentRank - oldRank}</span>`;
+                }
+            }
+            window.rankHistory.playerKills[playerName] = currentRank;
+
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrowHTML}</td>`;
             cellHTML += `<td class="player-name-cell"><span class="team-emoji">🎯</span>${row[0] || '-'}</td>`;
             for(let d = 1; d < numCols - 1; d++) {
                 cellHTML += `<td>${row[d] !== undefined ? row[d] : '-'}</td>`;
@@ -617,27 +651,39 @@ td.rank-cell, td.neon-score, td.highlight-stat {
             if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().toUpperCase().includes("PLAYER NAME")) continue;
             
             const tr = document.createElement('tr');
-            tr.classList.add(`rank-${currentRank}`);
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
             
-            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
+            // --- DYNAMIC ARROW LOGIC FOR TAB 3 ---
+            let statPlayerName = row[startIdx].toString().trim();
+            let arrowHTML = '';
+            if (window.rankHistory.playerStats[statPlayerName]) {
+                let oldRank = window.rankHistory.playerStats[statPlayerName];
+                if (currentRank < oldRank) {
+                    arrowHTML = ` <span class="pos-change pos-up">↑${oldRank - currentRank}</span>`;
+                } else if (currentRank > oldRank) {
+                    arrowHTML = ` <span class="pos-change pos-down">↓${currentRank - oldRank}</span>`;
+                }
+            }
+            window.rankHistory.playerStats[statPlayerName] = currentRank;
+            
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrowHTML}</td>`;
             cellHTML += `<td class="player-name-cell"><span class="team-emoji">👤</span>${row[startIdx] || '-'}</td>`;
             
             for (let d = startIdx + 1; d < numCols; d++) {
                 let cellValue = row[d];
     
-            // Agar ye aakhri column (KD) hai aur usme number hai, toh 2 decimal tak fix karo
-            if (d === numCols - 1 && cellValue !== undefined && !isNaN(cellValue) && cellValue !== "") {
-            cellValue = Number(cellValue).toFixed(2);
-       }
+                if (d === numCols - 1 && cellValue !== undefined && !isNaN(cellValue) && cellValue !== "") {
+                    cellValue = Number(cellValue).toFixed(2);
+                }
 
-            if (d === startIdx + 2) {
-            cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : '-'}</td>`;
-            } else if (d === numCols - 1) {
-            cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : '-'}</td>`;
-             } else {
-             cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : '-'}</td>`;
-       }
-    }
+                if (d === startIdx + 2) {
+                    cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : '-'}</td>`;
+                } else if (d === numCols - 1) {
+                    cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : '-'}</td>`;
+                } else {
+                    cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : '-'}</td>`;
+                }
+            }
             
             tr.innerHTML = cellHTML;
             tbody.appendChild(tr);
@@ -668,51 +714,59 @@ td.rank-cell, td.neon-score, td.highlight-stat {
         headHTML += `</tr>`;
         thead.innerHTML = headHTML;
 
-       tbody.innerHTML = '';
-    let currentRank = 1;
-    
-    for (let i = startRowIdx + 1; i < rows.length; i++) {
-        const row = rows[i];
-        if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().trim() === "0") continue;
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        
+        for (let i = startRowIdx + 1; i < rows.length; i++) {
+            const row = rows[i];
+            if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().trim() === "0") continue;
 
-        const tr = document.createElement('tr');
-        tr.classList.add(`rank-${currentRank}`);
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
 
-        let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}</td>`;
-        cellHTML += `<td class="standing-team-cell" style="text-align: center !important;">${row[startIdx]}</td>`;
+            // --- DYNAMIC ARROW LOGIC FOR TAB 4 ---
+            let standingTeamName = row[startIdx].toString().trim();
+            let arrowHTML = '';
+            if (window.rankHistory.teamStandings[standingTeamName]) {
+                let oldRank = window.rankHistory.teamStandings[standingTeamName];
+                if (currentRank < oldRank) {
+                    arrowHTML = ` <span class="pos-change pos-up">↑${oldRank - currentRank}</span>`;
+                } else if (currentRank > oldRank) {
+                    arrowHTML = ` <span class="pos-change pos-down">↓${currentRank - oldRank}</span>`;
+                }
+            }
+            window.rankHistory.teamStandings[standingTeamName] = currentRank;
 
-        for (let d = startIdx + 1; d < numCols; d++) {
-            let cellValue = row[d];
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrowHTML}</td>`;
+            cellHTML += `<td class="standing-team-cell" style="text-align: center !important;">${row[startIdx]}</td>`;
 
-            // Team KD ko 3-digit me force lock karne ke liye
-            if (d === numCols - 1 && cellValue !== undefined && !isNaN(cellValue) && cellValue !== '') {
-                cellValue = Number(cellValue).toFixed(2);
+            for (let d = startIdx + 1; d < numCols; d++) {
+                let cellValue = row[d];
+
+                if (d === numCols - 1 && cellValue !== undefined && !isNaN(cellValue) && cellValue !== '') {
+                    cellValue = Number(cellValue).toFixed(2);
+                }
+
+                if (d === startIdx + 2) {
+                    cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : 0}</td>`;
+                } else if (d === numCols - 1) {
+                    cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : 0}</td>`;
+                } else {
+                    cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : 0}</td>`;
+                }
             }
 
-            if (d === startIdx + 2) {
-                cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : 0}</td>`;
-            } else if (d === numCols - 1) {
-                cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : 0}</td>`;
-            } else {
-                cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : 0}</td>`;
-            }
+            tr.innerHTML = cellHTML;
+            tbody.appendChild(tr);
+            currentRank++;
         }
-
-        tr.innerHTML = cellHTML;
-        tbody.appendChild(tr);
-        currentRank++;
     }
-}
 
-// Data Fetching and Live Sync
-fetchAllSheetsData();
-setInterval(fetchAllSheetsData, 5000);
+    // Data Fetching and Live Sync
+    fetchAllSheetsData();
+    setInterval(fetchAllSheetsData, 5000);
 </script>
-<!-- ========================================== -->
-<!--  HELLFIRE ULTRA ENGINE V3 (NATIVE CRACKERS) -->
-<!-- ========================================== -->
 
-<!-- 1. FIRE THEME & POP-UP STYLES -->
 <style>
 body {
     background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important;
@@ -826,7 +880,6 @@ tr.rank-1 td {
 }
 </style>
 
-<!-- 2. DYNAMIC POP-UP & NATIVE CANVAS HTML -->
 <canvas id="crackersCanvas"></canvas>
 <div id="championPopup" class="champion-popup-overlay">
     <div class="champion-card">
@@ -836,7 +889,6 @@ tr.rank-1 td {
     </div>
 </div>
 
-<!-- 3. ANIMATION & LOCAL CRACKERS ENGINE LOGIC -->
 <script>
 // Fire Particles Background
 function initFireBackground() {
@@ -990,6 +1042,11 @@ function triggerTabCelebration(tabId, tabName) {
         let winnerName = nameCell.innerText || nameCell.textContent;
         winnerName = winnerName.replace(/[⭐👑🎖️🔥]/g, '').trim();
 
+        // Safely clear out rank tracking numbers if leaked into calculation
+        if (winnerName.includes('↑') || winnerName.includes('↓')) {
+            winnerName = winnerName.split('\n')[0].split('↑')[0].split('↓')[0].trim();
+        }
+
         if (!winnerName || winnerName.toUpperCase() === "LOADING...") return;
 
         if (lastWinnerCache[tabId] !== winnerName) {
@@ -1051,8 +1108,9 @@ if (typeof fetchAllSheetsData === 'function') {
     fetchAllSheetsData();
     setInterval(fetchAllSheetsData, 1000);
 }
+
 // WELCOME SCREEN ENTER BUTTON ACTION
-    function openMainPointsTable() {
+function openMainPointsTable() {
     const splashScreen = document.getElementById('porkalamSplash');
         
     // Welcome screen ko smooth gayab karega aur dashboard samne aa jayega
