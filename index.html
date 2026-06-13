@@ -7,47 +7,75 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body class="vsc-initialized">
-    <audio id="bgMusic" loop>
+    <!-- ========================================== -->
+<!--  CINEMATIC SPLASH SCREEN ENGINE BY GEMINI  -->
+<!-- ========================================== -->
+<style>
+/* Pure Page ko block karne wali welcome screen */
+.splash-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, #1a0601 0%, #000000 100%);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 9999999 !important; /* Pura dashboard iske piche chupa rahega */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+/* Title Text Style */
+.splash-title {
+    color: #ffffff;
+    font-size: 42pt;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px #ff4500, 0 0 10px #ffffff;
+    animation: pulseGlow 2s infinite alternate;
+}
+/* Enter Tournament Button Style */
+.splash-btn {
+    background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
+    color: #ffffff;
+    border: 2px solid #ffd700;
+    padding: 15px 40px;
+    font-size: 18pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(255, 69, 0, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.splash-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px #ff4500;
+}
+@keyframes pulseGlow {
+    0% { text-shadow: 0 0 20px #ff4500; transform: scale(1); }
+    100% { text-shadow: 0 0 40px #ff8c00, 0 0 10px #ffffff; transform: scale(1.02); }
+}
+/* Jab screen gayab hogi toh fade out effect */
+.splash-screen.fade-out {
+    opacity: 0;
+    transform: scale(1.1);
+    pointer-events: none;
+}
+</style>
+
+<!-- Audio Elements (Non-Copyright Links) -->
+<!-- Background Music (Looping) -->
+<audio id="bgMusic" 5 second>
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
+<!-- Button Click Cinematic Sound -->
 <audio id="clickSFX">
     <source src="https://actions.google.com/sounds/v1/science_fiction/glitch_digital_power_up.ogg" type="audio/ogg">
 </audio>
 
+<!-- Splash Screen HTML Structure -->
 <div id="welcomeSplash" class="splash-screen">
     <div class="splash-title">TYT PORKALAM</div>
     <button class="splash-btn" onclick="startEsportsEngine()">Enter Tournament</button>
 </div>
-
-<style>
-.sound-toggle-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.8);
-    border: 2px solid #ff4500;
-    color: #ffd700;
-    padding: 10px 15px;
-    font-size: 14pt;
-    font-weight: 700;
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 999998 !important; /* Main dashboard ke upar dikhega par splash ke piche */
-    box-shadow: 0 0 15px rgba(255, 69, 0, 0.4);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-}
-.sound-toggle-btn:hover {
-    box-shadow: 0 0 25px #ff4500;
-    transform: scale(1.05);
-}
-</style>
-
-<button id="soundBtn" class="sound-toggle-btn" onclick="toggleMainSound()">
-    <span>🔊</span> Sound: ON
-</button>
 </style>
 
 <!-- Audio Elements (Non-Copyright Links) -->
