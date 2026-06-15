@@ -12,35 +12,14 @@
 .premium-splash {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: #050100;
+    background: #030308;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     z-index: 9999999 !important;
     overflow: hidden;
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Fire Background Animation */
-.fire-bg {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, rgba(40,10,0,0.6) 0%, #000000 100%);
-    pointer-events: none;
-}
-.fire-particle {
-    position: absolute;
-    bottom: -20px;
-    background: radial-gradient(circle, #ff4500 20%, rgba(255,140,0,0) 70%);
-    border-radius: 50%;
-    opacity: 0.6;
-    animation: riseUp 4s linear infinite;
-}
-@keyframes riseUp {
-    0% { transform: translateY(0) scale(1) translateX(0); opacity: 0.7; }
-    50% { transform: translateY(-50vh) scale(1.3) translateX(20px); opacity: 0.4; }
-    100% { transform: translateY(-110vh) scale(0.5) translateX(-20px); opacity: 0; }
-}
-
-/* TYT PORKALAM Dancing / Glow Text Effect */
+/* Neon Cyberpunk Splash Title */
 .dancing-title {
     color: #ffffff;
     font-size: 46pt;
@@ -50,20 +29,20 @@
     margin-bottom: 30px;
     z-index: 2;
     position: relative;
-    text-shadow: 0 0 20px #ff4500, 0 0 40px #ff8c00;
-    animation: textDance 3s ease-in-out infinite alternate;
+    text-shadow: 0 0 15px #00f0ff, 0 0 30px #ff007f;
+    animation: neonPulse 2s ease-in-out infinite alternate;
 }
-@keyframes textDance {
-    0% { transform: translateY(0) rotate(-1deg); text-shadow: 0 0 20px #ff4500, 0 0 40px #ff8c00; }
-    50% { transform: translateY(-10px) rotate(1deg) scale(1.03); text-shadow: 0 0 30px #ff0000, 0 0 50px #ffd700; }
-    100% { transform: translateY(5px) rotate(-0.5deg); text-shadow: 0 0 25px #ff4500, 0 0 45px #ff8c00; }
+@keyframes neonPulse {
+    0% { transform: translateY(0) scale(1); text-shadow: 0 0 15px #00f0ff, 0 0 30px #ff007f; }
+    50% { transform: translateY(-5px) scale(1.02); text-shadow: 0 0 25px #00ff66, 0 0 40px #00f0ff; }
+    100% { transform: translateY(3px) scale(0.99); text-shadow: 0 0 15px #ff007f, 0 0 35px #7000ff; }
 }
 
 /* Enter Tournament Action Button */
 .enter-esports-btn {
-    background: linear-gradient(135deg, #ff4500 0%, #b30000 100%);
+    background: linear-gradient(135deg, #7000ff 0%, #00f0ff 100%);
     color: #ffffff;
-    border: 2px solid #ffd700;
+    border: 2px solid #00ff66;
     padding: 16px 45px;
     font-size: 16pt;
     font-weight: 800;
@@ -71,13 +50,13 @@
     border-radius: 6px;
     cursor: pointer;
     z-index: 2;
-    box-shadow: 0 0 25px rgba(255, 69, 0, 0.6);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
     transition: all 0.2s ease;
 }
 .enter-esports-btn:hover {
     transform: scale(1.08);
-    box-shadow: 0 0 45px #ff4500;
-    background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%);
+    box-shadow: 0 0 45px #00ff66;
+    background: linear-gradient(135deg, #ff007f 0%, #7000ff 100%);
 }
 
 /* Smooth Fade Out Class */
@@ -106,14 +85,6 @@
 </style>
 
 <div id="porkalamSplash" class="premium-splash">
-    <div class="fire-bg">
-        <div class="fire-particle" style="left:10%; width:15px; height:15px; animation-delay:0s; animation-duration:5s;"></div>
-        <div class="fire-particle" style="left:25%; width:22px; height:22px; animation-delay:1.5s; animation-duration:4s;"></div>
-        <div class="fire-particle" style="left:45%; width:12px; height:12px; animation-delay:0.5s; animation-duration:6s;"></div>
-        <div class="fire-particle" style="left:65%; width:26px; height:26px; animation-delay:2s; animation-duration:4.5s;"></div>
-        <div class="fire-particle" style="left:80%; width:18px; height:18px; animation-delay:1s; animation-duration:5.5s;"></div>
-    </div>
-    
     <div class="dancing-title">TYT PORKALAM</div>
     <button class="enter-esports-btn" onclick="openMainPointsTable()">Enter Tournament</button>
 </div>
@@ -125,15 +96,15 @@
             user-select: none;
         }
 
-        /* 🟢 INTERACTIVE DYNAMIC BACKGROUND MODE CORES */
+        /* 🟢 INTERACTIVE CYBER PUNK BACKGROUND */
         body {
             margin: 0;
-            padding: 10px 30px; /* Thoda padding adjust kiya wide display ke liye */
-            background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important;
+            padding: 10px 30px; 
+            background: #020205 !important;
             color: #ffffff;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Start from top to let content expand vertically */
+            align-items: flex-start; 
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
@@ -141,11 +112,11 @@
         }
 
         body.dashboard-orange-mode {
-            background: radial-gradient(circle at 50% 50%, #291100 0%, #080300 100%) !important;
+            background: #050200 !important;
         }
 
-        /* 🌊 BGMI OCEAN ODYSSEY CANVAS ENGINE */
-        #odysseyCanvas {
+        /* 🔮 TECH MATRIX CANVAS ENGINE */
+        #cyberCanvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -155,13 +126,13 @@
             pointer-events: none;
         }
 
-        /* 🔮 ULTRA TRANSPARENT & WIDE CONTAINER FOR 8 MATCHES */
+        /* ULTRA TRANSPARENT CONTAINER */
         .container {
             width: 100%;
-            max-width: 98% !important; /* Pure box ka display expand kar diya taaki 8 matches aaram se aayein */
-            background: transparent !important; /* Center ka solid dark card completely transparent kiya */
-            border: none !important; /* Borders hata diye extra spacing clear karne */
-            box-shadow: none !important; /* Glowing shadow block ko clean kiya */
+            max-width: 98% !important; 
+            background: transparent !important; 
+            border: none !important; 
+            box-shadow: none !important; 
             position: relative;
             z-index: 2;
             padding-top: 15px;
@@ -176,8 +147,8 @@
             gap: 15px;
         }
         .mode-toggle-btn {
-            background: rgba(30, 10, 5, 0.6);
-            border: 1.5px solid rgba(255, 69, 0, 0.3);
+            background: rgba(10, 10, 25, 0.6);
+            border: 1.5px solid rgba(0, 240, 255, 0.3);
             color: #a0aec0;
             padding: 10px 25px;
             font-size: 11pt;
@@ -189,23 +160,23 @@
             transition: all 0.3s ease;
         }
         .mode-toggle-btn.active-tournament {
-            background: linear-gradient(135deg, #b30000 0%, #ff4500 100%) !important;
+            background: linear-gradient(135deg, #7000ff 0%, #00f0ff 100%) !important;
             color: #fff !important;
-            border-color: #ffd700 !important;
-            box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+            border-color: #00ff66 !important;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
         }
         .mode-toggle-btn.active-dashboard {
-            background: linear-gradient(135deg, #cc5200 0%, #ff8c00 100%) !important;
+            background: linear-gradient(135deg, #ff007f 0%, #ff8c00 100%) !important;
             color: #fff !important;
-            border-color: #ffea00 !important;
-            box-shadow: 0 0 15px rgba(255, 140, 0, 0.5);
+            border-color: #ffd700 !important;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
         }
 
         /* Header Layout */
         .header-container {
             text-align: center;
             margin-bottom: 25px;
-            border-bottom: 2px solid rgba(255, 69, 0, 0.3);
+            border-bottom: 2px solid rgba(0, 240, 255, 0.3);
             padding-bottom: 15px;
             position: relative;
         }
@@ -220,28 +191,31 @@
             letter-spacing: 6px;
             margin: 0;
             color: #ffffff !important;
-            text-shadow: 0 0 10px #ff4500, 0 0 20px #ff8c00, 0 0 30px #ff0000 !important;
+            text-shadow: 0 0 10px #00f0ff, 0 0 20px #7000ff, 0 0 30px #ff007f !important;
         }
         body.dashboard-orange-mode .main-title {
-            text-shadow: 0 0 10px #ff8c00, 0 0 20px #ffa500, 0 0 30px #ff4500 !important;
+            text-shadow: 0 0 10px #ff8c00, 0 0 20px #ff007f, 0 0 30px #ffd700 !important;
         }
 
         .subtitle {
             font-size: 14pt;
-            color: #ff007f;
+            color: #00ff66;
             margin: 6px 0 0 0;
             font-weight: bold;
-            text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
+        }
+        body.dashboard-orange-mode .subtitle {
+            color: #ffaa00;
         }
 
         .live-badge {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(255, 69, 0, 0.2) !important;
-            border: 1px solid #ff4500 !important;
-            color: #ffaa66 !important;
-            box-shadow: 0 0 10px rgba(255, 69, 0, 0.4) !important;
+            background: rgba(0, 240, 255, 0.15) !important;
+            border: 1px solid #00f0ff !important;
+            color: #00ffff !important;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.4) !important;
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 11pt;
@@ -266,8 +240,8 @@
         }
 
         .tab-btn {
-            background: rgba(25, 10, 5, 0.8) !important;
-            border: 1px solid rgba(255, 69, 0, 0.3) !important;
+            background: rgba(10, 10, 20, 0.8) !important;
+            border: 1px solid rgba(0, 240, 255, 0.3) !important;
             color: #cbd5e0 !important;
             padding: 12px 24px;
             font-size: 12pt;
@@ -279,21 +253,21 @@
             transition: all 0.25s ease;
         }
         
-        /* Class helper to hide non-relevant tabs dynamically */
         .tab-btn.hide-tab-logic {
             display: none !important;
         }
 
         .tab-btn:hover, .tab-btn.active {
-            background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%) !important;
+            background: linear-gradient(135deg, #7000ff 0%, #00f0ff 100%) !important;
             color: #ffffff !important;
-            border: 1px solid #ffd700 !important;
-            box-shadow: 0 0 20px rgba(255, 69, 0, 0.6) !important;
+            border: 1px solid #00ff66 !important;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6) !important;
             transform: translateY(-2px);
         }
         body.dashboard-orange-mode .tab-btn:hover, body.dashboard-orange-mode .tab-btn.active {
-            background: linear-gradient(135deg, #cc5200 0%, #ff8c00 100%) !important;
-            box-shadow: 0 0 20px rgba(255, 140, 0, 0.6) !important;
+            background: linear-gradient(135deg, #ff007f 0%, #ff8c00 100%) !important;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6) !important;
+            border-color: #ffd700 !important;
         }
 
         /* Responsive Grid Enforcers */
@@ -307,40 +281,41 @@
             display: block;
         }
 
-        /* 📌 TRANSPARENT GLASSY TABLES (Piche Ka Animation Clear Dikhega) */
+        /* 📌 TRANSPARENT GLASSY TABLES */
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: rgba(12, 4, 2, 0.55) !important; /* Background light blend kiya taaki overlay dynamic dikhe */
-            border: 2px solid rgba(255, 69, 0, 0.4) !important;
-            backdrop-filter: blur(2px); /* Background elements clear render honge */
+            background-color: rgba(5, 5, 12, 0.65) !important; 
+            border: 2px solid rgba(0, 240, 255, 0.4) !important;
+            backdrop-filter: blur(4px); 
         }
         body.dashboard-orange-mode table {
-            border-color: rgba(255, 140, 0, 0.4) !important;
+            border-color: rgba(255, 0, 127, 0.4) !important;
+            background-color: rgba(12, 4, 0, 0.65) !important;
         }
 
         th {
-            background: linear-gradient(180deg, rgba(42,11,3,0.9) 0%, rgba(18,3,0,0.95) 100%) !important;
-            border-bottom: 2px solid #ff4500 !important;
-            color: #ff8c00 !important;
+            background: linear-gradient(180deg, rgba(15,15,35,0.95) 0%, rgba(5,5,15,0.98) 100%) !important;
+            border-bottom: 2px solid #00f0ff !important;
+            color: #00ffff !important;
             font-weight: 800;
             text-transform: uppercase;
             padding: 12px 10px;
-            border: 1.5px solid rgba(255, 69, 0, 0.3);
+            border: 1.5px solid rgba(0, 240, 255, 0.3);
             text-align: center;
             font-size: 11pt;
             white-space: nowrap;
         }
         body.dashboard-orange-mode th {
-            background: linear-gradient(180deg, rgba(51,20,0,0.9) 0%, rgba(23,9,0,0.95) 100%) !important;
-            border-bottom-color: #ff8c00 !important;
-            color: #ffa500 !important;
-            border-color: rgba(255, 140, 0, 0.3);
+            background: linear-gradient(180deg, rgba(35,10,5,0.95) 0%, rgba(15,3,0,0.98) 100%) !important;
+            border-bottom-color: #ff007f !important;
+            color: #ff8c00 !important;
+            border-color: rgba(255, 0, 127, 0.3);
         }
 
         td {
             padding: 12px 10px;
-            border: 1.5px solid rgba(255, 69, 0, 0.25) !important;
+            border: 1.5px solid rgba(0, 240, 255, 0.2) !important;
             text-align: center;
             color: #ffffff;
             font-size: 11.5pt;
@@ -349,7 +324,7 @@
             white-space: nowrap;
         }
         body.dashboard-orange-mode td {
-            border-color: rgba(255, 140, 0, 0.25) !important;
+            border-color: rgba(255, 0, 127, 0.2) !important;
         }
 
         /* Dynamic Width Helpers */
@@ -358,9 +333,9 @@
         th.player-name-head, td.player-name-cell { min-width: 250px; text-align: left !important; padding-left: 15px !important; }
         th.total-points-head, th.top-killer-head, td.neon-score { min-width: 120px; }
         
-        td.team-name-cell { border-left: 4px solid #ff4500; }
+        td.team-name-cell { border-left: 4px solid #00f0ff; }
         td.player-name-cell { border-left: 4px solid #ff007f; }
-        td.standing-team-cell { border-left: 4px solid #ff8c00; text-align: center !important; }
+        td.standing-team-cell { border-left: 4px solid #7000ff; text-align: center !important; }
         body.dashboard-orange-mode td.team-name-cell { border-left-color: #ff8c00; }
 
         .team-emoji {
@@ -370,27 +345,28 @@
             vertical-align: middle;
         }
 
-        td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; }
-        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; }
+        td.neon-score, td.highlight-stat { color: #00ff66 !important; text-shadow: 0 0 8px rgba(0, 255, 102, 0.6) !important; }
+        body.dashboard-orange-mode td.neon-score { color: #ffaa00 !important; text-shadow: 0 0 8px rgba(255, 170, 0, 0.6) !important; }
+        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(0, 240, 255, 0.4); color: #00ffff; }
 
-        tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); } 
-        tr:hover td { background-color: rgba(255, 69, 0, 0.15); } 
+        tr:nth-child(even) td { background-color: rgba(15, 15, 35, 0.2); } 
+        tr:hover td { background-color: rgba(0, 240, 255, 0.1); } 
         
         /* Premium Leaderboard Podium Rows Styling */
-        tr.rank-1 td { background-color: rgba(255, 69, 0, 0.2) !important; border-bottom: 1px solid #ffd700 !important; }
-        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell, tr.rank-1 td.standing-team-cell { text-shadow: 0 0 8px rgba(255,215,0,0.5); color: #ffd700; }
-        tr.rank-1 td.rank-cell { color: #ffd700; }
+        tr.rank-1 td { background-color: rgba(0, 240, 255, 0.12) !important; border-bottom: 1px solid #00ff66 !important; }
+        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell, tr.rank-1 td.standing-team-cell { text-shadow: 0 0 8px rgba(0,255,102,0.5); color: #00ff66; }
+        tr.rank-1 td.rank-cell { color: #00ff66; }
 
-        tr.rank-2 td { background-color: rgba(192, 192, 192, 0.08) !important; }
-        tr.rank-2 td.team-name-cell, tr.rank-2 td.player-name-cell, tr.rank-2 td.standing-team-cell { text-shadow: 0 0 8px rgba(192,192,192,0.4); color: #c0c0c0; }
-        tr.rank-2 td.rank-cell { color: #c0c0c0; }
+        tr.rank-2 td { background-color: rgba(112, 0, 255, 0.08) !important; }
+        tr.rank-2 td.team-name-cell, tr.rank-2 td.player-name-cell, tr.rank-2 td.standing-team-cell { text-shadow: 0 0 8px #00f0ff; color: #00f0ff; }
+        tr.rank-2 td.rank-cell { color: #00f0ff; }
 
-        tr.rank-3 td { background-color: rgba(205, 127, 50, 0.08) !important; }
-        tr.rank-3 td.team-name-cell, tr.rank-3 td.player-name-cell, tr.rank-3 td.standing-team-cell { text-shadow: 0 0 8px rgba(205,127,50,0.4); color: #cd7f32; }
-        tr.rank-3 td.rank-cell { color: #cd7f32; }
+        tr.rank-3 td { background-color: rgba(255, 0, 127, 0.06) !important; }
+        tr.rank-3 td.team-name-cell, tr.rank-3 td.player-name-cell, tr.rank-3 td.standing-team-cell { text-shadow: 0 0 8px #ff007f; color: #ff007f; }
+        tr.rank-3 td.rank-cell { color: #ff007f; }
 
-        th.map-header { font-size: 11.5pt; font-weight: 800; background-color: rgba(40, 15, 5, 0.95); color: #ffffff; min-width: 140px; }
-        th.sub-th { background-color: rgba(20, 8, 3, 0.85); font-size: 10.5pt; color: #a0aec0; min-width: 70px; }
+        th.map-header { font-size: 11.5pt; font-weight: 800; background-color: rgba(10, 10, 30, 0.95); color: #ffffff; min-width: 140px; }
+        th.sub-th { background-color: rgba(5, 5, 15, 0.85); font-size: 10.5pt; color: #a0aec0; min-width: 70px; }
 
         .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
 
@@ -410,7 +386,7 @@
         .champion-popup-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 3, 0, 0.95);
+            background: rgba(3, 3, 8, 0.95);
             backdrop-filter: blur(10px);
             display: flex; justify-content: center; align-items: center;
             z-index: 999999 !important;
@@ -422,9 +398,9 @@
             pointer-events: auto;
         }
         .champion-card {
-            background: linear-gradient(135deg, #3a1003 0%, #0c0400 100%);
-            border: 3px solid #ff4500;
-            box-shadow: 0 0 60px rgba(255, 69, 0, 0.6), inset 0 0 30px rgba(255, 140, 0, 0.3);
+            background: linear-gradient(135deg, #100030 0%, #030308 100%);
+            border: 3px solid #00f0ff;
+            box-shadow: 0 0 60px rgba(0, 240, 255, 0.6), inset 0 0 30px rgba(112, 0, 255, 0.3);
             padding: 50px 70px;
             border-radius: 24px;
             text-align: center;
@@ -435,7 +411,7 @@
             transform: scale(1);
         }
         .champion-title {
-            color: #ffd700;
+            color: #00ff66;
             font-size: 22pt;
             font-weight: 800;
             text-transform: uppercase;
@@ -447,16 +423,16 @@
             font-size: 42pt;
             font-weight: 900;
             margin: 15px 0;
-            text-shadow: 0 0 25px #ff4500, 0 0 10px #ffffff;
+            text-shadow: 0 0 25px #00f0ff, 0 0 10px #ffffff;
         }
         .champion-badge {
             font-size: 55pt;
             margin-bottom: 5px;
-            animation: firePulse 0.8s infinite alternate;
+            animation: cyberPulse 0.8s infinite alternate;
         }
-        @keyframes firePulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); }
-            100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); }
+        @keyframes cyberPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px #00f0ff); }
+            100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff007f); }
         }
 
         #crackersCanvas {
@@ -469,7 +445,7 @@
 </head>
 <body>
 
-<canvas id="odysseyCanvas"></canvas>
+<canvas id="cyberCanvas"></canvas>
 
 <div class="container">
     
@@ -540,7 +516,6 @@
 <script>
     const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyuMwMTwfZH6nh9r7f7F4wA6t0XgPbgRQLNvAxQkfv9ExAVTN3NHjmjDBP4S_VxSNN4_w/exec";
 
-    // Permanent Global Memory (Never resets during session)
     if (!window.rankMemory) {
         window.rankMemory = {
             teamPoints: {},
@@ -550,7 +525,6 @@
         };
     }
 
-    // MODE SWITCHER ENGINE LOGIC
     function applyOperationMode(mode) {
         const body = document.body;
         const btnTourney = document.getElementById('btnTourneyMode');
@@ -603,59 +577,117 @@
     }
 
     // ========================================================
-    // 🌌 CANVAS ENGINE WITH SMOOTH WAVE ANIMATIONS
+    // 🌌 TRENDING CYBERPUNK TECH MATRIX ENGINE (REPLACED OCEAN)
     // ========================================================
-    const canvas = document.getElementById('odysseyCanvas');
+    const canvas = document.getElementById('cyberCanvas');
     const ctx = canvas.getContext('2d');
-    let fishSchool = [], vortexAngle = 0;
+    
+    let nodes = [];
+    let matrixStream = [];
+    const hexChars = "0123456789ABCDEF//<>[]{}";
 
-    function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', initCanvas); initCanvas();
-
-    let whaleTop = { x: -450, y: canvas.height * 0.22, speed: 1.1, swing: 0, swingSpeed: 0.025, sizeScale: 0.9 };
-    let whaleBottom = { x: canvas.width + 500, y: canvas.height * 0.75, speed: -0.9, swing: 3.5, swingSpeed: 0.02, sizeScale: 1.2 };
-
-    for (let i = 0; i < 22; i++) {
-        fishSchool.push({
-            x: Math.random() * canvas.width + canvas.width * 0.2, y: Math.random() * canvas.height,
-            size: Math.random() * 7 + 5, speed: Math.random() * 1.5 + 1.0,
-            waveFactor: Math.random() * 10, waveSpeed: Math.random() * 0.05 + 0.03
-        });
-    }
-
-    function drawWhaleVector(x, y, swing, scale, invertedFactor) {
-        let tailWave = Math.sin(swing); ctx.save(); ctx.translate(x, y); ctx.scale(invertedFactor * scale, scale);
-        ctx.strokeStyle = "rgba(255, 69, 0, 0.12)"; ctx.lineWidth = 3; ctx.shadowBlur = 15; ctx.shadowColor = "#ff4500";
-        ctx.beginPath(); ctx.moveTo(150, 0); ctx.bezierCurveTo(80, -60, -50, -50, -120, tailWave * 15);
-        ctx.lineTo(-160, (tailWave * 15) - 35); ctx.lineTo(-145, tailWave * 15); ctx.lineTo(-160, (tailWave * 15) + 35);
-        ctx.lineTo(-120, tailWave * 15); ctx.bezierCurveTo(-50, 60, 80, 55, 150, 0); ctx.stroke(); ctx.restore();
-    }
-
-    function renderOdysseyWorld() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        vortexAngle += 0.002;
-        ctx.save(); ctx.translate(canvas.width * 0.12, canvas.height * 0.5);
-        for(let i = 0; i < 6; i++) {
-            ctx.strokeStyle = `rgba(255, 69, 0, ${0.025 - (i * 0.004)})`; ctx.lineWidth = 25 - (i * 3);
-            ctx.save(); ctx.rotate(vortexAngle * (1 + i * 0.15)); ctx.beginPath(); ctx.ellipse(0, 0, 80 + (i * 22), 240 + (i * 35), 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+    function initCanvas() { 
+        canvas.width = window.innerWidth; 
+        canvas.height = window.innerHeight; 
+        
+        // Initialize Grid Nodes
+        nodes = [];
+        for (let i = 0; i < 25; i++) {
+            nodes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.8,
+                vy: (Math.random() - 0.5) * 0.8,
+                radius: Math.random() * 2 + 1
+            });
         }
-        ctx.restore();
 
-        ctx.fillStyle = "rgba(255, 140, 0, 0.15)";
-        fishSchool.forEach(fish => {
-            fish.waveFactor += fish.waveSpeed; fish.x -= fish.speed; fish.y += Math.sin(fish.waveFactor) * 0.5;
-            if (fish.x < -60) { fish.x = canvas.width + 60; fish.y = Math.random() * canvas.height; }
-            ctx.save(); ctx.translate(fish.x, fish.y); ctx.rotate(Math.PI + Math.sin(fish.waveFactor) * 0.1);
-            ctx.beginPath(); ctx.moveTo(fish.size * 2, 0); ctx.quadraticCurveTo(fish.size, -fish.size * 0.4, 0, 0); ctx.quadraticCurveTo(fish.size, fish.size * 0.4, fish.size * 2, 0); ctx.closePath(); ctx.fill(); ctx.restore();
+        // Initialize Cyber Matrix Rain Streams
+        matrixStream = [];
+        const columns = Math.floor(canvas.width / 40);
+        for(let i=0; i<columns; i++) {
+            matrixStream.push({
+                x: i * 40,
+                y: Math.random() * -canvas.height,
+                speed: Math.random() * 3 + 2,
+                chars: []
+            });
+        }
+    }
+    window.addEventListener('resize', initCanvas); 
+    initCanvas();
+
+    function renderCyberWorld() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        const isDashboard = document.body.classList.contains('dashboard-orange-mode');
+        const primaryColor = isDashboard ? "rgba(255, 0, 127," : "rgba(0, 240, 255,";
+        const secondaryColor = isDashboard ? "rgba(255, 140, 0," : "rgba(112, 0, 255,";
+
+        // 1. Draw Tech Digital Grid Pattern
+        ctx.strokeStyle = isDashboard ? "rgba(255, 69, 0, 0.03)" : "rgba(0, 240, 255, 0.03)";
+        ctx.lineWidth = 1;
+        const gridSize = 50;
+        for (let x = 0; x < canvas.width; x += gridSize) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += gridSize) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+        }
+
+        // 2. Animate and Draw Nodes (Connecting Tech Mesh)
+        nodes.forEach(node => {
+            node.x += node.vx;
+            node.y += node.vy;
+
+            if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+            if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+
+            ctx.fillStyle = primaryColor + " 0.2)";
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+            ctx.fill();
         });
 
-        drawWhaleVector(whaleTop.x, whaleTop.y, whaleTop.swing, whaleTop.sizeScale, 1);
-        drawWhaleVector(whaleBottom.x, whaleBottom.y, whaleBottom.swing, whaleBottom.sizeScale, -1);
-        whaleTop.x += whaleTop.speed; whaleTop.swing += whaleTop.swingSpeed; if (whaleTop.x > canvas.width + 500) whaleTop.x = -500;
-        whaleBottom.x += whaleBottom.speed; whaleBottom.swing += whaleBottom.swingSpeed; if (whaleBottom.x < -600) whaleBottom.x = canvas.width + 600;
-        requestAnimationFrame(renderOdysseyWorld);
+        // Draw connections between close nodes
+        ctx.lineWidth = 0.5;
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dist = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
+                if (dist < 180) {
+                    ctx.strokeStyle = secondaryColor + `${0.15 - (dist / 180) * 0.15})`;
+                    ctx.beginPath();
+                    ctx.moveTo(nodes[i].x, nodes[i].y);
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // 3. Cyber Data Streams Rain
+        ctx.font = "10px monospace";
+        matrixStream.forEach(stream => {
+            if(Math.random() < 0.05 || stream.chars.length === 0) {
+                stream.chars.push(hexChars[Math.floor(Math.random() * hexChars.length)]);
+            }
+            if(stream.chars.length > 15) stream.chars.shift();
+
+            stream.y += stream.speed;
+            if (stream.y > canvas.height) {
+                stream.y = -100;
+                stream.speed = Math.random() * 3 + 2;
+            }
+
+            stream.chars.forEach((char, idx) => {
+                const alpha = (idx / stream.chars.length) * 0.15;
+                ctx.fillStyle = primaryColor + ` ${alpha})`;
+                ctx.fillText(char, stream.x, stream.y + (idx * 14));
+            });
+        });
+
+        requestAnimationFrame(renderCyberWorld);
     }
-    requestAnimationFrame(renderOdysseyWorld);
+    requestAnimationFrame(renderCyberWorld);
 
     function getTeamEmoji(teamName) {
         if (!teamName) return '🎮';
@@ -928,53 +960,6 @@
 </script>
 
 <script>
-// Fire Particles Background Engine
-function initFireBackground() {
-    const canvas = document.getElementById('odysseyCanvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = canvas.height + Math.random() * 100;
-            this.size = Math.random() * 3 + 1;
-            this.speedY = Math.random() * 1.5 + 0.5;
-            this.speedX = Math.random() * 1 - 0.5;
-            this.opacity = Math.random() * 0.5 + 0.5;
-        }
-        update() {
-            this.y -= this.speedY;
-            this.x += this.speedX;
-            if (this.y < -10) {
-                this.y = canvas.height + 10;
-                this.x = Math.random() * canvas.width;
-            }
-        }
-        draw() {
-            ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 100) + 50}, 0, ${this.opacity})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-    for (let i = 0; i < 50; i++) particles.push(new Particle());
-
-    function animate() {
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(animate);
-    }
-    animate();
-}
-
 // Crackers Simulation
 const cCanvas = document.getElementById('crackersCanvas');
 const cCtx = cCanvas.getContext('2d');
@@ -1008,7 +993,7 @@ class CrackerParticle {
 }
 
 function createExplosion(x, y) {
-    const colors = ['#ff4500', '#ff8c00', '#ffd700', '#ff0000', '#ffffff'];
+    const colors = ['#00f0ff', '#ff007f', '#00ff66', '#7000ff', '#ffffff'];
     for (let i = 0; i < 100; i++) {
         cParticles.push(new CrackerParticle(x, y, colors[Math.floor(Math.random() * colors.length)]));
     }
@@ -1072,7 +1057,6 @@ window.switchTab = function(tabId, button) {
 };
 
 window.addEventListener('load', () => {
-    initFireBackground();
     applyOperationMode('tournament');
 });
 
@@ -1083,7 +1067,7 @@ function openMainPointsTable() {
 
 if (typeof fetchAllSheetsData === 'function') {
     fetchAllSheetsData();
-    setInterval(fetchAllSheetsData, 1000); // 1-Second real-time fast sync lock
+    setInterval(fetchAllSheetsData, 1000); 
 }
 </script>
 </body>
