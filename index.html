@@ -128,12 +128,12 @@
         /* 🟢 INTERACTIVE DYNAMIC BACKGROUND MODE CORES */
         body {
             margin: 0;
-            padding: 15px;
+            padding: 10px 30px; /* Thoda padding adjust kiya wide display ke liye */
             background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important;
             color: #ffffff;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Start from top to let content expand vertically */
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
@@ -155,22 +155,17 @@
             pointer-events: none;
         }
 
-        /* 🔮 GLASS CONTAINER STYLE */
+        /* 🔮 ULTRA TRANSPARENT & WIDE CONTAINER FOR 8 MATCHES */
         .container {
             width: 100%;
-            max-width: 1450px;
-            background: rgba(12, 4, 2, 0.85) !important;
-            border: 2px solid #ff4500 !important;
-            box-shadow: 0 0 35px rgba(255, 69, 0, 0.25), inset 0 0 20px rgba(255, 140, 0, 0.1) !important;
-            border-radius: 16px !important;
+            max-width: 98% !important; /* Pure box ka display expand kar diya taaki 8 matches aaram se aayein */
+            background: transparent !important; /* Center ka solid dark card completely transparent kiya */
+            border: none !important; /* Borders hata diye extra spacing clear karne */
+            box-shadow: none !important; /* Glowing shadow block ko clean kiya */
             position: relative;
             z-index: 2;
+            padding-top: 15px;
             transition: all 0.5s ease;
-        }
-
-        body.dashboard-orange-mode .container {
-            border-color: #ff8c00 !important;
-            box-shadow: 0 0 35px rgba(255, 140, 0, 0.25), inset 0 0 20px rgba(255, 140, 0, 0.05) !important;
         }
 
         /* Mode Switcher UI bar */
@@ -271,7 +266,7 @@
         }
 
         .tab-btn {
-            background: rgba(25, 10, 5, 0.7) !important;
+            background: rgba(25, 10, 5, 0.8) !important;
             border: 1px solid rgba(255, 69, 0, 0.3) !important;
             color: #cbd5e0 !important;
             padding: 12px 24px;
@@ -312,53 +307,55 @@
             display: block;
         }
 
+        /* 📌 TRANSPARENT GLASSY TABLES (Piche Ka Animation Clear Dikhega) */
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: rgba(5, 12, 26, 0.45);
-            border: 2px solid rgba(255, 69, 0, 0.25);
+            background-color: rgba(12, 4, 2, 0.55) !important; /* Background light blend kiya taaki overlay dynamic dikhe */
+            border: 2px solid rgba(255, 69, 0, 0.4) !important;
+            backdrop-filter: blur(2px); /* Background elements clear render honge */
         }
         body.dashboard-orange-mode table {
-            border-color: rgba(255, 140, 0, 0.25);
+            border-color: rgba(255, 140, 0, 0.4) !important;
         }
 
         th {
-            background: linear-gradient(180deg, #2a0b03 0%, #120300 100%) !important;
+            background: linear-gradient(180deg, rgba(42,11,3,0.9) 0%, rgba(18,3,0,0.95) 100%) !important;
             border-bottom: 2px solid #ff4500 !important;
             color: #ff8c00 !important;
             font-weight: 800;
             text-transform: uppercase;
             padding: 12px 10px;
-            border: 1.5px solid rgba(255, 69, 0, 0.25);
+            border: 1.5px solid rgba(255, 69, 0, 0.3);
             text-align: center;
             font-size: 11pt;
             white-space: nowrap;
         }
         body.dashboard-orange-mode th {
-            background: linear-gradient(180deg, #331400 0%, #170900 100%) !important;
+            background: linear-gradient(180deg, rgba(51,20,0,0.9) 0%, rgba(23,9,0,0.95) 100%) !important;
             border-bottom-color: #ff8c00 !important;
             color: #ffa500 !important;
-            border-color: rgba(255, 140, 0, 0.25);
+            border-color: rgba(255, 140, 0, 0.3);
         }
 
         td {
             padding: 12px 10px;
-            border: 1.5px solid rgba(255, 69, 0, 0.18);
+            border: 1.5px solid rgba(255, 69, 0, 0.25) !important;
             text-align: center;
             color: #ffffff;
             font-size: 11.5pt;
             font-weight: 600;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.95);
             white-space: nowrap;
         }
         body.dashboard-orange-mode td {
-            border-color: rgba(255, 140, 0, 0.18);
+            border-color: rgba(255, 140, 0, 0.25) !important;
         }
 
         /* Dynamic Width Helpers */
-        th.rank-header, td.rank-cell { width: 95px; min-width: 95px; }
-        th.team-name-head, td.team-name-cell { min-width: 220px; text-align: left !important; padding-left: 15px !important; }
-        th.player-name-head, td.player-name-cell { min-width: 220px; text-align: left !important; padding-left: 15px !important; }
+        th.rank-header, td.rank-cell { width: 90px; min-width: 90px; }
+        th.team-name-head, td.team-name-cell { min-width: 250px; text-align: left !important; padding-left: 15px !important; }
+        th.player-name-head, td.player-name-cell { min-width: 250px; text-align: left !important; padding-left: 15px !important; }
         th.total-points-head, th.top-killer-head, td.neon-score { min-width: 120px; }
         
         td.team-name-cell { border-left: 4px solid #ff4500; }
@@ -376,19 +373,19 @@
         td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; }
         td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; }
 
-        tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.15); } 
-        tr:hover td { background-color: rgba(255, 69, 0, 0.1); } 
+        tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); } 
+        tr:hover td { background-color: rgba(255, 69, 0, 0.15); } 
         
         /* Premium Leaderboard Podium Rows Styling */
-        tr.rank-1 td { background-color: rgba(255, 69, 0, 0.12) !important; border-bottom: 1px solid #ffd700 !important; }
+        tr.rank-1 td { background-color: rgba(255, 69, 0, 0.2) !important; border-bottom: 1px solid #ffd700 !important; }
         tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell, tr.rank-1 td.standing-team-cell { text-shadow: 0 0 8px rgba(255,215,0,0.5); color: #ffd700; }
         tr.rank-1 td.rank-cell { color: #ffd700; }
 
-        tr.rank-2 td { background-color: rgba(192, 192, 192, 0.04) !important; }
+        tr.rank-2 td { background-color: rgba(192, 192, 192, 0.08) !important; }
         tr.rank-2 td.team-name-cell, tr.rank-2 td.player-name-cell, tr.rank-2 td.standing-team-cell { text-shadow: 0 0 8px rgba(192,192,192,0.4); color: #c0c0c0; }
         tr.rank-2 td.rank-cell { color: #c0c0c0; }
 
-        tr.rank-3 td { background-color: rgba(205, 127, 50, 0.04) !important; }
+        tr.rank-3 td { background-color: rgba(205, 127, 50, 0.08) !important; }
         tr.rank-3 td.team-name-cell, tr.rank-3 td.player-name-cell, tr.rank-3 td.standing-team-cell { text-shadow: 0 0 8px rgba(205,127,50,0.4); color: #cd7f32; }
         tr.rank-3 td.rank-cell { color: #cd7f32; }
 
@@ -476,20 +473,17 @@
 
 <div class="container">
     
-    <!-- 🟢 NEW INTERACTIVE MODE SWITCHER BAR -->
     <div class="mode-switcher-bar">
         <button id="btnTourneyMode" class="mode-toggle-btn active-tournament" onclick="applyOperationMode('tournament')">⚔️ Tournament Mode</button>
         <button id="btnDashboardMode" class="mode-toggle-btn" onclick="applyOperationMode('dashboard')">📊 Dashboard Mode</button>
     </div>
 
-    <!-- Header -->
     <div class="header-container">
         <h1 class="main-title">TYT PORKALAM</h1>
         <div class="subtitle">🔥ONLY THE STRONGEST SQUAD WILL SURVIVE🔥</div>
         <div class="live-badge">● Live Sync</div>
     </div>
 
-    <!-- Navigation Tabs -->
     <div class="tabs-container">
         <button id="tab-btn-team-points" class="tab-btn active" onclick="switchTab('team-points-tab', this)">🛡️ TEAM POINTS</button>
         <button id="tab-btn-player-kills" class="tab-btn" onclick="switchTab('player-kills-tab', this)">🎯 PLAYER KILLS</button>
@@ -497,7 +491,6 @@
         <button id="tab-btn-team-standings" class="tab-btn" onclick="switchTab('team-standings-tab', this)">🏆 TEAM STANDINGS</button>
     </div>
 
-    <!-- TAB 1: Team Points -->
     <div id="team-points-tab" class="table-responsive active">
         <table>
             <thead id="team-points-head"></thead>
@@ -507,7 +500,6 @@
         </table>
     </div>
 
-    <!-- TAB 2: Player Kills -->
     <div id="player-kills-tab" class="table-responsive">
         <table>
             <thead id="player-kills-head"></thead>
@@ -517,7 +509,6 @@
         </table>
     </div>
 
-    <!-- TAB 3: Players Stats -->
     <div id="player-stats-tab" class="table-responsive">
         <table>
             <thead id="player-stats-head"></thead>
@@ -527,7 +518,6 @@
         </table>
     </div>
 
-    <!-- TAB 4: Team Standings -->
     <div id="team-standings-tab" class="table-responsive">
         <table>
             <thead id="team-standings-head"></thead>
@@ -560,7 +550,7 @@
         };
     }
 
-    // 🟢 MODE SWITCHER ENGINE LOGIC
+    // MODE SWITCHER ENGINE LOGIC
     function applyOperationMode(mode) {
         const body = document.body;
         const btnTourney = document.getElementById('btnTourneyMode');
@@ -572,37 +562,30 @@
         const tabStandingsBtn = document.getElementById('tab-btn-team-standings');
 
         if (mode === 'dashboard') {
-            // Background to dynamic Orange mix
             body.classList.add('dashboard-orange-mode');
             btnTourney.className = 'mode-toggle-btn';
             btnDashboard.className = 'mode-toggle-btn active-dashboard';
 
-            // Hide Tournament tabs UI, show Dashboard targets
             tabPointsBtn.classList.add('hide-tab-logic');
             tabKillsBtn.classList.add('hide-tab-logic');
             tabStatsBtn.classList.remove('hide-tab-logic');
             tabStandingsBtn.classList.remove('hide-tab-logic');
 
-            // Force Active default dashboard tab Focus
             switchTab('player-stats-tab', tabStatsBtn);
         } else {
-            // Mode Default back to Tournament Red Mix
             body.classList.remove('dashboard-orange-mode');
             btnTourney.className = 'mode-toggle-btn active-tournament';
             btnDashboard.className = 'mode-toggle-btn';
 
-            // Show Tournament tabs UI, hide Dashboard targets
             tabPointsBtn.classList.remove('hide-tab-logic');
             tabKillsBtn.classList.remove('hide-tab-logic');
             tabStatsBtn.classList.add('hide-tab-logic');
             tabStandingsBtn.classList.add('hide-tab-logic');
 
-            // Force Active default tournament tab Focus
             switchTab('team-points-tab', tabPointsBtn);
         }
     }
 
-    // Helper to calculate arrow indicators
     function calculateRankArrow(storageKey, identifier, currentRank) {
         if (!identifier) return '';
         let arrowHTML = '';
@@ -674,7 +657,6 @@
     }
     requestAnimationFrame(renderOdysseyWorld);
 
-    // Emoji Engine
     function getTeamEmoji(teamName) {
         if (!teamName) return '🎮';
         const name = teamName.toUpperCase();
@@ -1091,7 +1073,6 @@ window.switchTab = function(tabId, button) {
 
 window.addEventListener('load', () => {
     initFireBackground();
-    // Initialize default mode visually on start
     applyOperationMode('tournament');
 });
 
