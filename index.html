@@ -191,6 +191,9 @@
 </div>
 
 <script>
+    // LIVE GOOGLE SHEET API URL LINK INJECTED HERE SUCCESSFULLY
+    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyLUuoNxnyJWdislLAR3X0Fv-K8Tjg5-lObdW1UdNK5qGTDP5MoVsV_72GoRYbDT1P6Pw/exec";
+
     if (!window.rankMemory) {
         window.rankMemory = { teamPoints: {}, playerKills: {}, playerStats: {}, teamStandings: {} };
     }
@@ -303,7 +306,6 @@
             let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
             rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
             
-            // Loop scores directly from safe sequential data sent by Apps Script
             team.scores.forEach(score => { 
                 rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
             });
