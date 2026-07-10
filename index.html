@@ -125,7 +125,6 @@
             user-select: none;
         }
 
-        /* 🟢 INTERACTIVE DYNAMIC BACKGROUND MODE CORES */
         body {
             margin: 0;
             padding: 10px 20px; 
@@ -144,7 +143,6 @@
             background: radial-gradient(circle at 50% 50%, #291100 0%, #080300 100%) !important;
         }
 
-        /* 🌊 BGMI OCEAN ODYSSEY CANVAS ENGINE */
         #odysseyCanvas {
             position: fixed;
             top: 0;
@@ -155,10 +153,9 @@
             pointer-events: none;
         }
 
-        /* 🔮 ULTRA TRANSPARENT CONTAINER */
         .container {
             width: 100% !important;
-            max-width: 1400px !important; /* Spacing stretched slightly to let more columns sit nicely */
+            max-width: 1400px !important;
             background: transparent !important; 
             border: none !important; 
             box-shadow: none !important; 
@@ -171,7 +168,6 @@
             align-items: center;
         }
 
-        /* Mode Switcher UI bar */
         .mode-switcher-bar {
             display: flex;
             justify-content: center;
@@ -204,7 +200,6 @@
             box-shadow: 0 0 15px rgba(255, 140, 0, 0.5);
         }
 
-        /* Header Layout */
         .header-container {
             text-align: center;
             margin-bottom: 25px;
@@ -258,9 +253,7 @@
             border-color: #ff8c00 !important;
             color: #ffbb77 !important;
         }
-        @keyframes blink { 50% { opacity: 0.4; } }
 
-        /* Navigation Tabs Control */
         .tabs-container {
             display: flex;
             justify-content: center;
@@ -299,9 +292,8 @@
             box-shadow: 0 0 20px rgba(255, 140, 0, 0.6) !important;
         }
 
-        /* Responsive Grid Enforcers */
         .table-responsive {
-            overflow-x: hidden; /* Scrollbar ko permanent hide kiya taaki clean look mile */
+            overflow-x: hidden;
             display: none;
             width: 100%; 
             margin: 0 auto;
@@ -311,13 +303,11 @@
             display: block;
         }
 
-        /* Compact class sirf dashboard tables ke liye */
         .compact-sheet-view {
             width: auto !important;
             max-width: fit-content !important;
         }
 
-        /* 📌 DYNAMIC TABLES STYLE */
         table {
             width: 100%; 
             border-collapse: collapse;
@@ -325,7 +315,7 @@
             border: 2px solid rgba(255, 69, 0, 0.4) !important;
             backdrop-filter: blur(2px); 
             margin: 0 auto;
-            table-layout: fixed; /* Columns spacing automatic evenly grid system distribution */
+            table-layout: fixed;
         }
         body.dashboard-orange-mode table {
             border-color: rgba(255, 140, 0, 0.4) !important;
@@ -338,10 +328,10 @@
             color: #ff8c00 !important;
             font-weight: 800;
             text-transform: uppercase;
-            padding: 8px 4px !important; /* Spacing tighter to fit everything */
+            padding: 8px 4px !important;
             border: 1.5px solid rgba(255, 69, 0, 0.3);
             text-align: center;
-            font-size: 11.5pt !important; /* Font text scales accurately */
+            font-size: 11.5pt !important;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -356,11 +346,11 @@
         }
 
         td {
-            padding: 8px 4px !important; /* Dynamic responsive cell scaling */
+            padding: 8px 4px !important;
             border: 1.5px solid rgba(255, 69, 0, 0.25) !important;
             text-align: center; 
             color: #ffffff;
-            font-size: 12.5pt !important; /* Optimized global sizing */
+            font-size: 12.5pt !important;
             font-weight: 600;
             text-shadow: 0 1px 4px rgba(0,0,0,0.95);
             white-space: nowrap;
@@ -373,38 +363,24 @@
             padding: 10px 10px !important;
         }
 
-        /* Explicit Column Width Assignments for Perfect Sizing Rules */
         .rank-header, .rank-cell { width: 65px !important; }
         .team-name-head, .team-name-cell { width: 230px !important; }
         .player-name-head, .player-name-cell { width: 210px !important; }
         .total-points-head, .neon-score { width: 110px !important; }
         .top-killer-head { width: 160px !important; }
 
-        /* Specific padding adjustment for compact dashboard tabs */
         .compact-sheet-view th, .compact-sheet-view td {
             padding: 9px 18px !important; 
             width: auto !important;
         }
 
-        /* Alignment Fixes */
-        th.player-name-head, th.team-name-head {
-            text-align: center !important;
-        }
-        td.team-name-cell, td.player-name-cell {
-            text-align: left !important; 
-            padding-left: 12px !important;
-        }
+        th.player-name-head, th.team-name-head { text-align: center !important; }
+        td.team-name-cell, td.player-name-cell { text-align: left !important; padding-left: 12px !important; }
 
         th.map-header { font-size: 11pt; font-weight: 800; background-color: rgba(40, 15, 5, 0.95); color: #ffffff; }
         th.sub-th { background-color: rgba(20, 8, 3, 0.85); font-size: 10pt; color: #a0aec0; }
 
-        .team-emoji {
-            margin-right: 6px;
-            display: inline-block;
-            font-size: 12pt;
-            vertical-align: middle;
-        }
-
+        .team-emoji { margin-right: 6px; display: inline-block; font-size: 12pt; vertical-align: middle; }
         td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt !important; font-weight: 700 !important;}
         td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; }
 
@@ -425,7 +401,6 @@
 
         .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
 
-        /* POPUP STRUCTURE STYLE */
         .champion-popup-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -436,10 +411,7 @@
             opacity: 0; pointer-events: none;
             transition: opacity 0.3s ease;
         }
-        .champion-popup-overlay.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .champion-popup-overlay.show { opacity: 1; pointer-events: auto; }
         .champion-card {
             background: linear-gradient(135deg, #3a1003 0%, #0c0400 100%);
             border: 3px solid #ff4500;
@@ -450,40 +422,16 @@
             transform: scale(0.6);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .champion-popup-overlay.show .champion-card {
-            transform: scale(1);
-        }
-        .champion-title {
-            color: #ffd700;
-            font-size: 22pt;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-        }
-        .champion-name {
-            color: #ffffff;
-            font-size: 42pt;
-            font-weight: 900;
-            margin: 15px 0;
-            text-shadow: 0 0 25px #ff4500, 0 0 10px #ffffff;
-        }
-        .champion-badge {
-            font-size: 55pt;
-            margin-bottom: 5px;
-            animation: firePulse 0.8s infinite alternate;
-        }
+        .champion-popup-overlay.show .champion-card { transform: scale(1); }
+        .champion-title { color: #ffd700; font-size: 22pt; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
+        .champion-name { color: #ffffff; font-size: 42pt; font-weight: 900; margin: 15px 0; text-shadow: 0 0 25px #ff4500, 0 0 10px #ffffff; }
+        .champion-badge { font-size: 55pt; margin-bottom: 5px; animation: firePulse 0.8s infinite alternate; }
         @keyframes firePulse {
             0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); }
             100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); }
         }
 
-        #crackersCanvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 9999999 !important;
-        }
+        #crackersCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999999 !important; }
     </style>
 </head>
 <body>
@@ -510,7 +458,6 @@
         <button id="tab-btn-team-standings" class="tab-btn" onclick="switchTab('team-standings-tab', this)">🏆 TEAM STANDINGS</button>
     </div>
 
-    <!-- Wide Premium Look Layouts -->
     <div id="team-points-tab" class="table-responsive active">
         <table>
             <thead id="team-points-head"></thead>
@@ -529,7 +476,6 @@
         </table>
     </div>
 
-    <!-- Compact Google Sheets Look Layouts -->
     <div id="player-stats-tab" class="table-responsive">
         <table class="compact-sheet-view">
             <thead id="player-stats-head"></thead>
@@ -559,7 +505,8 @@
 </div>
 
 <script>
-    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyLUuoNxnyJWdislLAR3X0Fv-K8Tjg5-lObdW1UdNK5qGTDP5MoVsV_72GoRYbDT1P6Pw/exec"
+    // 🔗 AAPKI LIVE GOOGLE SHEET SCRIPT LINK
+    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyLUuoNxnyJWdislLAR3X0Fv-K8Tjg5-lObdW1UdNK5qGTDP5MoVsV_72GoRYbDT1P6Pw/exec";
 
     if (!window.rankMemory) {
         window.rankMemory = {
@@ -805,7 +752,7 @@
         const numCols = headerRow.length;
 
         let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[0] || 'PLAYER NAME'}</th>`;
-        for(let c = 1; c < numCols - 1; c++) {
+        for(let c = 1; c < numCols - 1; d=c++) {
             headHTML += `<th>${headerRow[c] || 'MATCH'}</th>`;
         }
         headHTML += `<th class="total-points-head">${headerRow[numCols - 1] || 'TOTAL KILLS'}</th></tr>`;
@@ -1028,7 +975,7 @@ class CrackerParticle {
     draw() {
         cCtx.save(); cCtx.globalAlpha = this.alpha; cCtx.fillStyle = this.color;
         cCtx.shadowBlur = 10; cCtx.shadowColor = this.color;
-        cCtx.beginPath(); cCanvas.getContext('2d'); cCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); cCtx.fill(); cCtx.restore();
+        cCtx.beginPath(); cCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); cCtx.fill(); cCtx.restore();
     }
 }
 
