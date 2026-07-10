@@ -128,12 +128,12 @@
         /* 🟢 INTERACTIVE DYNAMIC BACKGROUND MODE CORES */
         body {
             margin: 0;
-            padding: 10px 30px; 
+            padding: 10px 20px; 
             background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important;
             color: #ffffff;
             display: flex;
-            justify-content: center;
-            align-items: flex-start; 
+            flex-direction: column;
+            align-items: center; 
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
@@ -155,10 +155,10 @@
             pointer-events: none;
         }
 
-        /* 🔮 ULTRA TRANSPARENT & WIDE CONTAINER FOR 8 MATCHES */
+        /* 🔮 ULTRA TRANSPARENT CONTAINER */
         .container {
-            width: 100%;
-            max-width: 98% !important; 
+            width: 100% !important;
+            max-width: 1400px !important; /* Spacing stretched slightly to let more columns sit nicely */
             background: transparent !important; 
             border: none !important; 
             box-shadow: none !important; 
@@ -166,6 +166,9 @@
             z-index: 2;
             padding-top: 15px;
             transition: all 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Mode Switcher UI bar */
@@ -208,6 +211,7 @@
             border-bottom: 2px solid rgba(255, 69, 0, 0.3);
             padding-bottom: 15px;
             position: relative;
+            width: 100%;
         }
         body.dashboard-orange-mode .header-container {
             border-bottom-color: rgba(255, 140, 0, 0.3);
@@ -297,25 +301,35 @@
 
         /* Responsive Grid Enforcers */
         .table-responsive {
-            overflow-x: auto;
+            overflow-x: hidden; /* Scrollbar ko permanent hide kiya taaki clean look mile */
             display: none;
-            width: 100%;
+            width: 100%; 
+            margin: 0 auto;
         }
 
         .table-responsive.active {
             display: block;
         }
 
-        /* 📌 TRANSPARENT GLASSY TABLES */
+        /* Compact class sirf dashboard tables ke liye */
+        .compact-sheet-view {
+            width: auto !important;
+            max-width: fit-content !important;
+        }
+
+        /* 📌 DYNAMIC TABLES STYLE */
         table {
-            width: 100%;
+            width: 100%; 
             border-collapse: collapse;
-            background-color: rgba(12, 4, 2, 0.55) !important; 
+            background-color: rgba(12, 4, 2, 0.75) !important; 
             border: 2px solid rgba(255, 69, 0, 0.4) !important;
             backdrop-filter: blur(2px); 
+            margin: 0 auto;
+            table-layout: fixed; /* Columns spacing automatic evenly grid system distribution */
         }
         body.dashboard-orange-mode table {
             border-color: rgba(255, 140, 0, 0.4) !important;
+            table-layout: auto;
         }
 
         th {
@@ -324,50 +338,65 @@
             color: #ff8c00 !important;
             font-weight: 800;
             text-transform: uppercase;
-            padding: 12px 10px;
+            padding: 8px 4px !important; /* Spacing tighter to fit everything */
             border: 1.5px solid rgba(255, 69, 0, 0.3);
             text-align: center;
-            font-size: 11pt;
+            font-size: 11.5pt !important; /* Font text scales accurately */
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         body.dashboard-orange-mode th {
             background: linear-gradient(180deg, rgba(51,20,0,0.9) 0%, rgba(23,9,0,0.95) 100%) !important;
             border-bottom-color: #ff8c00 !important;
             color: #ffa500 !important;
             border-color: rgba(255, 140, 0, 0.3);
+            font-size: 13pt !important;
+            padding: 12px 10px !important;
         }
 
         td {
-            padding: 12px 10px;
+            padding: 8px 4px !important; /* Dynamic responsive cell scaling */
             border: 1.5px solid rgba(255, 69, 0, 0.25) !important;
-            text-align: center;
+            text-align: center; 
             color: #ffffff;
-            font-size: 11.5pt;
+            font-size: 12.5pt !important; /* Optimized global sizing */
             font-weight: 600;
             text-shadow: 0 1px 4px rgba(0,0,0,0.95);
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         body.dashboard-orange-mode td {
             border-color: rgba(255, 140, 0, 0.25) !important;
+            font-size: 13pt !important;
+            padding: 10px 10px !important;
         }
 
-        th.rank-header, td.rank-cell { width: 90px; min-width: 90px; }
-        
-        /* Fixed Player & Team Names Columns - Clean, Centered & Compact */
-        th.team-name-head, td.team-name-cell,
-        th.player-name-head, td.player-name-cell { 
-            min-width: 180px; 
-            max-width: 260px; 
-            text-align: center !important; 
-            white-space: normal !important; 
-            word-break: break-word; 
+        /* Explicit Column Width Assignments for Perfect Sizing Rules */
+        .rank-header, .rank-cell { width: 65px !important; }
+        .team-name-head, .team-name-cell { width: 230px !important; }
+        .player-name-head, .player-name-cell { width: 210px !important; }
+        .total-points-head, .neon-score { width: 110px !important; }
+        .top-killer-head { width: 160px !important; }
+
+        /* Specific padding adjustment for compact dashboard tabs */
+        .compact-sheet-view th, .compact-sheet-view td {
+            padding: 9px 18px !important; 
+            width: auto !important;
         }
-        
-        th.total-points-head, th.top-killer-head, td.neon-score { min-width: 120px; }
-        
-        td.team-name-cell { border-left: 4px solid #ff4500; }
-        td.player-name-cell { border-left: 4px solid #ff007f; }
-        body.dashboard-orange-mode td.team-name-cell { border-left-color: #ff8c00; }
+
+        /* Alignment Fixes */
+        th.player-name-head, th.team-name-head {
+            text-align: center !important;
+        }
+        td.team-name-cell, td.player-name-cell {
+            text-align: left !important; 
+            padding-left: 12px !important;
+        }
+
+        th.map-header { font-size: 11pt; font-weight: 800; background-color: rgba(40, 15, 5, 0.95); color: #ffffff; }
+        th.sub-th { background-color: rgba(20, 8, 3, 0.85); font-size: 10pt; color: #a0aec0; }
 
         .team-emoji {
             margin-right: 6px;
@@ -376,8 +405,8 @@
             vertical-align: middle;
         }
 
-        td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; }
-        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; }
+        td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt !important; font-weight: 700 !important;}
+        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; }
 
         tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); } 
         tr:hover td { background-color: rgba(255, 69, 0, 0.15); } 
@@ -394,31 +423,7 @@
         tr.rank-3 td.team-name-cell, tr.rank-3 td.player-name-cell { text-shadow: 0 0 8px rgba(205,127,50,0.4); color: #cd7f32; }
         tr.rank-3 td.rank-cell { color: #cd7f32; }
 
-        th.map-header { font-size: 11.5pt; font-weight: 800; background-color: rgba(40, 15, 5, 0.95); color: #ffffff; min-width: 140px; }
-        th.sub-th { background-color: rgba(20, 8, 3, 0.85); font-size: 10.5pt; color: #a0aec0; min-width: 70px; }
-
         .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
-
-        table th, table td {
-            font-size: 14pt !important;
-            font-weight: 600 !important;
-            padding: 9px 8px !important;
-        }
-
-        td.rank-cell, td.neon-score, td.highlight-stat {
-            font-size: 16pt !important;
-            font-weight: 700 !important;
-        }
-
-        /* 📊 DASHBOARD LAYOUT MANAGEMENT */
-        .compact-dash-cell {
-            text-align: center !important;
-            white-space: nowrap !important;
-        }
-        
-        #player-stats-tab table, #team-standings-tab table {
-            table-layout: auto !important;
-        }
 
         /* POPUP STRUCTURE STYLE */
         .champion-popup-overlay {
@@ -505,6 +510,7 @@
         <button id="tab-btn-team-standings" class="tab-btn" onclick="switchTab('team-standings-tab', this)">🏆 TEAM STANDINGS</button>
     </div>
 
+    <!-- Wide Premium Look Layouts -->
     <div id="team-points-tab" class="table-responsive active">
         <table>
             <thead id="team-points-head"></thead>
@@ -523,8 +529,9 @@
         </table>
     </div>
 
+    <!-- Compact Google Sheets Look Layouts -->
     <div id="player-stats-tab" class="table-responsive">
-        <table>
+        <table class="compact-sheet-view">
             <thead id="player-stats-head"></thead>
             <tbody id="player-stats-body">
                 <tr><td class="status-message">SYNCHRONIZING PLAYER STATS RECORDS...</td></tr>
@@ -533,7 +540,7 @@
     </div>
 
     <div id="team-standings-tab" class="table-responsive">
-        <table>
+        <table class="compact-sheet-view">
             <thead id="team-standings-head"></thead>
             <tbody id="team-standings-body">
                 <tr><td class="status-message">CONNECTING TO STANDINGS PIPELINE...</td></tr>
@@ -573,6 +580,11 @@
         const tabStatsBtn = document.getElementById('tab-btn-player-stats');
         const tabStandingsBtn = document.getElementById('tab-btn-team-standings');
 
+        const pointsGrid = document.getElementById('team-points-tab');
+        const killsGrid = document.getElementById('player-kills-tab');
+        const statsGrid = document.getElementById('player-stats-tab');
+        const standingsGrid = document.getElementById('team-standings-tab');
+
         if (mode === 'dashboard') {
             body.classList.add('dashboard-orange-mode');
             btnTourney.className = 'mode-toggle-btn';
@@ -582,6 +594,11 @@
             tabKillsBtn.classList.add('hide-tab-logic');
             tabStatsBtn.classList.remove('hide-tab-logic');
             tabStandingsBtn.classList.remove('hide-tab-logic');
+
+            pointsGrid.style.width = "100%";
+            killsGrid.style.width = "100%";
+            statsGrid.style.width = "fit-content";
+            standingsGrid.style.width = "fit-content";
 
             switchTab('player-stats-tab', tabStatsBtn);
         } else {
@@ -593,6 +610,11 @@
             tabKillsBtn.classList.remove('hide-tab-logic');
             tabStatsBtn.classList.add('hide-tab-logic');
             tabStandingsBtn.classList.add('hide-tab-logic');
+
+            pointsGrid.style.width = "100%";
+            killsGrid.style.width = "100%";
+            statsGrid.style.width = "fit-content";
+            standingsGrid.style.width = "fit-content";
 
             switchTab('team-points-tab', tabPointsBtn);
         }
@@ -758,7 +780,7 @@
                 if (j === totalPointsIdx) {
                     rowCells += `<td class="neon-score">${row[j] !== undefined ? row[j] : '-'}</td>`;
                 } else if (j === topKillerIdx) {
-                    rowCells += `<td style="font-size:10.5pt;">${row[j] !== undefined ? row[j] : '-'}</td>`;
+                    rowCells += `<td style="font-size:10.5pt; text-align: left; padding-left: 10px; overflow:hidden; text-overflow:ellipsis;">${row[j] !== undefined ? row[j] : '-'}</td>`;
                 } else {
                     rowCells += `<td>${row[j] !== undefined ? row[j] : '-'}</td>`;
                 }
@@ -831,7 +853,7 @@
 
         let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[startIdx] || 'PLAYER NAME'}</th>`;
         for (let c = startIdx + 1; c < numCols; c++) {
-            headHTML += `<th class="compact-dash-cell">${headerRow[c] || 'STAT'}</th>`;
+            headHTML += `<th>${headerRow[c] || 'STAT'}</th>`;
         }
         headHTML += `</tr>`;
         thead.innerHTML = headHTML;
@@ -858,11 +880,11 @@
                 }
 
                 if (d === startIdx + 2) {
-                    cellHTML += `<td class="neon-score compact-dash-cell">${cellValue !== undefined ? cellValue : '-'}</td>`;
+                    cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : '-'}</td>`;
                 } else if (d === numCols - 1) {
-                    cellHTML += `<td class="highlight-stat compact-dash-cell">${cellValue !== undefined ? cellValue : '-'}</td>`;
+                    cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : '-'}</td>`;
                 } else {
-                    cellHTML += `<td class="compact-dash-cell">${cellValue !== undefined ? cellValue : '-'}</td>`;
+                    cellHTML += `<td>${cellValue !== undefined ? cellValue : '-'}</td>`;
                 }
             }
             
@@ -889,7 +911,7 @@
 
         let headHTML = `<tr><th class="rank-header">RANK</th><th class="team-name-head">${headerRow[startIdx] || 'TEAM NAME'}</th>`;
         for (let c = startIdx + 1; c < numCols; c++) {
-            headHTML += `<th class="compact-dash-cell">${headerRow[c] || 'DATA'}</th>`;
+            headHTML += `<th>${headerRow[c] || 'DATA'}</th>`;
         }
         headHTML += `</tr>`;
         thead.innerHTML = headHTML;
@@ -917,11 +939,11 @@
                 }
                 
                 if (d === startIdx + 3) { 
-                    cellHTML += `<td class="neon-score compact-dash-cell">${cellValue !== undefined ? cellValue : 0}</td>`;
+                    cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : 0}</td>`;
                 } else if (d === numCols - 1) { 
-                    cellHTML += `<td class="highlight-stat compact-dash-cell">${cellValue !== undefined ? cellValue : 0}</td>`;
+                    cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : 0}</td>`;
                 } else {
-                    cellHTML += `<td class="compact-dash-cell">${cellValue !== undefined ? cellValue : 0}</td>`;
+                    cellHTML += `<td>${cellValue !== undefined ? cellValue : 0}</td>`;
                 }
             }
 
