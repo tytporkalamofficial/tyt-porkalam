@@ -40,7 +40,6 @@
     100% { transform: translateY(-110vh) scale(0.5) translateX(-20px); opacity: 0; }
 }
 
-/* TYT PORKALAM Dancing / Glow Text Effect */
 .dancing-title {
     color: #ffffff;
     font-size: 46pt;
@@ -59,7 +58,6 @@
     100% { transform: translateY(5px) rotate(-0.5deg); text-shadow: 0 0 25px #ff4500, 0 0 45px #ff8c00; }
 }
 
-/* Enter Tournament Action Button */
 .enter-esports-btn {
     background: linear-gradient(135deg, #ff4500 0%, #b30000 100%);
     color: #ffffff;
@@ -80,14 +78,12 @@
     background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%);
 }
 
-/* Smooth Fade Out Class */
 .premium-splash.fade-hide {
     opacity: 0;
     transform: scale(1.05);
     pointer-events: none;
 }
 
-/* Arrow Styling & Animation */
 .pos-change { 
     font-size: 11pt; 
     font-weight: 900; 
@@ -113,139 +109,60 @@
         <div class="fire-particle" style="left:65%; width:26px; height:26px; animation-delay:2s; animation-duration:4.5s;"></div>
         <div class="fire-particle" style="left:80%; width:18px; height:18px; animation-delay:1s; animation-duration:5.5s;"></div>
     </div>
-    
     <div class="dancing-title">TYT PORKALAM</div>
     <button class="enter-esports-btn" onclick="openMainPointsTable()">Enter Tournament</button>
 </div>
     
     <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            user-select: none;
-        }
-
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
         body {
-            margin: 0;
-            padding: 10px 20px; 
+            margin: 0; padding: 10px 20px; 
             background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-            transition: background 0.8s ease !important;
+            color: #ffffff; display: flex; flex-direction: column; align-items: center; 
+            min-height: 100vh; position: relative; overflow-x: hidden; transition: background 0.8s ease !important;
         }
+        body.dashboard-orange-mode { background: radial-gradient(circle at 50% 50%, #291100 0%, #080300 100%) !important; }
+        #odysseyCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        
+        .container { width: 100% !important; max-width: 1400px !important; position: relative; z-index: 2; padding-top: 15px; display: flex; flex-direction: column; align-items: center; }
+        
+        .mode-switcher-bar { display: flex; justify-content: center; margin-bottom: 20px; gap: 15px; }
+        .mode-toggle-btn {
+            background: rgba(30, 10, 5, 0.6); border: 1.5px solid rgba(255, 69, 0, 0.3); color: #a0aec0;
+            padding: 10px 25px; font-size: 11pt; font-weight: 800; text-transform: uppercase; border-radius: 30px; cursor: pointer; transition: all 0.3s ease;
+        }
+        .mode-toggle-btn.active-tournament { background: linear-gradient(135deg, #b30000 0%, #ff4500 100%) !important; color: #fff !important; border-color: #ffd700 !important; box-shadow: 0 0 15px rgba(255, 69, 0, 0.5); }
+        .mode-toggle-btn.active-dashboard { background: linear-gradient(135deg, #cc5200 0%, #ff8c00 100%) !important; color: #fff !important; border-color: #ffea00 !important; box-shadow: 0 0 15px rgba(255, 140, 0, 0.5); }
 
-        #odysseyCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
+        .header-container { text-align: center; margin-bottom: 25px; border-bottom: 2px solid rgba(255, 69, 0, 0.3); padding-bottom: 15px; position: relative; width: 100%; }
+        body.dashboard-orange-mode .header-container { border-bottom-color: rgba(255, 140, 0, 0.3); }
+        .main-title { font-size: 40pt; font-weight: 900; text-transform: uppercase; letter-spacing: 6px; margin: 0; text-shadow: 0 0 10px #ff4500, 0 0 20px #ff8c00, 0 0 30px #ff0000 !important; }
+        body.dashboard-orange-mode .main-title { text-shadow: 0 0 10px #ff8c00, 0 0 20px #ffa500, 0 0 30px #ff4500 !important; }
+        .subtitle { font-size: 14pt; color: #ff007f; margin: 6px 0 0 0; font-weight: bold; text-shadow: 0 0 8px rgba(255, 0, 127, 0.5); }
+        .live-badge { position: absolute; top: 10px; right: 10px; background: rgba(255, 69, 0, 0.2) !important; border: 1px solid #ff4500 !important; color: #ffaa66 !important; padding: 6px 14px; border-radius: 20px; font-size: 11pt; font-weight: bold; text-transform: uppercase; }
 
-        .container {
-            width: 100% !important;
-            max-width: 1400px !important;
-            background: transparent !important; 
-            border: none !important; 
-            box-shadow: none !important; 
-            position: relative;
-            z-index: 2;
-            padding-top: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        .tabs-container { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+        .tab-btn { background: rgba(25, 10, 5, 0.8) !important; border: 1px solid rgba(255, 69, 0, 0.3) !important; color: #cbd5e0 !important; padding: 12px 24px; font-size: 12pt; font-weight: 700; text-transform: uppercase; border-radius: 8px; cursor: pointer; transition: all 0.25s ease; }
+        .tab-btn.hide-tab-logic { display: none !important; }
+        .tab-btn:hover, .tab-btn.active { background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%) !important; color: #ffffff !important; border: 1px solid #ffd700 !important; box-shadow: 0 0 20px rgba(255, 69, 0, 0.6) !important; transform: translateY(-2px); }
+        body.dashboard-orange-mode .tab-btn:hover, body.dashboard-orange-mode .tab-btn.active { background: linear-gradient(135deg, #cc5200 0%, #ff8c00 100%) !important; box-shadow: 0 0 20px rgba(255, 140, 0, 0.6) !important; }
 
-        .header-container {
-            text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid rgba(255, 69, 0, 0.3);
-            padding-bottom: 15px;
-            position: relative;
-            width: 100%;
-        }
+        .table-responsive { overflow-x: auto; display: none; width: 100%; margin: 0 auto; }
+        .table-responsive.active { display: block; }
+        .compact-sheet-view { width: auto !important; max-width: fit-content !important; }
 
-        .main-title {
-            font-size: 40pt;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            margin: 0;
-            color: #ffffff !important;
-            text-shadow: 0 0 10px #ff4500, 0 0 20px #ff8c00, 0 0 30px #ff0000 !important;
-        }
+        table { width: 100%; border-collapse: collapse; background-color: rgba(12, 4, 2, 0.8) !important; border: 2px solid rgba(255, 69, 0, 0.4) !important; backdrop-filter: blur(2px); margin: 0 auto; }
+        body.dashboard-orange-mode table { border-color: rgba(255, 140, 0, 0.4) !important; }
 
-        .subtitle {
-            font-size: 14pt;
-            color: #ff007f;
-            margin: 6px 0 0 0;
-            font-weight: bold;
-            text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
-        }
+        th { background: linear-gradient(180deg, rgba(42,11,3,0.9) 0%, rgba(18,3,0,0.95) 100%) !important; border-bottom: 2px solid #ff4500 !important; color: #ff8c00 !important; font-weight: 800; text-transform: uppercase; padding: 10px 6px !important; border: 1.5px solid rgba(255, 69, 0, 0.3); text-align: center; font-size: 12pt !important; white-space: nowrap; }
+        body.dashboard-orange-mode th { background: linear-gradient(180deg, rgba(51,20,0,0.9) 0%, rgba(23,9,0,0.95) 100%) !important; border-bottom-color: #ff8c00 !important; color: #ffa500 !important; border-color: rgba(255, 140, 0, 0.3); }
 
-        .live-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(255, 69, 0, 0.2) !important;
-            border: 1px solid #ff4500 !important;
-            color: #ffaa66 !important;
-            box-shadow: 0 0 10px rgba(255, 69, 0, 0.4) !important;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 11pt;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-            width: 100%; 
-            margin: 0 auto;
-        }
-
-        table {
-            width: 100%; 
-            border-collapse: collapse;
-            background-color: rgba(12, 4, 2, 0.85) !important; 
-            border: 2px solid rgba(255, 69, 0, 0.4) !important;
-            backdrop-filter: blur(2px); 
-            margin: 0 auto;
-        }
-
-        th {
-            background: linear-gradient(180deg, rgba(42,11,3,0.9) 0%, rgba(18,3,0,0.95) 100%) !important;
-            border-bottom: 2px solid #ff4500 !important;
-            color: #ff8c00 !important;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 10px 6px !important;
-            border: 1.5px solid rgba(255, 69, 0, 0.3);
-            text-align: center;
-            font-size: 12pt !important;
-            white-space: nowrap;
-        }
-
-        td {
-            padding: 10px 6px !important;
-            border: 1.5px solid rgba(255, 69, 0, 0.25) !important;
-            text-align: center; 
-            color: #ffffff;
-            font-size: 12.5pt !important;
-            font-weight: 600;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.95);
-            white-space: nowrap;
-        }
+        td { padding: 10px 6px !important; border: 1.5px solid rgba(255, 69, 0, 0.25) !important; text-align: center; color: #ffffff; font-size: 12.5pt !important; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.95); white-space: nowrap; }
+        body.dashboard-orange-mode td { border-color: rgba(255, 140, 0, 0.25) !important; }
 
         .rank-header, .rank-cell { width: 75px !important; }
         .team-name-head, .team-name-cell { width: 250px !important; text-align: left !important; padding-left: 15px !important; }
+        .player-name-head, .player-name-cell { width: 220px !important; text-align: left !important; padding-left: 15px !important; }
         .total-points-head, .neon-score { width: 130px !important; }
         .top-killer-head { width: 180px !important; text-align: left !important; padding-left: 15px !important; }
 
@@ -253,47 +170,26 @@
         th.sub-th { background-color: rgba(20, 8, 3, 0.85); font-size: 10pt; color: #a0aec0; }
 
         .team-emoji { margin-right: 6px; display: inline-block; font-size: 12pt; vertical-align: middle; }
-        td.neon-score { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt !important; font-weight: 700 !important;}
+        td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt !important; font-weight: 700 !important;}
         td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; }
 
         tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); } 
         tr:hover td { background-color: rgba(255, 69, 0, 0.15); } 
         
         tr.rank-1 td { background-color: rgba(255, 69, 0, 0.2) !important; border-bottom: 1px solid #ffd700 !important; }
-        tr.rank-1 td.team-name-cell { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
+        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
         tr.rank-1 td.rank-cell { color: #ffd700; }
 
         .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
 
-        .champion-popup-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 3, 0, 0.95);
-            backdrop-filter: blur(10px);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 999999 !important;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
+        .champion-popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 3, 0, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 999999 !important; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .champion-popup-overlay.show { opacity: 1; pointer-events: auto; }
-        .champion-card {
-            background: linear-gradient(135deg, #3a1003 0%, #0c0400 100%);
-            border: 3px solid #ff4500;
-            box-shadow: 0 0 60px rgba(255, 69, 0, 0.6), inset 0 0 30px rgba(255, 140, 0, 0.3);
-            padding: 50px 70px;
-            border-radius: 24px;
-            text-align: center;
-            transform: scale(0.6);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        .champion-card { background: linear-gradient(135deg, #3a1003 0%, #0c0400 100%); border: 3px solid #ff4500; box-shadow: 0 0 60px rgba(255, 69, 0, 0.6), inset 0 0 30px rgba(255, 140, 0, 0.3); padding: 50px 70px; border-radius: 24px; text-align: center; transform: scale(0.6); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .champion-popup-overlay.show .champion-card { transform: scale(1); }
         .champion-title { color: #ffd700; font-size: 22pt; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
         .champion-name { color: #ffffff; font-size: 42pt; font-weight: 900; margin: 15px 0; text-shadow: 0 0 25px #ff4500, 0 0 10px #ffffff; }
         .champion-badge { font-size: 55pt; margin-bottom: 5px; animation: firePulse 0.8s infinite alternate; }
-        @keyframes firePulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); }
-            100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); }
-        }
+        @keyframes firePulse { 0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); } 100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); } }
 
         #crackersCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999999 !important; }
     </style>
@@ -303,20 +199,53 @@
 <canvas id="odysseyCanvas"></canvas>
 
 <div class="container">
+    <div class="mode-switcher-bar">
+        <button id="btnTourneyMode" class="mode-toggle-btn active-tournament" onclick="applyOperationMode('tournament')">⚔️ Tournament Mode</button>
+        <button id="btnDashboardMode" class="mode-toggle-btn" onclick="applyOperationMode('dashboard')">📊 Dashboard Mode</button>
+    </div>
+
     <div class="header-container">
         <h1 class="main-title">TYT PORKALAM</h1>
         <div class="subtitle">🔥ONLY THE STRONGEST SQUAD WILL SURVIVE🔥</div>
         <div class="live-badge">● Live Sync</div>
     </div>
 
-    <div class="table-responsive">
+    <div class="tabs-container">
+        <button id="tab-btn-team-points" class="tab-btn active" onclick="switchTab('team-points-tab', this)">🛡️ TEAM POINTS</button>
+        <button id="tab-btn-player-kills" class="tab-btn" onclick="switchTab('player-kills-tab', this)">🎯 PLAYER KILLS</button>
+        <button id="tab-btn-player-stats" class="tab-btn" onclick="switchTab('player-stats-tab', this)">📊 PLAYER STATS</button>
+        <button id="tab-btn-team-standings" class="tab-btn" onclick="switchTab('team-standings-tab', this)">🏆 TEAM STANDINGS</button>
+    </div>
+
+    <!-- 1. TEAM POINTS TAB -->
+    <div id="team-points-tab" class="table-responsive active">
         <table>
-            <thead id="team-points-head">
-                <tr><th class="status-message">LOADING HEADERS...</th></tr>
-            </thead>
-            <tbody id="team-points-body">
-                <tr><td class="status-message">CONNECTING TO DATABASE...</td></tr>
-            </tbody>
+            <thead id="team-points-head"><tr><th class="status-message">LOADING MAPS...</th></tr></thead>
+            <tbody id="team-points-body"><tr><td class="status-message">CONNECTING...</td></tr></tbody>
+        </table>
+    </div>
+
+    <!-- 2. PLAYER KILLS TAB -->
+    <div id="player-kills-tab" class="table-responsive">
+        <table>
+            <thead id="player-kills-head"></thead>
+            <tbody id="player-kills-body"><tr><td class="status-message">LOADING DATA...</td></tr></tbody>
+        </table>
+    </div>
+
+    <!-- 3. PLAYER STATS TAB -->
+    <div id="player-stats-tab" class="table-responsive">
+        <table class="compact-sheet-view">
+            <thead id="player-stats-head"></thead>
+            <tbody id="player-stats-body"><tr><td class="status-message">LOADING STATS...</td></tr></tbody>
+        </table>
+    </div>
+
+    <!-- 4. TEAM STANDINGS TAB -->
+    <div id="team-standings-tab" class="table-responsive">
+        <table class="compact-sheet-view">
+            <thead id="team-standings-head"></thead>
+            <tbody id="team-standings-body"><tr><td class="status-message">LOADING STANDINGS...</td></tr></tbody>
         </table>
     </div>
 </div>
@@ -325,32 +254,58 @@
 <div id="championPopup" class="champion-popup-overlay">
     <div class="champion-card">
         <div class="champion-badge">👑🔥</div>
-        <div class="champion-title">CURRENT #1 LEADER</div>
+        <div class="champion-title" id="popHeaderType">CURRENT #1 LEADER</div>
         <div class="champion-name" id="popLeaderName">LOADING...</div>
     </div>
 </div>
 
 <script>
-    // 🔗 AAPKI LIVE API URL
     const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyLUuoNxnyJWdislLAR3X0Fv-K8Tjg5-lObdW1UdNK5qGTDP5MoVsV_72GoRYbDT1P6Pw/exec";
 
     if (!window.rankMemory) {
-        window.rankMemory = {};
+        window.rankMemory = { teamPoints: {}, playerKills: {}, playerStats: {}, teamStandings: {} };
     }
 
-    function calculateRankArrow(teamName, currentRank) {
-        if (!teamName) return '';
-        let arrowHTML = '';
-        let oldRank = window.rankMemory[teamName];
+    function applyOperationMode(mode) {
+        const body = document.body;
+        const btnTourney = document.getElementById('btnTourneyMode');
+        const btnDashboard = document.getElementById('btnDashboardMode');
         
-        if (oldRank !== undefined) {
-            if (currentRank < oldRank) {
-                arrowHTML = `<span class="pos-change pos-up">↑${oldRank - currentRank}</span>`;
-            } else if (currentRank > oldRank) {
-                arrowHTML = `<span class="pos-change pos-down">↓${currentRank - oldRank}</span>`;
-            }
+        const tabPointsBtn = document.getElementById('tab-btn-team-points');
+        const tabKillsBtn = document.getElementById('tab-btn-player-kills');
+        const tabStatsBtn = document.getElementById('tab-btn-player-stats');
+        const tabStandingsBtn = document.getElementById('tab-btn-team-standings');
+
+        if (mode === 'dashboard') {
+            body.classList.add('dashboard-orange-mode');
+            btnTourney.className = 'mode-toggle-btn';
+            btnDashboard.className = 'mode-toggle-btn active-dashboard';
+            tabPointsBtn.classList.add('hide-tab-logic');
+            tabKillsBtn.classList.add('hide-tab-logic');
+            tabStatsBtn.classList.remove('hide-tab-logic');
+            tabStandingsBtn.classList.remove('hide-tab-logic');
+            switchTab('player-stats-tab', tabStatsBtn);
+        } else {
+            body.classList.remove('dashboard-orange-mode');
+            btnTourney.className = 'mode-toggle-btn active-tournament';
+            btnDashboard.className = 'mode-toggle-btn';
+            tabPointsBtn.classList.remove('hide-tab-logic');
+            tabKillsBtn.classList.remove('hide-tab-logic');
+            tabStatsBtn.classList.add('hide-tab-logic');
+            tabStandingsBtn.classList.add('hide-tab-logic');
+            switchTab('team-points-tab', tabPointsBtn);
         }
-        window.rankMemory[teamName] = currentRank;
+    }
+
+    function calculateRankArrow(storageKey, identifier, currentRank) {
+        if (!identifier) return '';
+        let arrowHTML = '';
+        let oldRank = window.rankMemory[storageKey][identifier];
+        if (oldRank !== undefined) {
+            if (currentRank < oldRank) arrowHTML = `<span class="pos-change pos-up">↑${oldRank - currentRank}</span>`;
+            else if (currentRank > oldRank) arrowHTML = `<span class="pos-change pos-down">↓${currentRank - oldRank}</span>`;
+        }
+        window.rankMemory[storageKey][identifier] = currentRank;
         return arrowHTML;
     }
 
@@ -364,26 +319,41 @@
         return '⚔️'; 
     }
 
+    function getRankBadgeHTML(rankNum) {
+        if (rankNum === 1) return '🥇';
+        if (rankNum === 2) return '🥈';
+        if (rankNum === 3) return '🥉';
+        return rankNum;
+    }
+
+    function switchTab(tabId, button) {
+        document.querySelectorAll('.table-responsive').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        button.classList.add('active');
+        triggerTabCelebration(tabId);
+    }
+
     async function fetchAllSheetsData() {
         try {
             const response = await fetch(`${REALTIME_API_URL}?_=${new Date().getTime()}`);
             const allData = await response.json();
             
-            if(allData && allData.mapList && allData.teams) {
-                renderDynamicTable(allData);
-            }
+            buildDynamicTeamPointsGrid(allData.teamPoints);
+            buildPlayerKillsGrid(allData.playerKills);
+            buildPlayerStatsGrid(allData.playerStats);
+            buildTeamStandingsGrid(allData.teamStandings);
         } catch (error) { console.error("Sync error:", error); }
     }
 
-    function renderDynamicTable(data) {
+    function buildDynamicTeamPointsGrid(data) {
+        if (!data || !data.mapList || !data.teams) return;
         const thead = document.getElementById('team-points-head');
         const tbody = document.getElementById('team-points-body');
         
-        // --- 1. DYNAMIC HEADERS GENERATION ---
         let headRow1 = '<tr><th rowspan="2" class="rank-header">RANK</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
         let headRow2 = '</tr><tr>';
         
-        // Saare maps ke columns loop se ban rahe hain
         data.mapList.forEach(mapName => {
             headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
             headRow2 += `<th class="sub-th">P</th><th class="sub-th">K</th>`;
@@ -392,74 +362,145 @@
         headRow1 += `<th rowspan="2" class="total-points-head">TP</th><th rowspan="2" class="top-killer-head">TOP KILLER</th></tr>`;
         thead.innerHTML = headRow1 + headRow2;
 
-        // --- 2. DYNAMIC ROWS GENERATION ---
         tbody.innerHTML = '';
         let currentRank = 1;
-        
-        // Total points ke basis par JavaScript me automatic high to low sort kar dena safe hai
         data.teams.sort((a, b) => (Number(b.totalPoints) || 0) - (Number(a.totalPoints) || 0));
 
         data.teams.forEach(team => {
             const tr = document.createElement('tr');
             tr.classList.add(`rank-${currentRank}`, 'table-row');
+            let arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
             
-            let arrow = calculateRankArrow(team.teamName, currentRank);
-            let badge = currentRank === 1 ? '🥇' : (currentRank === 2 ? '🥈' : (currentRank === 3 ? '🥉' : currentRank));
-            
-            let rowHTML = `<td class="rank-cell">${badge}${arrow}</td>`;
+            let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
             rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
-            
-            // Map scores render karein
-            team.scores.forEach(score => {
-                rowHTML += `<td>${score !== undefined ? score : 0}</td>`;
-            });
-            
+            team.scores.forEach(score => { rowHTML += `<td>${score !== undefined ? score : 0}</td>`; });
             rowHTML += `<td class="neon-score">${team.totalPoints}</td>`;
             rowHTML += `<td class="top-killer-head" style="font-size:11pt; color:#cbd5e0;">${team.topKiller}</td>`;
             
-            tr.innerHTML = rowHTML;
-            tbody.appendChild(tr);
-            currentRank++;
+            tr.innerHTML = rowHTML; tbody.appendChild(tr); currentRank++;
         });
+    }
 
-        // #1 Team Celebration Trigger
-        if (data.teams.length > 0) {
-            triggerCelebration(data.teams[0].teamName);
+    function buildPlayerKillsGrid(rows) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById('player-kills-head');
+        const tbody = document.getElementById('player-kills-body');
+        let startRowIdx = rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM") ? 1 : 0;
+        const headerRow = rows[startRowIdx];
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[0] || 'PLAYER NAME'}</th>`;
+        for(let c = 1; c < numCols - 1; c++) headHTML += `<th>${headerRow[c] || 'MATCH'}</th>`;
+        headHTML += `<th class="total-points-head">${headerRow[numCols - 1] || 'TOTAL KILLS'}</th></tr>`;
+        thead.innerHTML = headHTML;
+
+        tbody.innerHTML = ''; let currentRank = 1;
+        for (let i = startRowIdx + 1; i < rows.length; i++) {
+            const row = rows[i]; if (!row || !row[0] || row[0].toString().trim() === "" || row[0].toString().toUpperCase().includes("PLAYER NAME")) continue;
+            const tr = document.createElement('tr'); tr.classList.add(`rank-${currentRank}`, 'table-row');
+            let arrow = calculateRankArrow('playerKills', row[0].toString().trim(), currentRank);
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            cellHTML += `<td class="player-name-cell"><span class="team-emoji">🎯</span>${row[0]}</td>`;
+            for(let d = 1; d < numCols - 1; d++) cellHTML += `<td>${row[d] !== undefined ? row[d] : '-'}</td>`;
+            cellHTML += `<td class="neon-score">${row[numCols - 1] !== undefined ? row[numCols - 1] : '-'}</td>`;
+            tr.innerHTML = cellHTML; tbody.appendChild(tr); currentRank++;
         }
     }
 
-    let lastWinner = "";
-    function triggerCelebration(winnerName) {
-        if (!winnerName || winnerName === "LOADING...") return;
-        if (lastWinner !== winnerName) {
-            lastWinner = winnerName;
-            document.getElementById('popLeaderName').innerText = winnerName;
-            const popup = document.getElementById('championPopup');
-            popup.classList.add('show');
-            triggerNativeCrackers();
-            setTimeout(() => popup.classList.remove('show'), 3000);
+    function buildPlayerStatsGrid(rows) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById('player-stats-head');
+        const tbody = document.getElementById('player-stats-body');
+        let startRowIdx = rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM") ? 1 : 0;
+        const headerRow = rows[startRowIdx];
+        const startIdx = headerRow[0] && headerRow[0].toString().toUpperCase().includes("S:") ? 1 : 0;
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[startIdx] || 'PLAYER NAME'}</th>`;
+        for (let c = startIdx + 1; c < numCols; c++) headHTML += `<th>${headerRow[c] || 'STAT'}</th>`;
+        thead.innerHTML = headHTML + `</tr>`;
+        
+        tbody.innerHTML = ''; let currentRank = 1;
+        for (let i = startRowIdx + 1; i < rows.length; i++) {
+            const row = rows[i]; if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().toUpperCase().includes("PLAYER NAME")) continue;
+            const tr = document.createElement('tr'); tr.classList.add(`rank-${currentRank}`, 'table-row');
+            let arrow = calculateRankArrow('playerStats', row[startIdx].toString().trim(), currentRank);
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            cellHTML += `<td class="player-name-cell"><span class="team-emoji">👤</span>${row[startIdx]}</td>`;
+            for (let d = startIdx + 1; d < numCols; d++) {
+                let val = row[d]; if (d === numCols - 1 && val !== undefined && !isNaN(val) && val !== "") val = Number(val).toFixed(2);
+                if (d === startIdx + 2) cellHTML += `<td class="neon-score">${val !== undefined ? val : '-'}</td>`;
+                else if (d === numCols - 1) cellHTML += `<td class="highlight-stat">${val !== undefined ? val : '-'}</td>`;
+                else cellHTML += `<td>${val !== undefined ? val : '-'}</td>`;
+            }
+            tr.innerHTML = cellHTML; tbody.appendChild(tr); currentRank++;
         }
+    }
+
+    function buildTeamStandingsGrid(rows) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById('team-standings-head');
+        const tbody = document.getElementById('team-standings-body');
+        let startRowIdx = rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM") ? 1 : 0;
+        const headerRow = rows[startRowIdx];
+        const startIdx = headerRow[0] && headerRow[0].toString().toUpperCase().includes("RANK") ? 1 : 0;
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="team-name-head">${headerRow[startIdx] || 'TEAM NAME'}</th>`;
+        for (let c = startIdx + 1; c < numCols; c++) headHTML += `<th>${headerRow[c] || 'DATA'}</th>`;
+        thead.innerHTML = headHTML + `</tr>`;
+
+        tbody.innerHTML = ''; let currentRank = 1;
+        for (let i = startRowIdx + 1; i < rows.length; i++) {
+            const row = rows[i]; if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().trim() === "0") continue;
+            const tr = document.createElement('tr'); tr.classList.add(`rank-${currentRank}`, 'table-row');
+            let arrow = calculateRankArrow('teamStandings', row[startIdx].toString().trim(), currentRank);
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            cellHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(row[startIdx])}</span>${row[startIdx]}</td>`;
+            for (let d = startIdx + 1; d < numCols; d++) {
+                let val = row[d]; if (d === numCols - 1 && val !== undefined && !isNaN(val) && val !== '') val = Number(val).toFixed(2);
+                if (d === startIdx + 3) cellHTML += `<td class="neon-score">${val !== undefined ? val : 0}</td>`;
+                else if (d === numCols - 1) cellHTML += `<td class="highlight-stat">${val !== undefined ? val : 0}</td>`;
+                else cellHTML += `<td>${val !== undefined ? val : 0}</td>`;
+            }
+            tr.innerHTML = cellHTML; tbody.appendChild(tr); currentRank++;
+        }
+    }
+
+    let lastWinnerCache = {};
+    function triggerTabCelebration(tabId) {
+        setTimeout(() => {
+            const container = document.getElementById(tabId); if (!container) return;
+            const firstRow = container.querySelector('tbody tr'); if (!firstRow) return;
+            const cells = firstRow.querySelectorAll('td'); if (cells.length < 2) return;
+            
+            let winnerName = cells[1].innerText || cells[1].textContent;
+            winnerName = winnerName.replace(/[🥇🥈🥉⭐👑🎖️🔥🎮🎯👤⚔️]/g, '').trim();
+            if (winnerName.toUpperCase() === "LOADING..." || winnerName === "") return;
+
+            if (lastWinnerCache[tabId] !== winnerName) {
+                lastWinnerCache[tabId] = winnerName;
+                let cleanName = tabId.includes('kill') ? "PLAYER KILLS" : (tabId.includes('stat') ? "PLAYER STATS" : (tabId.includes('standing') ? "TEAM STANDINGS" : "TEAM POINTS"));
+                document.getElementById('popHeaderType').innerText = cleanName + " #1 LEADER";
+                document.getElementById('popLeaderName').innerText = winnerName;
+                const popup = document.getElementById('championPopup');
+                popup.classList.add('show'); triggerNativeCrackers();
+                setTimeout(() => popup.classList.remove('show'), 3000);
+            }
+        }, 400);
     }
 </script>
 
 <script>
-// Background & Animation effects
-const canvas = document.getElementById('odysseyCanvas');
-const ctx = canvas.getContext('2d');
+// Ambient Effects & Crackers
+const canvas = document.getElementById('odysseyCanvas'); const ctx = canvas.getContext('2d');
 function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 window.addEventListener('resize', initCanvas); initCanvas();
 
 function initFireBackground() {
     let particles = [];
     class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = canvas.height + Math.random() * 100;
-            this.size = Math.random() * 3 + 1;
-            this.speedY = Math.random() * 1.2 + 0.4;
-            this.speedX = Math.random() * 0.8 - 0.4;
-            this.opacity = Math.random() * 0.4 + 0.4;
-        }
+        constructor() { this.x = Math.random() * canvas.width; this.y = canvas.height + Math.random() * 100; this.size = Math.random() * 3 + 1; this.speedY = Math.random() * 1.2 + 0.4; this.speedX = Math.random() * 0.8 - 0.4; this.opacity = Math.random() * 0.4 + 0.4; }
         update() { this.y -= this.speedY; this.x += this.speedX; if (this.y < -10) { this.y = canvas.height + 10; this.x = Math.random() * canvas.width; } }
         draw() { ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 90) + 40}, 0, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
     }
@@ -468,47 +509,22 @@ function initFireBackground() {
     animate();
 }
 
-const cCanvas = document.getElementById('crackersCanvas');
-const cCtx = cCanvas.getContext('2d');
+const cCanvas = document.getElementById('crackersCanvas'); const cCtx = cCanvas.getContext('2d');
 let cParticles = [], crackersAnimationId;
 function resizeCrackersCanvas() { cCanvas.width = window.innerWidth; cCanvas.height = window.innerHeight; }
 window.addEventListener('resize', resizeCrackersCanvas); resizeCrackersCanvas();
 
 class CrackerParticle {
-    constructor(x, y, color) {
-        this.x = x; this.y = y; this.color = color; this.radius = Math.random() * 3 + 2;
-        const angle = Math.random() * Math.PI * 2, velocity = Math.random() * 10 + 4;
-        this.speedX = Math.cos(angle) * velocity; this.speedY = Math.sin(angle) * velocity;
-        this.gravity = 0.18; this.alpha = 1; this.decay = Math.random() * 0.015 + 0.012;
-    }
+    constructor(x, y, color) { this.x = x; this.y = y; this.color = color; this.radius = Math.random() * 3 + 2; const angle = Math.random() * Math.PI * 2, velocity = Math.random() * 10 + 4; this.speedX = Math.cos(angle) * velocity; this.speedY = Math.sin(angle) * velocity; this.gravity = 0.18; this.alpha = 1; this.decay = Math.random() * 0.015 + 0.012; }
     update() { this.speedY += this.gravity; this.x += this.speedX; this.y += this.speedY; this.alpha -= this.decay; }
     draw() { cCtx.save(); cCtx.globalAlpha = this.alpha; cCtx.fillStyle = this.color; cCtx.shadowBlur = 8; cCtx.shadowColor = this.color; cCtx.beginPath(); cCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); cCtx.fill(); cCtx.restore(); }
 }
-function createExplosion(x, y) {
-    const colors = ['#ff4500', '#ff8c00', '#ffd700', '#ff0000', '#ffffff'];
-    for (let i = 0; i < 80; i++) cParticles.push(new CrackerParticle(x, y, colors[Math.floor(Math.random() * colors.length)]));
-}
-function animateCrackers() {
-    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
-    for (let i = cParticles.length - 1; i >= 0; i--) { cParticles[i].update(); if (cParticles[i].alpha <= 0) cParticles.splice(i, 1); else cParticles[i].draw(); }
-    crackersAnimationId = requestAnimationFrame(animateCrackers);
-}
-function triggerNativeCrackers() {
-    cParticles = []; cancelAnimationFrame(crackersAnimationId); animateCrackers();
-    createExplosion(window.innerWidth * 0.2, window.innerHeight * 0.4);
-    setTimeout(() => createExplosion(window.innerWidth * 0.8, window.innerHeight * 0.4), 250);
-    setTimeout(() => createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.3), 500);
-}
+function createExplosion(x, y) { const colors = ['#ff4500', '#ff8c00', '#ffd700', '#ff0000', '#ffffff']; for (let i = 0; i < 80; i++) cParticles.push(new CrackerParticle(x, y, colors[Math.floor(Math.random() * colors.length)])); }
+function animateCrackers() { cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height); for (let i = cParticles.length - 1; i >= 0; i--) { cParticles[i].update(); if (cParticles[i].alpha <= 0) cParticles.splice(i, 1); else cParticles[i].draw(); } crackersAnimationId = requestAnimationFrame(animateCrackers); }
+function triggerNativeCrackers() { cParticles = []; cancelAnimationFrame(crackersAnimationId); animateCrackers(); createExplosion(window.innerWidth * 0.2, window.innerHeight * 0.4); setTimeout(() => createExplosion(window.innerWidth * 0.8, window.innerHeight * 0.4), 250); setTimeout(() => createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.3), 500); }
 
-window.addEventListener('load', () => {
-    initFireBackground();
-});
-
-function openMainPointsTable() {
-    document.getElementById('porkalamSplash').classList.add('fade-hide');
-    fetchAllSheetsData();
-    setInterval(fetchAllSheetsData, 2000); // Har 2 second me live auto-sync hota rahega
-}
+window.addEventListener('load', () => { initFireBackground(); applyOperationMode('tournament'); });
+function openMainPointsTable() { document.getElementById('porkalamSplash').classList.add('fade-hide'); fetchAllSheetsData(); setInterval(fetchAllSheetsData, 2000); }
 </script>
 </body>
 </html>
