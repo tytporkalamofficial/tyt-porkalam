@@ -221,7 +221,7 @@
 </div>
 
 <script>
-    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyLUuoNxnyJWdislLAR3X0Fv-K8Tjg5-lObdW1UdNK5qGTDP5MoVsV_72GoRYbDT1P6Pw/exec";
+    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbylGOWHXhoiPGUOaEFlHx1FS8pUeY7QGGNCIc0AYGMBkK7nqrr_4o7ZkcDyKqLQeQ6hvA/exec";
 
     if (!window.rankMemory) {
         window.rankMemory = { teamPoints: {}, playerKills: {}, playerStats: {}, teamStandings: {} };
@@ -330,10 +330,10 @@
         }
         
         container.innerHTML = '';
-        // Skip header row at index 0
+        // Index 0 has headers (DATE, PORKALAM, CHAMPION TEAM...)
         for(let i = 1; i < rows.length; i++) {
             const row = rows[i];
-            if(!row || !row[1] || row[1].toString().trim() === "") continue;
+            if(!row || !row[0] || row[0].toString().trim() === "") continue;
             
             const dateVal = row[0] || 'N/A';
             const tourneyName = row[1] || 'Tournament';
