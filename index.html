@@ -369,43 +369,53 @@
     }
 
     function buildDynamicTeamPointsGrid(data) {
-        if (!data || !data.mapList || !data.teams) return;
-        const thead = document.getElementById('team-points-head');
-        const tbody = document.getElementById('team-points-body');
+           if (!data || !data.mapList || !data.teams) return;
+    const thead = document.getElementById('team-points-head');
+    const tbody = document.getElementById('team-points-body');
+    
+    // Yahan TP ki jagah TOTAL POINTS likh diya hai
+    let headRow1 = '<tr><th rowspan="2" class="rank-header">RANK</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
+    let headRow2 = '</tr><tr>';
+    
+    data.mapList.forEach(mapName => {
+        headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
+        headRow2 += `<th class="sub-th">P</th><th class="sub-th">K</th>`;
+    });
+    
+    headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th><th rowspan="2" class="top-killer-head">TOP KILLER</th></tr>`;
+    thead.innerHTML = headRow1 + headRow2;
+
+    tbody.innerHTML = '';
+    let currentRank = 1;
+    
+    // Sort teams by total points
+    data.teams.sort((a, b) => (Number(b.totalPoints) || 0) - (Number(a.totalPoints) || 0));
+
+    data.teams.forEach(team => {
+        // FILTER: Agar Google Sheet se koi extra template row ya placeholder text (jaise khud "TEAM NAME") aa raha ho, toh use skip karo
+        if (!team.teamName || team.teamName.toString().trim() === "" || team.teamName.toUpperCase() === "TEAM NAME") {
+            return; 
+        }
+
+        const tr = document.createElement('tr');
+        tr.classList.add(`rank-${currentRank}`, 'table-row');
+        let arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
         
-        let headRow1 = '<tr><th rowspan="2" class="rank-header">RANK</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
-        let headRow2 = '</tr><tr>';
+        let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+        rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
         
-        data.mapList.forEach(mapName => {
-            headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
-            headRow2 += `<th class="sub-th">P</th><th class="sub-th">K</th>`;
+        team.scores.forEach(score => { 
+            rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
         });
         
-        headRow1 += `<th rowspan="2" class="total-points-head">TP</th><th rowspan="2" class="top-killer-head">TOP KILLER</th></tr>`;
-        thead.innerHTML = headRow1 + headRow2;
-
-        tbody.innerHTML = '';
-        let currentRank = 1;
-        data.teams.sort((a, b) => (Number(b.totalPoints) || 0) - (Number(a.totalPoints) || 0));
-
-        data.teams.forEach(team => {
-            const tr = document.createElement('tr');
-            tr.classList.add(`rank-${currentRank}`, 'table-row');
-            let arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
-            
-            let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
-            rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
-            
-            team.scores.forEach(score => { 
-                rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
-            });
-            
-            rowHTML += `<td class="neon-score">${team.totalPoints}</td>`;
-            rowHTML += `<td class="top-killer-head" style="font-size:11pt; color:#cbd5e0;">${team.topKiller}</td>`;
-            
-            tr.innerHTML = rowHTML; tbody.appendChild(tr); currentRank++;
-        });
-    }
+        rowHTML += `<td class="neon-score">${team.totalPoints}</td>`;
+        rowHTML += `<td class="top-killer-head" style="font-size:11pt; color:#cbd5e0;">${team.topKiller}</td>`;
+        
+        tr.innerHTML = rowHTML; 
+        tbody.appendChild(tr); 
+        currentRank++;
+    });
+}
 
     function buildPlayerKillsGrid(rows) {
         if (!rows || rows.length === 0) return;
