@@ -100,16 +100,23 @@
         .total-points-head, .neon-score { width: 130px !important; }
         .top-killer-head { width: 180px !important; text-align: left !important; padding-left: 15px !important; }
         th.map-header { font-size: 11pt; font-weight: 800; background-color: rgba(40, 15, 5, 0.95); color: #ffffff; }
-        th.sub-th { background-color: rgba(20, 8, 3, 0.85); font-size: 10pt; color: #a0aec0; width: 70px !important; min-widht: 70px !important; text-align: center !important; }
-        .team-emoji { margin-right: 6px; display: inline-block; font-size: 12pt; vertical-align: middle; }
-        td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt !important; font-weight: 700 !important;}
-        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; }
-        tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); } 
-        tr:hover td { background-color: rgba(255, 69, 0, 0.15); } 
-        tr.rank-1 td { background-color: rgba(255, 69, 0, 0.2) !important; border-bottom: 1px solid #ffd700 !important; }
-        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
-        tr.rank-1 td.rank-cell { color: #ffd700; }
-        .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
+        /* Header ke P ko style karega */
+th.p-column {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+#team-points-body tr td:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt; font-weight: 700 !important; }
+td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; text-align: middle; }
+tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); }
+tr:hover td { background-color: rgba(255, 69, 0, 0.15); }
+tr.rank-1 td { background-color: rgba(255, 69, 0, 0.2) !important; border-bottom: 1px solid #ffd700 !important; }
+tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
+tr.rank-1 td.rank-cell { color: #ffd700; }
+.status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
         
         /* RECENT RESULTS CARDS STYLING */
         .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; width: 100%; max-width: 1100px; padding: 10px; }
@@ -379,7 +386,8 @@
     
     data.mapList.forEach(mapName => {
         headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
-        headRow2 += `<th class="sub-th" style="width: 50px; text-align: center;">P</th><th class="sub-th" style="width: 50px; text-align: center;>K</th>`;
+        // Humne pehle wale sub-th mein 'p-column' class jod di hai
+        headRow2 += `<th class="sub-th p-column">P</th><th class="sub-th">K</th>`;
     });
     
     headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
