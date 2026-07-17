@@ -86,7 +86,7 @@
         .table-responsive { overflow-x: auto; display: none; width: 100%; margin: 0 auto; }
         .table-responsive.active { display: block; }
         .compact-sheet-view { width: auto !important; max-width: fit-content !important; }
-        table { width: 100%; border-collapse: collapse; background-color: rgba(12, 4, 2, 0.8) !important; border: 2px solid rgba(255, 69, 0, 0.4) !important; backdrop-filter: blur(2px); margin: 0 auto; }
+        table { table-layout: fixed !important; width: 100%; border-collapse: collapse; background-color: rgba(12, 4, 2, 0.8) !important; border: 2px solid rgba(255, 69, 0, 0.4) !important; backdrop-filter: blur(2px); margin: 0 auto; }
         body.dashboard-orange-mode table { border-color: rgba(255, 140, 0, 0.4) !important; }
         
         th { background: linear-gradient(180deg, rgba(42,11,3,0.9) 0%, rgba(18,3,0,0.95) 100%) !important; border-bottom: 2px solid #ff4500 !important; color: #ff8c00 !important; font-weight: 800; text-transform: uppercase; padding: 10px 6px !important; border: 1.5px solid rgba(255, 69, 0, 0.3); text-align: center; font-size: 12pt !important; white-space: nowrap; }
@@ -95,12 +95,12 @@
         body.dashboard-orange-mode td { border-color: rgba(255, 140, 0, 0.25) !important; }
         
         .rank-header, .rank-cell { width: 75px !important; }
-        .team-name-head, .team-name-cell { width: 250px !important; text-align: left !important; padding-left: 15px !important; }
+        .team-name-head, .team-name-cell { width: 30% !important; text-align: left !important; padding-left: 15px !important; }
         .player-name-head, .player-name-cell { width: 220px !important; text-align: left !important; padding-left: 15px !important; }
         .total-points-head, .neon-score { width: 130px !important; }
         .top-killer-head { width: 180px !important; text-align: left !important; padding-left: 15px !important; }
         th.map-header { font-size: 11pt; font-weight: 800; background-color: rgba(40, 15, 5, 0.95); color: #ffffff; }
-        th.sub-th { background-color: rgba(20, 8, 3, 0.85); font-size: 10pt; color: #a0aec0; }
+        th.sub-th { background-color: rgba(20, 8, 3, 0.85); font-size: 10pt; color: #a0aec0; width: 70px !important; min-widht: 70px !important; text-align: center !important; }
         .team-emoji { margin-right: 6px; display: inline-block; font-size: 12pt; vertical-align: middle; }
         td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt !important; font-weight: 700 !important;}
         td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; }
