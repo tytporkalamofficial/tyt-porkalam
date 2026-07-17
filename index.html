@@ -135,12 +135,23 @@ body::before {
         body.dashboard-orange-mode th { background: linear-gradient(180deg, rgba(51,20,0,0.9) 0%, rgba(23,9,0,0.95) 100%) !important; border-bottom-color: #ff8c00 !important; color: #ffa500 !important; border-color: rgba(255, 140, 0, 0.3); }
         td { padding: 10px 6px !important; border: 1.5px solid rgba(255, 69, 0, 0.25) !important; text-align: center; color: #ffffff; font-size: 12.5pt !important; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.95); white-space: nowrap; }
         body.dashboard-orange-mode td { border-color: rgba(255, 140, 0, 0.25) !important; }
-        
-        .rank-header, .rank-cell { width: 75px !important; }
-        .team-name-head, .team-name-cell { width: 25% !important; text-align: left !important; padding-left: 15px !important; }
-        .player-name-head, .player-name-cell { width: 220px !important; text-align: left !important; padding-left: 15px !important; }
-        .total-points-head, .neon-score { width: 130px !important; }
-        .top-killer-head { width: 180px !important; text-align: left !important; padding-left: 15px !important; }
+       /* Table Columns Fix */
+.rank-header, .rank-cell { width: 50px !important; }
+
+/* Team Name ka width adjust aur bada naam wrap hone ka fix */
+.team-name-head, .team-name-cell { 
+    width: 20% !important; 
+    word-break: break-word !important; 
+    padding-left: 10px !important;
+}
+
+/* Total Matches ka column chota kar diya */
+.total-matches-head { width: 80px !important; text-align: center !important; }
+
+/* KD aur WWCD ka width barabar kar diya */
+.wwcd-head, .kd-head { width: 60px !important; text-align: center !important; }
+
+.total-points-head, .neon-score { width: 100px !important; text-align: center !important; }
         th.map-header { font-size: 11pt; font-weight: 800; background-color: rgba(40, 15, 5, 0.95); color: #ffffff; }
         /* Header ke P ko style karega */
 th.p-column {
