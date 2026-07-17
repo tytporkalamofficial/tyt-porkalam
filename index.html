@@ -95,7 +95,7 @@
         body.dashboard-orange-mode td { border-color: rgba(255, 140, 0, 0.25) !important; }
         
         .rank-header, .rank-cell { width: 75px !important; }
-        .team-name-head, .team-name-cell { width: 25% !important; text-align: left !important; padding-left: 15px !important; }
+        .team-name-head, .team-name-cell { width: 30% !important; text-align: left !important; padding-left: 15px !important; }
         .player-name-head, .player-name-cell { width: 220px !important; text-align: left !important; padding-left: 15px !important; }
         .total-points-head, .neon-score { width: 130px !important; }
         .top-killer-head { width: 180px !important; text-align: left !important; padding-left: 15px !important; }
@@ -379,7 +379,7 @@
     
     data.mapList.forEach(mapName => {
         headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
-        headRow2 += `<th class="sub-th">P</th><th class="sub-th">K</th>`;
+        headRow2 += `<th class="sub-th" style="width: 50px; text-align: center;">P</th><th class="sub-th" style="width: 50px; text-align: center;>K</th>`;
     });
     
     headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
