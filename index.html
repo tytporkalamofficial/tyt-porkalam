@@ -382,7 +382,7 @@
         headRow2 += `<th class="sub-th">P</th><th class="sub-th">K</th>`;
     });
     
-    headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th><th rowspan="2" class="top-killer-head">TOP KILLER</th></tr>`;
+    headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
     thead.innerHTML = headRow1 + headRow2;
 
     tbody.innerHTML = '';
@@ -409,8 +409,7 @@
         });
         
         rowHTML += `<td class="neon-score">${team.totalPoints}</td>`;
-        rowHTML += `<td class="top-killer-head" style="font-size:11pt; color:#cbd5e0;">${team.topKiller}</td>`;
-        
+          
         tr.innerHTML = rowHTML; 
         tbody.appendChild(tr); 
         currentRank++;
