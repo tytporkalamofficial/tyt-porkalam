@@ -281,7 +281,7 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
 </div>
 
 <script>
-    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbwXA2ifBfbWl0dwq-2Uid_SG9_Qo2sX_n2H3k-vpq5Ay3Hg95_3LqediNx-ziuiqS2i/exec";
+    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbxYcSOEDchQ-m6BrE-Onxc_-CAq57zYzSLA1ypRv64MGH8kLE3s1Wz7diiaw6GT4lUT8A/exec";
 
     if (!window.rankMemory) {
         window.rankMemory = { teamPoints: {}, playerKills: {}, playerStats: {}, teamStandings: {} };
@@ -469,7 +469,7 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
             rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
         });
         
-        rowHTML += `<td style="color: #ffffff !important; font-weight: 800 !important;">${team.totalPoints !== undefined ? team.totalPoints : 0}</td>`;
+        rowHTML += `<td class="neon-score">${team.totalPoints}</td>`;
           
         tr.innerHTML = rowHTML; 
         tbody.appendChild(tr); 
