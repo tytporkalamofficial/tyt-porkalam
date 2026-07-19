@@ -97,15 +97,34 @@
         .rank-header, .rank-cell { width: 75px !important; }
         .team-name-head, .team-name-cell { width: 30% !important; text-align: left !important; padding-left: 15px !important; }
         .player-name-head, .player-name-cell { width: 220px !important; text-align: left !important; padding-left: 15px !important; }
-        .total-points-head, .neon-score { width: 130px !important; }
+        
+        /* TOTAL POINTS HEAD & BORDER STYLING FIX */
+        .total-points-head, td.neon-score { 
+            width: 130px !important; 
+            border: 1.5px solid rgba(255, 69, 0, 0.4) !important; 
+        }
+        body.dashboard-orange-mode .total-points-head, body.dashboard-orange-mode td.neon-score {
+            border: 1.5px solid rgba(255, 140, 0, 0.4) !important;
+        }
+        body.results-purple-mode .total-points-head, body.results-purple-mode td.neon-score {
+            border: 1.5px solid rgba(138, 43, 226, 0.5) !important;
+        }
+
         .top-killer-head { width: 180px !important; text-align: left !important; padding-left: 15px !important; }
         th.map-header { font-size: 11pt; font-weight: 800; background-color: rgba(40, 15, 5, 0.95); color: #ffffff; }
-        th.sub-th { background-color: rgba(20, 8, 3, 0.85); font-size: 10pt; color: #a0aec0; width: 70px !important; min-widht: 70px !important; text-align: center !important; }
-        .team-emoji { margin-right: 6px; display: inline-block; font-size: 12pt; vertical-align: middle; }
-        td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt !important; font-weight: 700 !important;}
-        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; }
-        tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); } 
-        tr:hover td { background-color: rgba(255, 69, 0, 0.15); } 
+        
+        th.p-column {
+            background-color: rgba(255, 255, 255, 0.04) !important;
+        }
+
+        #team-points-body tr td:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.03) !important;
+        }
+
+        td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt; font-weight: 700 !important; }
+        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; text-align: middle; }
+        tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); }
+        tr:hover td { background-color: rgba(255, 69, 0, 0.15); }
         tr.rank-1 td { background-color: rgba(255, 69, 0, 0.2) !important; border-bottom: 1px solid #ffd700 !important; }
         tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
         tr.rank-1 td.rank-cell { color: #ffd700; }
@@ -133,6 +152,17 @@
         .champion-badge { font-size: 55pt; margin-bottom: 5px; animation: firePulse 0.8s infinite alternate; }
         @keyframes firePulse { 0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); } 100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); } }
         #crackersCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999999 !important; }
+
+    @media screen and (max-width: 768px) {
+        body { padding: 5px 4px !important; }
+        .container { width: 100% !important; max-width: 100% !important; padding: 4px !important; margin: 0 auto !important; }
+        .tournament-mode, .dashboard-mode, .recent-results { display: block !important; width: 100% !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; margin-bottom: 15px !important; }
+        table { width: 100% !important; table-layout: auto !important; }
+        table th, table td { padding: 6px 4px !important; font-size: 9.5pt !important; }
+        .rank-header, .rank-cell { width: 45px !important; }
+        .team-name-head, .team-name-cell, .player-name-head, .player-name-cell { min-width: 120px !important; white-space: normal !important; word-break: break-word !important; }
+        th.total-points-head, td.neon-score { min-width: 90px !important; text-align: center !important; display: table-cell !important; }
+    }
     </style>
 </head>
 <body>
@@ -239,7 +269,6 @@
         const tabStandingsBtn = document.getElementById('tab-btn-team-standings');
         const tabsContainer = document.getElementById('mainTabsContainer');
 
-        // Reset Modes
         body.classList.remove('dashboard-orange-mode', 'results-purple-mode');
         btnTourney.className = 'mode-toggle-btn';
         btnDashboard.className = 'mode-toggle-btn';
@@ -257,9 +286,7 @@
         } else if (mode === 'results') {
             body.classList.add('results-purple-mode');
             btnResults.className = 'mode-toggle-btn active-results';
-            tabsContainer.style.display = 'none'; // Hide inner sub-tabs entirely
-            
-            // Hide all sub tab sheets & show recent results div directly
+            tabsContainer.style.display = 'none';
             document.querySelectorAll('.table-responsive').forEach(tab => tab.classList.remove('active'));
             document.getElementById('recent-results-tab').classList.add('active');
         } else {
@@ -330,7 +357,6 @@
         }
         
         container.innerHTML = '';
-        // Index 0 has headers (DATE, PORKALAM, CHAMPION TEAM...)
         for(let i = 1; i < rows.length; i++) {
             const row = rows[i];
             if(!row || !row[0] || row[0].toString().trim() === "") continue;
@@ -369,52 +395,60 @@
     }
 
     function buildDynamicTeamPointsGrid(data) {
-           if (!data || !data.mapList || !data.teams) return;
-    const thead = document.getElementById('team-points-head');
-    const tbody = document.getElementById('team-points-body');
-    
-    // Yahan TP ki jagah TOTAL POINTS likh diya hai
-    let headRow1 = '<tr><th rowspan="2" class="rank-header">RANK</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
-    let headRow2 = '</tr><tr>';
-    
-    data.mapList.forEach(mapName => {
-        headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
-        headRow2 += `<th class="sub-th" style="width: 50px; text-align: center;">P</th><th class="sub-th" style="width: 50px; text-align: center;>K</th>`;
-    });
-    
-    headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
-    thead.innerHTML = headRow1 + headRow2;
-
-    tbody.innerHTML = '';
-    let currentRank = 1;
-    
-    // Sort teams by total points
-    data.teams.sort((a, b) => (Number(b.totalPoints) || 0) - (Number(a.totalPoints) || 0));
-
-    data.teams.forEach(team => {
-        // FILTER: Agar Google Sheet se koi extra template row ya placeholder text (jaise khud "TEAM NAME") aa raha ho, toh use skip karo
-        if (!team.teamName || team.teamName.toString().trim() === "" || team.teamName.toUpperCase() === "TEAM NAME") {
-            return; 
-        }
-
-        const tr = document.createElement('tr');
-        tr.classList.add(`rank-${currentRank}`, 'table-row');
-        let arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
+        if (!data || !data.mapList || !data.teams) return;
+        const thead = document.getElementById('team-points-head');
+        const tbody = document.getElementById('team-points-body');
         
-        let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
-        rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
+        let headRow1 = '<tr><th rowspan="2" class="rank-header">RANK</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
+        let headRow2 = '</tr><tr>';
         
-        team.scores.forEach(score => { 
-            rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
+        data.mapList.forEach(mapName => {
+            headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
+            headRow2 += `<th class="sub-th p-column">P</th><th class="sub-th">K</th>`;
         });
         
-        rowHTML += `<td class="neon-score">${team.totalPoints}</td>`;
-          
-        tr.innerHTML = rowHTML; 
-        tbody.appendChild(tr); 
-        currentRank++;
-    });
-}
+        headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
+        thead.innerHTML = headRow1 + headRow2;
+
+        tbody.innerHTML = '';
+        
+        // Calculation logic ishi loop ke andar lagayi hai taaki static override na ho
+        data.teams.sort((a, b) => {
+            let totalA = 0, totalB = 0;
+            if(a.scores) a.scores.forEach(s => { if(!isNaN(parseFloat(s))) totalA += parseFloat(s); });
+            if(b.scores) b.scores.forEach(s => { if(!isNaN(parseFloat(s))) totalB += parseFloat(s); });
+            return totalB - totalA;
+        });
+
+        let currentRank = 1;
+        data.teams.forEach(team => {
+            if (!team.teamName || team.teamName.toString().trim() === "" || team.teamName.toUpperCase() === "TEAM NAME") {
+                return; 
+            }
+
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
+            let arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
+            
+            let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
+            
+            let calculatedSum = 0;
+            team.scores.forEach(score => { 
+                let val = score !== undefined ? parseFloat(score) : 0;
+                if(isNaN(val)) val = 0;
+                calculatedSum += val;
+                rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
+            });
+            
+            // P aur K ka automatic addition idhar append ho raha hai complete border class (neon-score) ke sath
+            rowHTML += `<td class="neon-score">${calculatedSum}</td>`;
+              
+            tr.innerHTML = rowHTML; 
+            tbody.appendChild(tr); 
+            currentRank++;
+        });
+    }
 
     function buildPlayerKillsGrid(rows) {
         if (!rows || rows.length === 0) return;
@@ -527,7 +561,6 @@
 </script>
 
 <script>
-// Canvas Engine & Crackers System
 const canvas = document.getElementById('odysseyCanvas'); const ctx = canvas.getContext('2d');
 function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 window.addEventListener('resize', initCanvas); initCanvas();
