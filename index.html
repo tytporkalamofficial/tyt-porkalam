@@ -86,7 +86,7 @@
         .table-responsive { overflow-x: auto; display: none; width: 100%; margin: 0 auto; }
         .table-responsive.active { display: block; }
         .compact-sheet-view { width: auto !important; max-width: fit-content !important; }
-        table { table-layout: fixed !important; width: 100%; border-collapse: collapse; background-color: rgba(12, 4, 2, 0.8) !important; border: 2px solid rgba(255, 69, 0, 0.4) !important; backdrop-filter: blur(2px); margin: 0 auto; }
+        table { width: 100%; border-collapse: collapse; background-color: rgba(12, 4, 2, 0.8) !important; border: 2px solid rgba(255, 69, 0, 0.4) !important; backdrop-filter: blur(2px); margin: 0 auto; }
         body.dashboard-orange-mode table { border-color: rgba(255, 140, 0, 0.4) !important; }
         
         th { background: linear-gradient(180deg, rgba(42,11,3,0.9) 0%, rgba(18,3,0,0.95) 100%) !important; border-bottom: 2px solid #ff4500 !important; color: #ff8c00 !important; font-weight: 800; text-transform: uppercase; padding: 10px 6px !important; border: 1.5px solid rgba(255, 69, 0, 0.3); text-align: center; font-size: 12pt !important; white-space: nowrap; }
@@ -95,28 +95,21 @@
         body.dashboard-orange-mode td { border-color: rgba(255, 140, 0, 0.25) !important; }
         
         .rank-header, .rank-cell { width: 75px !important; }
-        .team-name-head, .team-name-cell { width: 30% !important; text-align: left !important; padding-left: 15px !important; }
+        .team-name-head, .team-name-cell { width: 250px !important; text-align: left !important; padding-left: 15px !important; }
         .player-name-head, .player-name-cell { width: 220px !important; text-align: left !important; padding-left: 15px !important; }
         .total-points-head, .neon-score { width: 130px !important; }
         .top-killer-head { width: 180px !important; text-align: left !important; padding-left: 15px !important; }
         th.map-header { font-size: 11pt; font-weight: 800; background-color: rgba(40, 15, 5, 0.95); color: #ffffff; }
-        /* Header ke P ko style karega */
-th.p-column {
-    background-color: rgba(255, 255, 255, 0.04) !important;
-}
-
-#team-points-body tr td:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.03) !important;
-}
-
-td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt; font-weight: 700 !important; }
-td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; text-align: middle; }
-tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); }
-tr:hover td { background-color: rgba(255, 69, 0, 0.15); }
-tr.rank-1 td { background-color: rgba(255, 69, 0, 0.2) !important; border-bottom: 1px solid #ffd700 !important; }
-tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
-tr.rank-1 td.rank-cell { color: #ffd700; }
-.status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
+        th.sub-th { background-color: rgba(20, 8, 3, 0.85); font-size: 10pt; color: #a0aec0; }
+        .team-emoji { margin-right: 6px; display: inline-block; font-size: 12pt; vertical-align: middle; }
+        td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt !important; font-weight: 700 !important;}
+        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; }
+        tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); } 
+        tr:hover td { background-color: rgba(255, 69, 0, 0.15); } 
+        tr.rank-1 td { background-color: rgba(255, 69, 0, 0.2) !important; border-bottom: 1px solid #ffd700 !important; }
+        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
+        tr.rank-1 td.rank-cell { color: #ffd700; }
+        .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
         
         /* RECENT RESULTS CARDS STYLING */
         .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; width: 100%; max-width: 1100px; padding: 10px; }
@@ -140,54 +133,6 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
         .champion-badge { font-size: 55pt; margin-bottom: 5px; animation: firePulse 0.8s infinite alternate; }
         @keyframes firePulse { 0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); } 100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); } }
         #crackersCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999999 !important; }
-        /* =======================================================
-   MOBILE & TABLET COMPACT RESPONSIVE STYLES
-   ======================================================= */
-@media screen and (max-width: 768px) {
-    body {
-        padding: 5px 8px !important;
-    }
-    .container {
-        width: 100% !important;
-        padding: 5px !important;
-        margin: 0 auto !important;
-    }
-    .tournament-mode, .dashboard-mode, .recent-results {
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        margin-bottom: 15px !important;
-    }
-    table th, table td {
-        padding: 6px 4px !important;
-        font-size: 10pt !important;
-    }
-    .rank-header, .rank-cell { 
-        width: 35px !important; 
-        font-size: 11pt !important;
-    }
-    .team-name-head, .team-name-cell,
-    .player-name-head, .player-name-cell { 
-        width: 120px !important; 
-        min-width: 110px !important;
-        max-width: 130px !important;
-        font-size: 10.5pt !important;
-        white-space: normal !important; 
-        word-break: break-word !important;
-    }
-    .total-matches-head { 
-        width: 60px !important; 
-    }
-    .wwcd-head, .kd-head { 
-        width: 50px !important; 
-    }
-    .total-points-head, .neon-score { 
-        width: 70px !important; 
-        font-size: 11pt !important;
-    }
-    td.neon-score, td.highlight-stat {
-        font-size: 11pt !important;
-    }
-}
     </style>
 </head>
 <body>
@@ -434,8 +379,7 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
     
     data.mapList.forEach(mapName => {
         headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
-        // Humne pehle wale sub-th mein 'p-column' class jod di hai
-        headRow2 += `<th class="sub-th p-column">P</th><th class="sub-th">K</th>`;
+        headRow2 += `<th class="sub-th">P</th><th class="sub-th">K</th>`;
     });
     
     headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
