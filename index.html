@@ -47,15 +47,16 @@
         }
         .enter-esports-btn:hover { transform: scale(1.08); box-shadow: 0 0 45px #ff4500; background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%); }
         .premium-splash.fade-hide { opacity: 0; transform: scale(1.05); pointer-events: none; }
-        .pos-change { font-size: 11pt; font-weight: 900; margin-left: 8px; display: inline-block; vertical-align: middle; }
-        .pos-up { color: #00ff66 !important; }
-        .pos-down { color: #ff3333 !important; }
+        .pos-change { font-size: 11pt; font-weight: 900; margin-left: 8px; display: inline-block; vertical-align: middle; animation: arrowPop 0.3s ease-out; }
+        @keyframes arrowPop { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .pos-up { color: #00ff66 !important; text-shadow: 0 0 8px rgba(0, 255, 102, 0.6); }
+        .pos-down { color: #ff3333 !important; text-shadow: 0 0 8px rgba(255, 51, 51, 0.6); }
         .table-row { transition: all 0.5s ease; }
     </style>
 
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
-        body { margin: 0; padding: 10px 20px; background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important; color: #ffffff; display: flex; flex-direction: column; align-items: center; min-height: 100vh; position: relative; overflow-x: hidden; }
+        body { margin: 0; padding: 10px 20px; background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important; color: #ffffff; display: flex; flex-direction: column; align-items: center; min-height: 100vh; position: relative; overflow-x: hidden; transition: background 0.8s ease !important; }
         body.dashboard-orange-mode { background: radial-gradient(circle at 50% 50%, #291100 0%, #080300 100%) !important; }
         body.results-purple-mode { background: radial-gradient(circle at 50% 50%, #15002b 0%, #05000d 100%) !important; }
         #odysseyCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
@@ -80,61 +81,87 @@
         .tab-btn { background: rgba(25, 10, 5, 0.8) !important; border: 1px solid rgba(255, 69, 0, 0.3) !important; color: #cbd5e0 !important; padding: 12px 24px; font-size: 12pt; font-weight: 700; text-transform: uppercase; border-radius: 8px; cursor: pointer; transition: all 0.25s ease; }
         .tab-btn.hide-tab-logic { display: none !important; }
         .tab-btn:hover, .tab-btn.active { background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%) !important; color: #ffffff !important; border: 1px solid #ffd700 !important; box-shadow: 0 0 20px rgba(255, 69, 0, 0.6) !important; transform: translateY(-2px); }
+        body.dashboard-orange-mode .tab-btn:hover, body.dashboard-orange-mode .tab-btn.active { background: linear-gradient(135deg, #cc5200 0%, #ff8c00 100%) !important; box-shadow: 0 0 20px rgba(255, 140, 0, 0.6) !important; }
         
         .table-responsive { overflow-x: auto; display: none; width: 100%; margin: 0 auto; }
         .table-responsive.active { display: block; }
         .compact-sheet-view { width: auto !important; max-width: fit-content !important; }
+        table { table-layout: fixed !important; width: 100%; border-collapse: collapse; background-color: rgba(12, 4, 2, 0.8) !important; border: 2px solid rgba(255, 69, 0, 0.4) !important; backdrop-filter: blur(2px); margin: 0 auto; }
+        body.dashboard-orange-mode table { border-color: rgba(255, 140, 0, 0.4) !important; }
         
-        /* SCREENSHOT SPREADSHEET LOOK GRID STYLING */
-        table { table-layout: fixed !important; width: 100%; border-collapse: collapse; background-color: rgba(12, 4, 2, 0.95) !important; border: 2px solid #555555 !important; margin: 0 auto; }
-        th { background: #222222 !important; border: 1.5px solid #555555 !important; color: #ffffff !important; font-weight: 800; text-transform: uppercase; padding: 12px 8px !important; text-align: center; font-size: 12pt !important; white-space: nowrap; }
-        td { padding: 12px 8px !important; border: 1.5px solid #555555 !important; text-align: center; color: #ffffff; font-size: 12.5pt !important; font-weight: 600; white-space: nowrap; }
+        th { background: linear-gradient(180deg, rgba(42,11,3,0.9) 0%, rgba(18,3,0,0.95) 100%) !important; border-bottom: 2px solid #ff4500 !important; color: #ff8c00 !important; font-weight: 800; text-transform: uppercase; padding: 10px 6px !important; border: 1.5px solid rgba(255, 69, 0, 0.3); text-align: center; font-size: 12pt !important; white-space: nowrap; }
+        body.dashboard-orange-mode th { background: linear-gradient(180deg, rgba(51,20,0,0.9) 0%, rgba(23,9,0,0.95) 100%) !important; border-bottom-color: #ff8c00 !important; color: #ffa500 !important; border-color: rgba(255, 140, 0, 0.3); }
+        td { padding: 10px 6px !important; border: 1.5px solid rgba(255, 69, 0, 0.25) !important; text-align: center; color: #ffffff; font-size: 12.5pt !important; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.95); white-space: nowrap; }
+        body.dashboard-orange-mode td { border-color: rgba(255, 140, 0, 0.25) !important; }
         
-        .rank-header, .rank-cell { width: 85px !important; font-weight: bold; color: #ffffff !important; }
+        .rank-header, .rank-cell { width: 75px !important; }
         .team-name-head, .team-name-cell { width: 30% !important; text-align: left !important; padding-left: 15px !important; }
         .player-name-head, .player-name-cell { width: 220px !important; text-align: left !important; padding-left: 15px !important; }
         
-        /* TOTAL POINTS COLUMN STYLING EXACT MATCH WITH BORDER */
-        .total-points-head, td.total-points-cell { 
-            width: 140px !important; 
-            font-weight: 800 !important;
-            background-color: rgba(255, 255, 255, 0.05) !important;
-            border: 1.5px solid #555555 !important;
+        /* TOTAL POINTS HEAD & BORDER STYLING FIX */
+        .total-points-head, td.neon-score { 
+            width: 130px !important; 
+            border: 1.5px solid rgba(255, 69, 0, 0.4) !important; 
+        }
+        body.dashboard-orange-mode .total-points-head, body.dashboard-orange-mode td.neon-score {
+            border: 1.5px solid rgba(255, 140, 0, 0.4) !important;
+        }
+        body.results-purple-mode .total-points-head, body.results-purple-mode td.neon-score {
+            border: 1.5px solid rgba(138, 43, 226, 0.5) !important;
         }
 
         .top-killer-head { width: 180px !important; text-align: left !important; padding-left: 15px !important; }
-        th.map-header { font-size: 12pt; font-weight: 800; background-color: #333333 !important; color: #ffffff; }
+        th.map-header { font-size: 11pt; font-weight: 800; background-color: rgba(40, 15, 5, 0.95); color: #ffffff; }
         
-        tr:hover td { background-color: rgba(255, 255, 255, 0.1) !important; }
+        th.p-column {
+            background-color: rgba(255, 255, 255, 0.04) !important;
+        }
+
+        #team-points-body tr td:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.03) !important;
+        }
+
+        td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt; font-weight: 700 !important; }
+        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; text-align: middle; }
+        tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); }
+        tr:hover td { background-color: rgba(255, 69, 0, 0.15); }
+        tr.rank-1 td { background-color: rgba(255, 69, 0, 0.2) !important; border-bottom: 1px solid #ffd700 !important; }
+        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
+        tr.rank-1 td.rank-cell { color: #ffd700; }
         .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
         
         /* RECENT RESULTS CARDS STYLING */
         .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; width: 100%; max-width: 1100px; padding: 10px; }
-        .result-card { background: linear-gradient(135deg, rgba(20, 5, 35, 0.85) 0%, rgba(5, 1, 15, 0.95) 100%); border: 2px solid #8a2be2; border-radius: 16px; padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative; overflow: hidden; border-top: 5px solid #d8bfd8; }
+        .result-card { background: linear-gradient(135deg, rgba(20, 5, 35, 0.85) 0%, rgba(5, 1, 15, 0.95) 100%); border: 2px solid #8a2be2; border-radius: 16px; padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative; overflow: hidden; border-top: 5px solid #d8bfd8; transition: transform 0.3s ease; }
+        .result-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(138, 43, 226, 0.4); }
         .card-date { position: absolute; top: 12px; right: 15px; font-size: 9.5pt; color: #d8bfd8; font-weight: 700; background: rgba(138, 43, 226, 0.3); padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(216, 191, 216, 0.4); }
-        .card-title { font-size: 18pt; font-weight: 800; color: #ffffff; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1px; max-width: 70%; }
+        .card-title { font-size: 18pt; font-weight: 800; color: #ffffff; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1px; max-width: 70%; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
         .card-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(138, 43, 226, 0.2); }
         .card-row:last-child { border-bottom: none; }
         .row-label { font-size: 11pt; color: #a0aec0; font-weight: bold; text-transform: uppercase; }
         .row-value { font-size: 13pt; font-weight: 700; color: #ffffff; }
+        .winner-team { color: #ffd700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
+        .winner-mvp { color: #00ffff; text-shadow: 0 0 8px rgba(0, 255, 255, 0.4); }
 
         .champion-popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 3, 0, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 999999 !important; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .champion-popup-overlay.show { opacity: 1; pointer-events: auto; }
-        .champion-card { background: linear-gradient(135deg, #3a1003 0%, #0c0400 100%); border: 3px solid #ff4500; padding: 50px 70px; border-radius: 24px; text-align: center; transform: scale(0.6); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .champion-card { background: linear-gradient(135deg, #3a1003 0%, #0c0400 100%); border: 3px solid #ff4500; box-shadow: 0 0 60px rgba(255, 69, 0, 0.6), inset 0 0 30px rgba(255, 140, 0, 0.3); padding: 50px 70px; border-radius: 24px; text-align: center; transform: scale(0.6); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .champion-popup-overlay.show .champion-card { transform: scale(1); }
         .champion-title { color: #ffd700; font-size: 22pt; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
-        .champion-name { color: #ffffff; font-size: 42pt; font-weight: 900; margin: 15px 0; }
+        .champion-name { color: #ffffff; font-size: 42pt; font-weight: 900; margin: 15px 0; text-shadow: 0 0 25px #ff4500, 0 0 10px #ffffff; }
+        .champion-badge { font-size: 55pt; margin-bottom: 5px; animation: firePulse 0.8s infinite alternate; }
+        @keyframes firePulse { 0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); } 100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); } }
         #crackersCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999999 !important; }
 
     @media screen and (max-width: 768px) {
         body { padding: 5px 4px !important; }
         .container { width: 100% !important; max-width: 100% !important; padding: 4px !important; margin: 0 auto !important; }
-        .table-responsive { display: block !important; width: 100% !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; }
+        .tournament-mode, .dashboard-mode, .recent-results { display: block !important; width: 100% !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; margin-bottom: 15px !important; }
         table { width: 100% !important; table-layout: auto !important; }
-        table th, table td { padding: 8px 6px !important; font-size: 10pt !important; }
-        .rank-header, .rank-cell { width: 55px !important; }
-        .team-name-head, .team-name-cell, .player-name-head, .player-name-cell { min-width: 130px !important; white-space: normal !important; }
-        .total-points-head, td.total-points-cell { min-width: 100px !important; }
+        table th, table td { padding: 6px 4px !important; font-size: 9.5pt !important; }
+        .rank-header, .rank-cell { width: 45px !important; }
+        .team-name-head, .team-name-cell, .player-name-head, .player-name-cell { min-width: 120px !important; white-space: normal !important; word-break: break-word !important; }
+        th.total-points-head, td.neon-score { min-width: 90px !important; text-align: center !important; display: table-cell !important; }
     }
     </style>
 </head>
@@ -217,6 +244,7 @@
 <canvas id="crackersCanvas"></canvas>
 <div id="championPopup" class="champion-popup-overlay">
     <div class="champion-card">
+        <div class="champion-badge">👑🔥</div>
         <div class="champion-title" id="popHeaderType">CURRENT #1 LEADER</div>
         <div class="champion-name" id="popLeaderName">LOADING...</div>
     </div>
@@ -241,12 +269,14 @@
         const tabStandingsBtn = document.getElementById('tab-btn-team-standings');
         const tabsContainer = document.getElementById('mainTabsContainer');
 
+        body.classList.remove('dashboard-orange-mode', 'results-purple-mode');
         btnTourney.className = 'mode-toggle-btn';
         btnDashboard.className = 'mode-toggle-btn';
         btnResults.className = 'mode-toggle-btn';
         tabsContainer.style.display = 'flex';
 
         if (mode === 'dashboard') {
+            body.classList.add('dashboard-orange-mode');
             btnDashboard.className = 'mode-toggle-btn active-dashboard';
             tabPointsBtn.classList.add('hide-tab-logic');
             tabKillsBtn.classList.add('hide-tab-logic');
@@ -254,6 +284,7 @@
             tabStandingsBtn.classList.remove('hide-tab-logic');
             switchTab('player-stats-tab', tabStatsBtn);
         } else if (mode === 'results') {
+            body.classList.add('results-purple-mode');
             btnResults.className = 'mode-toggle-btn active-results';
             tabsContainer.style.display = 'none';
             document.querySelectorAll('.table-responsive').forEach(tab => tab.classList.remove('active'));
@@ -280,6 +311,23 @@
         return arrowHTML;
     }
 
+    function getTeamEmoji(teamName) {
+        if (!teamName) return '🎮';
+        const name = teamName.toUpperCase();
+        if (name.includes('CAMP')) return '⛺';
+        if (name.includes('HUNT')) return '🏹';
+        if (name.includes('BOT')) return '🤖';
+        if (name.includes('THUND')) return '⚡';
+        return '⚔️'; 
+    }
+
+    function getRankBadgeHTML(rankNum) {
+        if (rankNum === 1) return '🥇';
+        if (rankNum === 2) return '🥈';
+        if (rankNum === 3) return '🥉';
+        return rankNum;
+    }
+
     function switchTab(tabId, button) {
         document.querySelectorAll('.table-responsive').forEach(tab => tab.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -304,23 +352,43 @@
     function buildRecentResultsCards(rows) {
         const container = document.getElementById('resultsCardsContainer');
         if (!rows || rows.length <= 1) {
-            container.innerHTML = `<div class="status-message">No history found.</div>`;
+            container.innerHTML = `<div class="status-message">No history found. Sheet tab named 'recentResults' must contain valid headers & rows.</div>`;
             return;
         }
+        
         container.innerHTML = '';
         for(let i = 1; i < rows.length; i++) {
             const row = rows[i];
             if(!row || !row[0] || row[0].toString().trim() === "") continue;
             
+            const dateVal = row[0] || 'N/A';
+            const tourneyName = row[1] || 'Tournament';
+            const champTeam = row[2] || 'TBD';
+            const teamPoints = row[3] || '0';
+            const mvpPlayer = row[4] || 'TBD';
+            const mvpKills = row[5] || '0';
+
             const card = document.createElement('div');
             card.className = 'result-card';
             card.innerHTML = `
-                <div class="card-date">📅 ${row[0] || 'N/A'}</div>
-                <div class="card-title">${row[1] || 'Tournament'}</div>
-                <div class="card-row"><span class="row-label">🏆 Champion Squad</span><span class="row-value">🥇 ${row[2] || 'TBD'}</span></div>
-                <div class="card-row"><span class="row-label">📊 Score Summary</span><span class="row-value">${row[3] || '0'}</span></div>
-                <div class="card-row"><span class="row-label">🔥 Tournament MVP</span><span class="row-value">${row[4] || 'TBD'}</span></div>
-                <div class="card-row"><span class="row-label">💀 Total Frag Count</span><span class="row-value" style="color:#ffaa44;">${row[5] || '0'} Kills</span></div>
+                <div class="card-date">📅 ${dateVal}</div>
+                <div class="card-title">${tourneyName}</div>
+                <div class="card-row">
+                    <span class="row-label">🏆 Champion Squad</span>
+                    <span class="row-value winner-team">🥇 ${champTeam}</span>
+                </div>
+                <div class="card-row">
+                    <span class="row-label">📊 Score Summary</span>
+                    <span class="row-value">${teamPoints}</span>
+                </div>
+                <div class="card-row">
+                    <span class="row-label">🔥 Tournament MVP</span>
+                    <span class="row-value winner-mvp">🎯 ${mvpPlayer}</span>
+                </div>
+                <div class="card-row">
+                    <span class="row-label">💀 Total Frag Count</span>
+                    <span class="row-value" style="color:#ffaa44;">${mvpKills} Kills</span>
+                </div>
             `;
             container.appendChild(card);
         }
@@ -331,54 +399,51 @@
         const thead = document.getElementById('team-points-head');
         const tbody = document.getElementById('team-points-body');
         
-        let headRow1 = '<tr><th rowspan="2" class="rank-header">S:NO</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
+        let headRow1 = '<tr><th rowspan="2" class="rank-header">RANK</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
         let headRow2 = '</tr><tr>';
         
         data.mapList.forEach(mapName => {
             headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
-            headRow2 += `<th>P</th><th>K</th>`;
+            headRow2 += `<th class="sub-th p-column">P</th><th class="sub-th">K</th>`;
         });
         
         headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
         thead.innerHTML = headRow1 + headRow2;
 
-        // Auto Calculation Logic & Sorting
-        data.teams.forEach(team => {
-            let total = 0;
-            if(team.scores) {
-                team.scores.forEach(s => {
-                    let cleanedVal = s !== undefined ? s.toString().trim() : '0';
-                    if(cleanedVal === '-' || cleanedVal === '') cleanedVal = '0';
-                    let num = parseFloat(cleanedVal);
-                    if(!isNaN(num)) total += num;
-                });
-            }
-            team.calculatedTotalPoints = total;
+        tbody.innerHTML = '';
+        
+        // Calculation logic ishi loop ke andar lagayi hai taaki static override na ho
+        data.teams.sort((a, b) => {
+            let totalA = 0, totalB = 0;
+            if(a.scores) a.scores.forEach(s => { if(!isNaN(parseFloat(s))) totalA += parseFloat(s); });
+            if(b.scores) b.scores.forEach(s => { if(!isNaN(parseFloat(s))) totalB += parseFloat(s); });
+            return totalB - totalA;
         });
 
-        data.teams.sort((a, b) => b.calculatedTotalPoints - a.calculatedTotalPoints);
-
-        tbody.innerHTML = '';
         let currentRank = 1;
-
         data.teams.forEach(team => {
-            if (!team.teamName || team.teamName.toString().trim() === "" || team.teamName.toUpperCase() === "TEAM NAME") return;
+            if (!team.teamName || team.teamName.toString().trim() === "" || team.teamName.toUpperCase() === "TEAM NAME") {
+                return; 
+            }
 
             const tr = document.createElement('tr');
-            tr.className = 'table-row';
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
             let arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
             
-            let rowHTML = `<td class="rank-cell">${currentRank}${arrow}</td>`;
-            rowHTML += `<td class="team-name-cell">${team.teamName}</td>`;
+            let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
             
+            let calculatedSum = 0;
             team.scores.forEach(score => { 
-                let displayScore = (score !== undefined && score.toString().trim() !== '') ? score : '-';
-                rowHTML += `<td>${displayScore}</td>`; 
+                let val = score !== undefined ? parseFloat(score) : 0;
+                if(isNaN(val)) val = 0;
+                calculatedSum += val;
+                rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
             });
             
-            // Total Points exact cell grid border attachment
-            rowHTML += `<td class="total-points-cell">${team.calculatedTotalPoints}</td>`;
-            
+            // P aur K ka automatic addition idhar append ho raha hai complete border class (neon-score) ke sath
+            rowHTML += `<td class="neon-score">${calculatedSum}</td>`;
+              
             tr.innerHTML = rowHTML; 
             tbody.appendChild(tr); 
             currentRank++;
@@ -393,7 +458,7 @@
         const headerRow = rows[startRowIdx];
         const numCols = headerRow.length;
 
-        let headHTML = `<tr><th class="rank-header">S:NO</th><th class="player-name-head">${headerRow[0] || 'PLAYER NAME'}</th>`;
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[0] || 'PLAYER NAME'}</th>`;
         for(let c = 1; c < numCols - 1; c++) headHTML += `<th>${headerRow[c] || 'MATCH'}</th>`;
         headHTML += `<th class="total-points-head">${headerRow[numCols - 1] || 'TOTAL KILLS'}</th></tr>`;
         thead.innerHTML = headHTML;
@@ -401,12 +466,12 @@
         tbody.innerHTML = ''; let currentRank = 1;
         for (let i = startRowIdx + 1; i < rows.length; i++) {
             const row = rows[i]; if (!row || !row[0] || row[0].toString().trim() === "" || row[0].toString().toUpperCase().includes("PLAYER NAME")) continue;
-            const tr = document.createElement('tr'); tr.className = 'table-row';
+            const tr = document.createElement('tr'); tr.classList.add(`rank-${currentRank}`, 'table-row');
             let arrow = calculateRankArrow('playerKills', row[0].toString().trim(), currentRank);
-            let cellHTML = `<td class="rank-cell">${currentRank}${arrow}</td>`;
-            cellHTML += `<td class="player-name-cell">${row[0]}</td>`;
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            cellHTML += `<td class="player-name-cell"><span class="team-emoji">🎯</span>${row[0]}</td>`;
             for(let d = 1; d < numCols - 1; d++) cellHTML += `<td>${row[d] !== undefined ? row[d] : '-'}</td>`;
-            cellHTML += `<td class="total-points-cell">${row[numCols - 1] !== undefined ? row[numCols - 1] : '-'}</td>`;
+            cellHTML += `<td class="neon-score">${row[numCols - 1] !== undefined ? row[numCols - 1] : '-'}</td>`;
             tr.innerHTML = cellHTML; tbody.appendChild(tr); currentRank++;
         }
     }
@@ -420,20 +485,21 @@
         const startIdx = headerRow[0] && headerRow[0].toString().toUpperCase().includes("S:") ? 1 : 0;
         const numCols = headerRow.length;
 
-        let headHTML = `<tr><th class="rank-header">S:NO</th><th class="player-name-head">${headerRow[startIdx] || 'PLAYER NAME'}</th>`;
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[startIdx] || 'PLAYER NAME'}</th>`;
         for (let c = startIdx + 1; c < numCols; c++) headHTML += `<th>${headerRow[c] || 'STAT'}</th>`;
         thead.innerHTML = headHTML + `</tr>`;
         
         tbody.innerHTML = ''; let currentRank = 1;
         for (let i = startRowIdx + 1; i < rows.length; i++) {
             const row = rows[i]; if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().toUpperCase().includes("PLAYER NAME")) continue;
-            const tr = document.createElement('tr'); tr.className = 'table-row';
+            const tr = document.createElement('tr'); tr.classList.add(`rank-${currentRank}`, 'table-row');
             let arrow = calculateRankArrow('playerStats', row[startIdx].toString().trim(), currentRank);
-            let cellHTML = `<td class="rank-cell">${currentRank}${arrow}</td>`;
-            cellHTML += `<td class="player-name-cell">${row[startIdx]}</td>`;
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            cellHTML += `<td class="player-name-cell"><span class="team-emoji">👤</span>${row[startIdx]}</td>`;
             for (let d = startIdx + 1; d < numCols; d++) {
                 let val = row[d]; if (d === numCols - 1 && val !== undefined && !isNaN(val) && val !== "") val = Number(val).toFixed(2);
-                if (d === numCols - 1) cellHTML += `<td class="total-points-cell">${val !== undefined ? val : '-'}</td>`;
+                if (d === startIdx + 2) cellHTML += `<td class="neon-score">${val !== undefined ? val : '-'}</td>`;
+                else if (d === numCols - 1) cellHTML += `<td class="highlight-stat">${val !== undefined ? val : '-'}</td>`;
                 else cellHTML += `<td>${val !== undefined ? val : '-'}</td>`;
             }
             tr.innerHTML = cellHTML; tbody.appendChild(tr); currentRank++;
@@ -449,20 +515,21 @@
         const startIdx = headerRow[0] && headerRow[0].toString().toUpperCase().includes("RANK") ? 1 : 0;
         const numCols = headerRow.length;
 
-        let headHTML = `<tr><th class="rank-header">S:NO</th><th class="team-name-head">${headerRow[startIdx] || 'TEAM NAME'}</th>`;
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="team-name-head">${headerRow[startIdx] || 'TEAM NAME'}</th>`;
         for (let c = startIdx + 1; c < numCols; c++) headHTML += `<th>${headerRow[c] || 'DATA'}</th>`;
         thead.innerHTML = headHTML + `</tr>`;
 
         tbody.innerHTML = ''; let currentRank = 1;
         for (let i = startRowIdx + 1; i < rows.length; i++) {
             const row = rows[i]; if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().trim() === "0") continue;
-            const tr = document.createElement('tr'); tr.className = 'table-row';
+            const tr = document.createElement('tr'); tr.classList.add(`rank-${currentRank}`, 'table-row');
             let arrow = calculateRankArrow('teamStandings', row[startIdx].toString().trim(), currentRank);
-            let cellHTML = `<td class="rank-cell">${currentRank}${arrow}</td>`;
-            cellHTML += `<td class="team-name-cell">${row[startIdx]}</td>`;
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            cellHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(row[startIdx])}</span>${row[startIdx]}</td>`;
             for (let d = startIdx + 1; d < numCols; d++) {
                 let val = row[d]; if (d === numCols - 1 && val !== undefined && !isNaN(val) && val !== '') val = Number(val).toFixed(2);
-                if (d === numCols - 1) cellHTML += `<td class="total-points-cell">${val !== undefined ? val : 0}</td>`;
+                if (d === startIdx + 3) cellHTML += `<td class="neon-score">${val !== undefined ? val : 0}</td>`;
+                else if (d === numCols - 1) cellHTML += `<td class="highlight-stat">${val !== undefined ? val : 0}</td>`;
                 else cellHTML += `<td>${val !== undefined ? val : 0}</td>`;
             }
             tr.innerHTML = cellHTML; tbody.appendChild(tr); currentRank++;
@@ -477,7 +544,7 @@
             const cells = firstRow.querySelectorAll('td'); if (cells.length < 2) return;
             
             let winnerName = cells[1].innerText || cells[1].textContent;
-            winnerName = winnerName.trim();
+            winnerName = winnerName.replace(/[🥇🥈🥉⭐👑🎖️🔥🎮🎯👤⚔️]/g, '').trim();
             if (winnerName.toUpperCase() === "LOADING..." || winnerName === "") return;
 
             if (lastWinnerCache[tabId] !== winnerName) {
