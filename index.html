@@ -428,7 +428,7 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
         }
     }
 
-   function buildDynamicTeamPointsGrid(data) {
+    function buildDynamicTeamPointsGrid(data) {
            if (!data || !data.mapList || !data.teams) return;
     const thead = document.getElementById('team-points-head');
     const tbody = document.getElementById('team-points-body');
@@ -439,7 +439,8 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
     
     data.mapList.forEach(mapName => {
         headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
-        headRow2 += `<th class="sub-th">P</th><th class="sub-th">K</th>`;
+        // Humne pehle wale sub-th mein 'p-column' class jod di hai
+        headRow2 += `<th class="sub-th p-column">P</th><th class="sub-th">K</th>`;
     });
     
     headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
@@ -468,14 +469,13 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
             rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
         });
         
-        rowHTML += `<td class="neon-score">${team.totalPoints}</td>`;
+        rowHTML += `<td style="color: #ffffff !important; font-weight: 800 !important;">${team.totalPoints !== undefined ? team.totalPoints : 0}</td>`;
           
         tr.innerHTML = rowHTML; 
         tbody.appendChild(tr); 
         currentRank++;
     });
 }
-
 
     function buildPlayerKillsGrid(rows) {
         if (!rows || rows.length === 0) return;
