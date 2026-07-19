@@ -100,25 +100,19 @@
         .total-points-head, .neon-score { width: 130px !important; }
         .top-killer-head { width: 180px !important; text-align: left !important; padding-left: 15px !important; }
         th.map-header { font-size: 11pt; font-weight: 800; background-color: rgba(40, 15, 5, 0.95); color: #ffffff; }
-        /* Header ke P ko style karega */
-th.p-column {
-    background-color: rgba(255, 255, 255, 0.04) !important;
-}
+        th.p-column { background-color: rgba(255, 255, 255, 0.04) !important; }
 
-#team-points-body tr td:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.03) !important;
-}
+        #team-points-body tr td:nth-child(even) { background-color: rgba(255, 255, 255, 0.03) !important; }
 
-td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt; font-weight: 700 !important; }
-td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; text-align: middle; }
-tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); }
-tr:hover td { background-color: rgba(255, 69, 0, 0.15); }
-tr.rank-1 td { background-color: rgba(255, 69, 0, 0.2) !important; border-bottom: 1px solid #ffd700 !important; }
-tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
-tr.rank-1 td.rank-cell { color: #ffd700; }
-.status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
+        td.neon-score, td.highlight-stat { color: #ffaa44 !important; text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important; font-size: 13.5pt; font-weight: 700 !important; }
+        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; font-size: 13.5pt !important; text-align: center; }
+        tr:nth-child(even) td { background-color: rgba(30, 15, 10, 0.25); }
+        tr:hover td { background-color: rgba(255, 69, 0, 0.15); }
+        tr.rank-1 td { background-color: rgba(255, 69, 0, 0.2) !important; border-bottom: 1px solid #ffd700 !important; }
+        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.5); }
+        tr.rank-1 td.rank-cell { color: #ffd700; }
+        .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
         
-        /* RECENT RESULTS CARDS STYLING */
         .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; width: 100%; max-width: 1100px; padding: 10px; }
         .result-card { background: linear-gradient(135deg, rgba(20, 5, 35, 0.85) 0%, rgba(5, 1, 15, 0.95) 100%); border: 2px solid #8a2be2; border-radius: 16px; padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative; overflow: hidden; border-top: 5px solid #d8bfd8; transition: transform 0.3s ease; }
         .result-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(138, 43, 226, 0.4); }
@@ -140,59 +134,18 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
         .champion-badge { font-size: 55pt; margin-bottom: 5px; animation: firePulse 0.8s infinite alternate; }
         @keyframes firePulse { 0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); } 100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); } }
         #crackersCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999999 !important; }
-       /* =======================================================
-   MOBILE & TABLET COMPACT RESPONSIVE STYLES (FINAL CLEAN FIX)
-   ======================================================= */
-@media screen and (max-width: 768px) {
-    body {
-        padding: 5px 4px !important;
-    }
-    
-    .container {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 4px !important;
-        margin: 0 auto !important;
-    }
 
-    /* Mobile standard scroll container setup */
-    .tournament-mode, .dashboard-mode, .recent-results {
-        display: block !important;
-        width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        margin-bottom: 15px !important;
-    }
-
-    table {
-        width: 100% !important;
-        table-layout: auto !important; /* Isse content squeeze nahi hoga */
-    }
-
-    table th, table td {
-        padding: 6px 4px !important;
-        font-size: 9.5pt !important;
-    }
-
-    /* Elements parameters under mobile layout */
-    .rank-header, .rank-cell { 
-        width: 45px !important; 
-    }
-    
-    .team-name-head, .team-name-cell,
-    .player-name-head, .player-name-cell { 
-        min-width: 120px !important;
-        white-space: normal !important; 
-        word-break: break-word !important;
-    }
-
-    /* Total Points mobile display optimization */
-    th.total-points-head, td.neon-score { 
-        min-width: 90px !important; 
-        text-align: center !important;
-        display: table-cell !important;
-    }
-}
+        @media screen and (max-width: 768px) {
+            body { padding: 5px 4px !important; }
+            .container { width: 100% !important; max-width: 100% !important; padding: 4px !important; margin: 0 auto !important; }
+            .tournament-mode, .dashboard-mode, .recent-results, .table-responsive { display: none; width: 100% !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; margin-bottom: 15px !important; }
+            .table-responsive.active { display: block !important; }
+            table { width: 100% !important; table-layout: auto !important; }
+            table th, table td { padding: 6px 4px !important; font-size: 9.5pt !important; }
+            .rank-header, .rank-cell { width: 45px !important; }
+            .team-name-head, .team-name-cell, .player-name-head, .player-name-cell { min-width: 120px !important; white-space: normal !important; word-break: break-word !important; }
+            th.total-points-head, td.neon-score { min-width: 90px !important; text-align: center !important; display: table-cell !important; }
+        }
     </style>
 </head>
 <body>
@@ -281,7 +234,8 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
 </div>
 
 <script>
-    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbxYcSOEDchQ-m6BrE-Onxc_-CAq57zYzSLA1ypRv64MGH8kLE3s1Wz7diiaw6GT4lUT8A/exec";
+    // FIX: Yahan aapka Deploy kiya hua naya URL hi aayega
+    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycby4dQUy5nTh-EjI_0dTyV58bbqXDBFZiNeyFFTZBbOWmRH_gzocbcWTWrmsYqAPBqQXBA/exec";
 
     if (!window.rankMemory) {
         window.rankMemory = { teamPoints: {}, playerKills: {}, playerStats: {}, teamStandings: {} };
@@ -299,7 +253,6 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
         const tabStandingsBtn = document.getElementById('tab-btn-team-standings');
         const tabsContainer = document.getElementById('mainTabsContainer');
 
-        // Reset Modes
         body.classList.remove('dashboard-orange-mode', 'results-purple-mode');
         btnTourney.className = 'mode-toggle-btn';
         btnDashboard.className = 'mode-toggle-btn';
@@ -317,9 +270,7 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
         } else if (mode === 'results') {
             body.classList.add('results-purple-mode');
             btnResults.className = 'mode-toggle-btn active-results';
-            tabsContainer.style.display = 'none'; // Hide inner sub-tabs entirely
-            
-            // Hide all sub tab sheets & show recent results div directly
+            tabsContainer.style.display = 'none';
             document.querySelectorAll('.table-responsive').forEach(tab => tab.classList.remove('active'));
             document.getElementById('recent-results-tab').classList.add('active');
         } else {
@@ -374,108 +325,83 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
             const response = await fetch(`${REALTIME_API_URL}?_=${new Date().getTime()}`);
             const allData = await response.json();
             
-            buildDynamicTeamPointsGrid(allData.teamPoints);
-            buildPlayerKillsGrid(allData.playerKills);
-            buildPlayerStatsGrid(allData.playerStats);
-            buildTeamStandingsGrid(allData.teamStandings);
-            buildRecentResultsCards(allData.recentResults);
+            if(allData) {
+                if(allData.teamPoints) buildDynamicTeamPointsGrid(allData.teamPoints);
+                if(allData.playerKills) buildPlayerKillsGrid(allData.playerKills);
+                if(allData.playerStats) buildPlayerStatsGrid(allData.playerStats);
+                if(allData.teamStandings) buildTeamStandingsGrid(allData.teamStandings);
+                if(allData.recentResults) buildRecentResultsCards(allData.recentResults);
+            }
         } catch (error) { console.error("Sync error:", error); }
     }
 
     function buildRecentResultsCards(rows) {
         const container = document.getElementById('resultsCardsContainer');
         if (!rows || rows.length <= 1) {
-            container.innerHTML = `<div class="status-message">No history found. Sheet tab named 'recentResults' must contain valid headers & rows.</div>`;
+            container.innerHTML = `<div class="status-message">No history found.</div>`;
             return;
         }
-        
         container.innerHTML = '';
-        // Index 0 has headers (DATE, PORKALAM, CHAMPION TEAM...)
         for(let i = 1; i < rows.length; i++) {
             const row = rows[i];
             if(!row || !row[0] || row[0].toString().trim() === "") continue;
             
-            const dateVal = row[0] || 'N/A';
-            const tourneyName = row[1] || 'Tournament';
-            const champTeam = row[2] || 'TBD';
-            const teamPoints = row[3] || '0';
-            const mvpPlayer = row[4] || 'TBD';
-            const mvpKills = row[5] || '0';
-
             const card = document.createElement('div');
             card.className = 'result-card';
             card.innerHTML = `
-                <div class="card-date">📅 ${dateVal}</div>
-                <div class="card-title">${tourneyName}</div>
-                <div class="card-row">
-                    <span class="row-label">🏆 Champion Squad</span>
-                    <span class="row-value winner-team">🥇 ${champTeam}</span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">📊 Score Summary</span>
-                    <span class="row-value">${teamPoints}</span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">🔥 Tournament MVP</span>
-                    <span class="row-value winner-mvp">🎯 ${mvpPlayer}</span>
-                </div>
-                <div class="card-row">
-                    <span class="row-label">💀 Total Frag Count</span>
-                    <span class="row-value" style="color:#ffaa44;">${mvpKills} Kills</span>
-                </div>
+                <div class="card-date">📅 ${row[0] || 'N/A'}</div>
+                <div class="card-title">${row[1] || 'Tournament'}</div>
+                <div class="card-row"><span class="row-label">🏆 Champion Squad</span><span class="row-value winner-team">🥇 ${row[2] || 'TBD'}</span></div>
+                <div class="card-row"><span class="row-label">📊 Score Summary</span><span class="row-value">${row[3] || '0'}</span></div>
+                <div class="card-row"><span class="row-label">🔥 Tournament MVP</span><span class="row-value winner-mvp">🎯 ${row[4] || 'TBD'}</span></div>
+                <div class="card-row"><span class="row-label">💀 Total Frag Count</span><span class="row-value" style="color:#ffaa44;">${row[5] || '0'} Kills</span></div>
             `;
             container.appendChild(card);
         }
     }
 
+    // FIXED: Strict Table Rendering Logic
     function buildDynamicTeamPointsGrid(data) {
-           if (!data || !data.mapList || !data.teams) return;
-    const thead = document.getElementById('team-points-head');
-    const tbody = document.getElementById('team-points-body');
-    
-    // Yahan TP ki jagah TOTAL POINTS likh diya hai
-    let headRow1 = '<tr><th rowspan="2" class="rank-header">RANK</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
-    let headRow2 = '</tr><tr>';
-    
-    data.mapList.forEach(mapName => {
-        headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
-        // Humne pehle wale sub-th mein 'p-column' class jod di hai
-        headRow2 += `<th class="sub-th p-column">P</th><th class="sub-th">K</th>`;
-    });
-    
-    headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
-    thead.innerHTML = headRow1 + headRow2;
-
-    tbody.innerHTML = '';
-    let currentRank = 1;
-    
-    // Sort teams by total points
-    data.teams.sort((a, b) => (Number(b.totalPoints) || 0) - (Number(a.totalPoints) || 0));
-
-    data.teams.forEach(team => {
-        // FILTER: Agar Google Sheet se koi extra template row ya placeholder text (jaise khud "TEAM NAME") aa raha ho, toh use skip karo
-        if (!team.teamName || team.teamName.toString().trim() === "" || team.teamName.toUpperCase() === "TEAM NAME") {
-            return; 
-        }
-
-        const tr = document.createElement('tr');
-        tr.classList.add(`rank-${currentRank}`, 'table-row');
-        let arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
+        if (!data || !data.mapList || !data.teams) return;
+        const thead = document.getElementById('team-points-head');
+        const tbody = document.getElementById('team-points-body');
         
-        let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
-        rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
+        let headRow1 = '<tr><th rowspan="2" class="rank-header">RANK</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
+        let headRow2 = '</tr><tr>';
         
-        team.scores.forEach(score => { 
-            rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
+        data.mapList.forEach(mapName => {
+            headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
+            headRow2 += `<th class="sub-th p-column">P</th><th class="sub-th">K</th>`;
         });
         
-        rowHTML += `<td class="neon-score">${team.totalPoints}</td>`;
-          
-        tr.innerHTML = rowHTML; 
-        tbody.appendChild(tr); 
-        currentRank++;
-    });
-}
+        headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
+        thead.innerHTML = headRow1 + headRow2;
+
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        
+        data.teams.sort((a, b) => (Number(b.totalPoints) || 0) - (Number(a.totalPoints) || 0));
+
+        data.teams.forEach(team => {
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
+            let arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
+            
+            let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
+            
+            team.scores.forEach(score => { 
+                rowHTML += `<td>${(score !== undefined && score !== "") ? score : 0}</td>`; 
+            });
+            
+            // Neon wrapper fix with accurate text visibility properties
+            rowHTML += `<td class="neon-score" style="color: #ffaa00 !important; font-weight:800; text-shadow: 0 0 8px rgba(255,170,0,0.6);">${team.totalPoints}</td>`;
+              
+            tr.innerHTML = rowHTML; 
+            tbody.appendChild(tr); 
+            currentRank++;
+        });
+    }
 
     function buildPlayerKillsGrid(rows) {
         if (!rows || rows.length === 0) return;
@@ -588,84 +514,38 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
 </script>
 
 <script>
-// Canvas Engine & Crackers System
-const canvas = document.getElementById('odysseyCanvas'); const ctx = canvas.getContext('2d');
-function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-window.addEventListener('resize', initCanvas); initCanvas();
+    const canvas = document.getElementById('odysseyCanvas'); const ctx = canvas.getContext('2d');
+    function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', initCanvas); initCanvas();
 
-function initFireBackground() {
-    let particles = [];
-    class Particle {
-        constructor() { this.x = Math.random() * canvas.width; this.y = canvas.height + Math.random() * 100; this.size = Math.random() * 3 + 1; this.speedY = Math.random() * 1.2 + 0.4; this.speedX = Math.random() * 0.8 - 0.4; this.opacity = Math.random() * 0.4 + 0.4; }
-        update() { this.y -= this.speedY; this.x += this.speedX; if (this.y < -10) { this.y = canvas.height + 10; this.x = Math.random() * canvas.width; } }
-        draw() { ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 90) + 40}, 0, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
-    }
-    for (let i = 0; i < 40; i++) particles.push(new Particle());
-    function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
-    animate();
-}
-
-const cCanvas = document.getElementById('crackersCanvas'); const cCtx = cCanvas.getContext('2d');
-let cParticles = [], crackersAnimationId;
-function resizeCrackersCanvas() { cCanvas.width = window.innerWidth; cCanvas.height = window.innerHeight; }
-window.addEventListener('resize', resizeCrackersCanvas); resizeCrackersCanvas();
-
-class CrackerParticle {
-    constructor(x, y, color) { this.x = x; this.y = y; this.color = color; this.radius = Math.random() * 3 + 2; const angle = Math.random() * Math.PI * 2, velocity = Math.random() * 10 + 4; this.speedX = Math.cos(angle) * velocity; this.speedY = Math.sin(angle) * velocity; this.gravity = 0.18; this.alpha = 1; this.decay = Math.random() * 0.015 + 0.012; }
-    update() { this.speedY += this.gravity; this.x += this.speedX; this.y += this.speedY; this.alpha -= this.decay; }
-    draw() { cCtx.save(); cCtx.globalAlpha = this.alpha; cCtx.fillStyle = this.color; cCtx.shadowBlur = 8; cCtx.shadowColor = this.color; cCtx.beginPath(); cCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); cCtx.fill(); cCtx.restore(); }
-}
-function createExplosion(x, y) { const colors = ['#ff4500', '#ff8c00', '#ffd700', '#ff0000', '#ffffff']; for (let i = 0; i < 80; i++) cParticles.push(new CrackerParticle(x, y, colors[Math.floor(Math.random() * colors.length)])); }
-function animateCrackers() { cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height); for (let i = cParticles.length - 1; i >= 0; i--) { cParticles[i].update(); if (cParticles[i].alpha <= 0) cParticles.splice(i, 1); else cParticles[i].draw(); } crackersAnimationId = requestAnimationFrame(animateCrackers); }
-function triggerNativeCrackers() { cParticles = []; cancelAnimationFrame(crackersAnimationId); animateCrackers(); createExplosion(window.innerWidth * 0.2, window.innerHeight * 0.4); setTimeout(() => createExplosion(window.innerWidth * 0.8, window.innerHeight * 0.4), 250); setTimeout(() => createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.3), 500); }
-
-window.addEventListener('load', () => { initFireBackground(); applyOperationMode('tournament'); });
-function openMainPointsTable() { document.getElementById('porkalamSplash').classList.add('fade-hide'); fetchAllSheetsData(); setInterval(fetchAllSheetsData, 2000); }
-    // =======================================================
-// AUTOMATIC TOTAL POINTS CALCULATION SCRIPT
-// =======================================================
-function updateTournamentTotalPoints() {
-    // Apne table ke saare rows ko target karna (header row ko chhodkar)
-    const rows = document.querySelectorAll('table tbody tr, table tr');
-    
-    rows.forEach(row => {
-        // Sirf un rows ko calculate karenge jisme data cells (td) hain aur rank present hai
-        const cells = row.querySelectorAll('td');
-        if (cells.length >= 10) { 
-            let totalSum = 0;
-            
-            // Map columns (Index 2 se lekar Index 9 tak ke saare P aur K status values)
-            // Index 2 = Erangle P, Index 3 = Erangle K... up to Index 9 = Miramar K
-            for (let i = 2; i <= 9; i++) {
-                let cellValue = cells[i].innerText || cells[i].textContent;
-                
-                // Agar field khali "-" hai ya numbers nahi hain toh use 0 maane
-                let numericValue = parseFloat(cellValue.trim());
-                if (!isNaN(numericValue)) {
-                    totalSum += numericValue;
-                }
-            }
-            
-            // Sabse aakhri column (Total Points) ko value assign karna
-            const totalPointsCell = cells[cells.length - 1];
-            if (totalPointsCell) {
-                totalPointsCell.innerHTML = `<strong>${totalSum}</strong>`;
-                
-                // Dynamic CSS features jo humne columns ke liye lagaye the unhe target karna
-                totalPointsCell.style.textAlign = 'center';
-                totalPointsCell.style.color = '#ffaa00';
-                totalPointsCell.style.textShadow = '0 0 8px rgba(255, 170, 0, 0.6)';
-            }
+    function initFireBackground() {
+        let particles = [];
+        class Particle {
+            constructor() { this.x = Math.random() * canvas.width; this.y = canvas.height + Math.random() * 100; this.size = Math.random() * 3 + 1; this.speedY = Math.random() * 1.2 + 0.4; this.speedX = Math.random() * 0.8 - 0.4; this.opacity = Math.random() * 0.4 + 0.4; }
+            update() { this.y -= this.speedY; this.x += this.speedX; if (this.y < -10) { this.y = canvas.height + 10; this.x = Math.random() * canvas.width; } }
+            draw() { ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 90) + 40}, 0, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
         }
-    });
-}
+        for (let i = 0; i < 40; i++) particles.push(new Particle());
+        function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        animate();
+    }
 
-// Page load hote hi aur dynamic data fetch hote hi real-time updates run honge
-document.addEventListener('DOMContentLoaded', updateTournamentTotalPoints);
-window.addEventListener('load', updateTournamentTotalPoints);
+    const cCanvas = document.getElementById('crackersCanvas'); const cCtx = cCanvas.getContext('2d');
+    let cParticles = [], crackersAnimationId;
+    function resizeCrackersCanvas() { cCanvas.width = window.innerWidth; cCanvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizeCrackersCanvas); resizeCrackersCanvas();
 
-// Agar aap real-time input fields use karte hain toh change hone par dynamic sum hoga
-document.addEventListener('input', updateTournamentTotalPoints);
+    class CrackerParticle {
+        constructor(x, y, color) { this.x = x; this.y = y; this.color = color; this.radius = Math.random() * 3 + 2; const angle = Math.random() * Math.PI * 2, velocity = Math.random() * 10 + 4; this.speedX = Math.cos(angle) * velocity; this.speedY = Math.sin(angle) * velocity; this.gravity = 0.18; this.alpha = 1; this.decay = Math.random() * 0.015 + 0.012; }
+        update() { this.speedY += this.gravity; this.x += this.speedX; this.y += this.speedY; this.alpha -= this.decay; }
+        draw() { cCtx.save(); cCtx.globalAlpha = this.alpha; cCtx.fillStyle = this.color; cCtx.shadowBlur = 8; cCtx.shadowColor = this.color; cCtx.beginPath(); cCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); cCtx.fill(); cCtx.restore(); }
+    }
+    function createExplosion(x, y) { const colors = ['#ff4500', '#ff8c00', '#ffd700', '#ff0000', '#ffffff']; for (let i = 0; i < 80; i++) cParticles.push(new CrackerParticle(x, y, colors[Math.floor(Math.random() * colors.length)])); }
+    function animateCrackers() { cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height); for (let i = cParticles.length - 1; i >= 0; i--) { cParticles[i].update(); if (cParticles[i].alpha <= 0) cParticles.splice(i, 1); else cParticles[i].draw(); } crackersAnimationId = requestAnimationFrame(animateCrackers); }
+    function triggerNativeCrackers() { cParticles = []; cancelAnimationFrame(crackersAnimationId); animateCrackers(); createExplosion(window.innerWidth * 0.2, window.innerHeight * 0.4); setTimeout(() => createExplosion(window.innerWidth * 0.8, window.innerHeight * 0.4), 250); setTimeout(() => createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.3), 500); }
+
+    window.addEventListener('load', () => { initFireBackground(); applyOperationMode('tournament'); });
+    function openMainPointsTable() { document.getElementById('porkalamSplash').classList.add('fade-hide'); fetchAllSheetsData(); setInterval(fetchAllSheetsData, 2000); }
 </script>
 </body>
 </html>
