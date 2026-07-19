@@ -469,7 +469,7 @@ tr.rank-1 td.rank-cell { color: #ffd700; }
             rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
         });
         
-        rowHTML += `<td>${team.totalPoints !== undefined ? team.totalPoints : 0}</td>`;
+        rowHTML += `<td style="color: #ffffff !important; font-weight: 800 !important;">${team.totalPoints !== undefined ? team.totalPoints : 0}</td>`;
           
         tr.innerHTML = rowHTML; 
         tbody.appendChild(tr); 
