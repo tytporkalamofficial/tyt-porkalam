@@ -118,6 +118,7 @@
         .result-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(138, 43, 226, 0.4); }
         .card-date { position: absolute; top: 12px; right: 15px; font-size: 9.5pt; color: #d8bfd8; font-weight: 700; background: rgba(138, 43, 226, 0.3); padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(216, 191, 216, 0.4); }
         .card-title { font-size: 18pt; font-weight: 800; color: #ffffff; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1px; max-width: 70%; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+        .card-title { font-size: 18pt; font-weight: 800; color: #ffffff; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1px; max-width: 70%; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
         .card-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(138, 43, 226, 0.2); }
         .card-row:last-child { border-bottom: none; }
         .row-label { font-size: 11pt; color: #a0aec0; font-weight: bold; text-transform: uppercase; }
@@ -234,8 +235,8 @@
 </div>
 
 <script>
-    // FIX: Yahan aapka Deploy kiya hua naya URL hi aayega
-    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbw2S7ZsyD0uanFEO-DNeSN9WjOUgFw7OiHw8IUhb4R4MjTSYjNHa-gRoeIa32EXoSe7Sg/exec";
+    // FIXED URL & REMOVED THE CACHE CONFLICT PARAMETER
+    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycby7XLwPH1rMVLQd0MEQOxJwkODJywlVgFo0EbAqYCvidG5MvIe3uziIOgavX_SuknTYxg/exec";
 
     if (!window.rankMemory) {
         window.rankMemory = { teamPoints: {}, playerKills: {}, playerStats: {}, teamStandings: {} };
@@ -320,9 +321,10 @@
         triggerTabCelebration(tabId);
     }
 
+    // FIXED: Clean Fetch Call Without Parameter Truncation Issues
     async function fetchAllSheetsData() {
         try {
-            const response = await fetch(`${REALTIME_API_URL}?_=${new Date().getTime()}`);
+            const response = await fetch(REALTIME_API_URL);
             const allData = await response.json();
             
             if(allData) {
@@ -360,7 +362,6 @@
         }
     }
 
-    // FIXED: Strict Table Rendering Logic
     function buildDynamicTeamPointsGrid(data) {
         if (!data || !data.mapList || !data.teams) return;
         const thead = document.getElementById('team-points-head');
@@ -394,7 +395,6 @@
                 rowHTML += `<td>${(score !== undefined && score !== "") ? score : 0}</td>`; 
             });
             
-            // Neon wrapper fix with accurate text visibility properties
             rowHTML += `<td class="neon-score" style="color: #ffaa00 !important; font-weight:800; text-shadow: 0 0 8px rgba(255,170,0,0.6);">${team.totalPoints}</td>`;
               
             tr.innerHTML = rowHTML; 
