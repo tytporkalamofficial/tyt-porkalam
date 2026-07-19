@@ -12,16 +12,37 @@
 .premium-splash {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: #000000; /* Pure Black */
+    background: #050100;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     z-index: 9999999 !important;
     overflow: hidden;
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Neon Red & Orange Splash Title */
+/* Fire Background Animation */
+.fire-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(40,10,0,0.6) 0%, #000000 100%);
+    pointer-events: none;
+}
+.fire-particle {
+    position: absolute;
+    bottom: -20px;
+    background: radial-gradient(circle, #ff4500 20%, rgba(255,140,0,0) 70%);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: riseUp 4s linear infinite;
+}
+@keyframes riseUp {
+    0% { transform: translateY(0) scale(1) translateX(0); opacity: 0.7; }
+    50% { transform: translateY(-50vh) scale(1.3) translateX(20px); opacity: 0.4; }
+    100% { transform: translateY(-110vh) scale(0.5) translateX(-20px); opacity: 0; }
+}
+
+/* TYT PORKALAM Dancing / Glow Text Effect */
 .dancing-title {
-    color: #ffffff; /* White Text */
+    color: #ffffff;
     font-size: 46pt;
     font-weight: 900;
     text-transform: uppercase;
@@ -29,20 +50,20 @@
     margin-bottom: 30px;
     z-index: 2;
     position: relative;
-    text-shadow: 0 0 15px #ff0033, 0 0 30px #ff6600; /* Neon Red & Orange Glow */
-    animation: neonPulse 2s ease-in-out infinite alternate;
+    text-shadow: 0 0 20px #ff4500, 0 0 40px #ff8c00;
+    animation: textDance 3s ease-in-out infinite alternate;
 }
-@keyframes neonPulse {
-    0% { transform: translateY(0) scale(1); text-shadow: 0 0 15px #ff0033, 0 0 30px #ff6600; }
-    50% { transform: translateY(-5px) scale(1.02); text-shadow: 0 0 25px #ff0000, 0 0 40px #ffaa00; }
-    100% { transform: translateY(3px) scale(0.99); text-shadow: 0 0 15px #ff3300, 0 0 35px #ff0033; }
+@keyframes textDance {
+    0% { transform: translateY(0) rotate(-1deg); text-shadow: 0 0 20px #ff4500, 0 0 40px #ff8c00; }
+    50% { transform: translateY(-10px) rotate(1deg) scale(1.03); text-shadow: 0 0 30px #ff0000, 0 0 50px #ffd700; }
+    100% { transform: translateY(5px) rotate(-0.5deg); text-shadow: 0 0 25px #ff4500, 0 0 45px #ff8c00; }
 }
 
 /* Enter Tournament Action Button */
 .enter-esports-btn {
-    background: linear-gradient(135deg, #ff0033 0%, #ff6600 100%); /* Red to Orange Accent */
+    background: linear-gradient(135deg, #ff4500 0%, #b30000 100%);
     color: #ffffff;
-    border: 2px solid #ff0033;
+    border: 2px solid #ffd700;
     padding: 16px 45px;
     font-size: 16pt;
     font-weight: 800;
@@ -50,13 +71,13 @@
     border-radius: 6px;
     cursor: pointer;
     z-index: 2;
-    box-shadow: 0 0 25px rgba(255, 0, 51, 0.5);
+    box-shadow: 0 0 25px rgba(255, 69, 0, 0.6);
     transition: all 0.2s ease;
 }
 .enter-esports-btn:hover {
     transform: scale(1.08);
-    box-shadow: 0 0 45px #ff6600;
-    background: linear-gradient(135deg, #ff6600 0%, #ff0033 100%);
+    box-shadow: 0 0 45px #ff4500;
+    background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%);
 }
 
 /* Smooth Fade Out Class */
@@ -79,12 +100,20 @@
     0% { transform: scale(0.5); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
 }
-.pos-up { color: #ffaa00 !important; text-shadow: 0 0 8px rgba(255, 170, 0, 0.6); } /* Orange Up */
-.pos-down { color: #ff0033 !important; text-shadow: 0 0 8px rgba(255, 0, 51, 0.6); } /* Red Down */
+.pos-up { color: #00ff66 !important; text-shadow: 0 0 8px rgba(0, 255, 102, 0.6); }
+.pos-down { color: #ff3333 !important; text-shadow: 0 0 8px rgba(255, 51, 51, 0.6); }
 .table-row { transition: all 0.5s ease; }
 </style>
 
 <div id="porkalamSplash" class="premium-splash">
+    <div class="fire-bg">
+        <div class="fire-particle" style="left:10%; width:15px; height:15px; animation-delay:0s; animation-duration:5s;"></div>
+        <div class="fire-particle" style="left:25%; width:22px; height:22px; animation-delay:1.5s; animation-duration:4s;"></div>
+        <div class="fire-particle" style="left:45%; width:12px; height:12px; animation-delay:0.5s; animation-duration:6s;"></div>
+        <div class="fire-particle" style="left:65%; width:26px; height:26px; animation-delay:2s; animation-duration:4.5s;"></div>
+        <div class="fire-particle" style="left:80%; width:18px; height:18px; animation-delay:1s; animation-duration:5.5s;"></div>
+    </div>
+    
     <div class="dancing-title">TYT PORKALAM</div>
     <button class="enter-esports-btn" onclick="openMainPointsTable()">Enter Tournament</button>
 </div>
@@ -96,22 +125,21 @@
             user-select: none;
         }
 
-        /* 🔥 PURE BLACK BACKGROUND WITH HEAVY PARTICLES */
         body {
             margin: 0;
-            padding: 10px 30px; 
-            background: #000000 !important; /* Pure Black */
-            color: #ffffff; /* White Text */
+            padding: 15px;
+            background: radial-gradient(circle at 70% 30%, #062340 0%, #031124 60%, #010610 100%);
+            color: #ffffff;
             display: flex;
             justify-content: center;
-            align-items: flex-start; 
+            align-items: center;
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* 🔮 EMBER, SMOKE & RED PARTICLE CANVAS ENGINE */
-        #cyberCanvas {
+        /* 🌊 BGMI OCEAN ODYSSEY CANVAS ENGINE */
+        #odysseyCanvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -121,51 +149,26 @@
             pointer-events: none;
         }
 
-        /* ULTRA TRANSPARENT CONTAINER */
+        /* 🔮 GLASS CONTAINER STYLE */
         .container {
             width: 100%;
-            max-width: 98% !important; 
-            background: transparent !important; 
-            border: none !important; 
-            box-shadow: none !important; 
+            max-width: 1450px;
+            background-color: rgba(4, 14, 28, 0.55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 240, 255, 0.12);
             position: relative;
             z-index: 2;
-            padding-top: 15px;
-            transition: all 0.5s ease;
-        }
-
-        /* Mode Switcher UI bar */
-        .mode-switcher-bar {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 15px;
-        }
-        .mode-toggle-btn {
-            background: rgba(0, 0, 0, 0.8);
-            border: 1.5px solid rgba(255, 0, 51, 0.3);
-            color: #a0aec0;
-            padding: 10px 25px;
-            font-size: 11pt;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-radius: 30px;
-            cursor: pointer;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        .mode-toggle-btn.active-tournament, .mode-toggle-btn.active-dashboard {
-            background: linear-gradient(135deg, #ff0033 0%, #ff6600 100%) !important;
-            color: #fff !important;
-            border-color: #ffaa00 !important;
-            box-shadow: 0 0 15px rgba(255, 0, 51, 0.5);
+            border: 1px solid rgba(0, 240, 255, 0.15);
         }
 
         /* Header Layout */
         .header-container {
             text-align: center;
             margin-bottom: 25px;
-            border-bottom: 2px solid rgba(255, 0, 51, 0.4);
+            border-bottom: 2px solid rgba(0, 240, 255, 0.4);
             padding-bottom: 15px;
             position: relative;
         }
@@ -176,26 +179,25 @@
             text-transform: uppercase;
             letter-spacing: 6px;
             margin: 0;
-            color: #ffffff !important;
-            text-shadow: 0 0 10px #ff0033, 0 0 20px #ff6600, 0 0 30px #ff0000 !important;
+            color: #00f0ff;
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.6), 0 0 30px rgba(0, 240, 255, 0.3);
         }
 
         .subtitle {
             font-size: 14pt;
-            color: #ff6600; /* Orange Accent */
+            color: #ff007f;
             margin: 6px 0 0 0;
             font-weight: bold;
-            text-shadow: 0 0 8px rgba(255, 102, 0, 0.5);
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
         }
 
         .live-badge {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(255, 0, 51, 0.15) !important;
-            border: 1px solid #ff0033 !important;
-            color: #ffffff !important;
-            box-shadow: 0 0 10px rgba(255, 0, 51, 0.4) !important;
+            background: rgba(0, 255, 170, 0.2);
+            border: 1px solid #00ffaa;
+            color: #00ffaa;
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 11pt;
@@ -205,7 +207,7 @@
         }
         @keyframes blink { 50% { opacity: 0.4; } }
 
-        /* Navigation Tabs Control */
+        /* Navigation Tabs */
         .tabs-container {
             display: flex;
             justify-content: center;
@@ -215,9 +217,9 @@
         }
 
         .tab-btn {
-            background: rgba(0, 0, 0, 0.85) !important;
-            border: 1px solid rgba(255, 0, 51, 0.4) !important;
-            color: #ffffff !important;
+            background: rgba(8, 20, 38, 0.8);
+            border: 1.5px solid rgba(0, 240, 255, 0.2);
+            color: #cbd5e1;
             padding: 12px 24px;
             font-size: 12pt;
             font-weight: 700;
@@ -227,16 +229,12 @@
             cursor: pointer;
             transition: all 0.25s ease;
         }
-        
-        .tab-btn.hide-tab-logic {
-            display: none !important;
-        }
 
         .tab-btn:hover, .tab-btn.active {
-            background: linear-gradient(135deg, #ff0033 0%, #ff6600 100%) !important;
-            color: #ffffff !important;
-            border: 1px solid #ffaa00 !important;
-            box-shadow: 0 0 20px rgba(255, 0, 51, 0.6) !important;
+            color: #00f0ff;
+            border-color: #00f0ff;
+            background: rgba(0, 240, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
             transform: translateY(-2px);
         }
 
@@ -251,29 +249,20 @@
             display: block;
         }
 
-        /* 📌 TRANSPARENT GLASS PANELS & ANIMATED GLOWING BORDERS */
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: rgba(0, 0, 0, 0.75) !important; /* Semi-transparent Glass */
-            border: 2px solid #ff0033 !important;
-            backdrop-filter: blur(10px); 
-            animation: panelGlow 4s linear infinite alternate;
-        }
-        @keyframes panelGlow {
-            0% { border-color: #ff0033; box-shadow: 0 0 10px rgba(255, 0, 51, 0.3); }
-            50% { border-color: #ff6600; box-shadow: 0 0 20px rgba(255, 102, 0, 0.5); }
-            100% { border-color: #ff0000; box-shadow: 0 0 10px rgba(255, 0, 0, 0.3); }
+            background-color: rgba(5, 12, 26, 0.45);
+            border: 2px solid rgba(0, 240, 255, 0.25);
         }
 
         th {
-            background: linear-gradient(180deg, rgba(15,0,3,0.95) 0%, rgba(0,0,0,0.98) 100%) !important;
-            border-bottom: 2px solid #ff6600 !important;
-            color: #ff6600 !important; /* Orange Accent */
+            background-color: rgba(12, 23, 43, 0.9);
+            color: #00f0ff;
             font-weight: 800;
             text-transform: uppercase;
             padding: 12px 10px;
-            border: 1.5px solid rgba(255, 0, 51, 0.3);
+            border: 1.5px solid rgba(0, 240, 255, 0.25);
             text-align: center;
             font-size: 11pt;
             white-space: nowrap;
@@ -281,24 +270,24 @@
 
         td {
             padding: 12px 10px;
-            border: 1.5px solid rgba(255, 0, 51, 0.2) !important;
+            border: 1.5px solid rgba(0, 240, 255, 0.18);
             text-align: center;
-            color: #ffffff; /* White Text */
+            color: #ffffff;
             font-size: 11.5pt;
             font-weight: 600;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.95);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
             white-space: nowrap;
         }
 
         /* Dynamic Width Helpers */
-        th.rank-header, td.rank-cell { width: 90px; min-width: 90px; }
-        th.team-name-head, td.team-name-cell { min-width: 250px; text-align: left !important; padding-left: 15px !important; }
-        th.player-name-head, td.player-name-cell { min-width: 250px; text-align: left !important; padding-left: 15px !important; }
+        th.rank-header, td.rank-cell { width: 95px; min-width: 95px; }
+        th.team-name-head, td.team-name-cell { min-width: 220px; text-align: left !important; padding-left: 15px !important; }
+        th.player-name-head, td.player-name-cell { min-width: 220px; text-align: left !important; padding-left: 15px !important; }
         th.total-points-head, th.top-killer-head, td.neon-score { min-width: 120px; }
         
-        td.team-name-cell { border-left: 4px solid #ff0033; }
-        td.player-name-cell { border-left: 4px solid #ff6600; }
-        td.standing-team-cell { border-left: 4px solid #ff0000; text-align: center !important; }
+        td.team-name-cell { border-left: 4px solid #00f0ff; }
+        td.player-name-cell { border-left: 4px solid #ff007f; }
+        td.standing-team-cell { border-left: 4px solid #00ffaa; text-align: center !important; }
 
         .team-emoji {
             margin-right: 8px;
@@ -307,127 +296,65 @@
             vertical-align: middle;
         }
 
-        td.neon-score, td.highlight-stat { color: #ffaa00 !important; text-shadow: 0 0 8px rgba(255, 170, 0, 0.6) !important; }
-        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 0, 51, 0.4); color: #ff0033; }
+        td.neon-score { font-weight: 800; color: #00ffaa; font-size: 12.5pt; text-shadow: 0 0 8px rgba(0, 255, 170, 0.4); }
+        td.highlight-stat { color: #00ffaa; font-weight: 800; text-shadow: 0 0 6px rgba(0, 255, 170, 0.3); }
+        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 170, 0, 0.4); color: #ffaa00; }
 
-        tr:nth-child(even) td { background-color: rgba(255, 0, 51, 0.03); } 
-        tr:hover td { background-color: rgba(255, 102, 0, 0.08); } 
+        tr:nth-child(even) td { background-color: rgba(16, 29, 51, 0.25); } 
+        tr:hover td { background-color: rgba(0, 240, 255, 0.15); } 
         
         /* Premium Leaderboard Podium Rows Styling */
-        tr.rank-1 td { background-color: rgba(255, 0, 51, 0.12) !important; border-bottom: 1px solid #ffaa00 !important; }
-        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell, tr.rank-1 td.standing-team-cell { text-shadow: 0 0 8px #ff6600; color: #ffaa00; }
-        tr.rank-1 td.rank-cell { color: #ffaa00; }
+        tr.rank-1 td { background-color: rgba(255, 215, 0, 0.04) !important; }
+        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell, tr.rank-1 td.standing-team-cell { text-shadow: 0 0 8px rgba(255,215,0,0.5); color: #ffd700; }
+        tr.rank-1 td.rank-cell { color: #ffd700; }
 
-        tr.rank-2 td { background-color: rgba(255, 102, 0, 0.08) !important; }
-        tr.rank-2 td.team-name-cell, tr.rank-2 td.player-name-cell, tr.rank-2 td.standing-team-cell { text-shadow: 0 0 8px #ff0033; color: #ff0033; }
-        tr.rank-2 td.rank-cell { color: #ff0033; }
+        tr.rank-2 td { background-color: rgba(192, 192, 192, 0.04) !important; }
+        tr.rank-2 td.team-name-cell, tr.rank-2 td.player-name-cell, tr.rank-2 td.standing-team-cell { text-shadow: 0 0 8px rgba(192,192,192,0.4); color: #c0c0c0; }
+        tr.rank-2 td.rank-cell { color: #c0c0c0; }
 
-        tr.rank-3 td { background-color: rgba(255, 0, 0, 0.06) !important; }
-        tr.rank-3 td.team-name-cell, tr.rank-3 td.player-name-cell, tr.rank-3 td.standing-team-cell { text-shadow: 0 0 8px #ff4444; color: #ff4444; }
-        tr.rank-3 td.rank-cell { color: #ff4444; }
+        tr.rank-3 td { background-color: rgba(205, 127, 50, 0.04) !important; }
+        tr.rank-3 td.team-name-cell, tr.rank-3 td.player-name-cell, tr.rank-3 td.standing-team-cell { text-shadow: 0 0 8px rgba(205,127,50,0.4); color: #cd7f32; }
+        tr.rank-3 td.rank-cell { color: #cd7f32; }
 
-        th.map-header { font-size: 11.5pt; font-weight: 800; background-color: rgba(10, 0, 0, 0.95); color: #ffffff; min-width: 140px; }
-        th.sub-th { background-color: rgba(5, 0, 0, 0.85); font-size: 10.5pt; color: #cbd5e0; min-width: 70px; }
+        th.map-header { font-size: 11.5pt; font-weight: 800; background-color: rgba(16, 32, 61, 0.95); color: #ffffff; min-width: 140px; }
+        th.sub-th { background-color: rgba(10, 17, 31, 0.85); font-size: 10.5pt; color: #a0aec0; min-width: 70px; }
 
-        .status-message { text-align: center; padding: 30px; color: #cbd5e0; font-size: 13pt; font-style: italic; }
+        .status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
 
-        /* Global Text Scaling */
-        table th, table td {
-            font-size: 14pt !important;
-            font-weight: 600 !important;
-            padding: 9px 8px !important;
-        }
+/* Global Text Scaling */
+table th, table td {
+    font-size: 14pt !important;
+    font-weight: 600 !important;
+    padding: 9px 8px !important;
+}
 
-        td.rank-cell, td.neon-score, td.highlight-stat {
-            font-size: 16pt !important;
-            font-weight: 700 !important;
-        }
-
-        /* POPUP STRUCTURE STYLE */
-        .champion-popup-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 999999 !important;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        .champion-popup-overlay.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .champion-card {
-            background: linear-gradient(135deg, #1a0005 0%, #000000 100%);
-            border: 3px solid #ff0033;
-            box-shadow: 0 0 60px rgba(255, 0, 51, 0.6), inset 0 0 30px rgba(255, 102, 0, 0.3);
-            padding: 50px 70px;
-            border-radius: 24px;
-            text-align: center;
-            transform: scale(0.6);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .champion-popup-overlay.show .champion-card {
-            transform: scale(1);
-        }
-        .champion-title {
-            color: #ffaa00;
-            font-size: 22pt;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-        }
-        .champion-name {
-            color: #ffffff;
-            font-size: 42pt;
-            font-weight: 900;
-            margin: 15px 0;
-            text-shadow: 0 0 25px #ff0033, 0 0 10px #ffffff;
-        }
-        .champion-badge {
-            font-size: 55pt;
-            margin-bottom: 5px;
-            animation: cyberPulse 0.8s infinite alternate;
-        }
-        @keyframes cyberPulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff0033); }
-            100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff6600); }
-        }
-
-        #crackersCanvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 9999999 !important;
-        }
+td.rank-cell, td.neon-score, td.highlight-stat {
+    font-size: 16pt !important;
+    font-weight: 700 !important;
+}
     </style>
 </head>
 <body>
 
-<canvas id="cyberCanvas"></canvas>
+<canvas id="odysseyCanvas"></canvas>
 
 <div class="container">
-    
-    <div class="mode-switcher-bar">
-        <button id="btnTourneyMode" class="mode-toggle-btn active-tournament" onclick="applyOperationMode('tournament')">⚔️ Tournament Mode</button>
-        <button id="btnDashboardMode" class="mode-toggle-btn" onclick="applyOperationMode('dashboard')">📊 Dashboard Mode</button>
-    </div>
-
+    <!-- Header -->
     <div class="header-container">
         <h1 class="main-title">TYT PORKALAM</h1>
         <div class="subtitle">🔥ONLY THE STRONGEST SQUAD WILL SURVIVE🔥</div>
         <div class="live-badge">● Live Sync</div>
     </div>
 
+    <!-- Navigation Tabs -->
     <div class="tabs-container">
-        <button id="tab-btn-team-points" class="tab-btn active" onclick="switchTab('team-points-tab', this)">🛡️ TEAM POINTS</button>
-        <button id="tab-btn-player-kills" class="tab-btn" onclick="switchTab('player-kills-tab', this)">🎯 PLAYER KILLS</button>
-        <button id="tab-btn-player-stats" class="tab-btn" onclick="switchTab('player-stats-tab', this)">📊 PLAYER STATS</button>
-        <button id="tab-btn-team-standings" class="tab-btn" onclick="switchTab('team-standings-tab', this)">🏆 TEAM STANDINGS</button>
+        <button class="tab-btn active" onclick="switchTab('team-points-tab', this)">🛡️ TEAM POINTS</button>
+        <button class="tab-btn" onclick="switchTab('player-kills-tab', this)">🎯 PLAYER KILLS</button>
+        <button class="tab-btn" onclick="switchTab('player-stats-tab', this)">📊 PLAYER STATS</button>
+        <button class="tab-btn" onclick="switchTab('team-standings-tab', this)">🏆 TEAM STANDINGS</button>
     </div>
 
+    <!-- TAB 1: Team Points -->
     <div id="team-points-tab" class="table-responsive active">
         <table>
             <thead id="team-points-head"></thead>
@@ -437,6 +364,7 @@
         </table>
     </div>
 
+    <!-- TAB 2: Player Kills -->
     <div id="player-kills-tab" class="table-responsive">
         <table>
             <thead id="player-kills-head"></thead>
@@ -446,6 +374,7 @@
         </table>
     </div>
 
+    <!-- TAB 3: Players Stats -->
     <div id="player-stats-tab" class="table-responsive">
         <table>
             <thead id="player-stats-head"></thead>
@@ -455,6 +384,7 @@
         </table>
     </div>
 
+    <!-- TAB 4: Team Standings -->
     <div id="team-standings-tab" class="table-responsive">
         <table>
             <thead id="team-standings-head"></thead>
@@ -465,18 +395,10 @@
     </div>
 </div>
 
-<canvas id="crackersCanvas"></canvas>
-<div id="championPopup" class="champion-popup-overlay">
-    <div class="champion-card">
-        <div class="champion-badge">👑🔥</div>
-        <div class="champion-title" id="popHeaderType">CURRENT #1 LEADER</div>
-        <div class="champion-name" id="popLeaderName">LOADING...</div>
-    </div>
-</div>
-
 <script>
     const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyuMwMTwfZH6nh9r7f7F4wA6t0XgPbgRQLNvAxQkfv9ExAVTN3NHjmjDBP4S_VxSNN4_w/exec";
 
+    // Permanent Global Memory (Never resets during session)
     if (!window.rankMemory) {
         window.rankMemory = {
             teamPoints: {},
@@ -486,33 +408,7 @@
         };
     }
 
-    function applyOperationMode(mode) {
-        const tabPointsBtn = document.getElementById('tab-btn-team-points');
-        const tabKillsBtn = document.getElementById('tab-btn-player-kills');
-        const tabStatsBtn = document.getElementById('tab-btn-player-stats');
-        const tabStandingsBtn = document.getElementById('tab-btn-team-standings');
-        const btnTourney = document.getElementById('btnTourneyMode');
-        const btnDashboard = document.getElementById('btnDashboardMode');
-
-        if (mode === 'dashboard') {
-            btnTourney.className = 'mode-toggle-btn';
-            btnDashboard.className = 'mode-toggle-btn active-dashboard';
-            tabPointsBtn.classList.add('hide-tab-logic');
-            tabKillsBtn.classList.add('hide-tab-logic');
-            tabStatsBtn.classList.remove('hide-tab-logic');
-            tabStandingsBtn.classList.remove('hide-tab-logic');
-            switchTab('player-stats-tab', tabStatsBtn);
-        } else {
-            btnTourney.className = 'mode-toggle-btn active-tournament';
-            btnDashboard.className = 'mode-toggle-btn';
-            tabPointsBtn.classList.remove('hide-tab-logic');
-            tabKillsBtn.classList.remove('hide-tab-logic');
-            tabStatsBtn.classList.add('hide-tab-logic');
-            tabStandingsBtn.classList.add('hide-tab-logic');
-            switchTab('team-points-tab', tabPointsBtn);
-        }
-    }
-
+    // Helper to calculate arrow indicators
     function calculateRankArrow(storageKey, identifier, currentRank) {
         if (!identifier) return '';
         let arrowHTML = '';
@@ -530,91 +426,61 @@
     }
 
     // ========================================================
-    // 🌌 DYNAMIC BACKGROUND ENGINE: SMOKE, EMBERS & RED PARTICLES
+    // 🌌 CANVAS ENGINE WITH SMOOTH WAVE ANIMATIONS
     // ========================================================
-    const canvas = document.getElementById('cyberCanvas');
+    const canvas = document.getElementById('odysseyCanvas');
     const ctx = canvas.getContext('2d');
-    
-    let embers = [];
-    let smokeClouds = [];
+    let fishSchool = [], vortexAngle = 0;
 
-    function initCanvas() { 
-        canvas.width = window.innerWidth; 
-        canvas.height = window.innerHeight; 
-        
-        embers = [];
-        for (let i = 0; i < 60; i++) {
-            embers.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height + canvas.height,
-                size: Math.random() * 3 + 1,
-                speedY: -(Math.random() * 2 + 1),
-                speedX: (Math.random() - 0.5) * 1,
-                alpha: Math.random() * 0.8 + 0.2,
-                color: Math.random() > 0.4 ? '#ff0033' : '#ff6600' // Red & Orange particles
-            });
-        }
+    function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', initCanvas); initCanvas();
 
-        smokeClouds = [];
-        for (let i = 0; i < 6; i++) {
-            smokeClouds.push({
-                x: Math.random() * canvas.width,
-                y: canvas.height - (Math.random() * 200),
-                radius: Math.random() * 150 + 100,
-                vx: (Math.random() - 0.5) * 0.4,
-                alpha: Math.random() * 0.08 + 0.03
-            });
-        }
+    let whaleTop = { x: -450, y: canvas.height * 0.22, speed: 1.1, swing: 0, swingSpeed: 0.025, sizeScale: 0.9 };
+    let whaleBottom = { x: canvas.width + 500, y: canvas.height * 0.75, speed: -0.9, swing: 3.5, swingSpeed: 0.02, sizeScale: 1.2 };
+
+    for (let i = 0; i < 22; i++) {
+        fishSchool.push({
+            x: Math.random() * canvas.width + canvas.width * 0.2, y: Math.random() * canvas.height,
+            size: Math.random() * 7 + 5, speed: Math.random() * 1.5 + 1.0,
+            waveFactor: Math.random() * 10, waveSpeed: Math.random() * 0.05 + 0.03
+        });
     }
-    window.addEventListener('resize', initCanvas); 
-    initCanvas();
 
-    function renderAtmosphere() {
-        ctx.fillStyle = '#000000'; // Pure Black Base
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    function drawWhaleVector(x, y, swing, scale, invertedFactor) {
+        let tailWave = Math.sin(swing); ctx.save(); ctx.translate(x, y); ctx.scale(invertedFactor * scale, scale);
+        ctx.strokeStyle = "rgba(0, 210, 255, 0.14)"; ctx.lineWidth = 3; ctx.shadowBlur = 15; ctx.shadowColor = "#00f0ff";
+        ctx.beginPath(); ctx.moveTo(150, 0); ctx.bezierCurveTo(80, -60, -50, -50, -120, tailWave * 15);
+        ctx.lineTo(-160, (tailWave * 15) - 35); ctx.lineTo(-145, tailWave * 15); ctx.lineTo(-160, (tailWave * 15) + 35);
+        ctx.lineTo(-120, tailWave * 15); ctx.bezierCurveTo(-50, 60, 80, 55, 150, 0); ctx.stroke(); ctx.restore();
+    }
 
-        // 1. Draw Simulated Smoke Layer
-        smokeClouds.forEach(smoke => {
-            smoke.x += smoke.vx;
-            if (smoke.x - smoke.radius > canvas.width) smoke.x = -smoke.radius;
-            if (smoke.x + smoke.radius < 0) smoke.x = canvas.width + smoke.radius;
+    function renderOdysseyWorld() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        vortexAngle += 0.002;
+        ctx.save(); ctx.translate(canvas.width * 0.12, canvas.height * 0.5);
+        for(let i = 0; i < 6; i++) {
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.025 - (i * 0.004)})`; ctx.lineWidth = 25 - (i * 3);
+            ctx.save(); ctx.rotate(vortexAngle * (1 + i * 0.15)); ctx.beginPath(); ctx.ellipse(0, 0, 80 + (i * 22), 240 + (i * 35), 0, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+        }
+        ctx.restore();
 
-            let gradient = ctx.createRadialGradient(smoke.x, smoke.y, 10, smoke.x, smoke.y, smoke.radius);
-            gradient.addColorStop(0, `rgba(255, 0, 51, ${smoke.alpha})`); // Red tinted smoke
-            gradient.addColorStop(0.5, `rgba(255, 102, 0, ${smoke.alpha * 0.5})`);
-            gradient.addColorStop(1, 'rgba(0,0,0,0)');
-
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(smoke.x, smoke.y, smoke.radius, 0, Math.PI * 2);
-            ctx.fill();
+        ctx.fillStyle = "rgba(0, 225, 255, 0.2)";
+        fishSchool.forEach(fish => {
+            fish.waveFactor += fish.waveSpeed; fish.x -= fish.speed; fish.y += Math.sin(fish.waveFactor) * 0.5;
+            if (fish.x < -60) { fish.x = canvas.width + 60; fish.y = Math.random() * canvas.height; }
+            ctx.save(); ctx.translate(fish.x, fish.y); ctx.rotate(Math.PI + Math.sin(fish.waveFactor) * 0.1);
+            ctx.beginPath(); ctx.moveTo(fish.size * 2, 0); ctx.quadraticCurveTo(fish.size, -fish.size * 0.4, 0, 0); ctx.quadraticCurveTo(fish.size, fish.size * 0.4, fish.size * 2, 0); ctx.closePath(); ctx.fill(); ctx.restore();
         });
 
-        // 2. Animate & Render Floating Embers / Red Particles
-        embers.forEach(p => {
-            p.y += p.speedY;
-            p.x += p.speedX;
-
-            if (p.y < -10) {
-                p.y = canvas.height + 10;
-                p.x = Math.random() * canvas.width;
-            }
-
-            ctx.save();
-            ctx.globalAlpha = p.alpha;
-            ctx.fillStyle = p.color;
-            ctx.shadowBlur = p.size * 3;
-            ctx.shadowColor = p.color;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.restore();
-        });
-
-        requestAnimationFrame(renderAtmosphere);
+        drawWhaleVector(whaleTop.x, whaleTop.y, whaleTop.swing, whaleTop.sizeScale, 1);
+        drawWhaleVector(whaleBottom.x, whaleBottom.y, whaleBottom.swing, whaleBottom.sizeScale, -1);
+        whaleTop.x += whaleTop.speed; whaleTop.swing += whaleTop.swingSpeed; if (whaleTop.x > canvas.width + 500) whaleTop.x = -500;
+        whaleBottom.x += whaleBottom.speed; whaleBottom.swing += whaleBottom.swingSpeed; if (whaleBottom.x < -600) whaleBottom.x = canvas.width + 600;
+        requestAnimationFrame(renderOdysseyWorld);
     }
-    requestAnimationFrame(renderAtmosphere);
+    requestAnimationFrame(renderOdysseyWorld);
 
+    // Emoji Engine
     function getTeamEmoji(teamName) {
         if (!teamName) return '🎮';
         const name = teamName.toUpperCase();
@@ -824,7 +690,7 @@
         }
     }
 
-    // TAB 4: Team Standings
+    // TAB 4: Team Standings (Fixed specifically based on your screenshot layout)
     function buildTeamStandingsGrid(rows, headId, bodyId) {
         if (!rows || rows.length === 0) return;
         const thead = document.getElementById(headId);
@@ -869,9 +735,10 @@
                     cellValue = Number(cellValue).toFixed(2);
                 }
                 
-                if (d === startIdx + 3) { 
+                // Colors highlighters for values
+                if (d === startIdx + 3) { // Total Kills column placement
                     cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : 0}</td>`;
-                } else if (d === numCols - 1) { 
+                } else if (d === numCols - 1) { // KD Column
                     cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : 0}</td>`;
                 } else {
                     cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : 0}</td>`;
@@ -885,7 +752,179 @@
     }
 </script>
 
+<!-- ========================================== -->
+<!--  HELLFIRE ULTRA ENGINE V3 (NATIVE CRACKERS) -->
+<!-- ========================================== -->
+
+<style>
+body {
+    background: radial-gradient(circle at 50% 50%, #1a0500 0%, #050100 100%) !important;
+    position: relative;
+    overflow-x: hidden;
+}
+#odysseyCanvas {
+    opacity: 0.15;
+    mix-blend-mode: screen;
+}
+.container {
+    background: rgba(12, 4, 2, 0.85) !important;
+    border: 2px solid #ff4500 !important;
+    box-shadow: 0 0 35px rgba(255, 69, 0, 0.25), inset 0 0 20px rgba(255, 140, 0, 0.1) !important;
+    border-radius: 16px !important;
+}
+.header-container h1.main-title {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px #ff4500, 0 0 20px #ff8c00, 0 0 30px #ff0000 !important;
+}
+.live-badge {
+    background: rgba(255, 69, 0, 0.2) !important;
+    border: 1px solid #ff4500 !important;
+    color: #ffaa66 !important;
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.4) !important;
+}
+.tab-btn {
+    background: rgba(25, 10, 5, 0.7) !important;
+    border: 1px solid rgba(255, 69, 0, 0.3) !important;
+    color: #cbd5e0 !important;
+}
+.tab-btn.active {
+    background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid #ffd700 !important;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.6) !important;
+}
+th {
+    background: linear-gradient(180deg, #2a0b03 0%, #120300 100%) !important;
+    border-bottom: 2px solid #ff4500 !important;
+    color: #ff8c00 !important;
+}
+td.neon-score, td.highlight-stat {
+    color: #ffaa44 !important;
+    text-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important;
+}
+tr.rank-1 td {
+    background-color: rgba(255, 69, 0, 0.12) !important;
+    border-bottom: 1px solid #ffd700 !important;
+}
+
+/* POPUP STRUCTURE STYLE */
+.champion-popup-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10, 3, 0, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 999999 !important;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.champion-popup-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.champion-card {
+    background: linear-gradient(135deg, #3a1003 0%, #0c0400 100%);
+    border: 3px solid #ff4500;
+    box-shadow: 0 0 60px rgba(255, 69, 0, 0.6), inset 0 0 30px rgba(255, 140, 0, 0.3);
+    padding: 50px 70px;
+    border-radius: 24px;
+    text-align: center;
+    transform: scale(0.6);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.champion-popup-overlay.show .champion-card {
+    transform: scale(1);
+}
+.champion-title {
+    color: #ffd700;
+    font-size: 22pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+.champion-name {
+    color: #ffffff;
+    font-size: 42pt;
+    font-weight: 900;
+    margin: 15px 0;
+    text-shadow: 0 0 25px #ff4500, 0 0 10px #ffffff;
+}
+.champion-badge {
+    font-size: 55pt;
+    margin-bottom: 5px;
+    animation: firePulse 0.8s infinite alternate;
+}
+@keyframes firePulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4500); }
+    100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff8c00); }
+}
+
+#crackersCanvas {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 9999999 !important;
+}
+</style>
+
+<canvas id="crackersCanvas"></canvas>
+<div id="championPopup" class="champion-popup-overlay">
+    <div class="champion-card">
+        <div class="champion-badge">👑🔥</div>
+        <div class="champion-title" id="popHeaderType">CURRENT #1 LEADER</div>
+        <div class="champion-name" id="popLeaderName">LOADING...</div>
+    </div>
+</div>
+
 <script>
+// Fire Particles Background
+function initFireBackground() {
+    const canvas = document.getElementById('odysseyCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + Math.random() * 100;
+            this.size = Math.random() * 3 + 1;
+            this.speedY = Math.random() * 1.5 + 0.5;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.opacity = Math.random() * 0.5 + 0.5;
+        }
+        update() {
+            this.y -= this.speedY;
+            this.x += this.speedX;
+            if (this.y < -10) {
+                this.y = canvas.height + 10;
+                this.x = Math.random() * canvas.width;
+            }
+        }
+        draw() {
+            ctx.fillStyle = `rgba(255, ${Math.floor(Math.random() * 100) + 50}, 0, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+    for (let i = 0; i < 50; i++) particles.push(new Particle());
+
+    function animate() {
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+
 // Crackers Simulation
 const cCanvas = document.getElementById('crackersCanvas');
 const cCtx = cCanvas.getContext('2d');
@@ -919,7 +958,7 @@ class CrackerParticle {
 }
 
 function createExplosion(x, y) {
-    const colors = ['#ff0033', '#ff6600', '#ffaa00', '#ffffff'];
+    const colors = ['#ff4500', '#ff8c00', '#ffd700', '#ff0000', '#ffffff'];
     for (let i = 0; i < 100; i++) {
         cParticles.push(new CrackerParticle(x, y, colors[Math.floor(Math.random() * colors.length)]));
     }
@@ -983,7 +1022,17 @@ window.switchTab = function(tabId, button) {
 };
 
 window.addEventListener('load', () => {
-    applyOperationMode('tournament');
+    initFireBackground();
+    setTimeout(() => {
+        let activeBtn = document.querySelector('.tab-btn.active');
+        if (activeBtn) {
+            let onclickAttr = activeBtn.getAttribute('onclick');
+            if (onclickAttr) {
+                let match = onclickAttr.match(/'([^']+)'/);
+                if (match && match[1]) window.switchTab(match[1], activeBtn);
+            }
+        }
+    }, 1500);
 });
 
 function openMainPointsTable() {
@@ -993,7 +1042,7 @@ function openMainPointsTable() {
 
 if (typeof fetchAllSheetsData === 'function') {
     fetchAllSheetsData();
-    setInterval(fetchAllSheetsData, 1000); 
+    setInterval(fetchAllSheetsData, 1000); // 1-Second real-time fast sync lock
 }
 </script>
 </body>
