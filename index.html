@@ -621,6 +621,51 @@ function triggerNativeCrackers() { cParticles = []; cancelAnimationFrame(cracker
 
 window.addEventListener('load', () => { initFireBackground(); applyOperationMode('tournament'); });
 function openMainPointsTable() { document.getElementById('porkalamSplash').classList.add('fade-hide'); fetchAllSheetsData(); setInterval(fetchAllSheetsData, 2000); }
+    // =======================================================
+// AUTOMATIC TOTAL POINTS CALCULATION SCRIPT
+// =======================================================
+function updateTournamentTotalPoints() {
+    // Apne table ke saare rows ko target karna (header row ko chhodkar)
+    const rows = document.querySelectorAll('table tbody tr, table tr');
+    
+    rows.forEach(row => {
+        // Sirf un rows ko calculate karenge jisme data cells (td) hain aur rank present hai
+        const cells = row.querySelectorAll('td');
+        if (cells.length >= 10) { 
+            let totalSum = 0;
+            
+            // Map columns (Index 2 se lekar Index 9 tak ke saare P aur K status values)
+            // Index 2 = Erangle P, Index 3 = Erangle K... up to Index 9 = Miramar K
+            for (let i = 2; i <= 9; i++) {
+                let cellValue = cells[i].innerText || cells[i].textContent;
+                
+                // Agar field khali "-" hai ya numbers nahi hain toh use 0 maane
+                let numericValue = parseFloat(cellValue.trim());
+                if (!isNaN(numericValue)) {
+                    totalSum += numericValue;
+                }
+            }
+            
+            // Sabse aakhri column (Total Points) ko value assign karna
+            const totalPointsCell = cells[cells.length - 1];
+            if (totalPointsCell) {
+                totalPointsCell.innerHTML = `<strong>${totalSum}</strong>`;
+                
+                // Dynamic CSS features jo humne columns ke liye lagaye the unhe target karna
+                totalPointsCell.style.textAlign = 'center';
+                totalPointsCell.style.color = '#ffaa00';
+                totalPointsCell.style.textShadow = '0 0 8px rgba(255, 170, 0, 0.6)';
+            }
+        }
+    });
+}
+
+// Page load hote hi aur dynamic data fetch hote hi real-time updates run honge
+document.addEventListener('DOMContentLoaded', updateTournamentTotalPoints);
+window.addEventListener('load', updateTournamentTotalPoints);
+
+// Agar aap real-time input fields use karte hain toh change hone par dynamic sum hoga
+document.addEventListener('input', updateTournamentTotalPoints);
 </script>
 </body>
 </html>
