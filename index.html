@@ -1,345 +1,1000 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TYT PORKALAM - Live Standings</title>
+    <title>TYT PORKALAM - BGMI Esports Combo Engine</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+<style>
+/* Pure page ko block karne wali welcome screen */
+.premium-splash {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #000000; /* Pure Black */
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 9999999 !important;
+    overflow: hidden;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Neon Red & Orange Splash Title */
+.dancing-title {
+    color: #ffffff; /* White Text */
+    font-size: 46pt;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    margin-bottom: 30px;
+    z-index: 2;
+    position: relative;
+    text-shadow: 0 0 15px #ff0033, 0 0 30px #ff6600; /* Neon Red & Orange Glow */
+    animation: neonPulse 2s ease-in-out infinite alternate;
+}
+@keyframes neonPulse {
+    0% { transform: translateY(0) scale(1); text-shadow: 0 0 15px #ff0033, 0 0 30px #ff6600; }
+    50% { transform: translateY(-5px) scale(1.02); text-shadow: 0 0 25px #ff0000, 0 0 40px #ffaa00; }
+    100% { transform: translateY(3px) scale(0.99); text-shadow: 0 0 15px #ff3300, 0 0 35px #ff0033; }
+}
+
+/* Enter Tournament Action Button */
+.enter-esports-btn {
+    background: linear-gradient(135deg, #ff0033 0%, #ff6600 100%); /* Red to Orange Accent */
+    color: #ffffff;
+    border: 2px solid #ff0033;
+    padding: 16px 45px;
+    font-size: 16pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 0 25px rgba(255, 0, 51, 0.5);
+    transition: all 0.2s ease;
+}
+.enter-esports-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 45px #ff6600;
+    background: linear-gradient(135deg, #ff6600 0%, #ff0033 100%);
+}
+
+/* Smooth Fade Out Class */
+.premium-splash.fade-hide {
+    opacity: 0;
+    transform: scale(1.05);
+    pointer-events: none;
+}
+
+/* Arrow Styling & Animation */
+.pos-change { 
+    font-size: 11pt; 
+    font-weight: 900; 
+    margin-left: 8px; 
+    display: inline-block;
+    vertical-align: middle;
+    animation: arrowPop 0.3s ease-out;
+}
+@keyframes arrowPop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.pos-up { color: #ffaa00 !important; text-shadow: 0 0 8px rgba(255, 170, 0, 0.6); } /* Orange Up */
+.pos-down { color: #ff0033 !important; text-shadow: 0 0 8px rgba(255, 0, 51, 0.6); } /* Red Down */
+.table-row { transition: all 0.5s ease; }
+</style>
+
+<div id="porkalamSplash" class="premium-splash">
+    <div class="dancing-title">TYT PORKALAM</div>
+    <button class="enter-esports-btn" onclick="openMainPointsTable()">Enter Tournament</button>
+</div>
+    
     <style>
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
         }
 
+        /* 🔥 PURE BLACK BACKGROUND WITH HEAVY PARTICLES */
         body {
-            background-color: #ffffff;
-            color: #000000;
-            padding: 20px;
+            margin: 0;
+            padding: 10px 30px; 
+            background: #000000 !important; /* Pure Black */
+            color: #ffffff; /* White Text */
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
+            align-items: flex-start; 
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* 1. INTRO WELCOME PANEL */
-        .intro-screen {
+        /* 🔮 EMBER, SMOKE & RED PARTICLE CANVAS ENGINE */
+        #cyberCanvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #f7f9fa;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
-
-        .intro-screen.hide {
-            opacity: 0;
-            visibility: hidden;
+            z-index: 1;
             pointer-events: none;
         }
 
-        .intro-title {
-            font-size: 36px;
-            font-weight: bold;
-            color: #000000;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+        /* ULTRA TRANSPARENT CONTAINER */
+        .container {
+            width: 100%;
+            max-width: 98% !important; 
+            background: transparent !important; 
+            border: none !important; 
+            box-shadow: none !important; 
+            position: relative;
+            z-index: 2;
+            padding-top: 15px;
+            transition: all 0.5s ease;
         }
 
-        .enter-btn {
-            background-color: #ff5100;
-            border: none;
-            color: #ffffff;
-            padding: 12px 30px;
-            font-size: 14px;
+        /* Mode Switcher UI bar */
+        .mode-switcher-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        .mode-toggle-btn {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1.5px solid rgba(255, 0, 51, 0.3);
+            color: #a0aec0;
+            padding: 10px 25px;
+            font-size: 11pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 30px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .mode-toggle-btn.active-tournament, .mode-toggle-btn.active-dashboard {
+            background: linear-gradient(135deg, #ff0033 0%, #ff6600 100%) !important;
+            color: #fff !important;
+            border-color: #ffaa00 !important;
+            box-shadow: 0 0 15px rgba(255, 0, 51, 0.5);
+        }
+
+        /* Header Layout */
+        .header-container {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 0, 51, 0.4);
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 40pt;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin: 0;
+            color: #ffffff !important;
+            text-shadow: 0 0 10px #ff0033, 0 0 20px #ff6600, 0 0 30px #ff0000 !important;
+        }
+
+        .subtitle {
+            font-size: 14pt;
+            color: #ff6600; /* Orange Accent */
+            margin: 6px 0 0 0;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(255, 102, 0, 0.5);
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 0, 51, 0.15) !important;
+            border: 1px solid #ff0033 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 10px rgba(255, 0, 51, 0.4) !important;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11pt;
             font-weight: bold;
             text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: blink 1s infinite;
         }
+        @keyframes blink { 50% { opacity: 0.4; } }
 
-        /* 2. MAIN TOURNAMENT CONTAINER */
-        .main-dashboard {
-            width: 100%;
-            max-width: 1200px;
-            opacity: 0;
-            visibility: hidden;
+        /* Navigation Tabs Control */
+        .tabs-container {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
 
-        .main-dashboard.show {
-            opacity: 1;
-            visibility: visible;
+        .tab-btn {
+            background: rgba(0, 0, 0, 0.85) !important;
+            border: 1px solid rgba(255, 0, 51, 0.4) !important;
+            color: #ffffff !important;
+            padding: 12px 24px;
+            font-size: 12pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        
+        .tab-btn.hide-tab-logic {
+            display: none !important;
         }
 
-        .status-bar {
-            align-self: flex-end;
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 8px;
-            font-weight: bold;
+        .tab-btn:hover, .tab-btn.active {
+            background: linear-gradient(135deg, #ff0033 0%, #ff6600 100%) !important;
+            color: #ffffff !important;
+            border: 1px solid #ffaa00 !important;
+            box-shadow: 0 0 20px rgba(255, 0, 51, 0.6) !important;
+            transform: translateY(-2px);
         }
 
-        /* EXACT SPREADSHEET REPLICA TABLE GRID */
-        .table-container {
-            width: 100%;
+        /* Responsive Grid Enforcers */
+        .table-responsive {
             overflow-x: auto;
-            border: 1px solid #999999;
+            display: none;
+            width: 100%;
         }
 
-        .sheet-table {
+        .table-responsive.active {
+            display: block;
+        }
+
+        /* 📌 TRANSPARENT GLASS PANELS & ANIMATED GLOWING BORDERS */
+        table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
-            background-color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.75) !important; /* Semi-transparent Glass */
+            border: 2px solid #ff0033 !important;
+            backdrop-filter: blur(10px); 
+            animation: panelGlow 4s linear infinite alternate;
+        }
+        @keyframes panelGlow {
+            0% { border-color: #ff0033; box-shadow: 0 0 10px rgba(255, 0, 51, 0.3); }
+            50% { border-color: #ff6600; box-shadow: 0 0 20px rgba(255, 102, 0, 0.5); }
+            100% { border-color: #ff0000; box-shadow: 0 0 10px rgba(255, 0, 0, 0.3); }
         }
 
-        /* Borders and Cell structure */
-        .sheet-table th, .sheet-table td {
-            border: 1px solid #a3a3a3;
-            padding: 6px 8px;
+        th {
+            background: linear-gradient(180deg, rgba(15,0,3,0.95) 0%, rgba(0,0,0,0.98) 100%) !important;
+            border-bottom: 2px solid #ff6600 !important;
+            color: #ff6600 !important; /* Orange Accent */
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 12px 10px;
+            border: 1.5px solid rgba(255, 0, 51, 0.3);
             text-align: center;
+            font-size: 11pt;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px 10px;
+            border: 1.5px solid rgba(255, 0, 51, 0.2) !important;
+            text-align: center;
+            color: #ffffff; /* White Text */
+            font-size: 11.5pt;
+            font-weight: 600;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.95);
+            white-space: nowrap;
+        }
+
+        /* Dynamic Width Helpers */
+        th.rank-header, td.rank-cell { width: 90px; min-width: 90px; }
+        th.team-name-head, td.team-name-cell { min-width: 250px; text-align: left !important; padding-left: 15px !important; }
+        th.player-name-head, td.player-name-cell { min-width: 250px; text-align: left !important; padding-left: 15px !important; }
+        th.total-points-head, th.top-killer-head, td.neon-score { min-width: 120px; }
+        
+        td.team-name-cell { border-left: 4px solid #ff0033; }
+        td.player-name-cell { border-left: 4px solid #ff6600; }
+        td.standing-team-cell { border-left: 4px solid #ff0000; text-align: center !important; }
+
+        .team-emoji {
+            margin-right: 8px;
+            display: inline-block;
+            font-size: 12pt;
             vertical-align: middle;
         }
 
-        /* Main Spreadsheet Style Headers */
-        .title-header {
-            background-color: #fbc4c4; /* Light Pink Tone from Screenshot */
-            font-size: 16px;
-            font-weight: bold;
-            color: #000000;
-            letter-spacing: 0.5px;
+        td.neon-score, td.highlight-stat { color: #ffaa00 !important; text-shadow: 0 0 8px rgba(255, 170, 0, 0.6) !important; }
+        td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(255, 0, 51, 0.4); color: #ff0033; }
+
+        tr:nth-child(even) td { background-color: rgba(255, 0, 51, 0.03); } 
+        tr:hover td { background-color: rgba(255, 102, 0, 0.08); } 
+        
+        /* Premium Leaderboard Podium Rows Styling */
+        tr.rank-1 td { background-color: rgba(255, 0, 51, 0.12) !important; border-bottom: 1px solid #ffaa00 !important; }
+        tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell, tr.rank-1 td.standing-team-cell { text-shadow: 0 0 8px #ff6600; color: #ffaa00; }
+        tr.rank-1 td.rank-cell { color: #ffaa00; }
+
+        tr.rank-2 td { background-color: rgba(255, 102, 0, 0.08) !important; }
+        tr.rank-2 td.team-name-cell, tr.rank-2 td.player-name-cell, tr.rank-2 td.standing-team-cell { text-shadow: 0 0 8px #ff0033; color: #ff0033; }
+        tr.rank-2 td.rank-cell { color: #ff0033; }
+
+        tr.rank-3 td { background-color: rgba(255, 0, 0, 0.06) !important; }
+        tr.rank-3 td.team-name-cell, tr.rank-3 td.player-name-cell, tr.rank-3 td.standing-team-cell { text-shadow: 0 0 8px #ff4444; color: #ff4444; }
+        tr.rank-3 td.rank-cell { color: #ff4444; }
+
+        th.map-header { font-size: 11.5pt; font-weight: 800; background-color: rgba(10, 0, 0, 0.95); color: #ffffff; min-width: 140px; }
+        th.sub-th { background-color: rgba(5, 0, 0, 0.85); font-size: 10.5pt; color: #cbd5e0; min-width: 70px; }
+
+        .status-message { text-align: center; padding: 30px; color: #cbd5e0; font-size: 13pt; font-style: italic; }
+
+        /* Global Text Scaling */
+        table th, table td {
+            font-size: 14pt !important;
+            font-weight: 600 !important;
+            padding: 9px 8px !important;
         }
 
-        .map-header {
-            background-color: #d9ebd9; /* Subtle soft green tone */
-            font-weight: bold;
-            color: #000000;
+        td.rank-cell, td.neon-score, td.highlight-stat {
+            font-size: 16pt !important;
+            font-weight: 700 !important;
         }
 
-        .label-header {
-            background-color: #d9ebd9;
-            font-weight: bold;
-            color: #000000;
+        /* POPUP STRUCTURE STYLE */
+        .champion-popup-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 999999 !important;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .champion-popup-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .champion-card {
+            background: linear-gradient(135deg, #1a0005 0%, #000000 100%);
+            border: 3px solid #ff0033;
+            box-shadow: 0 0 60px rgba(255, 0, 51, 0.6), inset 0 0 30px rgba(255, 102, 0, 0.3);
+            padding: 50px 70px;
+            border-radius: 24px;
+            text-align: center;
+            transform: scale(0.6);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .champion-popup-overlay.show .champion-card {
+            transform: scale(1);
+        }
+        .champion-title {
+            color: #ffaa00;
+            font-size: 22pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        .champion-name {
+            color: #ffffff;
+            font-size: 42pt;
+            font-weight: 900;
+            margin: 15px 0;
+            text-shadow: 0 0 25px #ff0033, 0 0 10px #ffffff;
+        }
+        .champion-badge {
+            font-size: 55pt;
+            margin-bottom: 5px;
+            animation: cyberPulse 0.8s infinite alternate;
+        }
+        @keyframes cyberPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff0033); }
+            100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff6600); }
         }
 
-        /* Data Rows Text Formatting */
-        .sheet-table tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        .team-name-cell {
-            text-align: left;
-            font-weight: bold;
-            padding-left: 12px;
-            color: #000000;
-        }
-
-        .total-points-cell {
-            background-color: #eff3f7;
-            font-weight: bold;
-        }
-
-        .blank-row td {
-            height: 28px;
-            background-color: #ffffff !important;
+        #crackersCanvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999999 !important;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. INTRO SCREEN -->
-    <div class="intro-screen" id="introScreen">
-        <h1 class="intro-title">TYT PORKALAM</h1>
-        <button class="enter-btn" onclick="enterDashboard()">Enter Tournament</button>
+<canvas id="cyberCanvas"></canvas>
+
+<div class="container">
+    
+    <div class="mode-switcher-bar">
+        <button id="btnTourneyMode" class="mode-toggle-btn active-tournament" onclick="applyOperationMode('tournament')">⚔️ Tournament Mode</button>
+        <button id="btnDashboardMode" class="mode-toggle-btn" onclick="applyOperationMode('dashboard')">📊 Dashboard Mode</button>
     </div>
 
-    <!-- 2. MAIN TOURNAMENT DASHBOARD -->
-    <div class="main-dashboard" id="mainDashboard">
-        <div class="status-bar" id="syncStatus">Connecting...</div>
-
-        <!-- Spreadsheet Table Component Wrapper -->
-        <div class="table-container">
-            <table class="sheet-table">
-                <thead>
-                    <!-- Top Title Bar Row -->
-                    <tr>
-                        <th colspan="11" class="title-header" id="mainSheetTitle">TYT PORKALAM</th>
-                    </tr>
-                    <!-- Maps Segment Row -->
-                    <tr id="mapHeaderRow">
-                        <!-- Dynamic Maps Inserted Here -->
-                    </tr>
-                    <!-- P & K Sub Labels Row -->
-                    <tr id="subLabelRow">
-                        <!-- Dynamic Sub Labels Inserted Here -->
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <tr>
-                        <td colspan="11" style="padding: 20px; color: #555;">Loading tournament records...</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="header-container">
+        <h1 class="main-title">TYT PORKALAM</h1>
+        <div class="subtitle">🔥ONLY THE STRONGEST SQUAD WILL SURVIVE🔥</div>
+        <div class="live-badge">● Live Sync</div>
     </div>
 
-    <script>
-        const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3BrEMJsf28yxJW41GWpvyvDLy5WTwFnsCSJjZC9SOP6Gky-V3_UHvHREXKcor0pq1YFz_FuFg1zN6/pub?output=csv";
+    <div class="tabs-container">
+        <button id="tab-btn-team-points" class="tab-btn active" onclick="switchTab('team-points-tab', this)">🛡️ TEAM POINTS</button>
+        <button id="tab-btn-player-kills" class="tab-btn" onclick="switchTab('player-kills-tab', this)">🎯 PLAYER KILLS</button>
+        <button id="tab-btn-player-stats" class="tab-btn" onclick="switchTab('player-stats-tab', this)">📊 PLAYER STATS</button>
+        <button id="tab-btn-team-standings" class="tab-btn" onclick="switchTab('team-standings-tab', this)">🏆 TEAM STANDINGS</button>
+    </div>
 
-        function enterDashboard() {
-            document.getElementById('introScreen').classList.add('hide');
-            document.getElementById('mainDashboard').classList.add('show');
-            loadSheetData();
-            setInterval(loadSheetData, 10000); // Live background sync
+    <div id="team-points-tab" class="table-responsive active">
+        <table>
+            <thead id="team-points-head"></thead>
+            <tbody id="team-points-body">
+                <tr><td class="status-message">LOADING MAPS METRICS...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="player-kills-tab" class="table-responsive">
+        <table>
+            <thead id="player-kills-head"></thead>
+            <tbody id="player-kills-body">
+                <tr><td class="status-message">KILLS DATABASE STREAMING...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="player-stats-tab" class="table-responsive">
+        <table>
+            <thead id="player-stats-head"></thead>
+            <tbody id="player-stats-body">
+                <tr><td class="status-message">SYNCHRONIZING PLAYER STATS RECORDS...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="team-standings-tab" class="table-responsive">
+        <table>
+            <thead id="team-standings-head"></thead>
+            <tbody id="team-standings-body">
+                <tr><td class="status-message">CONNECTING TO STANDINGS PIPELINE...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<canvas id="crackersCanvas"></canvas>
+<div id="championPopup" class="champion-popup-overlay">
+    <div class="champion-card">
+        <div class="champion-badge">👑🔥</div>
+        <div class="champion-title" id="popHeaderType">CURRENT #1 LEADER</div>
+        <div class="champion-name" id="popLeaderName">LOADING...</div>
+    </div>
+</div>
+
+<script>
+    const REALTIME_API_URL = "https://script.google.com/macros/s/AKfycbyuMwMTwfZH6nh9r7f7F4wA6t0XgPbgRQLNvAxQkfv9ExAVTN3NHjmjDBP4S_VxSNN4_w/exec";
+
+    if (!window.rankMemory) {
+        window.rankMemory = {
+            teamPoints: {},
+            playerKills: {},
+            playerStats: {},
+            teamStandings: {}
+        };
+    }
+
+    function applyOperationMode(mode) {
+        const tabPointsBtn = document.getElementById('tab-btn-team-points');
+        const tabKillsBtn = document.getElementById('tab-btn-player-kills');
+        const tabStatsBtn = document.getElementById('tab-btn-player-stats');
+        const tabStandingsBtn = document.getElementById('tab-btn-team-standings');
+        const btnTourney = document.getElementById('btnTourneyMode');
+        const btnDashboard = document.getElementById('btnDashboardMode');
+
+        if (mode === 'dashboard') {
+            btnTourney.className = 'mode-toggle-btn';
+            btnDashboard.className = 'mode-toggle-btn active-dashboard';
+            tabPointsBtn.classList.add('hide-tab-logic');
+            tabKillsBtn.classList.add('hide-tab-logic');
+            tabStatsBtn.classList.remove('hide-tab-logic');
+            tabStandingsBtn.classList.remove('hide-tab-logic');
+            switchTab('player-stats-tab', tabStatsBtn);
+        } else {
+            btnTourney.className = 'mode-toggle-btn active-tournament';
+            btnDashboard.className = 'mode-toggle-btn';
+            tabPointsBtn.classList.remove('hide-tab-logic');
+            tabKillsBtn.classList.remove('hide-tab-logic');
+            tabStatsBtn.classList.add('hide-tab-logic');
+            tabStandingsBtn.classList.add('hide-tab-logic');
+            switchTab('team-points-tab', tabPointsBtn);
         }
+    }
 
-        async function loadSheetData() {
-            try {
-                const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(SHEET_CSV_URL)}&_=${new Date().getTime()}`);
-                const data = await res.json();
-                renderSpreadsheet(data.contents);
-                document.getElementById('syncStatus').innerText = "Live Synced";
-            } catch (err) {
-                // Secondary fallback directly attempting connection
-                try {
-                    const fallback = await fetch(SHEET_CSV_URL);
-                    const text = await fallback.text();
-                    renderSpreadsheet(text);
-                } catch(e) {
-                    document.getElementById('syncStatus').innerText = "Sync Error";
-                }
+    function calculateRankArrow(storageKey, identifier, currentRank) {
+        if (!identifier) return '';
+        let arrowHTML = '';
+        let oldRank = window.rankMemory[storageKey][identifier];
+        
+        if (oldRank !== undefined) {
+            if (currentRank < oldRank) {
+                arrowHTML = `<span class="pos-change pos-up">↑${oldRank - currentRank}</span>`;
+            } else if (currentRank > oldRank) {
+                arrowHTML = `<span class="pos-change pos-down">↓${currentRank - oldRank}</span>`;
             }
         }
+        window.rankMemory[storageKey][identifier] = currentRank;
+        return arrowHTML;
+    }
 
-        function parseCSV(text) {
-            let lines = text.split(/\r?\n/);
-            return lines.map(line => {
-                let row = [];
-                let curr = '';
-                let inQuotes = false;
-                for (let i = 0; i < line.length; i++) {
-                    let char = line[i];
-                    if (char === '"') inQuotes = !inQuotes;
-                    else if (char === ',' && !inQuotes) {
-                        row.push(curr.trim());
-                        curr = '';
-                    } else curr += char;
-                }
-                row.push(curr.trim());
-                return row;
-            }).filter(r => r.length > 0 && r.some(c => c !== ''));
-        }
+    // ========================================================
+    // 🌌 DYNAMIC BACKGROUND ENGINE: SMOKE, EMBERS & RED PARTICLES
+    // ========================================================
+    const canvas = document.getElementById('cyberCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let embers = [];
+    let smokeClouds = [];
 
-        function renderSpreadsheet(csvText) {
-            const matrix = parseCSV(csvText);
-            if (matrix.length < 3) return;
-
-            const mapRow = matrix[0];
-            const keyRow = matrix[1];
-
-            const mapHeaderRow = document.getElementById('mapHeaderRow');
-            const subLabelRow = document.getElementById('subLabelRow');
-            const tableBody = document.getElementById('tableBody');
-
-            mapHeaderRow.innerHTML = '';
-            subLabelRow.innerHTML = '';
-            tableBody.innerHTML = '';
-
-            // Build Exact Layout Structure based on Sheet setup keys
-            let c = 0;
-            let totalColumnsCount = 0;
-
-            while (c < keyRow.length) {
-                let colName = keyRow[c].toUpperCase();
-
-                if (colName === 'S:NO' || colName === 'TEAM NAME') {
-                    mapHeaderRow.innerHTML += `<th rowspan="2" class="label-header">${keyRow[c]}</th>`;
-                    c++;
-                    totalColumnsCount++;
-                } else if (colName.includes('TOTAL')) {
-                    mapHeaderRow.innerHTML += `<th rowspan="2" class="label-header">${keyRow[c]}</th>`;
-                    c++;
-                    totalColumnsCount++;
-                } else if (colName === 'P' && keyRow[c+1]?.toUpperCase() === 'K') {
-                    let mapLabel = mapRow[c] || 'MAP';
-                    mapHeaderRow.innerHTML += `<th colspan="2" class="map-header">${mapLabel}</th>`;
-                    subLabelRow.innerHTML += `<th class="label-header">P</th><th class="label-header">K</th>`;
-                    c += 2;
-                    totalColumnsCount += 2;
-                } else {
-                    if(keyRow[c]) {
-                        mapHeaderRow.innerHTML += `<th rowspan="2" class="label-header">${keyRow[c]}</th>`;
-                        totalColumnsCount++;
-                    }
-                    c++;
-                }
-            }
-
-            // Update main container span spacing seamlessly
-            document.getElementById('mainSheetTitle').setAttribute('colspan', totalColumnsCount);
-
-            // Filter out empty spaces and populate real-time positions
-            let teamList = [];
-            let totalIdx = keyRow.findIndex(name => name.toUpperCase().includes('TOTAL'));
-
-            for (let r = 2; r < matrix.length; r++) {
-                let data = matrix[r];
-                if (!data[1]) continue; 
-                let score = totalIdx !== -1 ? parseInt(data[totalIdx]) || 0 : 0;
-                teamList.push({ raw: data, score: score });
-            }
-
-            // Keep the raw positions or sorting synced to your active sheet metrics
-            teamList.forEach((team, idx) => {
-                let trHtml = `<tr>`;
-                let colPointer = 0;
-                let rankNum = idx + 1;
-
-                while (colPointer < keyRow.length) {
-                    let val = team.raw[colPointer] || '';
-                    let label = keyRow[colPointer].toUpperCase();
-
-                    if (label === 'S:NO') {
-                        trHtml += `<td>${rankNum}</td>`;
-                        colPointer++;
-                    } else if (label === 'TEAM NAME') {
-                        trHtml += `<td class="team-name-cell">${val}</td>`;
-                        colPointer++;
-                    } else if (label.includes('TOTAL')) {
-                        trHtml += `<td class="total-points-cell">${val}</td>`;
-                        colPointer++;
-                    } else if (label === 'P' && keyRow[colPointer+1]?.toUpperCase() === 'K') {
-                        let pVal = team.raw[colPointer] || '-';
-                        let kVal = team.raw[colPointer+1] || '-';
-                        trHtml += `<td>${pVal}</td><td>${kVal}</td>`;
-                        colPointer += 2;
-                    } else {
-                        trHtml += `<td>${val}</td>`;
-                        colPointer++;
-                    }
-                }
-                trHtml += `</tr>`;
-                tableBody.innerHTML += trHtml;
+    function initCanvas() { 
+        canvas.width = window.innerWidth; 
+        canvas.height = window.innerHeight; 
+        
+        embers = [];
+        for (let i = 0; i < 60; i++) {
+            embers.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height + canvas.height,
+                size: Math.random() * 3 + 1,
+                speedY: -(Math.random() * 2 + 1),
+                speedX: (Math.random() - 0.5) * 1,
+                alpha: Math.random() * 0.8 + 0.2,
+                color: Math.random() > 0.4 ? '#ff0033' : '#ff6600' // Red & Orange particles
             });
-
-            // Append optional exact blank rows to preserve spreadsheet styling authenticity
-            for (let b = 0; b < 2; b++) {
-                let blankHtml = `<tr class="blank-row">`;
-                for (let k = 0; k < totalColumnsCount; k++) {
-                    blankHtml += `<td></td>`;
-                }
-                blankHtml += `</tr>`;
-                tableBody.innerHTML += blankHtml;
-            }
         }
-    </script>
+
+        smokeClouds = [];
+        for (let i = 0; i < 6; i++) {
+            smokeClouds.push({
+                x: Math.random() * canvas.width,
+                y: canvas.height - (Math.random() * 200),
+                radius: Math.random() * 150 + 100,
+                vx: (Math.random() - 0.5) * 0.4,
+                alpha: Math.random() * 0.08 + 0.03
+            });
+        }
+    }
+    window.addEventListener('resize', initCanvas); 
+    initCanvas();
+
+    function renderAtmosphere() {
+        ctx.fillStyle = '#000000'; // Pure Black Base
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // 1. Draw Simulated Smoke Layer
+        smokeClouds.forEach(smoke => {
+            smoke.x += smoke.vx;
+            if (smoke.x - smoke.radius > canvas.width) smoke.x = -smoke.radius;
+            if (smoke.x + smoke.radius < 0) smoke.x = canvas.width + smoke.radius;
+
+            let gradient = ctx.createRadialGradient(smoke.x, smoke.y, 10, smoke.x, smoke.y, smoke.radius);
+            gradient.addColorStop(0, `rgba(255, 0, 51, ${smoke.alpha})`); // Red tinted smoke
+            gradient.addColorStop(0.5, `rgba(255, 102, 0, ${smoke.alpha * 0.5})`);
+            gradient.addColorStop(1, 'rgba(0,0,0,0)');
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(smoke.x, smoke.y, smoke.radius, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // 2. Animate & Render Floating Embers / Red Particles
+        embers.forEach(p => {
+            p.y += p.speedY;
+            p.x += p.speedX;
+
+            if (p.y < -10) {
+                p.y = canvas.height + 10;
+                p.x = Math.random() * canvas.width;
+            }
+
+            ctx.save();
+            ctx.globalAlpha = p.alpha;
+            ctx.fillStyle = p.color;
+            ctx.shadowBlur = p.size * 3;
+            ctx.shadowColor = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        });
+
+        requestAnimationFrame(renderAtmosphere);
+    }
+    requestAnimationFrame(renderAtmosphere);
+
+    function getTeamEmoji(teamName) {
+        if (!teamName) return '🎮';
+        const name = teamName.toUpperCase();
+        if (name.includes('CAMP')) return '⛺';
+        if (name.includes('HUNT')) return '🏹';
+        if (name.includes('EVEN') || name.includes('SQUAD')) return '🌆';
+        if (name.includes('MEDIC')) return '🩺';
+        if (name.includes('MATRIX')) return '🔮';
+        if (name.includes('BOT')) return '🤖';
+        if (name.includes('THUND')) return '⚡';
+        return '⚔️'; 
+    }
+
+    function getRankBadgeHTML(rankNum) {
+        if (rankNum === 1) return '🥇';
+        if (rankNum === 2) return '🥈';
+        if (rankNum === 3) return '🥉';
+        return rankNum;
+    }
+
+    function switchTab(tabId, button) {
+        document.querySelectorAll('.table-responsive').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        button.classList.add('active');
+    }
+
+    async function fetchAllSheetsData() {
+        try {
+            const response = await fetch(`${REALTIME_API_URL}?_=${new Date().getTime()}`);
+            const allData = await response.json();
+            
+            buildUniversalMasterGrid(allData.teamPoints, 'team-points-head', 'team-points-body');
+            buildPlayerKillsGrid(allData.playerKills, 'player-kills-head', 'player-kills-body');
+            buildPlayerStatsGrid(allData.playerStats, 'player-stats-head', 'player-stats-body');
+            buildTeamStandingsGrid(allData.teamStandings, 'team-standings-head', 'team-standings-body');
+        } catch (error) { console.error("Sync error:", error); }
+    }
+
+    // TAB 1: Team Points
+    function buildUniversalMasterGrid(rows, headId, bodyId) {
+        if (!rows || rows.length < 2) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+        
+        const isHeaderDeleted = rows[0][0] && rows[0][0].toString().toUpperCase().includes("S:NO");
+        const startRowIdx = isHeaderDeleted ? 0 : 1;
+        const headerRow = rows[startRowIdx];
+
+        if (!headerRow) return;
+
+        const totalColumns = headerRow.length;
+        const totalPointsIdx = totalColumns - 2; 
+        const topKillerIdx = totalColumns - 1;   
+
+        let headHTML = '<tr><th rowspan="2" class="rank-header">RANK</th>';
+        headerRow.forEach((col, index) => {
+            if (index === 1) headHTML += `<th rowspan="2" class="team-name-head">TEAM NAME</th>`;
+            else if (index > 1 && index < totalPointsIdx && index % 2 === 0) {
+                headHTML += `<th colspan="2" class="map-header">${col || ''}</th>`;
+            }
+            else if (index === totalPointsIdx) headHTML += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th>`;
+            else if (index === topKillerIdx) headHTML += `<th rowspan="2" class="top-killer-head">TOP KILLER</th>`;
+        });
+        headHTML += '</tr><tr>';
+        
+        if (rows[startRowIdx + 1]) {
+            rows[startRowIdx + 1].forEach((col, index) => {
+                if (index > 1 && index < totalPointsIdx) headHTML += `<th class="sub-th">${col || ''}</th>`;
+            });
+        }
+        headHTML += '</tr>';
+        thead.innerHTML = headHTML;
+
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        for (let i = (startRowIdx + 2); i < rows.length; i++) {
+            const row = rows[i];
+            if (!row || !row[1] || row[1].toString().trim() === "" || row[0] === "TOTAL POINTS") continue;
+            
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
+            
+            let tName = row[1].toString().trim();
+            let arrow = calculateRankArrow('teamPoints', tName, currentRank);
+            
+            let rowCells = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            rowCells += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(tName)}</span>${row[1] || '-'}</td>`;
+            
+            for (let j = 2; j < totalColumns; j++) {
+                if (j === totalPointsIdx) {
+                    rowCells += `<td class="neon-score">${row[j] !== undefined ? row[j] : '-'}</td>`;
+                } else if (j === topKillerIdx) {
+                    rowCells += `<td style="font-size:10.5pt;">${row[j] !== undefined ? row[j] : '-'}</td>`;
+                } else {
+                    rowCells += `<td>${row[j] !== undefined ? row[j] : '-'}</td>`;
+                }
+            }
+            tr.innerHTML = rowCells;
+            tbody.appendChild(tr);
+            currentRank++;
+        }
+    }
+
+    // TAB 2: Player Kills
+    function buildPlayerKillsGrid(rows, headId, bodyId) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+
+        let startRowIdx = 0;
+        if (rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM")) {
+            startRowIdx = 1; 
+        }
+
+        const headerRow = rows[startRowIdx];
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[0] || 'PLAYER NAME'}</th>`;
+        for(let c = 1; c < numCols - 1; c++) {
+            headHTML += `<th>${headerRow[c] || 'MATCH'}</th>`;
+        }
+        headHTML += `<th class="total-points-head">${headerRow[numCols - 1] || 'TOTAL KILLS'}</th></tr>`;
+        thead.innerHTML = headHTML;
+
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        for (let i = startRowIdx + 1; i < rows.length; i++) {
+            const row = rows[i];
+            if (!row || !row[0] || row[0].toString().trim() === "" || row[0].toString().toUpperCase().includes("PLAYER NAME")) continue;
+
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
+
+            let pName = row[0].toString().trim();
+            let arrow = calculateRankArrow('playerKills', pName, currentRank);
+
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            cellHTML += `<td class="player-name-cell"><span class="team-emoji">🎯</span>${row[0] || '-'}</td>`;
+            for(let d = 1; d < numCols - 1; d++) {
+                cellHTML += `<td>${row[d] !== undefined ? row[d] : '-'}</td>`;
+            }
+            cellHTML += `<td class="neon-score">${row[numCols - 1] !== undefined ? row[numCols - 1] : '-'}</td>`;
+
+            tr.innerHTML = cellHTML;
+            tbody.appendChild(tr);
+            currentRank++;
+        }
+    }
+
+    // TAB 3: Player Stats
+    function buildPlayerStatsGrid(rows, headId, bodyId) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+
+        let startRowIdx = 0;
+        if (rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM")) {
+            startRowIdx = 1; 
+        }
+
+        const headerRow = rows[startRowIdx];
+        const hasSNo = headerRow[0] && headerRow[0].toString().toUpperCase().includes("S:");
+        const startIdx = hasSNo ? 1 : 0;
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="player-name-head">${headerRow[startIdx] || 'PLAYER NAME'}</th>`;
+        for (let c = startIdx + 1; c < numCols; c++) {
+            headHTML += `<th>${headerRow[c] || 'STAT'}</th>`;
+        }
+        headHTML += `</tr>`;
+        thead.innerHTML = headHTML;
+        
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        for (let i = startRowIdx + 1; i < rows.length; i++) {
+            const row = rows[i];
+            if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().toUpperCase().includes("PLAYER NAME")) continue;
+            
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
+            
+            let psName = row[startIdx].toString().trim();
+            let arrow = calculateRankArrow('playerStats', psName, currentRank);
+            
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            cellHTML += `<td class="player-name-cell"><span class="team-emoji">👤</span>${row[startIdx] || '-'}</td>`;
+            
+            for (let d = startIdx + 1; d < numCols; d++) {
+                let cellValue = row[d];
+                if (d === numCols - 1 && cellValue !== undefined && !isNaN(cellValue) && cellValue !== "") {
+                    cellValue = Number(cellValue).toFixed(2);
+                }
+
+                if (d === startIdx + 2) {
+                    cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : '-'}</td>`;
+                } else if (d === numCols - 1) {
+                    cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : '-'}</td>`;
+                } else {
+                    cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : '-'}</td>`;
+                }
+            }
+            
+            tr.innerHTML = cellHTML;
+            tbody.appendChild(tr);
+            currentRank++;
+        }
+    }
+
+    // TAB 4: Team Standings
+    function buildTeamStandingsGrid(rows, headId, bodyId) {
+        if (!rows || rows.length === 0) return;
+        const thead = document.getElementById(headId);
+        const tbody = document.getElementById(bodyId);
+
+        let startRowIdx = 0;
+        if (rows[0][0] && rows[0][0].toString().toUpperCase().includes("TYT PORKALAM")) {
+            startRowIdx = 1;
+        }
+
+        const headerRow = rows[startRowIdx];
+        const hasRankCol = headerRow[0] && headerRow[0].toString().toUpperCase().includes("RANK");
+        const startIdx = hasRankCol ? 1 : 0;
+        const numCols = headerRow.length;
+
+        let headHTML = `<tr><th class="rank-header">RANK</th><th class="team-name-head">${headerRow[startIdx] || 'TEAM NAME'}</th>`;
+        for (let c = startIdx + 1; c < numCols; c++) {
+            headHTML += `<th>${headerRow[c] || 'DATA'}</th>`;
+        }
+        headHTML += `</tr>`;
+        thead.innerHTML = headHTML;
+
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        
+        for (let i = startRowIdx + 1; i < rows.length; i++) {
+            const row = rows[i];
+            if (!row || !row[startIdx] || row[startIdx].toString().trim() === "" || row[startIdx].toString().trim() === "0") continue;
+
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
+
+            let tsName = row[startIdx].toString().trim();
+            let arrow = calculateRankArrow('teamStandings', tsName, currentRank);
+
+            let cellHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            cellHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(tsName)}</span>${row[startIdx]}</td>`;
+
+            for (let d = startIdx + 1; d < numCols; d++) {
+                let cellValue = row[d];
+                if (d === numCols - 1 && cellValue !== undefined && !isNaN(cellValue) && cellValue !== '') {
+                    cellValue = Number(cellValue).toFixed(2);
+                }
+                
+                if (d === startIdx + 3) { 
+                    cellHTML += `<td class="neon-score">${cellValue !== undefined ? cellValue : 0}</td>`;
+                } else if (d === numCols - 1) { 
+                    cellHTML += `<td class="highlight-stat">${cellValue !== undefined ? cellValue : 0}</td>`;
+                } else {
+                    cellHTML += `<td class="stat-number-cell">${cellValue !== undefined ? cellValue : 0}</td>`;
+                }
+            }
+
+            tr.innerHTML = cellHTML;
+            tbody.appendChild(tr);
+            currentRank++;
+        }
+    }
+</script>
+
+<script>
+// Crackers Simulation
+const cCanvas = document.getElementById('crackersCanvas');
+const cCtx = cCanvas.getContext('2d');
+let cParticles = [];
+let crackersAnimationId;
+
+function resizeCrackersCanvas() {
+    cCanvas.width = window.innerWidth;
+    cCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCrackersCanvas);
+resizeCrackersCanvas();
+
+class CrackerParticle {
+    constructor(x, y, color) {
+        this.x = x; this.y = y; this.color = color;
+        this.radius = Math.random() * 4 + 2;
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 12 + 4;
+        this.speedX = Math.cos(angle) * velocity;
+        this.speedY = Math.sin(angle) * velocity;
+        this.gravity = 0.2; this.alpha = 1;
+        this.decay = Math.random() * 0.015 + 0.015;
+    }
+    update() { this.speedY += this.gravity; this.x += this.speedX; this.y += this.speedY; this.alpha -= this.decay; }
+    draw() {
+        cCtx.save(); cCtx.globalAlpha = this.alpha; cCtx.fillStyle = this.color;
+        cCtx.shadowBlur = 10; cCtx.shadowColor = this.color;
+        cCtx.beginPath(); cCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); cCtx.fill(); cCtx.restore();
+    }
+}
+
+function createExplosion(x, y) {
+    const colors = ['#ff0033', '#ff6600', '#ffaa00', '#ffffff'];
+    for (let i = 0; i < 100; i++) {
+        cParticles.push(new CrackerParticle(x, y, colors[Math.floor(Math.random() * colors.length)]));
+    }
+}
+
+function animateCrackers() {
+    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+    for (let i = cParticles.length - 1; i >= 0; i--) {
+        cParticles[i].update();
+        if (cParticles[i].alpha <= 0) cParticles.splice(i, 1);
+        else cParticles[i].draw();
+    }
+    crackersAnimationId = requestAnimationFrame(animateCrackers);
+}
+
+function triggerNativeCrackers() {
+    cParticles = [];
+    cancelAnimationFrame(crackersAnimationId);
+    animateCrackers();
+    createExplosion(window.innerWidth * 0.2, window.innerHeight * 0.4);
+    setTimeout(() => createExplosion(window.innerWidth * 0.8, window.innerHeight * 0.4), 250);
+    setTimeout(() => createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.3), 500);
+}
+
+let lastWinnerCache = {};
+function triggerTabCelebration(tabId, tabName) {
+    setTimeout(() => {
+        const gridContainer = document.getElementById(tabId);
+        if (!gridContainer) return;
+        const firstRow = gridContainer.querySelector('tbody tr');
+        if (!firstRow) return;
+        const allCells = firstRow.querySelectorAll('td');
+        if (allCells.length < 2) return;
+        
+        let winnerName = allCells[1].innerText || allCells[1].textContent;
+        winnerName = winnerName.replace(/[🥇🥈🥉⭐👑🎖️🔥]/g, '').trim();
+        if (winnerName.includes('\n')) winnerName = winnerName.split('\n')[0];
+
+        if (!winnerName || winnerName.toUpperCase() === "LOADING...") return;
+
+        if (lastWinnerCache[tabId] !== winnerName) {
+            lastWinnerCache[tabId] = winnerName;
+            document.getElementById('popHeaderType').innerText = tabName + " #1 LEADER";
+            document.getElementById('popLeaderName').innerText = winnerName;
+            const popup = document.getElementById('championPopup');
+            popup.classList.add('show');
+            triggerNativeCrackers();
+            setTimeout(() => popup.classList.remove('show'), 3000);
+        }
+    }, 600);
+}
+
+const originalSwitchTab = window.switchTab;
+window.switchTab = function(tabId, button) {
+    if (typeof originalSwitchTab === 'function') originalSwitchTab(tabId, button);
+    let cleanName = "TEAM POINTS";
+    if (tabId.includes('kill')) cleanName = "PLAYER KILLS";
+    if (tabId.includes('stat')) cleanName = "PLAYER STATS";
+    if (tabId.includes('standing')) cleanName = "TEAM STANDINGS";
+    triggerTabCelebration(tabId, cleanName);
+};
+
+window.addEventListener('load', () => {
+    applyOperationMode('tournament');
+});
+
+function openMainPointsTable() {
+    document.getElementById('porkalamSplash').classList.add('fade-hide');
+    if (typeof fetchAllSheetsData === 'function') fetchAllSheetsData();
+}
+
+if (typeof fetchAllSheetsData === 'function') {
+    fetchAllSheetsData();
+    setInterval(fetchAllSheetsData, 1000); 
+}
+</script>
 </body>
 </html>
