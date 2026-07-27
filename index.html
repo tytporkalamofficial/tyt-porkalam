@@ -334,7 +334,7 @@
             buildTeamStandingsGrid(allData.teamStandings);
             buildRecentResultsCards(allData.recentResults);
             
-            updateTournamentTotalPoints();
+            
         } catch (error) { console.error("Sync error:", error); }
     }
 
@@ -384,60 +384,79 @@
     }
 
     function buildDynamicTeamPointsGrid(data) {
-        if (!data || !data.mapList || !data.teams) return;
+        if (!data || !data.teams) return;
+
         const thead = document.getElementById('team-points-head');
         const tbody = document.getElementById('team-points-body');
-        
+
+        // The Team Points sheet has exactly 4 maps:
+        // Erangle, Sanhok, Livik, Miramar — each has P + K.
+        const mapNames = (data.mapList && data.mapList.length)
+            ? data.mapList.slice(0, 4)
+            : ['Erangle', 'Sanhok', 'Livik', 'Miramar'];
+
         let headRow1 = '<tr><th rowspan="2" class="rank-header">RANK</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
-        let headRow2 = '</tr><tr>';
-        
-        data.mapList.forEach(mapName => {
-            headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
+        let headRow2 = '<tr>';
+
+        mapNames.forEach(mapName => {
+            headRow1 += `<th colspan="2" class="map-header">${String(mapName).toUpperCase()}</th>`;
             headRow2 += `<th class="sub-th p-column">P</th><th class="sub-th">K</th>`;
         });
-        
-        headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
-        thead.innerHTML = headRow1 + headRow2;
 
+        headRow1 += '<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>';
+        headRow2 += '</tr>';
+        thead.innerHTML = headRow1 + headRow2;
         tbody.innerHTML = '';
-        
-        // Calculate Total Points accurately for each team
+
+        const toNumber = value => {
+            if (value === null || value === undefined || value === '' || value === '-') return 0;
+            const n = Number(String(value).replace(/,/g, '').trim());
+            return Number.isFinite(n) ? n : 0;
+        };
+
+        // TOTAL POINTS is ALWAYS calculated from the 8 visible P/K values.
         data.teams.forEach(team => {
-            let computedTotal = 0;
-            if (team.scores && Array.isArray(team.scores)) {
-                computedTotal = team.scores.reduce((sum, val) => sum + (Number(val) || 0), 0);
-            }
-            team.calculatedTotalPoints = (team.totalPoints !== undefined && team.totalPoints !== null && !isNaN(Number(team.totalPoints)) && Number(team.totalPoints) > 0) 
-                ? Number(team.totalPoints) 
-                : computedTotal;
+            const scores = Array.isArray(team.scores) ? team.scores.slice(0, 8) : [];
+            team.scores = scores;
+
+            team.calculatedTotalPoints = scores.reduce(
+                (sum, value) => sum + toNumber(value), 0
+            );
         });
 
-        // Sort teams by total points descending
         data.teams.sort((a, b) => b.calculatedTotalPoints - a.calculatedTotalPoints);
 
         let currentRank = 1;
+
         data.teams.forEach(team => {
-            if (!team.teamName || team.teamName.toString().trim() === "" || team.teamName.toUpperCase() === "TEAM NAME") {
-                return; 
+            if (!team.teamName ||
+                team.teamName.toString().trim() === '' ||
+                team.teamName.toUpperCase() === 'TEAM NAME') {
+                return;
             }
 
             const tr = document.createElement('tr');
             tr.classList.add(`rank-${currentRank}`, 'table-row');
-            let arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
-            
-            let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
-            rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
-            
-            if (team.scores && Array.isArray(team.scores)) {
-                team.scores.forEach(score => { 
-                    rowHTML += `<td>${score !== undefined && score !== null && score !== '' ? score : 0}</td>`; 
-                });
+
+            const arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
+
+            let rowHTML =
+                `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+
+            rowHTML +=
+                `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
+
+            // Always render exactly 8 P/K cells.
+            for (let i = 0; i < 8; i++) {
+                const value = team.scores[i];
+                rowHTML += `<td>${value !== undefined && value !== null && value !== '' ? value : 0}</td>`;
             }
-            
+
+            // Example: 12+27+0+3+0+14+8+15 = 79
             rowHTML += `<td class="neon-score">${team.calculatedTotalPoints}</td>`;
-              
-            tr.innerHTML = rowHTML; 
-            tbody.appendChild(tr); 
+
+            tr.innerHTML = rowHTML;
+            tbody.appendChild(tr);
             currentRank++;
         });
     }
@@ -587,37 +606,6 @@ function triggerNativeCrackers() { cParticles = []; cancelAnimationFrame(cracker
 window.addEventListener('load', () => { initFireBackground(); applyOperationMode('tournament'); });
 function openMainPointsTable() { document.getElementById('porkalamSplash').classList.add('fade-hide'); fetchAllSheetsData(); setInterval(fetchAllSheetsData, 2000); }
 
-// AUTOMATIC TOTAL POINTS RE-CALCULATION & RENDER FIX
-function updateTournamentTotalPoints() {
-    const rows = document.querySelectorAll('#team-points-body tr');
-    
-    rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        if (cells.length >= 4) { 
-            let totalSum = 0;
-            let hasValidNumber = false;
-            
-            // Iterate over all score columns between Team Name and Total Points
-            for (let i = 2; i < cells.length - 1; i++) {
-                let cellValue = cells[i].innerText || cells[i].textContent;
-                let numericValue = parseFloat(cellValue.trim());
-                if (!isNaN(numericValue)) {
-                    totalSum += numericValue;
-                    hasValidNumber = true;
-                }
-            }
-            
-            const totalPointsCell = cells[cells.length - 1];
-            if (totalPointsCell && (totalPointsCell.innerText.trim() === "" || totalPointsCell.innerText.trim() === "0" || hasValidNumber)) {
-                totalPointsCell.innerHTML = totalSum;
-            }
-        }
-    });
-}
-
-document.addEventListener('DOMContentLoaded', updateTournamentTotalPoints);
-window.addEventListener('load', updateTournamentTotalPoints);
-document.addEventListener('input', updateTournamentTotalPoints);
 </script>
 </body>
 </html>
