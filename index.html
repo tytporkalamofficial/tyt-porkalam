@@ -3,244 +3,598 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TYT PORKALAM - BGMI Esports Combo Engine</title>
+    <title>TYT PORKALAM - Midnight Hunters</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
+        /* ========== MIDNIGHT HUNTERS THEME ========== */
         .premium-splash {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #050100;
+            background: #02040a;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             z-index: 9999999 !important;
             overflow: hidden;
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
         .fire-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background:
-                repeating-conic-gradient(from 0deg at 50% 50%, rgba(200,235,255,0.05) 0deg 8deg, transparent 8deg 16deg),
-                radial-gradient(circle at center, rgba(0,60,120,0.55) 0%, #010710 100%);
+            background: radial-gradient(ellipse at center, rgba(10, 25, 15, 0.7) 0%, #010308 70%, #000000 100%);
             pointer-events: none;
         }
         .fire-particle {
             position: absolute;
-            bottom: -20px;
-            background: radial-gradient(circle, #eafcff 15%, rgba(120,220,255,0.7) 45%, rgba(30,144,255,0) 75%);
+            bottom: -30px;
+            background: radial-gradient(circle, rgba(0, 255, 120, 0.5) 10%, rgba(0, 80, 40, 0) 70%);
             border-radius: 50%;
-            opacity: 0.75;
-            box-shadow: 0 0 8px rgba(150, 230, 255, 0.8);
-            animation: riseUp 4s linear infinite;
+            opacity: 0.5;
+            animation: mistRise 7s linear infinite;
+            filter: blur(1px);
         }
-        @keyframes riseUp {
-            0% { transform: translateY(0) scale(1) translateX(0); opacity: 0.7; }
-            50% { transform: translateY(-50vh) scale(1.3) translateX(20px); opacity: 0.4; }
-            100% { transform: translateY(-110vh) scale(0.5) translateX(-20px); opacity: 0; }
+        @keyframes mistRise {
+            0% { transform: translateY(0) scale(1) translateX(0); opacity: 0.5; }
+            40% { transform: translateY(-40vh) scale(1.4) translateX(30px); opacity: 0.35; }
+            100% { transform: translateY(-120vh) scale(0.6) translateX(-25px); opacity: 0; }
         }
         .dancing-title {
-            color: #ffffff; font-size: 46pt; font-weight: 900; text-transform: uppercase; letter-spacing: 6px; margin-bottom: 30px; z-index: 2; position: relative; text-shadow: 0 0 20px #1e90ff, 0 0 40px #00e5ff; animation: textDance 3s ease-in-out infinite alternate;
+            color: #e8f0e8;
+            font-size: 46pt;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            margin-bottom: 28px;
+            z-index: 2;
+            position: relative;
+            text-shadow: 0 0 18px #00ff88, 0 0 40px rgba(0, 180, 80, 0.6), 0 0 70px rgba(0, 100, 40, 0.4);
+            animation: titleHaunt 4s ease-in-out infinite alternate;
         }
-        @keyframes textDance {
-            0% { transform: translateY(0) rotate(-1deg); text-shadow: 0 0 20px #1e90ff, 0 0 40px #00e5ff; }
-            50% { transform: translateY(-10px) rotate(1deg) scale(1.03); text-shadow: 0 0 30px #d90429, 0 0 50px #7fdbff; }
-            100% { transform: translateY(5px) rotate(-0.5deg); text-shadow: 0 0 25px #1e90ff, 0 0 45px #00e5ff; }
+        @keyframes titleHaunt {
+            0% { transform: translateY(0) rotate(-0.8deg); text-shadow: 0 0 18px #00ff88, 0 0 40px rgba(0,180,80,0.5); filter: brightness(1); }
+            50% { transform: translateY(-12px) rotate(0.8deg) scale(1.04); text-shadow: 0 0 28px #39ff14, 0 0 55px rgba(0,255,100,0.7), 0 0 90px rgba(255,0,40,0.25); filter: brightness(1.15); }
+            100% { transform: translateY(4px) rotate(-0.4deg); text-shadow: 0 0 20px #00cc66, 0 0 45px rgba(0,140,60,0.5); filter: brightness(0.95); }
         }
         .enter-esports-btn {
-            background: linear-gradient(135deg, #d90429 0%, #001f4d 100%); color: #ffffff; border: 2px solid #7fdbff; padding: 16px 45px; font-size: 16pt; font-weight: 800; text-transform: uppercase; border-radius: 6px; cursor: pointer; z-index: 2; box-shadow: 0 0 25px rgba(30, 144, 255, 0.6); transition: all 0.2s ease;
+            background: linear-gradient(135deg, #0a2a18 0%, #041208 100%);
+            color: #c8ffd0;
+            border: 2px solid #00cc66;
+            padding: 16px 48px;
+            font-size: 15pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 2;
+            box-shadow: 0 0 25px rgba(0, 200, 90, 0.4), inset 0 0 20px rgba(0, 80, 40, 0.3);
+            transition: all 0.25s ease;
+            letter-spacing: 2px;
         }
-        .enter-esports-btn:hover { transform: scale(1.08); box-shadow: 0 0 45px #00e5ff; background: linear-gradient(135deg, #ff0a3c 0%, #003a80 100%); }
-        .premium-splash.fade-hide { opacity: 0; transform: scale(1.05); pointer-events: none; }
-        .pos-change { font-size: 11pt; font-weight: 900; margin-left: 8px; display: inline-block; vertical-align: middle; animation: arrowPop 0.3s ease-out; }
-        @keyframes arrowPop { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        .pos-up { color: #00ff66 !important; text-shadow: 0 0 8px rgba(0, 255, 102, 0.6); }
-        .pos-down { color: #ff3333 !important; text-shadow: 0 0 8px rgba(255, 51, 51, 0.6); }
-        .table-row { transition: all 0.5s ease; }
-    </style>
+        .enter-esports-btn:hover {
+            transform: scale(1.07);
+            box-shadow: 0 0 45px rgba(0, 255, 120, 0.55), 0 0 20px rgba(255, 30, 50, 0.25);
+            background: linear-gradient(135deg, #0d3a22 0%, #062a15 100%);
+            border-color: #39ff14;
+            color: #ffffff;
+        }
+        .premium-splash.fade-hide {
+            opacity: 0;
+            transform: scale(1.06);
+            pointer-events: none;
+        }
 
-    <style>
+        /* Rank arrows */
+        .pos-change {
+            font-size: 11pt;
+            font-weight: 900;
+            margin-left: 8px;
+            display: inline-block;
+            vertical-align: middle;
+            animation: arrowPop 0.3s ease-out;
+        }
+        @keyframes arrowPop {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .pos-up { color: #39ff14 !important; text-shadow: 0 0 10px rgba(57, 255, 20, 0.7); }
+        .pos-down { color: #ff3355 !important; text-shadow: 0 0 10px rgba(255, 51, 85, 0.7); }
+        .table-row { transition: all 0.5s ease; }
+
+        /* ========== GLOBAL & BODY ========== */
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
         body {
-            margin: 0; padding: 10px 20px;
-            background:
-                repeating-conic-gradient(from 0deg at 50% 0%, rgba(220,240,255,0.035) 0deg 6deg, transparent 6deg 18deg),
-                radial-gradient(circle at 50% 50%, #052a52 0%, #010714 100%) !important;
-            color: #ffffff; display: flex; flex-direction: column; align-items: center; min-height: 100vh; position: relative; overflow-x: hidden; transition: background 0.8s ease !important;
+            margin: 0;
+            padding: 10px 20px;
+            background: radial-gradient(ellipse at 50% 20%, #0a1a12 0%, #03080a 45%, #010204 100%) !important;
+            color: #d8e8d8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.9s ease !important;
         }
-        body.dashboard-orange-mode { background: radial-gradient(circle at 50% 50%, #001a33 0%, #00060f 100%) !important; }
-        body.results-purple-mode { background: radial-gradient(circle at 50% 50%, #3a0012 0%, #08000a 100%) !important; }
-        #odysseyCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        .container { width: 100% !important; max-width: 1400px !important; position: relative; z-index: 2; padding-top: 15px; display: flex; flex-direction: column; align-items: center; }
-        .mode-switcher-bar { display: flex; justify-content: center; margin-bottom: 20px; gap: 15px; flex-wrap: wrap; }
-        .mode-toggle-btn { background: rgba(5, 15, 30, 0.6); border: 1.5px solid rgba(30, 144, 255, 0.35); color: #a0aec0; padding: 10px 25px; font-size: 11pt; font-weight: 800; text-transform: uppercase; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; }
-        .mode-toggle-btn.active-tournament { background: linear-gradient(135deg, #8b0000 0%, #d90429 100%) !important; color: #fff !important; border-color: #7fdbff !important; box-shadow: 0 0 15px rgba(217, 4, 41, 0.5); }
-        .mode-toggle-btn.active-dashboard { background: linear-gradient(135deg, #003a80 0%, #00b7ff 100%) !important; color: #fff !important; border-color: #eafcff !important; box-shadow: 0 0 15px rgba(0, 183, 255, 0.5); }
-        .mode-toggle-btn.active-results { background: linear-gradient(135deg, #6e0022 0%, #d90429 100%) !important; color: #fff !important; border-color: #eaf6ff !important; box-shadow: 0 0 15px rgba(217, 4, 41, 0.5); }
-        
-        .header-container { text-align: center; margin-bottom: 25px; border-bottom: 2px solid rgba(30, 144, 255, 0.3); padding-bottom: 15px; position: relative; width: 100%; }
-        body.dashboard-orange-mode .header-container { border-bottom-color: rgba(0, 183, 255, 0.3); }
-        body.results-purple-mode .header-container { border-bottom-color: rgba(217, 4, 41, 0.4); }
-        .main-title { font-size: 40pt; font-weight: 900; text-transform: uppercase; letter-spacing: 6px; margin: 0; text-shadow: 0 0 10px #1e90ff, 0 0 20px #00e5ff, 0 0 30px #d90429 !important; }
-        body.dashboard-orange-mode .main-title { text-shadow: 0 0 10px #00b7ff, 0 0 20px #7fdbff, 0 0 30px #1e90ff !important; }
-        body.results-purple-mode .main-title { text-shadow: 0 0 10px #d90429, 0 0 20px #ff5c7a, 0 0 30px #6e0022 !important; }
-        
-        .subtitle { font-size: 14pt; color: #00e5ff; margin: 6px 0 0 0; font-weight: bold; text-shadow: 0 0 8px rgba(0, 229, 255, 0.5); }
-        .live-badge { position: absolute; top: 10px; right: 10px; background: rgba(30, 144, 255, 0.2) !important; border: 1px solid #1e90ff !important; color: #aeeaff !important; padding: 6px 14px; border-radius: 20px; font-size: 11pt; font-weight: bold; text-transform: uppercase; }
-        
-        .tabs-container { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
-        .tab-btn { background: rgba(5, 15, 30, 0.8) !important; border: 1px solid rgba(30, 144, 255, 0.3) !important; color: #cbd5e0 !important; padding: 12px 24px; font-size: 12pt; font-weight: 700; text-transform: uppercase; border-radius: 8px; cursor: pointer; transition: all 0.25s ease; }
+        body.dashboard-orange-mode {
+            background: radial-gradient(ellipse at 50% 20%, #0c1a14 0%, #04100c 50%, #010503 100%) !important;
+        }
+        body.results-purple-mode {
+            background: radial-gradient(ellipse at 50% 20%, #0d0a1a 0%, #05030e 50%, #02010a 100%) !important;
+        }
+
+        /* Fog / mist overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(0, 60, 40, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 30%, rgba(20, 0, 40, 0.1) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: fogDrift 18s ease-in-out infinite alternate;
+        }
+        @keyframes fogDrift {
+            0% { opacity: 0.7; transform: scale(1) translateX(0); }
+            100% { opacity: 1; transform: scale(1.05) translateX(15px); }
+        }
+
+        #odysseyCanvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100% !important;
+            max-width: 1400px !important;
+            position: relative;
+            z-index: 2;
+            padding-top: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Mode switcher */
+        .mode-switcher-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .mode-toggle-btn {
+            background: rgba(8, 18, 12, 0.7);
+            border: 1.5px solid rgba(0, 180, 90, 0.35);
+            color: #8aaa90;
+            padding: 10px 24px;
+            font-size: 11pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        .mode-toggle-btn.active-tournament {
+            background: linear-gradient(135deg, #062a18 0%, #0a3d22 100%) !important;
+            color: #c8ffd0 !important;
+            border-color: #00cc66 !important;
+            box-shadow: 0 0 18px rgba(0, 200, 90, 0.45);
+        }
+        .mode-toggle-btn.active-dashboard {
+            background: linear-gradient(135deg, #0a2a1a 0%, #0d3a22 100%) !important;
+            color: #d0ffd8 !important;
+            border-color: #39ff14 !important;
+            box-shadow: 0 0 18px rgba(57, 255, 20, 0.4);
+        }
+        .mode-toggle-btn.active-results {
+            background: linear-gradient(135deg, #1a0a2a 0%, #2a1040 100%) !important;
+            color: #e0d0ff !important;
+            border-color: #a070ff !important;
+            box-shadow: 0 0 18px rgba(140, 80, 220, 0.45);
+        }
+
+        /* Header */
+        .header-container {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(0, 160, 80, 0.3);
+            padding-bottom: 15px;
+            position: relative;
+            width: 100%;
+        }
+        body.dashboard-orange-mode .header-container { border-bottom-color: rgba(0, 180, 90, 0.35); }
+        body.results-purple-mode .header-container { border-bottom-color: rgba(120, 60, 200, 0.4); }
+
+        .main-title {
+            font-size: 40pt;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 7px;
+            margin: 0;
+            color: #e8f5e8;
+            text-shadow: 0 0 12px #00ff88, 0 0 28px rgba(0, 180, 80, 0.5), 0 0 50px rgba(0, 80, 40, 0.3) !important;
+        }
+        body.dashboard-orange-mode .main-title {
+            text-shadow: 0 0 12px #39ff14, 0 0 28px rgba(0, 200, 90, 0.55), 0 0 50px rgba(0, 100, 50, 0.3) !important;
+        }
+        body.results-purple-mode .main-title {
+            text-shadow: 0 0 12px #b080ff, 0 0 28px rgba(140, 80, 220, 0.5), 0 0 50px rgba(80, 40, 140, 0.3) !important;
+        }
+
+        .subtitle {
+            font-size: 14pt;
+            color: #66cc88;
+            margin: 8px 0 0 0;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 200, 100, 0.45);
+            letter-spacing: 1px;
+        }
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 40, 25, 0.5) !important;
+            border: 1px solid #00aa55 !important;
+            color: #88ffaa !important;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 12px rgba(0, 180, 80, 0.3);
+            animation: livePulse 2.5s ease-in-out infinite;
+        }
+        @keyframes livePulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(0, 180, 80, 0.3); }
+            50% { box-shadow: 0 0 18px rgba(0, 255, 120, 0.55); }
+        }
+
+        /* Tabs */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: rgba(8, 18, 12, 0.75) !important;
+            border: 1px solid rgba(0, 160, 80, 0.3) !important;
+            color: #a0b8a8 !important;
+            padding: 12px 22px;
+            font-size: 12pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            letter-spacing: 0.5px;
+        }
         .tab-btn.hide-tab-logic { display: none !important; }
-        .tab-btn:hover, .tab-btn.active { background: linear-gradient(135deg, #d90429 0%, #1e90ff 100%) !important; color: #ffffff !important; border: 1px solid #7fdbff !important; box-shadow: 0 0 20px rgba(30, 144, 255, 0.6) !important; transform: translateY(-2px); }
-        body.dashboard-orange-mode .tab-btn:hover, body.dashboard-orange-mode .tab-btn.active { background: linear-gradient(135deg, #003a80 0%, #00b7ff 100%) !important; box-shadow: 0 0 20px rgba(0, 183, 255, 0.6) !important; }
-        
-        .table-responsive { overflow-x: auto; display: none; width: 100%; margin: 0 auto; }
+        .tab-btn:hover, .tab-btn.active {
+            background: linear-gradient(135deg, #0a3a22 0%, #062a18 100%) !important;
+            color: #d0ffd8 !important;
+            border: 1px solid #00cc66 !important;
+            box-shadow: 0 0 22px rgba(0, 200, 90, 0.5) !important;
+            transform: translateY(-2px);
+        }
+        body.dashboard-orange-mode .tab-btn:hover,
+        body.dashboard-orange-mode .tab-btn.active {
+            background: linear-gradient(135deg, #0d4025 0%, #08351c 100%) !important;
+            box-shadow: 0 0 22px rgba(57, 255, 20, 0.45) !important;
+        }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            display: none;
+            width: 100%;
+            margin: 0 auto;
+        }
         .table-responsive.active { display: block; }
         .compact-sheet-view { width: auto !important; max-width: fit-content !important; }
-        table { table-layout: fixed !important; width: 100%; border-collapse: collapse; background-color: rgba(2, 8, 18, 0.8) !important; border: 2px solid rgba(30, 144, 255, 0.4) !important; backdrop-filter: blur(2px); margin: 0 auto; }
-        body.dashboard-orange-mode table { border-color: rgba(0, 183, 255, 0.4) !important; }
-        
-        th { background: linear-gradient(180deg, rgba(3,17,35,0.9) 0%, rgba(1,7,15,0.95) 100%) !important; border-bottom: 2px solid #1e90ff !important; color: #7fdbff !important; font-weight: 800; text-transform: uppercase; padding: 10px 6px !important; border: 1.5px solid rgba(30, 144, 255, 0.3); text-align: center; font-size: 12pt !important; white-space: nowrap; }
-        body.dashboard-orange-mode th { background: linear-gradient(180deg, rgba(0,25,51,0.9) 0%, rgba(0,10,23,0.95) 100%) !important; border-bottom-color: #00b7ff !important; color: #aeeaff !important; border-color: rgba(0, 183, 255, 0.3); }
-        td { padding: 10px 6px !important; border: 1.5px solid rgba(30, 144, 255, 0.25) !important; text-align: center; color: #ffffff; font-size: 12.5pt !important; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.95); white-space: nowrap; }
-        body.dashboard-orange-mode td { border-color: rgba(0, 183, 255, 0.25) !important; }
-        
+
+        table {
+            table-layout: fixed !important;
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(4, 12, 8, 0.82) !important;
+            border: 2px solid rgba(0, 140, 70, 0.4) !important;
+            backdrop-filter: blur(3px);
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(0, 60, 30, 0.25);
+        }
+        body.dashboard-orange-mode table {
+            border-color: rgba(0, 160, 80, 0.45) !important;
+        }
+
+        th {
+            background: linear-gradient(180deg, rgba(8, 28, 16, 0.95) 0%, rgba(3, 12, 8, 0.98) 100%) !important;
+            border-bottom: 2px solid #00aa55 !important;
+            color: #66dd99 !important;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 10px 6px !important;
+            border: 1.5px solid rgba(0, 140, 70, 0.3);
+            text-align: center;
+            font-size: 12pt !important;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+        body.dashboard-orange-mode th {
+            background: linear-gradient(180deg, rgba(10, 32, 18, 0.95) 0%, rgba(4, 16, 10, 0.98) 100%) !important;
+            border-bottom-color: #00cc66 !important;
+            color: #77eeaa !important;
+            border-color: rgba(0, 160, 80, 0.35);
+        }
+        td {
+            padding: 10px 6px !important;
+            border: 1.5px solid rgba(0, 120, 60, 0.22) !important;
+            text-align: center;
+            color: #d8e8d8;
+            font-size: 12.5pt !important;
+            font-weight: 600;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+            white-space: nowrap;
+        }
+        body.dashboard-orange-mode td {
+            border-color: rgba(0, 140, 70, 0.25) !important;
+        }
+
         .rank-header, .rank-cell { width: 75px !important; }
         .team-name-head, .team-name-cell { width: 30% !important; text-align: left !important; padding-left: 15px !important; }
         .player-name-head, .player-name-cell { width: 220px !important; text-align: left !important; padding-left: 15px !important; }
         .total-points-head, .neon-score { width: 130px !important; }
         .top-killer-head { width: 180px !important; text-align: left !important; padding-left: 15px !important; }
-        th.map-header { font-size: 11pt; font-weight: 800; background-color: rgba(5, 25, 45, 0.95); color: #ffffff; }
-        /* Header ke P ko style karega */
-th.p-column {
-    background-color: rgba(255, 255, 255, 0.04) !important;
-}
+        th.map-header {
+            font-size: 11pt;
+            font-weight: 800;
+            background-color: rgba(6, 22, 14, 0.95);
+            color: #a8e8c0;
+        }
+        th.p-column {
+            background-color: rgba(0, 255, 120, 0.04) !important;
+        }
+        #team-points-body tr td:nth-child(even) {
+            background-color: rgba(0, 40, 25, 0.08) !important;
+        }
 
-#team-points-body tr td:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.03) !important;
-}
+        td.neon-score, td.highlight-stat {
+            color: #66ffaa !important;
+            text-shadow: 0 0 10px rgba(0, 255, 120, 0.55) !important;
+            font-size: 13.5pt;
+            font-weight: 700 !important;
+        }
+        td.rank-cell {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            text-shadow: 0 0 10px rgba(0, 220, 100, 0.4);
+            color: #88ffaa;
+            font-size: 13.5pt !important;
+            text-align: middle;
+        }
+        tr:nth-child(even) td { background-color: rgba(0, 25, 15, 0.2); }
+        tr:hover td {
+            background-color: rgba(0, 80, 45, 0.18);
+        }
+        tr.rank-1 td {
+            background-color: rgba(0, 90, 50, 0.22) !important;
+            border-bottom: 1px solid #00ff88 !important;
+        }
+        tr.rank-1 td.team-name-cell,
+        tr.rank-1 td.player-name-cell {
+            color: #a0ffc0;
+            text-shadow: 0 0 10px rgba(0, 255, 140, 0.45);
+        }
+        tr.rank-1 td.rank-cell { color: #39ff14; }
 
-td.neon-score, td.highlight-stat { color: #7fdbff !important; text-shadow: 0 0 8px rgba(30, 144, 255, 0.6) !important; font-size: 13.5pt; font-weight: 700 !important; }
-td.rank-cell { font-family: 'Impact', 'Arial Black', sans-serif; text-shadow: 0 0 8px rgba(0, 229, 255, 0.4); color: #00e5ff; font-size: 13.5pt !important; text-align: middle; }
-tr:nth-child(even) td { background-color: rgba(10, 25, 45, 0.25); }
-tr:hover td { background-color: rgba(217, 4, 41, 0.15); }
-tr.rank-1 td { background-color: rgba(30, 144, 255, 0.2) !important; border-bottom: 1px solid #eafcff !important; }
-tr.rank-1 td.team-name-cell, tr.rank-1 td.player-name-cell { color: #eafcff; text-shadow: 0 0 8px rgba(234,252,255,0.5); }
-tr.rank-1 td.rank-cell { color: #eafcff; }
-.status-message { text-align: center; padding: 30px; color: #a0aec0; font-size: 13pt; font-style: italic; }
-        
-        /* RECENT RESULTS CARDS STYLING */
-        .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; width: 100%; max-width: 1100px; padding: 10px; }
-        .result-card { background: linear-gradient(135deg, rgba(5, 20, 40, 0.85) 0%, rgba(1, 6, 15, 0.95) 100%); border: 2px solid #d90429; border-radius: 16px; padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); position: relative; overflow: hidden; border-top: 5px solid #1e90ff; transition: transform 0.3s ease; }
-        .result-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(30, 144, 255, 0.4); }
-        .card-date { position: absolute; top: 12px; right: 15px; font-size: 9.5pt; color: #eafcff; font-weight: 700; background: rgba(217, 4, 41, 0.3); padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(234, 252, 255, 0.4); }
-        .card-title { font-size: 18pt; font-weight: 800; color: #ffffff; margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1px; max-width: 70%; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-        .card-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(30, 144, 255, 0.2); }
+        .status-message {
+            text-align: center;
+            padding: 30px;
+            color: #6a8a70;
+            font-size: 13pt;
+            font-style: italic;
+        }
+
+        /* Recent Results Cards */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1100px;
+            padding: 10px;
+        }
+        .result-card {
+            background: linear-gradient(145deg, rgba(12, 8, 28, 0.9) 0%, rgba(4, 2, 12, 0.96) 100%);
+            border: 2px solid #6a3cb0;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.55), 0 0 20px rgba(80, 40, 160, 0.2);
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid #a070ff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .result-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 40px rgba(100, 50, 200, 0.35);
+        }
+        .card-date {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 9.5pt;
+            color: #c0a0ff;
+            font-weight: 700;
+            background: rgba(80, 40, 160, 0.35);
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(160, 120, 255, 0.4);
+        }
+        .card-title {
+            font-size: 18pt;
+            font-weight: 800;
+            color: #e8e0ff;
+            margin: 0 0 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            max-width: 70%;
+            text-shadow: 0 0 12px rgba(160, 120, 255, 0.3);
+        }
+        .card-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(100, 60, 180, 0.25);
+        }
         .card-row:last-child { border-bottom: none; }
-        .row-label { font-size: 11pt; color: #a0aec0; font-weight: bold; text-transform: uppercase; }
-        .row-value { font-size: 13pt; font-weight: 700; color: #ffffff; }
-        .winner-team { color: #eafcff; text-shadow: 0 0 8px rgba(234, 252, 255, 0.4); }
-        .winner-mvp { color: #00ffff; text-shadow: 0 0 8px rgba(0, 255, 255, 0.4); }
+        .row-label {
+            font-size: 11pt;
+            color: #9080b0;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .row-value {
+            font-size: 13pt;
+            font-weight: 700;
+            color: #e0d8f0;
+        }
+        .winner-team {
+            color: #a0ffc0;
+            text-shadow: 0 0 10px rgba(0, 255, 140, 0.4);
+        }
+        .winner-mvp {
+            color: #80e0ff;
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.4);
+        }
 
-        .champion-popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(1, 5, 12, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 999999 !important; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-        .champion-popup-overlay.show { opacity: 1; pointer-events: auto; }
-        .champion-card { background: linear-gradient(135deg, #6e0022 0%, #001a33 100%); border: 3px solid #1e90ff; box-shadow: 0 0 60px rgba(30, 144, 255, 0.6), inset 0 0 30px rgba(217, 4, 41, 0.3); padding: 50px 70px; border-radius: 24px; text-align: center; transform: scale(0.6); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .champion-popup-overlay.show .champion-card { transform: scale(1); }
-        .champion-title { color: #eafcff; font-size: 22pt; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
-        .champion-name { color: #ffffff; font-size: 42pt; font-weight: 900; margin: 15px 0; text-shadow: 0 0 25px #1e90ff, 0 0 10px #ffffff; }
-        .champion-badge { font-size: 55pt; margin-bottom: 5px; animation: firePulse 0.8s infinite alternate; }
-        @keyframes firePulse { 0% { transform: scale(1); filter: drop-shadow(0 0 5px #d90429); } 100% { transform: scale(1.1); filter: drop-shadow(0 0 20px #1e90ff); } }
-        #crackersCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999999 !important; }
-       /* =======================================================
-   MOBILE & TABLET COMPACT RESPONSIVE STYLES (FINAL CLEAN FIX)
-   ======================================================= */
-@media screen and (max-width: 768px) {
-    body {
-        padding: 5px 4px !important;
-    }
-    
-    .container {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 4px !important;
-        margin: 0 auto !important;
-    }
+        /* Champion Popup */
+        .champion-popup-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(2, 6, 4, 0.94);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999 !important;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+        .champion-popup-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .champion-card {
+            background: linear-gradient(145deg, #0a2215 0%, #031008 100%);
+            border: 3px solid #00cc66;
+            box-shadow: 0 0 60px rgba(0, 200, 90, 0.5), inset 0 0 40px rgba(0, 80, 40, 0.35);
+            padding: 50px 70px;
+            border-radius: 16px;
+            text-align: center;
+            transform: scale(0.55);
+            transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .champion-popup-overlay.show .champion-card {
+            transform: scale(1);
+        }
+        .champion-title {
+            color: #66ffaa;
+            font-size: 20pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(0, 255, 120, 0.5);
+        }
+        .champion-name {
+            color: #ffffff;
+            font-size: 40pt;
+            font-weight: 900;
+            margin: 15px 0;
+            text-shadow: 0 0 25px #00ff88, 0 0 12px #ffffff;
+        }
+        .champion-badge {
+            font-size: 52pt;
+            margin-bottom: 5px;
+            animation: badgeHaunt 1.2s infinite alternate;
+        }
+        @keyframes badgeHaunt {
+            0% { transform: scale(1); filter: drop-shadow(0 0 8px #00cc66); }
+            100% { transform: scale(1.12); filter: drop-shadow(0 0 22px #39ff14); }
+        }
 
-    /* Mobile standard scroll container setup */
-    .tournament-mode, .dashboard-mode, .recent-results {
-        display: block !important;
-        width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        margin-bottom: 15px !important;
-    }
+        #crackersCanvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999999 !important;
+        }
 
-    table {
-        width: 100% !important;
-        table-layout: auto !important; /* Isse content squeeze nahi hoga */
-    }
-
-    table th, table td {
-        padding: 6px 4px !important;
-        font-size: 9.5pt !important;
-    }
-
-    /* Elements parameters under mobile layout */
-    .rank-header, .rank-cell { 
-        width: 45px !important; 
-    }
-    
-    .team-name-head, .team-name-cell,
-    .player-name-head, .player-name-cell { 
-        min-width: 120px !important;
-        white-space: normal !important; 
-        word-break: break-word !important;
-    }
-
-    /* Total Points mobile display optimization */
-    th.total-points-head, td.neon-score { 
-        min-width: 90px !important; 
-        text-align: center !important;
-        display: table-cell !important;
-    }
-}
-    .web-corner { position: fixed; width: 260px; height: 260px; pointer-events: none; z-index: 1; opacity: 0.35; filter: drop-shadow(0 0 6px rgba(127, 219, 255, 0.5)); }
-    .web-corner.tl { top: -20px; left: -20px; }
-    .web-corner.br { bottom: -20px; right: -20px; transform: rotate(180deg); }
-    @media screen and (max-width: 768px) { .web-corner { width: 150px; height: 150px; opacity: 0.25; } }
+        /* Mobile */
+        @media screen and (max-width: 768px) {
+            body { padding: 5px 4px !important; }
+            .container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 4px !important;
+                margin: 0 auto !important;
+            }
+            .tournament-mode, .dashboard-mode, .recent-results {
+                display: block !important;
+                width: 100% !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                margin-bottom: 15px !important;
+            }
+            table {
+                width: 100% !important;
+                table-layout: auto !important;
+            }
+            table th, table td {
+                padding: 6px 4px !important;
+                font-size: 9.5pt !important;
+            }
+            .rank-header, .rank-cell { width: 45px !important; }
+            .team-name-head, .team-name-cell,
+            .player-name-head, .player-name-cell {
+                min-width: 120px !important;
+                white-space: normal !important;
+                word-break: break-word !important;
+            }
+            th.total-points-head, td.neon-score {
+                min-width: 90px !important;
+                text-align: center !important;
+                display: table-cell !important;
+            }
+            .main-title { font-size: 28pt; letter-spacing: 4px; }
+            .dancing-title { font-size: 28pt; letter-spacing: 4px; }
+        }
     </style>
 </head>
 <body>
-
-<svg class="web-corner tl" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <g fill="none" stroke="#7fdbff" stroke-width="1">
-        <path d="M0,0 L60,10 M0,0 L40,40 M0,0 L10,60 M0,0 L90,20 M0,0 L20,90 M0,0 L130,15 M0,0 L15,130"/>
-        <path d="M60,10 Q35,25 40,40 Q22,32 10,60 Q45,55 40,40 Q65,45 90,20 Q55,38 40,40"/>
-        <path d="M90,20 Q60,55 20,90 Q80,70 130,15" />
-        <path d="M20,90 Q75,80 130,15 Q90,110 15,130" />
-        <path d="M130,15 Q75,90 15,130" />
-    </g>
-</svg>
-<svg class="web-corner br" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <g fill="none" stroke="#d90429" stroke-width="1" opacity="0.8">
-        <path d="M0,0 L60,10 M0,0 L40,40 M0,0 L10,60 M0,0 L90,20 M0,0 L20,90 M0,0 L130,15 M0,0 L15,130"/>
-        <path d="M60,10 Q35,25 40,40 Q22,32 10,60 Q45,55 40,40 Q65,45 90,20 Q55,38 40,40"/>
-        <path d="M90,20 Q60,55 20,90 Q80,70 130,15" />
-        <path d="M20,90 Q75,80 130,15 Q90,110 15,130" />
-        <path d="M130,15 Q75,90 15,130" />
-    </g>
-</svg>
 
 <canvas id="odysseyCanvas"></canvas>
 
 <div id="porkalamSplash" class="premium-splash">
     <div class="fire-bg">
-        <div class="fire-particle" style="left:10%; width:15px; height:15px; animation-delay:0s; animation-duration:5s;"></div>
-        <div class="fire-particle" style="left:25%; width:22px; height:22px; animation-delay:1.5s; animation-duration:4s;"></div>
-        <div class="fire-particle" style="left:45%; width:12px; height:12px; animation-delay:0.5s; animation-duration:6s;"></div>
-        <div class="fire-particle" style="left:65%; width:26px; height:26px; animation-delay:2s; animation-duration:4.5s;"></div>
-        <div class="fire-particle" style="left:80%; width:18px; height:18px; animation-delay:1s; animation-duration:5.5s;"></div>
+        <div class="fire-particle" style="left:8%; width:18px; height:18px; animation-delay:0s; animation-duration:7s;"></div>
+        <div class="fire-particle" style="left:22%; width:28px; height:28px; animation-delay:1.8s; animation-duration:6s;"></div>
+        <div class="fire-particle" style="left:40%; width:14px; height:14px; animation-delay:0.7s; animation-duration:8s;"></div>
+        <div class="fire-particle" style="left:58%; width:32px; height:32px; animation-delay:2.4s; animation-duration:5.5s;"></div>
+        <div class="fire-particle" style="left:75%; width:20px; height:20px; animation-delay:1.2s; animation-duration:7.5s;"></div>
+        <div class="fire-particle" style="left:88%; width:24px; height:24px; animation-delay:0.4s; animation-duration:6.8s;"></div>
     </div>
     <div class="dancing-title">TYT PORKALAM</div>
-    <button class="enter-esports-btn" onclick="openMainPointsTable()">Enter Tournament</button>
+    <div style="color:#66aa88; font-size:13pt; margin-bottom:28px; z-index:2; letter-spacing:3px; text-transform:uppercase; opacity:0.85;">
+        🌙 MIDNIGHT HUNTERS
+    </div>
+    <button class="enter-esports-btn" onclick="openMainPointsTable()">Enter the Hunt</button>
 </div>
 
 <div class="container">
@@ -252,7 +606,7 @@ tr.rank-1 td.rank-cell { color: #eafcff; }
 
     <div class="header-container">
         <h1 class="main-title">TYT PORKALAM</h1>
-        <div class="subtitle">🔥ONLY THE STRONGEST SQUAD WILL SURVIVE🔥</div>
+        <div class="subtitle">🌙 ONLY THE STRONGEST SQUAD WILL SURVIVE THE NIGHT 🌙</div>
         <div class="live-badge">● Live Sync</div>
     </div>
 
@@ -306,7 +660,7 @@ tr.rank-1 td.rank-cell { color: #eafcff; }
 <canvas id="crackersCanvas"></canvas>
 <div id="championPopup" class="champion-popup-overlay">
     <div class="champion-card">
-        <div class="champion-badge">👑🔥</div>
+        <div class="champion-badge">👑🌙</div>
         <div class="champion-title" id="popHeaderType">CURRENT #1 LEADER</div>
         <div class="champion-name" id="popLeaderName">LOADING...</div>
     </div>
@@ -331,7 +685,6 @@ tr.rank-1 td.rank-cell { color: #eafcff; }
         const tabStandingsBtn = document.getElementById('tab-btn-team-standings');
         const tabsContainer = document.getElementById('mainTabsContainer');
 
-        // Reset Modes
         body.classList.remove('dashboard-orange-mode', 'results-purple-mode');
         btnTourney.className = 'mode-toggle-btn';
         btnDashboard.className = 'mode-toggle-btn';
@@ -349,9 +702,8 @@ tr.rank-1 td.rank-cell { color: #eafcff; }
         } else if (mode === 'results') {
             body.classList.add('results-purple-mode');
             btnResults.className = 'mode-toggle-btn active-results';
-            tabsContainer.style.display = 'none'; // Hide inner sub-tabs entirely
+            tabsContainer.style.display = 'none';
             
-            // Hide all sub tab sheets & show recent results div directly
             document.querySelectorAll('.table-responsive').forEach(tab => tab.classList.remove('active'));
             document.getElementById('recent-results-tab').classList.add('active');
         } else {
@@ -422,7 +774,6 @@ tr.rank-1 td.rank-cell { color: #eafcff; }
         }
         
         container.innerHTML = '';
-        // Index 0 has headers (DATE, PORKALAM, CHAMPION TEAM...)
         for(let i = 1; i < rows.length; i++) {
             const row = rows[i];
             if(!row || !row[0] || row[0].toString().trim() === "") continue;
@@ -453,7 +804,7 @@ tr.rank-1 td.rank-cell { color: #eafcff; }
                 </div>
                 <div class="card-row">
                     <span class="row-label">💀 Total Frag Count</span>
-                    <span class="row-value" style="color:#ffaa44;">${mvpKills} Kills</span>
+                    <span class="row-value" style="color:#66ffaa;">${mvpKills} Kills</span>
                 </div>
             `;
             container.appendChild(card);
@@ -461,53 +812,49 @@ tr.rank-1 td.rank-cell { color: #eafcff; }
     }
 
     function buildDynamicTeamPointsGrid(data) {
-           if (!data || !data.mapList || !data.teams) return;
-    const thead = document.getElementById('team-points-head');
-    const tbody = document.getElementById('team-points-body');
-    
-    // Yahan TP ki jagah TOTAL POINTS likh diya hai
-    let headRow1 = '<tr><th rowspan="2" class="rank-header">RANK</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
-    let headRow2 = '</tr><tr>';
-    
-    data.mapList.forEach(mapName => {
-        headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
-        // Humne pehle wale sub-th mein 'p-column' class jod di hai
-        headRow2 += `<th class="sub-th p-column">P</th><th class="sub-th">K</th>`;
-    });
-    
-    headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
-    thead.innerHTML = headRow1 + headRow2;
-
-    tbody.innerHTML = '';
-    let currentRank = 1;
-    
-    // Sort teams by total points
-    data.teams.sort((a, b) => (Number(b.totalPoints) || 0) - (Number(a.totalPoints) || 0));
-
-    data.teams.forEach(team => {
-        // FILTER: Agar Google Sheet se koi extra template row ya placeholder text (jaise khud "TEAM NAME") aa raha ho, toh use skip karo
-        if (!team.teamName || team.teamName.toString().trim() === "" || team.teamName.toUpperCase() === "TEAM NAME") {
-            return; 
-        }
-
-        const tr = document.createElement('tr');
-        tr.classList.add(`rank-${currentRank}`, 'table-row');
-        let arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
+        if (!data || !data.mapList || !data.teams) return;
+        const thead = document.getElementById('team-points-head');
+        const tbody = document.getElementById('team-points-body');
         
-        let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
-        rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
+        let headRow1 = '<tr><th rowspan="2" class="rank-header">RANK</th><th rowspan="2" class="team-name-head">TEAM NAME</th>';
+        let headRow2 = '</tr><tr>';
         
-        team.scores.forEach(score => { 
-            rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
+        data.mapList.forEach(mapName => {
+            headRow1 += `<th colspan="2" class="map-header">${mapName.toUpperCase()}</th>`;
+            headRow2 += `<th class="sub-th p-column">P</th><th class="sub-th">K</th>`;
         });
         
-        rowHTML += `<td class="neon-score">${team.totalPoints}</td>`;
-          
-        tr.innerHTML = rowHTML; 
-        tbody.appendChild(tr); 
-        currentRank++;
-    });
-}
+        headRow1 += `<th rowspan="2" class="total-points-head">TOTAL POINTS</th></tr>`;
+        thead.innerHTML = headRow1 + headRow2;
+
+        tbody.innerHTML = '';
+        let currentRank = 1;
+        
+        data.teams.sort((a, b) => (Number(b.totalPoints) || 0) - (Number(a.totalPoints) || 0));
+
+        data.teams.forEach(team => {
+            if (!team.teamName || team.teamName.toString().trim() === "" || team.teamName.toUpperCase() === "TEAM NAME") {
+                return; 
+            }
+
+            const tr = document.createElement('tr');
+            tr.classList.add(`rank-${currentRank}`, 'table-row');
+            let arrow = calculateRankArrow('teamPoints', team.teamName, currentRank);
+            
+            let rowHTML = `<td class="rank-cell">${getRankBadgeHTML(currentRank)}${arrow}</td>`;
+            rowHTML += `<td class="team-name-cell"><span class="team-emoji">${getTeamEmoji(team.teamName)}</span>${team.teamName}</td>`;
+            
+            team.scores.forEach(score => { 
+                rowHTML += `<td>${score !== undefined ? score : 0}</td>`; 
+            });
+            
+            rowHTML += `<td class="neon-score">${team.totalPoints}</td>`;
+              
+            tr.innerHTML = rowHTML; 
+            tbody.appendChild(tr); 
+            currentRank++;
+        });
+    }
 
     function buildPlayerKillsGrid(rows) {
         if (!rows || rows.length === 0) return;
@@ -603,7 +950,7 @@ tr.rank-1 td.rank-cell { color: #eafcff; }
             const cells = firstRow.querySelectorAll('td'); if (cells.length < 2) return;
             
             let winnerName = cells[1].innerText || cells[1].textContent;
-            winnerName = winnerName.replace(/[🥇🥈🥉⭐👑🎖️🔥🎮🎯👤⚔️]/g, '').trim();
+            winnerName = winnerName.replace(/[🥇🥈🥉⭐👑🎖️🔥🎮🎯👤⚔️🌙]/g, '').trim();
             if (winnerName.toUpperCase() === "LOADING..." || winnerName === "") return;
 
             if (lastWinnerCache[tabId] !== winnerName) {
@@ -620,83 +967,228 @@ tr.rank-1 td.rank-cell { color: #eafcff; }
 </script>
 
 <script>
-// Canvas Engine & Crackers System
-const canvas = document.getElementById('odysseyCanvas'); const ctx = canvas.getContext('2d');
-function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-window.addEventListener('resize', initCanvas); initCanvas();
+// ========== MIDNIGHT HUNTERS CANVAS ENGINE ==========
+const canvas = document.getElementById('odysseyCanvas');
+const ctx = canvas.getContext('2d');
+
+function initCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', initCanvas);
+initCanvas();
 
 function initFireBackground() {
     let particles = [];
+    let eyes = [];
+
+    // Soft green mist particles
     class Particle {
-        constructor() { this.x = Math.random() * canvas.width; this.y = canvas.height + Math.random() * 100; this.size = Math.random() * 3 + 1; this.speedY = Math.random() * 1.2 + 0.4; this.speedX = Math.random() * 0.8 - 0.4; this.opacity = Math.random() * 0.4 + 0.4; }
-        update() { this.y -= this.speedY; this.x += this.speedX; if (this.y < -10) { this.y = canvas.height + 10; this.x = Math.random() * canvas.width; } }
-        draw() { ctx.fillStyle = `rgba(${Math.floor(Math.random() * 60) + 150}, ${Math.floor(Math.random() * 60) + 210}, 255, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + Math.random() * 80;
+            this.size = Math.random() * 3.5 + 1.2;
+            this.speedY = Math.random() * 0.7 + 0.25;
+            this.speedX = Math.random() * 0.6 - 0.3;
+            this.opacity = Math.random() * 0.35 + 0.2;
+            this.life = 0;
+        }
+        update() {
+            this.y -= this.speedY;
+            this.x += this.speedX;
+            this.life++;
+            if (this.y < -20) {
+                this.y = canvas.height + 20;
+                this.x = Math.random() * canvas.width;
+                this.life = 0;
+            }
+        }
+        draw() {
+            const green = Math.floor(Math.random() * 60) + 140;
+            ctx.fillStyle = `rgba(40, ${green}, 80, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
-    for (let i = 0; i < 40; i++) particles.push(new Particle());
-    function animate() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+
+    // Occasional glowing "eyes" that fade in/out (horror feel)
+    class Eye {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height * 0.7;
+            this.size = Math.random() * 4 + 2;
+            this.opacity = 0;
+            this.phase = Math.random() * Math.PI * 2;
+            this.speed = 0.015 + Math.random() * 0.02;
+            this.alive = true;
+            this.life = 0;
+            this.maxLife = 180 + Math.random() * 120;
+        }
+        update() {
+            this.life++;
+            this.phase += this.speed;
+            // Fade in then out
+            if (this.life < 40) this.opacity = this.life / 40 * 0.55;
+            else if (this.life > this.maxLife - 50) this.opacity = Math.max(0, (this.maxLife - this.life) / 50 * 0.55);
+            else this.opacity = 0.45 + Math.sin(this.phase) * 0.15;
+
+            if (this.life > this.maxLife) this.reset();
+        }
+        draw() {
+            if (this.opacity <= 0.02) return;
+            // Outer glow
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 2.2, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0, 255, 100, ${this.opacity * 0.18})`;
+            ctx.fill();
+            // Core
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(180, 255, 200, ${this.opacity})`;
+            ctx.fill();
+            // Tiny red pupil for horror
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 0.35, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 40, 60, ${this.opacity * 0.85})`;
+            ctx.fill();
+        }
+    }
+
+    for (let i = 0; i < 55; i++) particles.push(new Particle());
+    for (let i = 0; i < 7; i++) eyes.push(new Eye());
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Very subtle dark vignette
+        const grad = ctx.createRadialGradient(
+            canvas.width / 2, canvas.height / 2, canvas.height * 0.2,
+            canvas.width / 2, canvas.height / 2, canvas.height * 0.85
+        );
+        grad.addColorStop(0, 'rgba(0,0,0,0)');
+        grad.addColorStop(1, 'rgba(0,5,8,0.35)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(p => { p.update(); p.draw(); });
+        eyes.forEach(e => { e.update(); e.draw(); });
+
+        requestAnimationFrame(animate);
+    }
     animate();
 }
 
-const cCanvas = document.getElementById('crackersCanvas'); const cCtx = cCanvas.getContext('2d');
+// Crackers / celebration particles (green + blood red)
+const cCanvas = document.getElementById('crackersCanvas');
+const cCtx = cCanvas.getContext('2d');
 let cParticles = [], crackersAnimationId;
-function resizeCrackersCanvas() { cCanvas.width = window.innerWidth; cCanvas.height = window.innerHeight; }
-window.addEventListener('resize', resizeCrackersCanvas); resizeCrackersCanvas();
+
+function resizeCrackersCanvas() {
+    cCanvas.width = window.innerWidth;
+    cCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCrackersCanvas);
+resizeCrackersCanvas();
 
 class CrackerParticle {
-    constructor(x, y, color) { this.x = x; this.y = y; this.color = color; this.radius = Math.random() * 3 + 2; const angle = Math.random() * Math.PI * 2, velocity = Math.random() * 10 + 4; this.speedX = Math.cos(angle) * velocity; this.speedY = Math.sin(angle) * velocity; this.gravity = 0.18; this.alpha = 1; this.decay = Math.random() * 0.015 + 0.012; }
-    update() { this.speedY += this.gravity; this.x += this.speedX; this.y += this.speedY; this.alpha -= this.decay; }
-    draw() { cCtx.save(); cCtx.globalAlpha = this.alpha; cCtx.fillStyle = this.color; cCtx.shadowBlur = 8; cCtx.shadowColor = this.color; cCtx.beginPath(); cCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); cCtx.fill(); cCtx.restore(); }
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.radius = Math.random() * 3.2 + 1.8;
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 9 + 3.5;
+        this.speedX = Math.cos(angle) * velocity;
+        this.speedY = Math.sin(angle) * velocity;
+        this.gravity = 0.16;
+        this.alpha = 1;
+        this.decay = Math.random() * 0.014 + 0.01;
+    }
+    update() {
+        this.speedY += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.alpha -= this.decay;
+    }
+    draw() {
+        cCtx.save();
+        cCtx.globalAlpha = this.alpha;
+        cCtx.fillStyle = this.color;
+        cCtx.shadowBlur = 10;
+        cCtx.shadowColor = this.color;
+        cCtx.beginPath();
+        cCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        cCtx.fill();
+        cCtx.restore();
+    }
 }
-function createExplosion(x, y) { const colors = ['#1e90ff', '#00e5ff', '#7fdbff', '#d90429', '#ffffff']; for (let i = 0; i < 80; i++) cParticles.push(new CrackerParticle(x, y, colors[Math.floor(Math.random() * colors.length)])); }
-function animateCrackers() { cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height); for (let i = cParticles.length - 1; i >= 0; i--) { cParticles[i].update(); if (cParticles[i].alpha <= 0) cParticles.splice(i, 1); else cParticles[i].draw(); } crackersAnimationId = requestAnimationFrame(animateCrackers); }
-function triggerNativeCrackers() { cParticles = []; cancelAnimationFrame(crackersAnimationId); animateCrackers(); createExplosion(window.innerWidth * 0.2, window.innerHeight * 0.4); setTimeout(() => createExplosion(window.innerWidth * 0.8, window.innerHeight * 0.4), 250); setTimeout(() => createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.3), 500); }
 
-window.addEventListener('load', () => { initFireBackground(); applyOperationMode('tournament'); });
-function openMainPointsTable() { document.getElementById('porkalamSplash').classList.add('fade-hide'); fetchAllSheetsData(); setInterval(fetchAllSheetsData, 2000); }
-    // =======================================================
-// AUTOMATIC TOTAL POINTS CALCULATION SCRIPT
-// =======================================================
+function createExplosion(x, y) {
+    const colors = ['#00ff88', '#39ff14', '#00cc66', '#ff3355', '#a0ffc0', '#ffffff'];
+    for (let i = 0; i < 75; i++) {
+        cParticles.push(new CrackerParticle(x, y, colors[Math.floor(Math.random() * colors.length)]));
+    }
+}
+
+function animateCrackers() {
+    cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+    for (let i = cParticles.length - 1; i >= 0; i--) {
+        cParticles[i].update();
+        if (cParticles[i].alpha <= 0) cParticles.splice(i, 1);
+        else cParticles[i].draw();
+    }
+    crackersAnimationId = requestAnimationFrame(animateCrackers);
+}
+
+function triggerNativeCrackers() {
+    cParticles = [];
+    cancelAnimationFrame(crackersAnimationId);
+    animateCrackers();
+    createExplosion(window.innerWidth * 0.2, window.innerHeight * 0.4);
+    setTimeout(() => createExplosion(window.innerWidth * 0.8, window.innerHeight * 0.4), 250);
+    setTimeout(() => createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.28), 480);
+}
+
+window.addEventListener('load', () => {
+    initFireBackground();
+    applyOperationMode('tournament');
+});
+
+function openMainPointsTable() {
+    document.getElementById('porkalamSplash').classList.add('fade-hide');
+    fetchAllSheetsData();
+    setInterval(fetchAllSheetsData, 2000);
+}
+
+// Total points auto-calc (kept for compatibility)
 function updateTournamentTotalPoints() {
-    // Apne table ke saare rows ko target karna (header row ko chhodkar)
     const rows = document.querySelectorAll('table tbody tr, table tr');
-    
     rows.forEach(row => {
-        // Sirf un rows ko calculate karenge jisme data cells (td) hain aur rank present hai
         const cells = row.querySelectorAll('td');
-        if (cells.length >= 10) { 
+        if (cells.length >= 10) {
             let totalSum = 0;
-            
-            // Map columns (Index 2 se lekar Index 9 tak ke saare P aur K status values)
-            // Index 2 = Erangle P, Index 3 = Erangle K... up to Index 9 = Miramar K
             for (let i = 2; i <= 9; i++) {
                 let cellValue = cells[i].innerText || cells[i].textContent;
-                
-                // Agar field khali "-" hai ya numbers nahi hain toh use 0 maane
                 let numericValue = parseFloat(cellValue.trim());
-                if (!isNaN(numericValue)) {
-                    totalSum += numericValue;
-                }
+                if (!isNaN(numericValue)) totalSum += numericValue;
             }
-            
-            // Sabse aakhri column (Total Points) ko value assign karna
             const totalPointsCell = cells[cells.length - 1];
             if (totalPointsCell) {
                 totalPointsCell.innerHTML = `<strong>${totalSum}</strong>`;
-                
-                // Dynamic CSS features jo humne columns ke liye lagaye the unhe target karna
                 totalPointsCell.style.textAlign = 'center';
-                totalPointsCell.style.color = '#ffaa00';
-                totalPointsCell.style.textShadow = '0 0 8px rgba(255, 170, 0, 0.6)';
+                totalPointsCell.style.color = '#66ffaa';
+                totalPointsCell.style.textShadow = '0 0 10px rgba(0, 255, 120, 0.55)';
             }
         }
     });
 }
 
-// Page load hote hi aur dynamic data fetch hote hi real-time updates run honge
 document.addEventListener('DOMContentLoaded', updateTournamentTotalPoints);
 window.addEventListener('load', updateTournamentTotalPoints);
-
-// Agar aap real-time input fields use karte hain toh change hone par dynamic sum hoga
 document.addEventListener('input', updateTournamentTotalPoints);
 </script>
 </body>
